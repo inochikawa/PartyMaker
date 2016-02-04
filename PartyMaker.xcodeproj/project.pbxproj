@@ -15,6 +15,8 @@
 		83E217D81C6220E000C8BF08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D61C6220E000C8BF08 /* LaunchScreen.storyboard */; };
 		83E217E71C62275A00C8BF08 /* PMRAddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217E61C62275A00C8BF08 /* PMRAddEventViewController.m */; };
 		83E217EA1C62286900C8BF08 /* PMRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217E91C62286900C8BF08 /* PMRMainViewController.m */; };
+		83E74DEE1C6355E400B0D255 /* MyriadProBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83E74DEC1C6355E400B0D255 /* MyriadProBold.ttf */; };
+		83E74DEF1C6355E400B0D255 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83E74DED1C6355E400B0D255 /* MyriadProRegular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		83E217E61C62275A00C8BF08 /* PMRAddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRAddEventViewController.m; sourceTree = "<group>"; };
 		83E217E81C62286900C8BF08 /* PMRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRMainViewController.h; sourceTree = "<group>"; };
 		83E217E91C62286900C8BF08 /* PMRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRMainViewController.m; sourceTree = "<group>"; };
+		83E74DEC1C6355E400B0D255 /* MyriadProBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProBold.ttf; sourceTree = "<group>"; };
+		83E74DED1C6355E400B0D255 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 		83E217C71C6220E000C8BF08 /* PartyMaker */ = {
 			isa = PBXGroup;
 			children = (
+				83E74DEB1C63508D00B0D255 /* Fonts */,
 				83E217CB1C6220E000C8BF08 /* AppDelegate.h */,
 				83E217CC1C6220E000C8BF08 /* AppDelegate.m */,
 				83E217CE1C6220E000C8BF08 /* ViewController.h */,
@@ -87,6 +92,15 @@
 				83E217C91C6220E000C8BF08 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		83E74DEB1C63508D00B0D255 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				83E74DEC1C6355E400B0D255 /* MyriadProBold.ttf */,
+				83E74DED1C6355E400B0D255 /* MyriadProRegular.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,8 +161,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				83E217D81C6220E000C8BF08 /* LaunchScreen.storyboard in Resources */,
+				83E74DEE1C6355E400B0D255 /* MyriadProBold.ttf in Resources */,
 				83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */,
 				83E217D31C6220E000C8BF08 /* Main.storyboard in Resources */,
+				83E74DEF1C6355E400B0D255 /* MyriadProRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +328,7 @@
 				83E217DE1C6220E000C8BF08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
