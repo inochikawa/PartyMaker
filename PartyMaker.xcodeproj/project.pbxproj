@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		546A501E1C63DE00004C36E5 /* PMRParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 546A501D1C63DE00004C36E5 /* PMRParty.m */; };
 		83E217CA1C6220E000C8BF08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217C91C6220E000C8BF08 /* main.m */; };
 		83E217CD1C6220E000C8BF08 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CC1C6220E000C8BF08 /* AppDelegate.m */; };
 		83E217D01C6220E000C8BF08 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CF1C6220E000C8BF08 /* ViewController.m */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		546A501C1C63DE00004C36E5 /* PMRParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRParty.h; sourceTree = "<group>"; };
+		546A501D1C63DE00004C36E5 /* PMRParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRParty.m; sourceTree = "<group>"; };
 		83E217C51C6220E000C8BF08 /* PartyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E217C91C6220E000C8BF08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E217CB1C6220E000C8BF08 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -82,6 +85,8 @@
 				83E217E61C62275A00C8BF08 /* PMRAddEventViewController.m */,
 				83E217E81C62286900C8BF08 /* PMRMainViewController.h */,
 				83E217E91C62286900C8BF08 /* PMRMainViewController.m */,
+				546A501C1C63DE00004C36E5 /* PMRParty.h */,
+				546A501D1C63DE00004C36E5 /* PMRParty.m */,
 			);
 			path = PartyMaker;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546A501E1C63DE00004C36E5 /* PMRParty.m in Sources */,
 				83E217D01C6220E000C8BF08 /* ViewController.m in Sources */,
 				83E217CD1C6220E000C8BF08 /* AppDelegate.m in Sources */,
 				83E217CA1C6220E000C8BF08 /* main.m in Sources */,

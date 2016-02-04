@@ -55,6 +55,7 @@
     self.saveButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
     [self.saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
     [self.saveButton addTarget:self action:@selector(onSaveButtonTouchDown) forControlEvents:UIControlEventTouchDown];
+    //[self.saveButton addTarget:self action:@selector(onSaveButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
     
     //init cancelButton
     self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 460.5, 190, 36)];
@@ -63,6 +64,7 @@
     self.cancelButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
     self.cancelButton.tintColor = [UIColor whiteColor];
     [self.cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
+    [self.cancelButton addTarget:self action:@selector(onCancelButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.chooseDateButton];
     [self.view addSubview:self.saveButton];
@@ -272,11 +274,6 @@
                          action:@selector(onPageChanged:)
                forControlEvents:UIControlEventValueChanged];
     
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                action:@selector(onPageScrollViewTap)];
-    [self.pageControl addGestureRecognizer:singleTap];
-    [self.pageScrollView addGestureRecognizer:singleTap];
-    
     [self.view addSubview:self.pageScrollView];
     [self.view addSubview:self.pageControl];
 }
@@ -291,11 +288,6 @@
     self.descriptionTextView.backgroundColor = [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1];
     self.descriptionTextView.layer.cornerRadius = 4.;
     self.descriptionTextView.delegate = self;
-    
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                      action:@selector(onDescriptionTextViewTap)];
-    [self.descriptionTextView addGestureRecognizer:singleTap];
-    
     
     [self.view addSubview:self.descriptionTextView];
     [self.view addSubview:blueLine];
@@ -320,11 +312,14 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self moveBallToYCoordinate:235];
     NSInteger currentPage = scrollView.contentOffset.x / self.pageScrollView.frame.size.width;
     [self.pageControl setCurrentPage:currentPage];
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    [self moveBallToYCoordinate:354];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(keyboardWillShow:)
                                                 name:UIKeyboardWillShowNotification
@@ -387,18 +382,6 @@
 
 - (void)onDoneDatePickerViewBarButtonTouch {
     UIDatePicker *datePicker = (UIDatePicker *)self.datePickerView.subviews[1];
-    
-    if (![self isCurrentDateOrderedDescendingWithDate:datePicker.date]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                       message:@"You selected small date"
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok"
-                                                           style:UIAlertActionStyleCancel handler:nil];
-        [alert addAction:okAction];
-        [self presentViewController:alert animated:YES completion:nil];
-        return;
-    }
-    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd MMM yyyy"];
     
@@ -413,6 +396,15 @@
                      completion:nil];
 }
 
+- (void)onCancelButtonTouchUpInside {
+    if ([self.navigationController isViewLoaded]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    else {
+        NSLog(@"Error - navigation controller is not loaded");
+    }
+}
+
 - (void)onCancelKeyboardBarButtonTouch {
     [self.descriptionTextView resignFirstResponder];
 }
@@ -422,6 +414,7 @@
 }
 
 - (void)onPageChanged:(UIPageControl *)sender {
+    [self moveBallToYCoordinate:235];
     CGPoint contentOffset = CGPointMake(sender.currentPage * self.pageScrollView.frame.size.width, 0);
     [self.pageScrollView setContentOffset:contentOffset animated:YES];
 }
@@ -439,6 +432,24 @@
 
 - (void)onSaveButtonTouchDown {
     [self moveBallToYCoordinate:472];
+    
+    if ([self.chooseDateButton.titleLabel.text  isEqual: @"CHOOSE DATE"]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You aren't select event date!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
+    if ([self.eventNameTextField.text isEqual:@""]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You aren't input event name!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
 }
 
 - (void)onEventNameTextFieldTouchDown {
@@ -451,14 +462,6 @@
 
 - (void)onEndTimeSliderTouchDown {
     [self moveBallToYCoordinate:159];
-}
-
-- (void)onDescriptionTextViewTap {
-    [self moveBallToYCoordinate:354];
-}
-
-- (void)onPageScrollViewTap {
-    [self moveBallToYCoordinate:235];
 }
 
 #pragma mark ---
@@ -506,23 +509,6 @@
                      completion:nil];
 }
 
-- (BOOL)isCurrentDateOrderedDescendingWithDate:(NSDate *)date {
-    unsigned int flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDateComponents* currentDateComponents = [calendar components:flags fromDate:[NSDate date]];
-    NSDateComponents* selectedDateComponents = [calendar components:flags fromDate:date];
-    
-    NSDate* currentDate = [calendar dateFromComponents:currentDateComponents];
-    NSDate *selectedDate = [calendar dateFromComponents:selectedDateComponents];
-    
-    if ([selectedDate compare:currentDate] != NSOrderedSame)
-        if ([selectedDate compare:currentDate] == NSOrderedAscending) {
-            return NO;
-        }
-    
-    return YES;
-}
-
 - (NSString *)timeFromMinutes:(int)totalMinutes {
     int minutes = totalMinutes % 60;
     int hours = totalMinutes / 60;
@@ -555,6 +541,5 @@
     [self createKeyboardToolBar];
     [self createDatePickerView];
 }
-
 
 @end
