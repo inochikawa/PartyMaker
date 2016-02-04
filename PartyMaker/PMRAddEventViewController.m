@@ -55,7 +55,7 @@
     self.saveButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
     [self.saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
     [self.saveButton addTarget:self action:@selector(onSaveButtonTouchDown) forControlEvents:UIControlEventTouchDown];
-    //[self.saveButton addTarget:self action:@selector(onSaveButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+    [self.saveButton addTarget:self action:@selector(onSaveButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
     
     //init cancelButton
     self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 460.5, 190, 36)];
@@ -432,7 +432,9 @@
 
 - (void)onSaveButtonTouchDown {
     [self moveBallToYCoordinate:472];
-    
+}
+
+- (void)onSaveButtonTouchUpInside {
     if ([self.chooseDateButton.titleLabel.text  isEqual: @"CHOOSE DATE"]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You aren't select event date!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
