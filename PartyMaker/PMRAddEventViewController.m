@@ -176,7 +176,6 @@
     eventNameTextField.returnKeyType = UIReturnKeyDone;
     eventNameTextField.delegate = self;
     [eventNameTextField addTarget:self action:@selector(onEventNameTextFieldTouchDown) forControlEvents:UIControlEventTouchDown];
-    [eventNameTextField addTarget:self action:@selector(onEventNameTextFieldTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
     if ([eventNameTextField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor colorWithRed:76/255. green:82/255. blue:92/255. alpha:1];
         eventNameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Your party Name"
