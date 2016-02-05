@@ -98,6 +98,7 @@
     cancelButton.tintColor = [UIColor whiteColor];
     [cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
     [cancelButton addTarget:self action:@selector(onCancelButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton addTarget:self action:@selector(onCancelButtonTouchDown) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:cancelButton];
     self.cancelButton = cancelButton;
     
@@ -420,6 +421,13 @@
                          weakSelf.datePickerView.frame = CGRectMake(0, weakSelf.view.frame.size.height - weakSelf.datePickerView.frame.size.height, weakSelf.datePickerView.frame.size.width, weakSelf.datePickerView.frame.size.height);
                      }
                      completion:nil];
+    
+    [UIView transitionWithView:self.chooseDateButton duration:.2
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.chooseDateButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
+                    }
+                    completion:nil];
 }
 
 - (void)onCancelDatePickerViewBarButtonTouch {
@@ -453,12 +461,28 @@
 }
 
 - (void)onCancelButtonTouchUpInside {
+    [UIView transitionWithView:self.cancelButton duration:.2
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.cancelButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
+                    }
+                    completion:nil];
+    
     if ([self.navigationController isViewLoaded]) {
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     else {
         NSLog(@"Error - navigation controller is not loaded");
     }
+}
+
+- (void)onCancelButtonTouchDown {
+    [UIView transitionWithView:self.cancelButton duration:.2
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.cancelButton setTitleColor:[UIColor colorWithWhite:1 alpha:.5] forState:UIControlStateNormal];
+                    }
+                    completion:nil];
 }
 
 - (void)onCancelKeyboardBarButtonTouch {
@@ -484,13 +508,34 @@
 
 - (void)onChooseDateButtonTouchDown {
     [self moveBallToYCoordinate:21];
+    
+    [UIView transitionWithView:self.chooseDateButton duration:.2
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.chooseDateButton setTitleColor:[UIColor colorWithWhite:1 alpha:.5] forState:UIControlStateNormal];
+                    }
+                    completion:nil];
 }
 
 - (void)onSaveButtonTouchDown {
     [self moveBallToYCoordinate:472];
+    
+    [UIView transitionWithView:self.saveButton duration:.2
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.saveButton setTitleColor:[UIColor colorWithWhite:1 alpha:.5] forState:UIControlStateNormal];
+                    }
+                    completion:nil];
 }
 
 - (void)onSaveButtonTouchUpInside {
+    [UIView transitionWithView:self.saveButton duration:.2
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.saveButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
+                    }
+                    completion:nil];
+    
     if ([self.chooseDateButton.titleLabel.text  isEqual: @"CHOOSE DATE"]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You aren't select event date!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
