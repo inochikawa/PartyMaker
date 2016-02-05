@@ -31,6 +31,8 @@
 @property (nonatomic, weak) UIPageControl *pageControl;
 
 @property (nonatomic, weak) UITextView *descriptionTextView;
+
+@property (nonatomic) NSMutableString* lastTextViewEditText;
 @end
 
 @implementation PMRAddEventViewController
@@ -39,6 +41,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithRed:46/255. green:49/255. blue:56/255. alpha:1];
+    self.title = @"CREATE PARTY";
     
     if ([self.navigationController isViewLoaded]) {
         self.navigationController.navigationBar.userInteractionEnabled = NO;
@@ -49,7 +52,7 @@
         NSLog(@"Error - navigation controller view is not loaded");
     }
     
-    self.title = @"CREATE PARTY";
+    self.lastTextViewEditText = [[NSMutableString alloc] initWithString:@""];
     
     [self creareButtons];
     [self createBalls];
@@ -173,6 +176,7 @@
     eventNameTextField.returnKeyType = UIReturnKeyDone;
     eventNameTextField.delegate = self;
     [eventNameTextField addTarget:self action:@selector(onEventNameTextFieldTouchDown) forControlEvents:UIControlEventTouchDown];
+    [eventNameTextField addTarget:self action:@selector(onEventNameTextFieldTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
     if ([eventNameTextField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor colorWithRed:76/255. green:82/255. blue:92/255. alpha:1];
         eventNameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Your party Name"
@@ -314,6 +318,7 @@
     pageControl.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     pageControl.pageIndicatorTintColor = [UIColor colorWithRed:29/255. green:30/255. blue:36/255. alpha:1];
     pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+    [pageControl setUserInteractionEnabled:NO];
     
     [pageControl addTarget:self
                          action:@selector(onPageChanged:)
@@ -349,6 +354,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    [self.chooseDateButton setUserInteractionEnabled:YES];
     return YES;
 }
 
@@ -487,10 +493,13 @@
 
 - (void)onCancelKeyboardBarButtonTouch {
     [self.descriptionTextView resignFirstResponder];
+    self.descriptionTextView.text = self.lastTextViewEditText;
 }
 
 - (void)onDoneKeyboardBarButtonTouch {
     [self.descriptionTextView resignFirstResponder];
+    [self.lastTextViewEditText setString:@""];
+    [self.lastTextViewEditText appendString:self.descriptionTextView.text];
 }
 
 - (void)onPageChanged:(UIPageControl *)sender {
@@ -537,7 +546,7 @@
                     completion:nil];
     
     if ([self.chooseDateButton.titleLabel.text  isEqual: @"CHOOSE DATE"]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You aren't select event date!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Something wrong" message:@"You did not choose date." preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
         
         [alertController addAction:okAction];
@@ -546,7 +555,7 @@
     }
     
     if ([self.eventNameTextField.text isEqual:@""]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You aren't input event name!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Something wrong" message:@"You did not input event name." preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
         
         [alertController addAction:okAction];
@@ -557,6 +566,7 @@
 
 - (void)onEventNameTextFieldTouchDown {
     [self moveBallToYCoordinate:70];
+    [self.chooseDateButton setUserInteractionEnabled:NO];
 }
 
 - (void)onStartTimeSliderTouchDown {
