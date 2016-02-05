@@ -7,68 +7,101 @@
 //
 
 #import "PMRAddEventViewController.h"
+#import "PMRParty.h"
 
 @interface PMRAddEventViewController()<UITextFieldDelegate,
                                        UIScrollViewDelegate,
                                        UITextViewDelegate>
-@property (nonatomic) UIButton *chooseDateButton;
-@property (nonatomic) UIButton *saveButton;
-@property (nonatomic) UIButton *cancelButton;
 
-@property (nonatomic) UITextField *eventNameTextField;
+@property (nonatomic, weak) UIButton *chooseDateButton;
+@property (nonatomic, weak) UIButton *saveButton;
+@property (nonatomic, weak) UIButton *cancelButton;
 
-@property (nonatomic) UIView *dynamicBall;
-@property (nonatomic) UIView *datePickerView;
+@property (nonatomic, weak) UITextField *eventNameTextField;
 
-@property (nonatomic) UILabel *startTimeLabel;
-@property (nonatomic) UILabel *endTimeLabel;
+@property (nonatomic, weak) UIView *dynamicBall;
+@property (nonatomic, weak) UIView *datePickerView;
 
-@property (nonatomic) UISlider *startTimeSlider;
-@property (nonatomic) UISlider *endTimeSlider;
+@property (nonatomic, weak) UILabel *startTimeLabel;
+@property (nonatomic, weak) UILabel *endTimeLabel;
 
-@property (nonatomic) UIScrollView *pageScrollView;
-@property (nonatomic) UIPageControl *pageControl;
+@property (nonatomic, weak) UISlider *startTimeSlider;
+@property (nonatomic, weak) UISlider *endTimeSlider;
 
-@property (nonatomic) UITextView *descriptionTextView;
+@property (nonatomic, weak) UIScrollView *pageScrollView;
+@property (nonatomic, weak) UIPageControl *pageControl;
+
+@property (nonatomic, weak) UITextView *descriptionTextView;
 @end
 
 @implementation PMRAddEventViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:46/255. green:49/255. blue:56/255. alpha:1];
+    
+    if ([self.navigationController isViewLoaded]) {
+        self.navigationController.navigationBar.userInteractionEnabled = NO;
+        self.navigationController.navigationBar.tintColor = self.navigationController.navigationBar.barTintColor;
+        self.navigationItem.hidesBackButton = YES;
+    }
+    else {
+        NSLog(@"Error - navigation controller view is not loaded");
+    }
+    
+    self.title = @"CREATE PARTY";
+    
+    [self creareButtons];
+    [self createBalls];
+    [self createTextField];
+    [self createSliders];
+    [self createPageControl];
+    [self createDescriptionTextView];
+    [self createKeyboardToolBar];
+    [self createDatePickerView];
+}
 
 #pragma mark Creating methods
 
 - (void)creareButtons {
     // init chooseButton
-    self.chooseDateButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 10, 190, 36)];
-    self.chooseDateButton.backgroundColor = [UIColor colorWithRed:239/255. green:177/255. blue:27/255. alpha:1];
-    self.chooseDateButton.layer.cornerRadius = 5.;
-    self.chooseDateButton.tintColor = [UIColor whiteColor];
-    self.chooseDateButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
-    [self.chooseDateButton setTitle:@"CHOOSE DATE" forState:UIControlStateNormal];
-    [self.chooseDateButton addTarget:self action:@selector(onChooseDateButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
-    [self.chooseDateButton addTarget:self action:@selector(onChooseDateButtonTouchDown) forControlEvents:UIControlEventTouchDown];
+    UIButton *chooseDateButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 10, 190, 36)];
+    chooseDateButton.backgroundColor = [UIColor colorWithRed:239/255. green:177/255. blue:27/255. alpha:1];
+    chooseDateButton.layer.cornerRadius = 5.;
+    [chooseDateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [chooseDateButton setTitleColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:.5] forState:UIControlStateSelected];
+    chooseDateButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
+    [chooseDateButton setTitle:@"CHOOSE DATE" forState:UIControlStateNormal];
+    [chooseDateButton addTarget:self action:@selector(onChooseDateButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+    [chooseDateButton addTarget:self action:@selector(onChooseDateButtonTouchDown) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:chooseDateButton];
+    self.chooseDateButton = chooseDateButton;
     
     // init saveButton
-    self.saveButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 413.5, 190, 36)];
-    self.saveButton.backgroundColor = [UIColor colorWithRed:140/255. green:186/255. blue:29/255. alpha:1];
-    self.saveButton.layer.cornerRadius = 5.;
-    self.saveButton.tintColor = [UIColor whiteColor];
-    self.saveButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
-    [self.saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
-    [self.saveButton addTarget:self action:@selector(onSaveButtonTouchDown) forControlEvents:UIControlEventTouchDown];
-    [self.saveButton addTarget:self action:@selector(onSaveButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 413.5, 190, 36)];
+    saveButton.backgroundColor = [UIColor colorWithRed:140/255. green:186/255. blue:29/255. alpha:1];
+    saveButton.layer.cornerRadius = 5.;
+    saveButton.tintColor = [UIColor whiteColor];
+    saveButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
+    [saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
+    [saveButton addTarget:self action:@selector(onSaveButtonTouchDown) forControlEvents:UIControlEventTouchDown];
+    [saveButton addTarget:self action:@selector(onSaveButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:saveButton];
+    self.saveButton = saveButton;
+    
     
     //init cancelButton
-    self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 460.5, 190, 36)];
-    self.cancelButton.backgroundColor = [UIColor colorWithRed:236/255. green:71/255. blue:19/255. alpha:1];
-    self.cancelButton.layer.cornerRadius = 5.;
-    self.cancelButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
-    self.cancelButton.tintColor = [UIColor whiteColor];
-    [self.cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
-    [self.cancelButton addTarget:self action:@selector(onCancelButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 460.5, 190, 36)];
+    cancelButton.backgroundColor = [UIColor colorWithRed:236/255. green:71/255. blue:19/255. alpha:1];
+    cancelButton.layer.cornerRadius = 5.;
+    cancelButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
+    cancelButton.tintColor = [UIColor whiteColor];
+    [cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
+    [cancelButton addTarget:self action:@selector(onCancelButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:cancelButton];
+    self.cancelButton = cancelButton;
     
-    [self.view addSubview:self.chooseDateButton];
-    [self.view addSubview:self.saveButton];
-    [self.view addSubview:self.cancelButton];
 }
 
 - (void)createBalls {
@@ -108,10 +141,11 @@
     line.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:line];
     
-    self.dynamicBall = [[UIView alloc] initWithFrame:CGRectMake(8.5, 21, 13, 13)];
-    self.dynamicBall.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.5];
-    self.dynamicBall.layer.cornerRadius = self.dynamicBall.frame.size.height / 2.;
-    [self.view addSubview:self.dynamicBall];
+    UIView *dynamicBall = [[UIView alloc] initWithFrame:CGRectMake(8.5, 21, 13, 13)];
+    dynamicBall.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.5];
+    dynamicBall.layer.cornerRadius = dynamicBall.frame.size.height / 2.;
+    [self.view addSubview:dynamicBall];
+    self.dynamicBall = dynamicBall;
 }
 
 -(UIView *)createBallWithFrame:(CGRect)frame {
@@ -130,17 +164,24 @@
 }
 
 - (void)createTextField {
-    self.eventNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 56.5, 190, 36)];
-    self.eventNameTextField.placeholder = @"Your party Name";
-    self.eventNameTextField.backgroundColor = [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1];
-    self.eventNameTextField.textColor = [UIColor whiteColor];
-    self.eventNameTextField.textAlignment = NSTextAlignmentCenter;
-    self.eventNameTextField.layer.cornerRadius = 5.;
-    self.eventNameTextField.returnKeyType = UIReturnKeyDone;
-    self.eventNameTextField.delegate = self;
-    [self.eventNameTextField addTarget:self action:@selector(onEventNameTextFieldTouchDown) forControlEvents:UIControlEventTouchDown];
-    
-    [self.view addSubview:self.eventNameTextField];
+    UITextField *eventNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 56.5, 190, 36)];
+    eventNameTextField.backgroundColor = [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1];
+    eventNameTextField.font = [UIFont fontWithName:@"MyriadPro-Regular" size:16];
+    eventNameTextField.textColor = [UIColor whiteColor];
+    eventNameTextField.textAlignment = NSTextAlignmentCenter;
+    eventNameTextField.layer.cornerRadius = 5.;
+    eventNameTextField.returnKeyType = UIReturnKeyDone;
+    eventNameTextField.delegate = self;
+    [eventNameTextField addTarget:self action:@selector(onEventNameTextFieldTouchDown) forControlEvents:UIControlEventTouchDown];
+    if ([eventNameTextField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
+        UIColor *color = [UIColor colorWithRed:76/255. green:82/255. blue:92/255. alpha:1];
+        eventNameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Your party Name"
+                                                                                   attributes:@{NSForegroundColorAttributeName: color}];
+    } else {
+        NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
+    }
+    [self.view addSubview:eventNameTextField];
+    self.eventNameTextField = eventNameTextField;
 }
 
 - (void)createDatePickerView {
@@ -167,12 +208,13 @@
     datePicker.backgroundColor = [UIColor whiteColor];
     [datePicker setMinimumDate:[NSDate date]];
     
-    self.datePickerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, datePicker.frame.size.height + toolbar.frame.size.height)];
+    UIView *datePickerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, datePicker.frame.size.height + toolbar.frame.size.height)];
     
-    [self.datePickerView addSubview:toolbar];
-    [self.datePickerView addSubview:datePicker];
+    [datePickerView addSubview:toolbar];
+    [datePickerView addSubview:datePicker];
     
-    [self.view addSubview:self.datePickerView];
+    [self.view addSubview:datePickerView];
+    self.datePickerView = datePickerView;
 }
 
 - (void)createKeyboardToolBar {
@@ -198,99 +240,107 @@
 }
 
 - (void)createSliders {
-    self.startTimeSlider = [[UISlider alloc] initWithFrame:CGRectMake(120, 107, 190, 30)];
-    self.startTimeSlider.tintColor = [UIColor colorWithRed:238/255. green:178/255. blue:30/255. alpha:1];
-    [self.startTimeSlider addTarget:self action:@selector(onStartTimeSliderTouchDown) forControlEvents:UIControlEventTouchDown];
+    UISlider *startTimeSlider = [[UISlider alloc] initWithFrame:CGRectMake(120, 107, 190, 30)];
+    startTimeSlider.tintColor = [UIColor colorWithRed:238/255. green:178/255. blue:30/255. alpha:1];
+    [startTimeSlider addTarget:self action:@selector(onStartTimeSliderTouchDown) forControlEvents:UIControlEventTouchDown];
     // set minimum and maximum time in minutes
-    self.startTimeSlider.minimumValue = 0;    // minimum time = 0:00
-    self.startTimeSlider.maximumValue = 1409; // maximum time = 23:29
+    startTimeSlider.minimumValue = 0;    // minimum time = 0:00
+    startTimeSlider.maximumValue = 1409; // maximum time = 23:29
     
-    self.endTimeSlider = [[UISlider alloc] initWithFrame:CGRectMake(120, 149.5, 190, 30)];
-    self.endTimeSlider.tintColor = [UIColor colorWithRed:238/255. green:178/255. blue:30/255. alpha:1];
-    [self.endTimeSlider addTarget:self action:@selector(onEndTimeSliderTouchDown) forControlEvents:UIControlEventTouchDown];
+    UISlider *endTimeSlider = [[UISlider alloc] initWithFrame:CGRectMake(120, 149.5, 190, 30)];
+    endTimeSlider.tintColor = [UIColor colorWithRed:238/255. green:178/255. blue:30/255. alpha:1];
+    [endTimeSlider addTarget:self action:@selector(onEndTimeSliderTouchDown) forControlEvents:UIControlEventTouchDown];
     // set minimum and maximum time in minutes
-    self.endTimeSlider.minimumValue = 30;   // minimum time = 0:30
-    self.endTimeSlider.maximumValue = 1439; // maximum time = 23:59
+    endTimeSlider.minimumValue = 30;   // minimum time = 0:30
+    endTimeSlider.maximumValue = 1439; // maximum time = 23:59
     
-    self.startTimeSlider.minimumValueImage = [UIImage imageNamed:@"TimePopup"];
+    startTimeSlider.minimumValueImage = [UIImage imageNamed:@"TimePopup"];
+    endTimeSlider.maximumValueImage = [UIImage imageNamed:@"TimePopup_1"];
     
-    CIImage *ciImage = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"TimePopup"]];
-    self.endTimeSlider.maximumValueImage = [[UIImage alloc] initWithCIImage:ciImage scale:2 orientation:UIImageOrientationUpMirrored];
+    [self.view addSubview:startTimeSlider];
+    [self.view addSubview:endTimeSlider];
     
-    [self.view addSubview:self.startTimeSlider];
-    [self.view addSubview:self.endTimeSlider];
-    
-    [self.startTimeSlider addTarget:self
+    [startTimeSlider addTarget:self
                              action:@selector(onStartTimeSliderValueChanged:)
                    forControlEvents:UIControlEventValueChanged];
     
-    [self.endTimeSlider addTarget:self
+    [endTimeSlider addTarget:self
                            action:@selector(onEndTimeSliderValueChanged:)
                  forControlEvents:UIControlEventValueChanged];
     
-    [self.startTimeSlider setValue:.3 animated:YES];
+    [startTimeSlider setValue:.3 animated:YES];
     
-    self.startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 113, 32.5, 19)];
-    self.startTimeLabel.font = [UIFont fontWithName:@"MyriadPro-Regular" size:10.6];
-    self.startTimeLabel.textColor = [UIColor whiteColor];
-    self.startTimeLabel.text = @"00:00";
-    self.startTimeLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:self.startTimeLabel];
+    UILabel *startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 113, 32.5, 19)];
+    startTimeLabel.font = [UIFont fontWithName:@"MyriadPro-Regular" size:10.6];
+    startTimeLabel.textColor = [UIColor whiteColor];
+    startTimeLabel.text = @"00:00";
+    startTimeLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:startTimeLabel];
     
-    self.endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(278, 148, 32.5, 32.5)];
-    self.endTimeLabel.font = [UIFont fontWithName:@"MyriadPro-Regular" size:10.6];
-    self.endTimeLabel.textColor = [UIColor whiteColor];
-    self.endTimeLabel.text = @"00:30";
-    self.endTimeLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:self.endTimeLabel];
+    UILabel *endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(278, 148, 32.5, 32.5)];
+    endTimeLabel.font = [UIFont fontWithName:@"MyriadPro-Regular" size:10.6];
+    endTimeLabel.textColor = [UIColor whiteColor];
+    endTimeLabel.text = @"00:30";
+    endTimeLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:endTimeLabel];
+    
+    self.startTimeSlider = startTimeSlider;
+    self.startTimeLabel = startTimeLabel;
+    self.endTimeSlider = endTimeSlider;
+    self.endTimeLabel = endTimeLabel;
 }
 
 - (void)createPageControl {
-    self.pageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(120, 192, 190, 100)];
-    self.pageScrollView.pagingEnabled = YES;
-    self.pageScrollView.backgroundColor = [UIColor colorWithRed:68/255. green:73/255. blue:83/255. alpha:1];
-    self.pageScrollView.layer.cornerRadius = 4.;
-    [self.pageScrollView setShowsHorizontalScrollIndicator:NO];
-    self.pageScrollView.delegate = self;
+    UIScrollView *pageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(120, 192, 190, 100)];
+    pageScrollView.pagingEnabled = YES;
+    pageScrollView.backgroundColor = [UIColor colorWithRed:68/255. green:73/255. blue:83/255. alpha:1];
+    pageScrollView.layer.cornerRadius = 4.;
+    [pageScrollView setShowsHorizontalScrollIndicator:NO];
+    pageScrollView.delegate = self;
     
     for (int i = 0; i < 6 ; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"PartyLogo_Small_%d", i]]];
-        float xOffset = (self.pageScrollView.frame.size.width / 2 - imageView.frame.size.width / 2) + i * 190;
+        float xOffset = (pageScrollView.frame.size.width / 2 - imageView.frame.size.width / 2) + i * 190;
         imageView.frame =CGRectMake(xOffset, 9.5, imageView.frame.size.width, imageView.frame.size.height);
-        [self.pageScrollView addSubview:imageView];
+        [pageScrollView addSubview:imageView];
     }
     
-    self.pageScrollView.contentSize = CGSizeMake(190 * 6, 63);
+    pageScrollView.contentSize = CGSizeMake(190 * 6, 63);
     
-    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(120, 272, 190, 20)];
-    self.pageControl.numberOfPages = 6;
-    self.pageControl.currentPage = 0;
-    self.pageControl.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    self.pageControl.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:29/255. green:30/255. blue:36/255. alpha:1];
-    self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+    UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(120, 272, 190, 20)];
+    pageControl.numberOfPages = 6;
+    pageControl.currentPage = 0;
+    pageControl.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    pageControl.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    pageControl.pageIndicatorTintColor = [UIColor colorWithRed:29/255. green:30/255. blue:36/255. alpha:1];
+    pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
     
-    [self.pageControl addTarget:self
+    [pageControl addTarget:self
                          action:@selector(onPageChanged:)
                forControlEvents:UIControlEventValueChanged];
     
-    [self.view addSubview:self.pageScrollView];
-    [self.view addSubview:self.pageControl];
+    [self.view addSubview:pageScrollView];
+    [self.view addSubview:pageControl];
+    
+    self.pageControl = pageControl;
+    self.pageScrollView = pageScrollView;
 }
 
 - (void)createDescriptionTextView {
     UIView *blueLine = [[UIView alloc] initWithFrame:CGRectMake(120, 302.5, 184.5, 5)];
     blueLine.backgroundColor = [UIColor colorWithRed:40/255. green:132/255. blue:175/255. alpha:1];
     
-    self.descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(120, 302.5, 184.5, 99.5)];
-    self.descriptionTextView.font = [UIFont fontWithName:@"MyriadPro-Regular" size:12];
-    self.descriptionTextView.textColor = [UIColor whiteColor];
-    self.descriptionTextView.backgroundColor = [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1];
-    self.descriptionTextView.layer.cornerRadius = 4.;
-    self.descriptionTextView.delegate = self;
+    UITextView *descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(120, 302.5, 184.5, 99.5)];
+    descriptionTextView.font = [UIFont fontWithName:@"MyriadPro-Regular" size:12];
+    descriptionTextView.textColor = [UIColor whiteColor];
+    descriptionTextView.backgroundColor = [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1];
+    descriptionTextView.layer.cornerRadius = 4.;
+    descriptionTextView.delegate = self;
     
-    [self.view addSubview:self.descriptionTextView];
+    [self.view addSubview:descriptionTextView];
     [self.view addSubview:blueLine];
+    
+    self.descriptionTextView = descriptionTextView;
 }
 
 #pragma mark ---
@@ -452,6 +502,10 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
+    
+    PMRParty *p = [PMRParty new];
+    p.eventName = [self.eventNameTextField.text copy];
+    [p save];
 }
 
 - (void)onEventNameTextFieldTouchDown {
@@ -501,7 +555,6 @@
 
 - (void)moveBallToYCoordinate:(float)yCoordinate {
     __block __weak PMRAddEventViewController *weakSelf = self;
-   
     [UIView animateWithDuration:.3
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
@@ -515,33 +568,6 @@
     int minutes = totalMinutes % 60;
     int hours = totalMinutes / 60;
     return [NSString stringWithFormat:@"%02d:%02d",hours, minutes];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor colorWithRed:46/255. green:49/255. blue:56/255. alpha:1];
-    
-    if ([self.navigationController isViewLoaded]) {
-        self.navigationController.navigationBar.userInteractionEnabled = NO;
-        self.navigationController.navigationBar.tintColor = self.navigationController.navigationBar.barTintColor;
-        self.navigationController.navigationItem.leftBarButtonItem.enabled = NO;
-        
-    }
-    else {
-        NSLog(@"Error - navigation controller view is not loaded");
-    }
-    
-    self.title = @"Create party";
-    
-    [self creareButtons];
-    [self createBalls];
-    [self createTextField];
-    [self createSliders];
-    [self createPageControl];
-    [self createDescriptionTextView];
-    [self createKeyboardToolBar];
-    [self createDatePickerView];
 }
 
 @end

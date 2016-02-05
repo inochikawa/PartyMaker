@@ -16,6 +16,7 @@
 @implementation ViewController
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     PMRMainViewController *mainViewController = [PMRMainViewController new];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];

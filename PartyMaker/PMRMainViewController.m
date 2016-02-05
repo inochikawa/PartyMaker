@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Main view";
+    self.title = @"PARTY MAKER";
     self.view.backgroundColor = [UIColor grayColor];
     self.view = [[UIView alloc] initWithFrame:self.view.frame];
     

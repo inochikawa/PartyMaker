@@ -10,12 +10,14 @@
 
 @class UIImage;
 
-@interface PMRParty : NSObject
+@interface PMRParty : NSObject <NSCoding>
 
 @property (nonatomic) NSString *eventName;
 @property (nonatomic) NSString *eventDescription;
 @property (nonatomic) NSDate *startDate;
 @property (nonatomic) NSDate *endDate;
 @property (nonatomic) UIImage *eventTitle;
+
+- (void)save;
 
 @end
