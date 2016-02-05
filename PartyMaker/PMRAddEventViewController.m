@@ -7,7 +7,6 @@
 //
 
 #import "PMRAddEventViewController.h"
-#import "PMRParty.h"
 
 @interface PMRAddEventViewController()<UITextFieldDelegate,
                                        UIScrollViewDelegate,
@@ -369,6 +368,7 @@
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     [self moveBallToYCoordinate:354];
+    [self.pageScrollView setUserInteractionEnabled:NO];
     
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(keyboardWillShow:)
@@ -384,6 +384,7 @@
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    [self.pageScrollView setUserInteractionEnabled:YES];
     [self.descriptionTextView resignFirstResponder];
     return YES;
 }
@@ -411,6 +412,7 @@
 }
 
 - (void)onChooseDateButtonTouchUpInside {
+    [self.eventNameTextField setUserInteractionEnabled:NO];
     __block __weak PMRAddEventViewController *weakSelf = self;
     [UIView animateWithDuration:.3 delay:0
                         options:UIViewAnimationOptionCurveEaseOut
@@ -421,6 +423,8 @@
 }
 
 - (void)onCancelDatePickerViewBarButtonTouch {
+    [self.eventNameTextField setUserInteractionEnabled:YES];
+    
     __block __weak PMRAddEventViewController *weakSelf = self;
     [UIView animateWithDuration:.3 delay:0
                         options:UIViewAnimationOptionCurveEaseOut
@@ -431,6 +435,8 @@
 }
 
 - (void)onDoneDatePickerViewBarButtonTouch {
+    [self.eventNameTextField setUserInteractionEnabled:YES];
+    
     UIDatePicker *datePicker = (UIDatePicker *)self.datePickerView.subviews[1];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd MMM yyyy"];
@@ -502,10 +508,6 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
-    
-    PMRParty *p = [PMRParty new];
-    p.eventName = [self.eventNameTextField.text copy];
-    [p save];
 }
 
 - (void)onEventNameTextFieldTouchDown {
