@@ -562,6 +562,13 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
+    
+    if ([self.navigationController isViewLoaded]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    else {
+        NSLog(@"Error - navigation controller is not loaded");
+    }
 }
 
 - (void)onEventNameTextFieldTouchDown {
