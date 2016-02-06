@@ -6,13 +6,13 @@
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "PMRAppDelegate.h"
 
-@interface AppDelegate ()
+@interface PMRAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation PMRAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

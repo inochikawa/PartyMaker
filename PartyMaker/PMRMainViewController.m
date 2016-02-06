@@ -11,16 +11,6 @@
 
 @implementation PMRMainViewController
 
-- (void)createEventViewController {
-    if (![self.navigationController isViewLoaded]) {
-        NSLog(@"Error - navigation controller view is not loaded");
-        return;
-    }
-    
-    PMRAddEventViewController *addEventViewController = [PMRAddEventViewController new];
-    [self.navigationController pushViewController:addEventViewController animated:YES];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -32,6 +22,16 @@
     rightButton.tintColor = [UIColor grayColor];
     
     self.navigationItem.rightBarButtonItem = rightButton;
+}
+
+- (void)createEventViewController {
+    if (![self.navigationController isViewLoaded]) {
+        NSLog(@"Error - navigation controller view is not loaded");
+        return;
+    }
+    
+    PMRAddEventViewController *addEventViewController = [PMRAddEventViewController new];
+    [self.navigationController pushViewController:addEventViewController animated:YES];
 }
 
 @end

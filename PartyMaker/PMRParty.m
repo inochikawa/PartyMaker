@@ -12,38 +12,36 @@
 #define kEventDescriptionKey    @"eventDescription"
 #define kStartDateKey           @"startDate"
 #define kEndDateKey             @"endDate"
-#define kEventTitleKey          @"eventTitle"
+#define kImagePathKey           @"imagePath"
 #define kDataFile               @"Parties.plist"
-#define kDataKey                @"Party"
-
-@interface PMRParty()
-@property (nonatomic) NSString *documentsPath;
-@end
+#define kDataKey                @"Parties"
 
 @implementation PMRParty
 
+static NSMutableArray *parties;
+
 - (instancetype)init {
     self = [super init];
-    if (!self) return nil;
-    self.documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    return self;
-}
-
-- (instancetype)initWithName:(NSString *)eventName {
-    self = [self init];
-    self.eventName = eventName;
+    if (!self) {
+        NSLog(@"%s - [Error] - PMRPArty doesn't init.", __PRETTY_FUNCTION__);
+        return nil;
+    }
     return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (!self) return nil;
+    
+    if (!self) {
+        NSLog(@"%s - [Error] - PMRPArty doesn't init.", __PRETTY_FUNCTION__);
+        return nil;
+    }
     
     self.eventName = [aDecoder decodeObjectForKey:kEventNameKey];
     self.eventDescription = [aDecoder decodeObjectForKey:kEventDescriptionKey];
     self.startDate = [aDecoder decodeObjectForKey:kStartDateKey];
     self.endDate = [aDecoder decodeObjectForKey:kEndDateKey];
-    self.eventTitle = [aDecoder decodeObjectForKey:kEventTitleKey];
+    self.imagePath = [aDecoder decodeObjectForKey:kImagePathKey];
     
     return self;
 }
@@ -53,28 +51,68 @@
     [aCoder encodeObject:self.eventDescription forKey:kEventDescriptionKey];
     [aCoder encodeObject:self.startDate forKey:kStartDateKey];
     [aCoder encodeObject:self.endDate forKey:kEndDateKey];
-    [aCoder encodeObject:self.eventTitle forKey:kEventTitleKey];
+    [aCoder encodeObject:self.imagePath forKey:kImagePathKey];
 }
 
 - (void)save {
-    // [self createDataPath];
+    if (!parties) {
+        parties = [NSMutableArray new];
+        NSLog(@"%s --- Parties array was created.", __PRETTY_FUNCTION__);
+    }
     
-    NSString *dataPath = [self.documentsPath stringByAppendingPathComponent:kDataFile];
+    [parties addObject:self];
+    
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kDataFile];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        [self copyPlistFile];
+    }
+    
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:self forKey:[NSString stringWithFormat:kDataKey]];
+    [archiver encodeObject:parties forKey:kDataKey];
     [archiver finishEncoding];
-    [data writeToFile:dataPath atomically:YES];
-    NSLog(@"%@", dataPath);
+    [data writeToFile:path atomically:YES];
 }
 
-- (BOOL)createDataPath {
+- (void)copyPlistFile {
+    NSFileManager *fileManger=[NSFileManager defaultManager];
     NSError *error;
-    BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:self.documentsPath withIntermediateDirectories:YES attributes:nil error:&error];
-    if (!success) {
-        NSLog(@"Error creating data path: %@", [error localizedDescription]);
+    
+    NSString *destinationPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kDataFile];
+    
+    NSString *sourcePath=[[[NSBundle mainBundle] resourcePath]stringByAppendingPathComponent:kDataFile];
+    
+    if ([fileManger copyItemAtPath:sourcePath toPath:destinationPath error:&error]) {
+        NSLog(@"%s --- Parties.plist copies from bundle to Documents directory.", __PRETTY_FUNCTION__);
     }
-    return success;
+    else {
+        NSLog(@"%s - [Error] - %@", __PRETTY_FUNCTION__, error);
+    }
+}
+
+#pragma mark - Class methods
+
++ (NSMutableArray *)parties {
+    if (!parties) {
+        parties = [NSMutableArray new];
+        NSLog(@"%s --- Parties array was created.", __PRETTY_FUNCTION__);
+    }
+    return parties;
+}
+
++ (void)loadAllPatries {
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kDataFile];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+        parties = [unarchiver decodeObjectForKey:kDataKey];
+        [unarchiver finishDecoding];
+        NSLog(@"%s --- Parties array was loaded.", __PRETTY_FUNCTION__);
+    } else {
+        parties = [NSMutableArray new];
+        NSLog(@"%s --- Parties array was created.", __PRETTY_FUNCTION__);
+    }
 }
 
 @end

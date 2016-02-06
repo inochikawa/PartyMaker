@@ -6,8 +6,9 @@
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "PMRViewController.h"
 #import "PMRMainViewController.h"
+#import "PMRParty.h"
 
 @interface ViewController ()
 
@@ -29,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [PMRParty loadAllPatries];
 }
 
 - (void)didReceiveMemoryWarning {

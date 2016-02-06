@@ -7,6 +7,11 @@
 //
 
 #import "PMRAddEventViewController.h"
+#import "PMRParty.h"
+
+#define kTimeDifference     30
+#define fMyriadProRegular   @"MyriadPro-Regular"
+#define fMyriadProBold      @"MyriadPro-Bold"
 
 @interface PMRAddEventViewController()<UITextFieldDelegate,
                                        UIScrollViewDelegate,
@@ -56,7 +61,7 @@
     
     [self creareButtons];
     [self createBalls];
-    [self createTextField];
+    [self createEventNameTextField];
     [self createSliders];
     [self createPageControl];
     [self createDescriptionTextView];
@@ -64,7 +69,7 @@
     [self createDatePickerView];
 }
 
-#pragma mark Creating methods
+#pragma mark - Creating methods
 
 - (void)creareButtons {
     // init chooseButton
@@ -73,7 +78,7 @@
     chooseDateButton.layer.cornerRadius = 5.;
     [chooseDateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [chooseDateButton setTitleColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:.5] forState:UIControlStateSelected];
-    chooseDateButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
+    chooseDateButton.titleLabel.font = [UIFont fontWithName:fMyriadProBold size:16];
     [chooseDateButton setTitle:@"CHOOSE DATE" forState:UIControlStateNormal];
     [chooseDateButton addTarget:self action:@selector(onChooseDateButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
     [chooseDateButton addTarget:self action:@selector(onChooseDateButtonTouchDown) forControlEvents:UIControlEventTouchDown];
@@ -85,7 +90,7 @@
     saveButton.backgroundColor = [UIColor colorWithRed:140/255. green:186/255. blue:29/255. alpha:1];
     saveButton.layer.cornerRadius = 5.;
     saveButton.tintColor = [UIColor whiteColor];
-    saveButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
+    saveButton.titleLabel.font = [UIFont fontWithName:fMyriadProBold size:16];
     [saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
     [saveButton addTarget:self action:@selector(onSaveButtonTouchDown) forControlEvents:UIControlEventTouchDown];
     [saveButton addTarget:self action:@selector(onSaveButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
@@ -97,7 +102,7 @@
     UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(120, 460.5, 190, 36)];
     cancelButton.backgroundColor = [UIColor colorWithRed:236/255. green:71/255. blue:19/255. alpha:1];
     cancelButton.layer.cornerRadius = 5.;
-    cancelButton.titleLabel.font = [UIFont fontWithName:@"MyriadPro-Bold" size:16];
+    cancelButton.titleLabel.font = [UIFont fontWithName:fMyriadProBold size:16];
     cancelButton.tintColor = [UIColor whiteColor];
     [cancelButton setTitle:@"CANCEL" forState:UIControlStateNormal];
     [cancelButton addTarget:self action:@selector(onCancelButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
@@ -162,14 +167,14 @@
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = text;
     label.textColor = [UIColor whiteColor];
-    label.font = [UIFont fontWithName:@"MyriadPro-Regular" size:12];
+    label.font = [UIFont fontWithName:fMyriadProRegular size:12];
     return label;
 }
 
-- (void)createTextField {
+- (void)createEventNameTextField {
     UITextField *eventNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 56.5, 190, 36)];
     eventNameTextField.backgroundColor = [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1];
-    eventNameTextField.font = [UIFont fontWithName:@"MyriadPro-Regular" size:16];
+    eventNameTextField.font = [UIFont fontWithName:fMyriadProRegular size:16];
     eventNameTextField.textColor = [UIColor whiteColor];
     eventNameTextField.textAlignment = NSTextAlignmentCenter;
     eventNameTextField.layer.cornerRadius = 5.;
@@ -274,14 +279,14 @@
     [startTimeSlider setValue:.3 animated:YES];
     
     UILabel *startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 113, 32.5, 19)];
-    startTimeLabel.font = [UIFont fontWithName:@"MyriadPro-Regular" size:10.6];
+    startTimeLabel.font = [UIFont fontWithName:fMyriadProRegular size:10.6];
     startTimeLabel.textColor = [UIColor whiteColor];
     startTimeLabel.text = @"00:00";
     startTimeLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:startTimeLabel];
     
     UILabel *endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(278, 148, 32.5, 32.5)];
-    endTimeLabel.font = [UIFont fontWithName:@"MyriadPro-Regular" size:10.6];
+    endTimeLabel.font = [UIFont fontWithName:fMyriadProRegular size:10.6];
     endTimeLabel.textColor = [UIColor whiteColor];
     endTimeLabel.text = @"00:30";
     endTimeLabel.textAlignment = NSTextAlignmentCenter;
@@ -335,7 +340,7 @@
     blueLine.backgroundColor = [UIColor colorWithRed:40/255. green:132/255. blue:175/255. alpha:1];
     
     UITextView *descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(120, 302.5, 184.5, 99.5)];
-    descriptionTextView.font = [UIFont fontWithName:@"MyriadPro-Regular" size:12];
+    descriptionTextView.font = [UIFont fontWithName:fMyriadProRegular size:12];
     descriptionTextView.textColor = [UIColor whiteColor];
     descriptionTextView.backgroundColor = [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1];
     descriptionTextView.layer.cornerRadius = 4.;
@@ -347,9 +352,7 @@
     self.descriptionTextView = descriptionTextView;
 }
 
-#pragma mark ---
-
-#pragma mark Delegate methods
+#pragma mark - Delegate methods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -395,15 +398,20 @@
     return YES;
 }
 
-#pragma mark ---
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if (textView.text.length > 100) {
+        return NO;
+    }
+    return YES;
+}
 
-#pragma mark OnEvent methods
+#pragma mark - OnEvent methods
 
 - (void)onStartTimeSliderValueChanged:(UISlider *)sender {
     self.startTimeLabel.text = [self timeFromMinutes:(int)sender.value];
     
-    if (sender.value > self.endTimeSlider.value - 30) {
-        self.endTimeSlider.value = sender.value + 30;
+    if (sender.value > self.endTimeSlider.value - kTimeDifference) {
+        self.endTimeSlider.value = sender.value + kTimeDifference;
         self.endTimeLabel.text = [self timeFromMinutes:(int)self.endTimeSlider.value];
     }
 }
@@ -411,8 +419,8 @@
 - (void)onEndTimeSliderValueChanged:(UISlider *)sender {
     self.endTimeLabel.text = [self timeFromMinutes:(int)sender.value];
     
-    if (sender.value < self.startTimeSlider.value + 30) {
-        self.startTimeSlider.value = sender.value - 30;
+    if (sender.value < self.startTimeSlider.value + kTimeDifference) {
+        self.startTimeSlider.value = sender.value - kTimeDifference;
         self.startTimeLabel.text = [self timeFromMinutes:(int)self.startTimeSlider.value];
     }
 }
@@ -427,10 +435,10 @@
                      }
                      completion:nil];
     
-    [UIView transitionWithView:self.chooseDateButton duration:.2
+    [UIView transitionWithView:weakSelf.chooseDateButton duration:.2
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-                        [self.chooseDateButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
+                        [weakSelf.chooseDateButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
                     }
                     completion:nil];
 }
@@ -466,10 +474,11 @@
 }
 
 - (void)onCancelButtonTouchUpInside {
-    [UIView transitionWithView:self.cancelButton duration:.2
+    __block __weak PMRAddEventViewController *weakSelf = self;
+    [UIView transitionWithView:weakSelf.cancelButton duration:.2
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-                        [self.cancelButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
+                        [weakSelf.cancelButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
                     }
                     completion:nil];
     
@@ -482,10 +491,12 @@
 }
 
 - (void)onCancelButtonTouchDown {
-    [UIView transitionWithView:self.cancelButton duration:.2
+    __block __weak PMRAddEventViewController *weakSelf = self;
+    
+    [UIView transitionWithView:weakSelf.cancelButton duration:.2
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-                        [self.cancelButton setTitleColor:[UIColor colorWithWhite:1 alpha:.5] forState:UIControlStateNormal];
+                        [weakSelf.cancelButton setTitleColor:[UIColor colorWithWhite:1 alpha:.5] forState:UIControlStateNormal];
                     }
                     completion:nil];
 }
@@ -507,45 +518,39 @@
     [self.pageScrollView setContentOffset:contentOffset animated:YES];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if (textView.text.length > 100) {
-        return NO;
-    }
-    return YES;
-}
-
 - (void)onChooseDateButtonTouchDown {
     [self moveBallToYCoordinate:21];
-    
-    [UIView transitionWithView:self.chooseDateButton duration:.2
+    __block __weak PMRAddEventViewController *weakSelf = self;
+    [UIView transitionWithView:weakSelf.chooseDateButton duration:.2
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-                        [self.chooseDateButton setTitleColor:[UIColor colorWithWhite:1 alpha:.5] forState:UIControlStateNormal];
+                        [weakSelf.chooseDateButton setTitleColor:[UIColor colorWithWhite:1 alpha:.5] forState:UIControlStateNormal];
                     }
                     completion:nil];
 }
 
 - (void)onSaveButtonTouchDown {
     [self moveBallToYCoordinate:472];
-    
-    [UIView transitionWithView:self.saveButton duration:.2
+    __block __weak PMRAddEventViewController *weakSelf = self;
+    [UIView transitionWithView:weakSelf.saveButton duration:.2
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-                        [self.saveButton setTitleColor:[UIColor colorWithWhite:1 alpha:.5] forState:UIControlStateNormal];
+                        [weakSelf.saveButton setTitleColor:[UIColor colorWithWhite:1 alpha:.5] forState:UIControlStateNormal];
                     }
                     completion:nil];
 }
 
 - (void)onSaveButtonTouchUpInside {
-    [UIView transitionWithView:self.saveButton duration:.2
+    __block __weak PMRAddEventViewController *weakSelf = self;
+    [UIView transitionWithView:weakSelf.saveButton duration:.2
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-                        [self.saveButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
+                        [weakSelf.saveButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
                     }
                     completion:nil];
     
     if ([self.chooseDateButton.titleLabel.text  isEqual: @"CHOOSE DATE"]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Something wrong" message:@"You did not choose date." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You did not choose date." preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
         
         [alertController addAction:okAction];
@@ -554,13 +559,15 @@
     }
     
     if ([self.eventNameTextField.text isEqual:@""]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Something wrong" message:@"You did not input event name." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You did not input event name." preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
         
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
+    
+    [self saveParty];
     
     if ([self.navigationController isViewLoaded]) {
         [self.navigationController popToRootViewControllerAnimated:YES];
@@ -583,9 +590,7 @@
     [self moveBallToYCoordinate:159];
 }
 
-#pragma mark ---
-
-#pragma mark Keyboard notifications
+#pragma mark - Keyboard notifications
 
 - (void)keyboardWillShow:(NSNotification*)notification {
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -614,7 +619,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark ---
+#pragma mark - Helpers
 
 - (void)moveBallToYCoordinate:(float)yCoordinate {
     __block __weak PMRAddEventViewController *weakSelf = self;
@@ -627,10 +632,38 @@
                      completion:nil];
 }
 
+
 - (NSString *)timeFromMinutes:(int)totalMinutes {
     int minutes = totalMinutes % 60;
     int hours = totalMinutes / 60;
     return [NSString stringWithFormat:@"%02d:%02d",hours, minutes];
+}
+
+- (void)saveParty {
+    PMRParty *party = [PMRParty new];
+    party.eventName = self.eventNameTextField.text;
+    party.eventDescription = self.descriptionTextView.text;
+    party.startDate = [self selectedDateWithTime:self.startTimeLabel.text];
+    party.endDate = [self selectedDateWithTime:self.endTimeLabel.text];
+    party.imagePath = [self selectedImagePath];
+    [party save];
+}
+
+- (NSDate *)selectedDateWithTime:(NSString *)time {
+    NSDate *date = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components: NSUIntegerMax fromDate: date];
+    NSArray *timeArray = [time componentsSeparatedByString:@":"];
+    [components setHour: (NSInteger)timeArray[0]];
+    [components setMinute: (NSInteger)timeArray[1]];
+    [components setSecond: 00];
+    
+    return [gregorian dateFromComponents: components];
+}
+
+- (NSString *)selectedImagePath {
+    NSInteger selectedImageIndex = self.pageScrollView.contentOffset.x / self.pageScrollView.frame.size.width;
+    return [NSString stringWithFormat:@"PartyLogo_Small_%ld", (long)selectedImageIndex ];
 }
 
 @end

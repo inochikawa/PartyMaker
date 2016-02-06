@@ -14,10 +14,11 @@
 
 @property (nonatomic) NSString *eventName;
 @property (nonatomic) NSString *eventDescription;
+@property (nonatomic) NSString *imagePath;
 @property (nonatomic) NSDate *startDate;
 @property (nonatomic) NSDate *endDate;
-@property (nonatomic) UIImage *eventTitle;
 
 - (void)save;
-
++ (void)loadAllPatries;
++ (NSMutableArray *)parties;
 @end
