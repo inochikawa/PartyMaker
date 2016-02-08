@@ -10,11 +10,11 @@
 #import "PMRMainViewController.h"
 #import "PMRParty.h"
 
-@interface ViewController ()
+@interface NewViewController ()
 
 @end
 
-@implementation ViewController
+@implementation NewViewController
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

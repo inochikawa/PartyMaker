@@ -22,6 +22,11 @@
     rightButton.tintColor = [UIColor grayColor];
     
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    
+//    TestViewController *testVC = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
+    
+//    [self.navigationController pushViewController:testVC animated:YES];
 }
 
 - (void)createEventViewController {

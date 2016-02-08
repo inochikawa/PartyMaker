@@ -15,10 +15,13 @@
 		83E217D31C6220E000C8BF08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D11C6220E000C8BF08 /* Main.storyboard */; };
 		83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D41C6220E000C8BF08 /* Assets.xcassets */; };
 		83E217D81C6220E000C8BF08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D61C6220E000C8BF08 /* LaunchScreen.storyboard */; };
-		83E217E71C62275A00C8BF08 /* PMRAddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217E61C62275A00C8BF08 /* PMRAddEventViewController.m */; };
 		83E217EA1C62286900C8BF08 /* PMRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217E91C62286900C8BF08 /* PMRMainViewController.m */; };
 		83E74DEE1C6355E400B0D255 /* MyriadProBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83E74DEC1C6355E400B0D255 /* MyriadProBold.ttf */; };
 		83E74DEF1C6355E400B0D255 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83E74DED1C6355E400B0D255 /* MyriadProRegular.ttf */; };
+		83F7E9BE1C68A6E800243A5F /* AssetCatalog.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83F7E9BD1C68A6E800243A5F /* AssetCatalog.xcassets */; };
+		83F7E9C01C68A89C00243A5F /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F7E9BF1C68A89C00243A5F /* View.xib */; };
+		83F7E9CE1C68B91D00243A5F /* PMRAddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F7E9CC1C68B91D00243A5F /* PMRAddEventViewController.m */; };
+		83F7E9CF1C68B91D00243A5F /* PMRAddEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F7E9CD1C68B91D00243A5F /* PMRAddEventViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,12 +38,15 @@
 		83E217D41C6220E000C8BF08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83E217D71C6220E000C8BF08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83E217D91C6220E000C8BF08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		83E217E51C62275A00C8BF08 /* PMRAddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRAddEventViewController.h; sourceTree = "<group>"; };
-		83E217E61C62275A00C8BF08 /* PMRAddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRAddEventViewController.m; sourceTree = "<group>"; };
 		83E217E81C62286900C8BF08 /* PMRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRMainViewController.h; sourceTree = "<group>"; };
 		83E217E91C62286900C8BF08 /* PMRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRMainViewController.m; sourceTree = "<group>"; };
 		83E74DEC1C6355E400B0D255 /* MyriadProBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProBold.ttf; sourceTree = "<group>"; };
 		83E74DED1C6355E400B0D255 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
+		83F7E9BD1C68A6E800243A5F /* AssetCatalog.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AssetCatalog.xcassets; sourceTree = "<group>"; };
+		83F7E9BF1C68A89C00243A5F /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		83F7E9CB1C68B91D00243A5F /* PMRAddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRAddEventViewController.h; sourceTree = "<group>"; };
+		83F7E9CC1C68B91D00243A5F /* PMRAddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRAddEventViewController.m; sourceTree = "<group>"; };
+		83F7E9CD1C68B91D00243A5F /* PMRAddEventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PMRAddEventViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,12 +72,13 @@
 		540424EC1C6693E2002F77B9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				83E217E51C62275A00C8BF08 /* PMRAddEventViewController.h */,
-				83E217E61C62275A00C8BF08 /* PMRAddEventViewController.m */,
 				83E217E81C62286900C8BF08 /* PMRMainViewController.h */,
 				83E217E91C62286900C8BF08 /* PMRMainViewController.m */,
 				83E217CE1C6220E000C8BF08 /* PMRViewController.h */,
 				83E217CF1C6220E000C8BF08 /* PMRViewController.m */,
+				83F7E9CB1C68B91D00243A5F /* PMRAddEventViewController.h */,
+				83F7E9CC1C68B91D00243A5F /* PMRAddEventViewController.m */,
+				83F7E9CD1C68B91D00243A5F /* PMRAddEventViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -114,6 +121,8 @@
 				83E217D91C6220E000C8BF08 /* Info.plist */,
 				83E217C81C6220E000C8BF08 /* Supporting Files */,
 				540424E91C667445002F77B9 /* Parties.plist */,
+				83F7E9BD1C68A6E800243A5F /* AssetCatalog.xcassets */,
+				83F7E9BF1C68A89C00243A5F /* View.xib */,
 			);
 			path = PartyMaker;
 			sourceTree = "<group>";
@@ -192,9 +201,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F7E9BE1C68A6E800243A5F /* AssetCatalog.xcassets in Resources */,
 				83E217D81C6220E000C8BF08 /* LaunchScreen.storyboard in Resources */,
 				83E74DEE1C6355E400B0D255 /* MyriadProBold.ttf in Resources */,
 				83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */,
+				83F7E9CF1C68B91D00243A5F /* PMRAddEventViewController.xib in Resources */,
+				83F7E9C01C68A89C00243A5F /* View.xib in Resources */,
 				83E217D31C6220E000C8BF08 /* Main.storyboard in Resources */,
 				83E74DEF1C6355E400B0D255 /* MyriadProRegular.ttf in Resources */,
 				540424EA1C667445002F77B9 /* Parties.plist in Resources */,
@@ -209,10 +221,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				546A501E1C63DE00004C36E5 /* PMRParty.m in Sources */,
+				83F7E9CE1C68B91D00243A5F /* PMRAddEventViewController.m in Sources */,
 				83E217D01C6220E000C8BF08 /* PMRViewController.m in Sources */,
 				83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */,
 				83E217CA1C6220E000C8BF08 /* main.m in Sources */,
-				83E217E71C62275A00C8BF08 /* PMRAddEventViewController.m in Sources */,
 				83E217EA1C62286900C8BF08 /* PMRMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
