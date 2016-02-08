@@ -63,7 +63,7 @@ static NSMutableArray *parties;
     [parties addObject:self];
     
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kDataFile];
-    NSLog(@"%@",path);
+    
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
         [self copyPlistFile];
     }

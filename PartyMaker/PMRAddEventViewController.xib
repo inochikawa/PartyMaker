@@ -29,7 +29,7 @@
             <connections>
                 <outlet property="cancelButton" destination="fo0-Q5-Xsq" id="xjL-yN-vr8"/>
                 <outlet property="chooseDateButton" destination="Zvy-9H-Xj0" id="Zcr-pu-dMI"/>
-                <outlet property="datePickerControl" destination="Sqt-rf-eYM" id="c3O-6a-FHg"/>
+                <outlet property="datePickerControl" destination="Sqt-rf-eYM" id="PFy-Ec-ejD"/>
                 <outlet property="datePickerToolBar" destination="0cS-Lv-oN1" id="N7O-CN-yOr"/>
                 <outlet property="datePickerView" destination="aLn-K4-Hot" id="Jo3-bb-XFz"/>
                 <outlet property="descriptionTextView" destination="AM8-WB-k5v" id="WLx-m0-aLN"/>
@@ -52,7 +52,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Zvy-9H-Xj0">
-                    <rect key="frame" x="120" y="10" width="190" height="36"/>
+                    <rect key="frame" x="120" y="10" width="190" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.93725490196078431" green="0.69411764705882351" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
@@ -94,18 +94,20 @@
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your party Name" textAlignment="center" minimumFontSize="16" id="hCs-I6-eHV">
-                    <rect key="frame" x="120" y="57" width="190" height="36"/>
+                    <rect key="frame" x="120" y="57" width="190" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.13725490196078433" green="0.14509803921568626" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="0.0" maxY="-1"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <action selector="moveBallToElement:" destination="-1" eventType="touchDown" id="LLR-mi-8yT"/>
+                        <action selector="onEventNameTextFieldTouchDown" destination="-1" eventType="touchDown" id="Bui-Xa-gNE"/>
                     </connections>
                 </textField>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-2.5" maxValue="1409" minimumValueImage="TimePopup" id="gmz-Zx-WEt">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1409" minimumValueImage="TimePopup" id="gmz-Zx-WEt">
                     <rect key="frame" x="120" y="107" width="190" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.93333333333333335" green="0.69803921568627447" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
@@ -167,7 +169,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="EDE-zZ-07l" userLabel="Ball">
-                    <rect key="frame" x="11" y="23" width="9" height="9"/>
+                    <rect key="frame" x="11" y="24" width="9" height="9"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <userDefinedRuntimeAttributes>
@@ -290,6 +292,44 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" id="aLn-K4-Hot">
+                    <rect key="frame" x="0.0" y="305" width="320" height="263"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="Sqt-rf-eYM">
+                            <rect key="frame" x="0.0" y="44" width="320" height="219"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <date key="date" timeIntervalSinceReferenceDate="476634378.90044802">
+                                <!--2016-02-08 14:26:18 +0000-->
+                            </date>
+                            <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                <!--2037-12-31 11:00:00 +0000-->
+                            </date>
+                        </datePicker>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" id="0cS-Lv-oN1">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <barButtonItem title="Cancel" style="plain" id="puf-do-YR7">
+                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="onCancelDatePickerViewBarButtonTouch" destination="-1" id="eab-0u-s9m"/>
+                                    </connections>
+                                </barButtonItem>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="IEX-FW-ZdH"/>
+                                <barButtonItem title="Done" id="iZt-Jy-z9m">
+                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="onDoneDatePickerViewBarButtonTouch" destination="-1" id="5Ut-mr-UJU"/>
+                                    </connections>
+                                </barButtonItem>
+                            </items>
+                            <color key="barTintColor" red="0.26666666666666666" green="0.28627450980392155" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                        </toolbar>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -321,47 +361,6 @@
             <color key="barTintColor" red="0.2666666667" green="0.28627450980000002" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
             <point key="canvasLocation" x="531" y="597"/>
         </toolbar>
-        <view contentMode="scaleToFill" id="aLn-K4-Hot">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="Sqt-rf-eYM">
-                    <rect key="frame" x="0.0" y="44" width="320" height="524"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <date key="date" timeIntervalSinceReferenceDate="476634378.90044802">
-                        <!--2016-02-08 14:26:18 +0000-->
-                    </date>
-                    <date key="minimumDate" timeIntervalSinceReferenceDate="-975589200">
-                        <!--1970-02-01 11:00:00 +0000-->
-                    </date>
-                    <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
-                        <!--2037-12-31 11:00:00 +0000-->
-                    </date>
-                </datePicker>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" id="0cS-Lv-oN1">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <items>
-                        <barButtonItem title="Cancel" style="plain" id="puf-do-YR7">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="onCancelDatePickerViewBarButtonTouch" destination="-1" id="eab-0u-s9m"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="IEX-FW-ZdH"/>
-                        <barButtonItem title="Done" id="iZt-Jy-z9m">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="onDoneDatePickerViewBarButtonTouch" destination="-1" id="5Ut-mr-UJU"/>
-                            </connections>
-                        </barButtonItem>
-                    </items>
-                    <color key="barTintColor" red="0.26666666666666666" green="0.28627450980392155" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
-                </toolbar>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="924" y="245"/>
-        </view>
     </objects>
     <resources>
         <image name="TimePopup" width="40" height="31"/>

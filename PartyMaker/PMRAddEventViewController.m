@@ -135,12 +135,9 @@
     self.datePickerToolBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 36);
     [self.datePickerToolBar sizeToFit];
     
-    self.datePickerControl.frame = CGRectMake(0, self.datePickerToolBar.frame.size.height, self.view.frame.size.width, 200);
-    self.datePickerControl.datePickerMode = UIDatePickerModeDate;
-    self.datePickerControl.backgroundColor = [UIColor whiteColor];
+    self.datePickerControl.frame = CGRectMake(0, self.datePickerToolBar.frame.size.height, self.view.frame.size.width, 219);
     [self.datePickerControl setMinimumDate:[NSDate date]];
     self.datePickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.datePickerControl.frame.size.height + self.datePickerToolBar.frame.size.height);
-    [self.view addSubview:self.datePickerView];
 }
 
 - (void)configureKeyboardToolBar {
@@ -298,6 +295,10 @@
     [self.descriptionTextView resignFirstResponder];
     [self.lastTextViewEditText setString:@""];
     [self.lastTextViewEditText appendString:self.descriptionTextView.text];
+}
+
+- (IBAction)onEventNameTextFieldTouchDown {
+    [self.chooseDateButton setUserInteractionEnabled:NO];
 }
 
 - (IBAction)moveBallToElement:(id)sender {
