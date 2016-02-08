@@ -33,7 +33,7 @@
     else {
         NSLog(@"Error - navigation controller view is not loaded");
     }
-    //[self createBalls];
+    self.lastTextViewEditText = [[NSMutableString alloc] initWithString:@""];
     
     [self configureButtons];
     [self configureDescriptionTextView];
@@ -48,44 +48,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)createBalls {
-    NSArray *ballsFrames = @[[NSValue valueWithCGRect:CGRectMake(11, 23,  9, 9)],
-                             [NSValue valueWithCGRect:CGRectMake(1, 72,  9, 9)],
-                             [NSValue valueWithCGRect:CGRectMake(11, 119, 9, 9)],
-                             [NSValue valueWithCGRect:CGRectMake(11, 161, 9, 9)],
-                             [NSValue valueWithCGRect:CGRectMake(11, 237, 9, 9)],
-                             [NSValue valueWithCGRect:CGRectMake(11, 356, 9, 9)],
-                             [NSValue valueWithCGRect:CGRectMake(11, 474, 9, 9)]];
-    
-    NSArray *logosFrames = @[[NSValue valueWithCGRect:CGRectMake(27, 21,  100, 13)],
-                             [NSValue valueWithCGRect:CGRectMake(27, 70,  100, 13)],
-                             [NSValue valueWithCGRect:CGRectMake(27, 117, 100, 13)],
-                             [NSValue valueWithCGRect:CGRectMake(27, 159, 100, 13)],
-                             [NSValue valueWithCGRect:CGRectMake(27, 235, 100, 13)],
-                             [NSValue valueWithCGRect:CGRectMake(27, 354, 100, 13)],
-                             [NSValue valueWithCGRect:CGRectMake(27, 472, 100, 13)]];
-    
-    NSArray *logosTexts = @[@"CHOOSE DATE",
-                            @"PARTY NAME",
-                            @"START",
-                            @"END",
-                            @"LOGO",
-                            @"DESCRIPTION",
-                            @"FINAL"];
-    
-    for (int i = 0; i < 7; i++) {
-        [self.view addSubview:[self createBallWithFrame:[[ballsFrames objectAtIndex:i] CGRectValue]]];
-    }
-    
-    for (int i = 0; i < 7; i++) {
-        [self.view addSubview:[self createLabelWithText:logosTexts[i] withFrame:[[logosFrames objectAtIndex:i] CGRectValue]]];
-    }
-    
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(14.5, 28.5, 1, 452)];
-    line.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:line];
 }
 
 - (void)configureButtons {
