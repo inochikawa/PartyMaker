@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewViewController : UIViewController
+@interface PMRRootViewController : UIViewController
 
 
 @end

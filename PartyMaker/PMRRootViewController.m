@@ -6,15 +6,15 @@
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 
-#import "PMRViewController.h"
+#import "PMRRootViewController.h"
 #import "PMRMainViewController.h"
 #import "PMRParty.h"
 
-@interface NewViewController ()
+@interface PMRRootViewController ()
 
 @end
 
-@implementation NewViewController
+@implementation PMRRootViewController
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
