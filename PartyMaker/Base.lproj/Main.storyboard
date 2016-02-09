@@ -79,7 +79,7 @@
         <scene sceneID="gPf-bT-SxU">
             <objects>
                 <navigationController id="enQ-bq-O4f" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Parties" image="List-1" selectedImage="List" id="JfL-lh-h4d"/>
+                    <tabBarItem key="tabBarItem" title="Parties" image="List" selectedImage="List" id="JfL-lh-h4d"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="sQr-LM-dFY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -439,7 +439,6 @@
     </scenes>
     <resources>
         <image name="List" width="30" height="30"/>
-        <image name="List-1" width="30" height="30"/>
         <image name="Settings" width="30" height="30"/>
         <image name="TimePopup" width="40" height="31"/>
         <image name="TimePopup_1" width="40" height="31"/>
