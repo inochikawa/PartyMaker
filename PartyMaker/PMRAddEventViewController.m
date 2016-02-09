@@ -353,7 +353,7 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if (textView.text.length > 100) {
+    if (textView.text.length > 200) {
         return NO;
     }
     return YES;

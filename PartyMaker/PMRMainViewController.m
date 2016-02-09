@@ -19,7 +19,7 @@
     self.view = [[UIView alloc] initWithFrame:self.view.frame];
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createEventViewController)];
-    rightButton.tintColor = [UIColor grayColor];
+    rightButton.tintColor = [UIColor blackColor];
     
     self.navigationItem.rightBarButtonItem = rightButton;
     
