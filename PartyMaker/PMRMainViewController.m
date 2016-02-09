@@ -14,6 +14,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tabBarItem.image = [[UIImage imageNamed:@"List"]
+                             imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
     self.title = @"PARTY MAKER";
     self.view.backgroundColor = [UIColor grayColor];
     self.view = [[UIView alloc] initWithFrame:self.view.frame];
@@ -22,11 +25,6 @@
     rightButton.tintColor = [UIColor blackColor];
     
     self.navigationItem.rightBarButtonItem = rightButton;
-    
-    
-//    TestViewController *testVC = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
-    
-//    [self.navigationController pushViewController:testVC animated:YES];
 }
 
 - (void)createEventViewController {

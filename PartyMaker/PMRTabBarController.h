@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PMRRootViewController : UIViewController
+@interface PMRTabBarController : UITabBarController
 
 
 @end

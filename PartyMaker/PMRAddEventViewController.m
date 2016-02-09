@@ -8,6 +8,7 @@
 
 #import "PMRAddEventViewController.h"
 #import "PMRParty.h"
+#import "PMRDataStorage.h"
 
 #define kTimeDifference     30
 
@@ -18,9 +19,6 @@
 @property (nonatomic) NSMutableString* lastTextViewEditText;
 
 @property (nonatomic, weak) IBOutlet UIButton *chooseDateButton;
-
-@property (nonatomic, weak) IBOutlet UIButton *saveButton;
-@property (nonatomic, weak) IBOutlet UIButton *cancelButton;
 
 @property (nonatomic, weak) IBOutlet UITextField *eventNameTextField;
 
@@ -49,21 +47,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor colorWithRed:46/255. green:49/255. blue:56/255. alpha:1];
-    self.title = @"CREATE PARTY";
-    
-    if ([self.navigationController isViewLoaded]) {
-        self.navigationController.navigationBar.userInteractionEnabled = NO;
-        self.navigationController.navigationBar.tintColor = self.navigationController.navigationBar.barTintColor;
-        self.navigationItem.hidesBackButton = YES;
-    }
-    else {
-        NSLog(@"Error - navigation controller view is not loaded");
-    }
+
     self.lastTextViewEditText = [[NSMutableString alloc] initWithString:@""];
     
-    [self configureButtons];
+    [self configureButton];
     [self configureDescriptionTextView];
     [self configureEventNameTextField];
     [self configureImagePageControl];
@@ -71,6 +58,7 @@
     [self configureDatePickerView];
     [self configureKeyboardToolBar];
     [self configureDynamicBall];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,10 +66,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)configureButtons {
+#pragma mark - Configure methods
+
+- (void)configureButton {
     self.chooseDateButton.layer.cornerRadius = 5.;
-    self.saveButton.layer.cornerRadius = 5.;
-    self.cancelButton.layer.cornerRadius = 5.;
 }
 
 - (void)configureEventNameTextField {
@@ -175,14 +163,6 @@
 #pragma mark - IBActions
 
 - (IBAction)onSaveButtonTouchUpInside {
-    __block __weak PMRAddEventViewController *weakSelf = self;
-    [UIView transitionWithView:weakSelf.saveButton duration:.2
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        [weakSelf.saveButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
-                    }
-                    completion:nil];
-    
     if ([self.chooseDateButton.titleLabel.text  isEqual: @"CHOOSE DATE"]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You did not choose date." preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
@@ -374,7 +354,8 @@
     party.startDate = [self selectedDateWithTime:self.startTimeLabel.text];
     party.endDate = [self selectedDateWithTime:self.endTimeLabel.text];
     party.imagePath = [self selectedImagePath];
-    [party save];
+    
+    [PMRDataStorage savePatryToPlist:party];
 }
 
 - (NSDate *)selectedDateWithTime:(NSString *)time {

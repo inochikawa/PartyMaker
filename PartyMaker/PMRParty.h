@@ -18,7 +18,4 @@
 @property (nonatomic) NSDate *startDate;
 @property (nonatomic) NSDate *endDate;
 
-- (void)save;
-+ (void)loadAllPatries;
-+ (NSMutableArray *)parties;
 @end
