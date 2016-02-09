@@ -122,12 +122,14 @@
 }
 
 - (void)configureDatePickerView {
+    self.datePickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 221);
+    
     self.datePickerToolBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 36);
     [self.datePickerToolBar sizeToFit];
     
-    self.datePickerControl.frame = CGRectMake(0, self.datePickerToolBar.frame.size.height, self.view.frame.size.width, 219);
+    self.datePickerControl.frame = CGRectMake(0, self.datePickerToolBar.frame.size.height, self.view.frame.size.width, self.datePickerView.frame.size.height - self.datePickerToolBar.frame.size.height);
     [self.datePickerControl setMinimumDate:[NSDate date]];
-    self.datePickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.datePickerControl.frame.size.height + self.datePickerToolBar.frame.size.height);
+    [self.view addSubview:self.datePickerView];
 }
 
 - (void)configureKeyboardToolBar {
