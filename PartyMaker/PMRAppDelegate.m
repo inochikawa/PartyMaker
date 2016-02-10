@@ -27,7 +27,7 @@
     
     
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"MyriadPro-Regular" size:12.0f],
-                                                        NSForegroundColorAttributeName : [UIColor blackColor]
+                                                        NSForegroundColorAttributeName : [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1]
                                                         } forState:UIControlStateNormal];
     
     [[PMRDataStorage dataStorage] loadAllParties];

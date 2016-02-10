@@ -19,6 +19,7 @@
 @property (nonatomic) NSMutableString* lastTextViewEditText;
 
 @property (nonatomic, weak) IBOutlet UIButton *chooseDateButton;
+@property (nonatomic, weak) IBOutlet UIButton *locationButton;
 
 @property (nonatomic, weak) IBOutlet UITextField *eventNameTextField;
 
@@ -50,6 +51,10 @@
 
     self.lastTextViewEditText = [[NSMutableString alloc] initWithString:@""];
     
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [self configureButton];
     [self configureDescriptionTextView];
     [self configureEventNameTextField];
@@ -69,6 +74,7 @@
 
 - (void)configureButton {
     self.chooseDateButton.layer.cornerRadius = 5.;
+    self.locationButton.layer.cornerRadius = 5.;
 }
 
 - (void)configureEventNameTextField {
@@ -86,14 +92,15 @@
 }
 
 - (void)configureImageScrollView {
-    self.imageScrollView.layer.cornerRadius = 4.;
+    self.imageScrollView.layer.cornerRadius = 3.;
     self.imageScrollView.delegate = self;
-    self.imageScrollView.contentSize = CGSizeMake(190 * 6, 63);
+    self.imageScrollView.contentSize = CGSizeMake(self.imageScrollView.frame.size.width * 6, self.imageScrollView.frame.size.height);
     
     for (int i = 0; i < 6 ; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"PartyLogo_Small_%d", i]]];
-        float xOffset = (self.imageScrollView.frame.size.width / 2 - imageView.frame.size.width / 2) + i * 190;
-        imageView.frame =CGRectMake(xOffset, 9.5, imageView.frame.size.width, imageView.frame.size.height);
+        float xOffset = (self.imageScrollView.frame.size.width / 2 - imageView.frame.size.width / 2) + i * self.imageScrollView.frame.size.width;
+        float yOffset = self.imageScrollView.frame.size.height / 2 - imageView.frame.size.height / 2 - 20;
+        imageView.frame =CGRectMake(xOffset, yOffset, imageView.frame.size.width, imageView.frame.size.height);
         [self.imageScrollView addSubview:imageView];
     }
 }
@@ -104,17 +111,13 @@
 }
 
 - (void)configureDescriptionTextView {
-    self.descriptionTextView.layer.cornerRadius = 4.;
+    self.descriptionTextView.layer.cornerRadius = 3.;
     self.descriptionTextView.delegate = self;
 }
 
 - (void)configureDatePickerView {
-    self.datePickerView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 221);
-    
-    self.datePickerToolBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 36);
-    [self.datePickerToolBar sizeToFit];
-    
-    self.datePickerControl.frame = CGRectMake(0, self.datePickerToolBar.frame.size.height, self.view.frame.size.width, self.datePickerView.frame.size.height - self.datePickerToolBar.frame.size.height);
+    CGRect screenFrame = [[UIScreen mainScreen] bounds];
+    self.datePickerView.frame = CGRectMake(0, screenFrame.size.height, screenFrame.size.width, screenFrame.size.height / 3.);
     [self.datePickerControl setMinimumDate:[NSDate date]];
     [self.view addSubview:self.datePickerView];
 }
@@ -303,13 +306,13 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self moveBallToYCoordinate:235];
+    [self moveBallToElement:scrollView];
     NSInteger currentPage = scrollView.contentOffset.x / self.imageScrollView.frame.size.width;
     [self.imagePageControl setCurrentPage:currentPage];
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    [self moveBallToYCoordinate:354];
+    [self moveBallToElement:textView];
     [self.imageScrollView setUserInteractionEnabled:NO];
     
     [[NSNotificationCenter defaultCenter]addObserver:self
@@ -372,17 +375,6 @@
 - (NSString *)selectedImagePath {
     NSInteger selectedImageIndex = self.imageScrollView.contentOffset.x / self.imageScrollView.frame.size.width;
     return [NSString stringWithFormat:@"PartyLogo_Small_%ld", (long)selectedImageIndex ];
-}
-
-- (void)moveBallToYCoordinate:(float)yCoordinate {
-    __block __weak PMRAddEventViewController *weakSelf = self;
-    [UIView animateWithDuration:.3
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^ {
-                         weakSelf.dynamicBall.frame = CGRectMake(weakSelf.dynamicBall.frame.origin.x, yCoordinate, weakSelf.dynamicBall.frame.size.width, weakSelf.dynamicBall.frame.size.height);
-                     }
-                     completion:nil];
 }
 
 -(UIView *)createBallWithFrame:(CGRect)frame {
