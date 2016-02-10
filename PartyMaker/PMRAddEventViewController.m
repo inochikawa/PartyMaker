@@ -99,7 +99,7 @@
     for (int i = 0; i < 6 ; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"PartyLogo_Small_%d", i]]];
         float xOffset = (self.imageScrollView.frame.size.width / 2 - imageView.frame.size.width / 2) + i * self.imageScrollView.frame.size.width;
-        float yOffset = self.imageScrollView.frame.size.height / 2 - imageView.frame.size.height / 2 - 20;
+        float yOffset = self.imageScrollView.frame.size.height / 2 - imageView.frame.size.height / 2;
         imageView.frame =CGRectMake(xOffset, yOffset, imageView.frame.size.width, imageView.frame.size.height);
         [self.imageScrollView addSubview:imageView];
     }
