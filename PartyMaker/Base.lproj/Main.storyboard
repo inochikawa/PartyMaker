@@ -62,7 +62,7 @@
         <scene sceneID="IuT-Au-flL">
             <objects>
                 <navigationController id="f8M-DT-RiE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="Ptg-T6-1iS"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings-1" selectedImage="Settings" id="Ptg-T6-1iS"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="w4e-58-kwB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -79,7 +79,7 @@
         <scene sceneID="gPf-bT-SxU">
             <objects>
                 <navigationController id="enQ-bq-O4f" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Parties" image="List" selectedImage="List" id="JfL-lh-h4d"/>
+                    <tabBarItem key="tabBarItem" title="Parties" image="List-1" selectedImage="List" id="JfL-lh-h4d"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="sQr-LM-dFY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -343,13 +343,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="CREATE PARTY" id="K0X-xg-51U">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="J1B-Xx-b79">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="J1B-Xx-b79">
                             <color key="tintColor" red="0.92549019607843142" green="0.27843137254901962" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="onCancelButtonTouchUpInside" destination="TPF-f6-8pl" id="Dtl-K5-6mS"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="E6g-lw-Ryc">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="E6g-lw-Ryc">
                             <color key="tintColor" red="0.5490196078431373" green="0.72941176470588232" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="onSaveButtonTouchUpInside" destination="TPF-f6-8pl" id="xOm-NO-iOu"/>
@@ -439,7 +439,9 @@
     </scenes>
     <resources>
         <image name="List" width="30" height="30"/>
+        <image name="List-1" width="30" height="30"/>
         <image name="Settings" width="30" height="30"/>
+        <image name="Settings-1" width="30" height="30"/>
         <image name="TimePopup" width="40" height="31"/>
         <image name="TimePopup_1" width="40" height="31"/>
     </resources>

@@ -58,7 +58,6 @@
     [self configureDatePickerView];
     [self configureKeyboardToolBar];
     [self configureDynamicBall];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -355,7 +354,7 @@
     party.endDate = [self selectedDateWithTime:self.endTimeLabel.text];
     party.imagePath = [self selectedImagePath];
     
-    [PMRDataStorage savePatryToPlist:party];
+    [[PMRDataStorage dataStorage] savePatryToPlist:party];
 }
 
 - (NSDate *)selectedDateWithTime:(NSString *)time {

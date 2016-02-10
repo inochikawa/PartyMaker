@@ -13,37 +13,44 @@
 #define kDataKey    @"Parties"
 
 @interface PMRDataStorage()
-
 @end
 
 @implementation PMRDataStorage
 
-+ (NSArray *)loadAllParties {
-    NSArray *parties;
+-(instancetype) initUniqueInstance {
+    return [super init];
+}
+
++ (instancetype) dataStorage {
+    static dispatch_once_t pred;
+    static id storage = nil;
+    dispatch_once(&pred, ^{
+        storage = [[super alloc] initUniqueInstance];
+    });
+    return storage;
+}
+
+- (void)loadAllParties {
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kDataFile];
     if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSData *data = [[NSData alloc] initWithContentsOfFile:path];
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-        parties = [unarchiver decodeObjectForKey:kDataKey];
+        self.parties = [unarchiver decodeObjectForKey:kDataKey];
         [unarchiver finishDecoding];
         NSLog(@"%s --- Parties array was loaded.", __PRETTY_FUNCTION__);
     } else {
-        parties = [NSMutableArray new];
+        self.parties = [NSMutableArray new];
         NSLog(@"%s --- Parties array was created.", __PRETTY_FUNCTION__);
-        return nil;
     }
-    return parties;
 }
 
-+ (void)savePatryToPlist:(PMRParty *)party {
-    NSMutableArray *parties = [[NSMutableArray alloc] initWithArray:[self loadAllParties]];
-    
-    if (!parties) {
-        parties = [NSMutableArray new];
+- (void)savePatryToPlist:(PMRParty *)party {
+    if (!self.parties) {
+        self.parties = [NSMutableArray new];
         NSLog(@"%s --- Parties array was created.", __PRETTY_FUNCTION__);
     }
     
-    [parties addObject:party];
+    [self.parties addObject:party];
     
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kDataFile];
     
@@ -53,13 +60,13 @@
     
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:parties forKey:kDataKey];
+    [archiver encodeObject:self.parties forKey:kDataKey];
     [archiver finishEncoding];
     [data writeToFile:path atomically:YES];
     NSLog(@"%s --- Party was saved.", __PRETTY_FUNCTION__);
 }
 
-+ (void)copyPlistFile {
+- (void)copyPlistFile {
     NSFileManager *fileManger=[NSFileManager defaultManager];
     NSError *error;
     

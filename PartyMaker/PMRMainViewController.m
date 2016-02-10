@@ -27,6 +27,10 @@
     self.navigationItem.rightBarButtonItem = rightButton;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 - (void)createEventViewController {
     if (![self.navigationController isViewLoaded]) {
         NSLog(@"Error - navigation controller view is not loaded");

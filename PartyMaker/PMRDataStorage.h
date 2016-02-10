@@ -12,7 +12,10 @@
 
 @interface PMRDataStorage : NSObject
 
-+ (NSArray *)loadAllParties;
-+ (void)savePatryToPlist:(PMRParty *)party;
+@property (nonatomic) NSMutableArray *parties;
+
+- (void)loadAllParties;
+- (void)savePatryToPlist:(PMRParty *)party;
++ (instancetype) dataStorage;
 
 @end
