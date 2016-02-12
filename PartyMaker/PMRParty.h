@@ -12,6 +12,7 @@
 
 @interface PMRParty : NSObject <NSCoding>
 
+@property (nonatomic) NSString *Id;
 @property (nonatomic) NSString *eventName;
 @property (nonatomic) NSString *eventDescription;
 @property (nonatomic) NSString *imagePath;

@@ -7,6 +7,7 @@
 //
 
 #import "PMRParty.h"
+#import "PMRGuid.h"
 
 #define kEventNameKey           @"eventName"
 #define kEventDescriptionKey    @"eventDescription"
@@ -22,11 +23,12 @@
         NSLog(@"%s - [Error] - PMRPArty doesn't init.", __PRETTY_FUNCTION__);
         return nil;
     }
+    self.Id = [PMRGuid newGuid];
     return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
+    self = [self init];
     
     if (!self) {
         NSLog(@"%s - [Error] - PMRPArty doesn't init.", __PRETTY_FUNCTION__);

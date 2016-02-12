@@ -41,6 +41,8 @@
 
 @property (nonatomic, weak) IBOutlet UIToolbar *datePickerToolBar;
 @property (nonatomic, weak) IBOutlet UIToolbar *keyboardToolBar;
+@property (weak, nonatomic) IBOutlet UIView *descriptionBall;
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *balls;
 
 @end
 
@@ -48,21 +50,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"%@", self.balls);
 
     self.lastTextViewEditText = [[NSMutableString alloc] initWithString:@""];
     
-
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+    [self configureDatePickerView];
+    [self configureKeyboardToolBar];
+    [self configureDynamicBall];
     [self configureButton];
     [self configureDescriptionTextView];
     [self configureEventNameTextField];
     [self configureImagePageControl];
     [self configureImageScrollView];
-    [self configureDatePickerView];
-    [self configureKeyboardToolBar];
-    [self configureDynamicBall];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadPicturesToScrollView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,20 +96,12 @@
 }
 
 - (void)configureImageScrollView {
-    self.imageScrollView.layer.cornerRadius = 3.;
     self.imageScrollView.delegate = self;
-    self.imageScrollView.contentSize = CGSizeMake(self.imageScrollView.frame.size.width * 6, self.imageScrollView.frame.size.height);
-    
-    for (int i = 0; i < 6 ; i++) {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"PartyLogo_Small_%d", i]]];
-        float xOffset = (self.imageScrollView.frame.size.width / 2 - imageView.frame.size.width / 2) + i * self.imageScrollView.frame.size.width;
-        float yOffset = self.imageScrollView.frame.size.height / 2 - imageView.frame.size.height / 2;
-        imageView.frame =CGRectMake(xOffset, yOffset, imageView.frame.size.width, imageView.frame.size.height);
-        [self.imageScrollView addSubview:imageView];
-    }
 }
 
 - (void)configureImagePageControl {
+    self.imagePageControl.pageIndicatorTintColor = [UIColor colorWithRed:29/255. green:30/255. blue:36/255. alpha:1];
+    self.imagePageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
     self.imagePageControl.pageIndicatorTintColor = [UIColor colorWithRed:29/255. green:30/255. blue:36/255. alpha:1];
     self.imagePageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
 }
@@ -164,6 +160,12 @@
 
 #pragma mark - IBActions
 
+- (IBAction)onImagePageChanged:(id)sender {
+    [self moveBallToElement:self.imageScrollView];
+    CGPoint contentOffset = CGPointMake(((UIPageControl *)sender).currentPage * self.imageScrollView.frame.size.width, 0);
+    [self.imageScrollView setContentOffset:contentOffset animated:YES];
+}
+
 - (IBAction)onSaveButtonTouchUpInside {
     if ([self.chooseDateButton.titleLabel.text  isEqual: @"CHOOSE DATE"]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You did not choose date." preferredStyle:UIAlertControllerStyleAlert];
@@ -195,7 +197,7 @@
 
 - (IBAction)onCancelButtonTouchUpInside {
     if ([self.navigationController isViewLoaded]) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
     else {
         NSLog(@"Error - navigation controller is not loaded");
@@ -283,7 +285,7 @@
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^ {
-                         weakSelf.dynamicBall.frame = CGRectMake(weakSelf.dynamicBall.frame.origin.x, yCoordinate, weakSelf.dynamicBall.frame.size.width, weakSelf.dynamicBall.frame.size.height);
+                         weakSelf.dynamicBall.frame = CGRectMake(weakSelf.dynamicBall.frame.origin.x, roundf(yCoordinate), weakSelf.dynamicBall.frame.size.width, weakSelf.dynamicBall.frame.size.height);
                      }
                      completion:nil];
 }
@@ -314,6 +316,7 @@
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     [self moveBallToElement:textView];
     [self.imageScrollView setUserInteractionEnabled:NO];
+    [self.imagePageControl setUserInteractionEnabled:NO];
     
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(keyboardWillShow:)
@@ -330,6 +333,7 @@
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
     [self.imageScrollView setUserInteractionEnabled:YES];
+    [self.imagePageControl setUserInteractionEnabled:YES];
     [self.descriptionTextView resignFirstResponder];
     return YES;
 }
@@ -361,13 +365,15 @@
 }
 
 - (NSDate *)selectedDateWithTime:(NSString *)time {
-    NSDate *date = [NSDate date];
+    NSDate *date = self.datePickerControl.date;
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
+    [gregorian setTimeZone:[NSTimeZone systemTimeZone]];
     NSDateComponents *components = [gregorian components: NSUIntegerMax fromDate: date];
     NSArray *timeArray = [time componentsSeparatedByString:@":"];
-    [components setHour: (NSInteger)timeArray[0]];
-    [components setMinute: (NSInteger)timeArray[1]];
-    [components setSecond: 00];
+    [components setHour:[timeArray[0] integerValue]];
+    [components setMinute: [timeArray[1] integerValue]];
+    [components setSecond: 0];
+    [components setNanosecond:0];
     
     return [gregorian dateFromComponents: components];
 }
@@ -391,5 +397,18 @@
     label.font = [UIFont fontWithName:@"MyriadPro-Regular" size:12];
     return label;
 }
+
+- (void)loadPicturesToScrollView {
+    self.imageScrollView.contentSize = CGSizeMake(self.imageScrollView.frame.size.width * 6, self.imageScrollView.frame.size.height);
+    for (int i = 0; i < 6 ; i++) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"PartyLogo_Small_%d", i]]];
+        float xOffset = (self.imageScrollView.frame.size.width / 2 - imageView.frame.size.width / 2) + i * self.imageScrollView.frame.size.width;
+        float yOffset = self.imageScrollView.frame.size.height / 2 - imageView.frame.size.height / 2 - self.imagePageControl.frame.size.height;
+        imageView.frame =CGRectMake(xOffset, yOffset, imageView.frame.size.width, imageView.frame.size.height);
+        [self.imageScrollView addSubview:imageView];
+    }
+}
+
+
 
 @end

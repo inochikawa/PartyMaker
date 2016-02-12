@@ -24,6 +24,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>MyriadProItalic.ttf</string>
 		<string>MyriadProRegular.ttf</string>
 		<string>MyriadProBold.ttf</string>
 	</array>

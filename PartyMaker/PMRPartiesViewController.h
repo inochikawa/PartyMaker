@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PMRMainViewController.h
 //  PartyMaker
 //
 //  Created by 2 on 2/3/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PMRTabBarController : UITabBarController
-
+@interface PMRPartiesViewController : UIViewController
 
 @end
-

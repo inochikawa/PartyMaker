@@ -82,4 +82,18 @@
     }
 }
 
+- (void)removePlistFile {
+    NSFileManager *fileManger=[NSFileManager defaultManager];
+    NSError *error;
+    
+    NSString *destinationPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kDataFile];
+    
+    if ([fileManger removeItemAtPath:destinationPath error:&error]) {
+        NSLog(@"%s --- Parties.plist removed from Documents directory.", __PRETTY_FUNCTION__);
+    }
+    else {
+        NSLog(@"%s - [Error] - %@", __PRETTY_FUNCTION__, error);
+    }
+}
+
 @end

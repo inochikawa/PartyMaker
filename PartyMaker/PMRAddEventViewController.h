@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class PMRParty;
+
 @interface PMRAddEventViewController : UIViewController
+
+@property (nonatomic) PMRParty *party;
 
 @end
