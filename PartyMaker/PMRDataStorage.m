@@ -50,7 +50,20 @@
         NSLog(@"%s --- Parties array was created.", __PRETTY_FUNCTION__);
     }
     
-    [self.parties addObject:party];
+    if (![self isPartyExist:party]) {
+        [self.parties addObject:party];
+    }
+//    else {
+//        int partyIndex = 0;
+//        for (PMRParty *currentPaty in self.parties) {
+//            if ([currentPaty isEqual:party]) {
+//                [self.parties removeObject:party];
+//                break;
+//            }
+//            partyIndex++;
+//        }
+//        [self.parties insertObject:party atIndex:partyIndex];
+//    }
     
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kDataFile];
     
@@ -94,6 +107,15 @@
     else {
         NSLog(@"%s - [Error] - %@", __PRETTY_FUNCTION__, error);
     }
+}
+
+- (BOOL)isPartyExist:(PMRParty *)party {
+    for (PMRParty *currentPaty in self.parties) {
+        if ([currentPaty isEqual:party]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end

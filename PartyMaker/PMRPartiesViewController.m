@@ -30,7 +30,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+//    [[PMRDataStorage dataStorage].parties removeAllObjects];
     [self.tableView reloadData];
+    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    [[PMRDataStorage dataStorage] loadAllParties];
+//    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -41,12 +46,14 @@
     PMRTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PMRTableViewCell reuseIdentifier] forIndexPath:indexPath];
     PMRParty *selectedParty = [PMRDataStorage dataStorage].parties[indexPath.row];
     [cell configureWithName:selectedParty.eventName timeStart:[selectedParty.startDate toString] logo:[UIImage imageNamed:selectedParty.imagePath]];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [PMRDataStorage dataStorage].parties.count;
 }
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"TableViewCellToPMRCurrentVIewControllerSegue"]) {

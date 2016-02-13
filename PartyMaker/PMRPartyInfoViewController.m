@@ -7,6 +7,8 @@
 //
 
 #import "PMRPartyInfoViewController.h"
+#import "PMRAddEventViewController.h"
+#import "NSDate+Utility.h"
 
 @interface PMRPartyInfoViewController()
 
@@ -31,8 +33,18 @@
     self.imageHolderView.layer.borderColor = [UIColor colorWithRed:31/255. green:34/255. blue:39/255. alpha:1].CGColor;
     self.imageHolderView.layer.borderWidth = 3.0f;
     self.imageHolderView.layer.cornerRadius = self.imageHolderView.frame.size.width / 2.;
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self configurePartyInfoView];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"PartyInfoViewControllerToAddEventViewController"]) {
+        PMRAddEventViewController *addEventViewController = segue.destinationViewController;
+        addEventViewController.party = self.party;
+    }
 }
 
 #pragma mark - IBActions
@@ -52,6 +64,9 @@
     self.logoImageView.image = [UIImage imageNamed:self.party.imagePath];
     self.eventNameLabel.text = self.party.eventName;
     self.eventDescriptionLabel.text = [self roundQuatesText:self.party.eventDescription];
+    self.eventDateLabel.text = [self.party.startDate toStringWithDateFormat:@"dd.MM.yyyy"];
+    self.eventStartTimeLabel.text = [self.party.startDate toStringWithDateFormat:@"HH:mm"];
+    self.eventEndTimeLabel.text = [self.party.endDate toStringWithDateFormat:@"HH:mm"];
 }
 
 - (NSString *)roundQuatesText:(NSString *)text {

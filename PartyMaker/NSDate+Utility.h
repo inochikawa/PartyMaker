@@ -11,5 +11,7 @@
 @interface NSDate (Utility)
 
 - (NSString *) toString;
+- (NSString *)toStringWithDateFormat:(NSString *)dateFormat;
++ (NSDate *)dateFromString:(NSString *)date withDateFormat:(NSString *)dateFormat;
 
 @end

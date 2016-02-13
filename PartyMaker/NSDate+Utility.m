@@ -10,7 +10,7 @@
 
 @implementation NSDate (Utility)
 
-- (NSString *) toString {
+- (NSString *)toString {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd.MM.yyyy HH:mm"];
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
@@ -18,6 +18,18 @@
     return [dateFormatter stringFromDate:self];
 }
 
+- (NSString *)toStringWithDateFormat:(NSString *)dateFormat {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:dateFormat];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [dateFormatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
+    return [dateFormatter stringFromDate:self];
+}
 
++ (NSDate *)dateFromString:(NSString *)date withDateFormat:(NSString *)dateFormat {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:dateFormat];
+    return [dateFormatter dateFromString:date];
+}
 
 @end

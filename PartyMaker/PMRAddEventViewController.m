@@ -9,8 +9,12 @@
 #import "PMRAddEventViewController.h"
 #import "PMRParty.h"
 #import "PMRDataStorage.h"
+#import "NSDate+Utility.h"
 
-#define kTimeDifference     30
+#define kTimeDifference                     30
+#define kDistanceBetwenControls             5
+#define kDefaultControlHeight               36
+#define kDistanceBetwenLeadingAndControls   120
 
 @interface PMRAddEventViewController ()<UITextFieldDelegate,
                                         UIScrollViewDelegate,
@@ -50,7 +54,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@", self.balls);
 
     self.lastTextViewEditText = [[NSMutableString alloc] initWithString:@""];
     
@@ -62,11 +65,13 @@
     [self configureEventNameTextField];
     [self configureImagePageControl];
     [self configureImageScrollView];
+    [self loadPicturesToScrollView];
+    
+    [self establishPartyInformation];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self loadPicturesToScrollView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -188,7 +193,7 @@
     [self saveParty];
     
     if ([self.navigationController isViewLoaded]) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
     else {
         NSLog(@"Error - navigation controller is not loaded");
@@ -354,14 +359,17 @@
 }
 
 - (void)saveParty {
-    PMRParty *party = [PMRParty new];
-    party.eventName = self.eventNameTextField.text;
-    party.eventDescription = self.descriptionTextView.text;
-    party.startDate = [self selectedDateWithTime:self.startTimeLabel.text];
-    party.endDate = [self selectedDateWithTime:self.endTimeLabel.text];
-    party.imagePath = [self selectedImagePath];
+    if (!self.party) {
+        self.party = [PMRParty new];
+    }
     
-    [[PMRDataStorage dataStorage] savePatryToPlist:party];
+    self.party.eventName = self.eventNameTextField.text;
+    self.party.eventDescription = self.descriptionTextView.text;
+    self.party.startDate = [self selectedDateWithTime:self.startTimeLabel.text];
+    self.party.endDate = [self selectedDateWithTime:self.endTimeLabel.text];
+    self.party.imagePath = [self selectedImagePath];
+    
+    [[PMRDataStorage dataStorage] savePatryToPlist:self.party];
 }
 
 - (NSDate *)selectedDateWithTime:(NSString *)time {
@@ -399,16 +407,49 @@
 }
 
 - (void)loadPicturesToScrollView {
-    self.imageScrollView.contentSize = CGSizeMake(self.imageScrollView.frame.size.width * 6, self.imageScrollView.frame.size.height);
+    CGRect scrollViewFrame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - kDistanceBetwenLeadingAndControls - kDistanceBetwenControls, ([[UIScreen mainScreen] bounds].size.height - 8 * kDistanceBetwenControls - 5 * kDefaultControlHeight) / 2.);
+    self.imageScrollView.contentSize = CGSizeMake(scrollViewFrame.size.width * 6, scrollViewFrame.size.height);
     for (int i = 0; i < 6 ; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"PartyLogo_Small_%d", i]]];
-        float xOffset = (self.imageScrollView.frame.size.width / 2 - imageView.frame.size.width / 2) + i * self.imageScrollView.frame.size.width;
-        float yOffset = self.imageScrollView.frame.size.height / 2 - imageView.frame.size.height / 2 - self.imagePageControl.frame.size.height;
+        float xOffset = (scrollViewFrame.size.width / 2. - imageView.frame.size.width / 2.) + i * scrollViewFrame.size.width;
+        int deltaHeight = 0;
+        if (scrollViewFrame.size.height < 150) {
+            deltaHeight = 60;
+        }
+        else {
+            deltaHeight = 40;
+        }
+        float yOffset = scrollViewFrame.size.height / 2. - imageView.frame.size.height / 2. - deltaHeight;
         imageView.frame =CGRectMake(xOffset, yOffset, imageView.frame.size.width, imageView.frame.size.height);
         [self.imageScrollView addSubview:imageView];
     }
 }
 
-
+- (void)establishPartyInformation {
+    if (!self.party) {
+        NSLog(@"%s - Party is nil", __PRETTY_FUNCTION__);
+        return;
+    }
+    
+    self.eventNameTextField.text = self.party.eventName;
+    self.descriptionTextView.text = self.party.eventDescription;
+    [self.chooseDateButton setTitle:[self.party.startDate toStringWithDateFormat:@"dd MMM yyyy"] forState:UIControlStateNormal];
+    self.startTimeLabel.text = [self.party.startDate toStringWithDateFormat:@"HH:mm"];
+    self.endTimeLabel.text = [self.party.endDate toStringWithDateFormat:@"HH:mm"];
+    
+    int partyImageIndex = 0;
+    
+    for (UIImage *image in self.imageScrollView.subviews) {
+        if ([image isEqual:[UIImage imageNamed:self.party.imagePath]]) {
+            break;
+        }
+        partyImageIndex++;
+    }
+    
+    self.imagePageControl.currentPage = partyImageIndex;
+    
+    CGPoint contentOffset = CGPointMake(partyImageIndex * self.imageScrollView.frame.size.width, 0);
+    [self.imageScrollView setContentOffset:contentOffset animated:YES];
+}
 
 @end

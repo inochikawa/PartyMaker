@@ -144,7 +144,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PMRTableViewCell" focusStyle="custom" rowHeight="70" id="pdf-O3-oeh" customClass="PMRTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PMRTableViewCell" focusStyle="custom" rowHeight="70" id="pdf-O3-oeh" customClass="PMRTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pdf-O3-oeh" id="6d7-H5-zVd">
@@ -960,7 +960,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onEditButtonTouchUpInside:" destination="Zat-RY-jB1" eventType="touchUpInside" id="LaY-x9-dep"/>
-                                            <segue destination="TPF-f6-8pl" kind="show" id="Xxx-iK-O40"/>
+                                            <segue destination="TPF-f6-8pl" kind="show" identifier="PartyInfoViewControllerToAddEventViewController" id="Xxx-iK-O40"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1022,7 +1022,7 @@
         <image name="TimePopup_1" width="40" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xxx-iK-O40"/>
+        <segue reference="HSv-ua-Ffh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
