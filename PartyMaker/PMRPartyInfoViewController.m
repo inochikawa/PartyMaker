@@ -9,6 +9,7 @@
 #import "PMRPartyInfoViewController.h"
 #import "PMRAddEventViewController.h"
 #import "NSDate+Utility.h"
+#import "PMRDataStorage.h"
 
 @interface PMRPartyInfoViewController()
 
@@ -56,6 +57,22 @@
 }
 
 - (IBAction)onDeleteButtonTouchUpInside:(id)sender {
+    NSArray *parties = [PMRDataStorage dataStorage].parties;
+    
+    for (PMRParty *party in parties) {
+        if ([party.Id isEqualToString:self.party.Id]) {
+            [[PMRDataStorage dataStorage].parties removeObject:party];
+            break;
+        }
+    }
+    
+    if ([self.navigationController isViewLoaded]) {
+        [self.navigationController popViewControllerAnimated:YES];
+        [[PMRDataStorage dataStorage] savePlistFile];
+    }
+    else {
+        NSLog(@"[Error] - Navigation controller isn't loaded");
+    }
 }
 
 #pragma mark - Helpers

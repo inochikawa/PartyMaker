@@ -187,6 +187,9 @@
 		83E217BD1C6220E000C8BF08 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					chooseDate,
+				);
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Maksim Stecenko";
 				TargetAttributes = {

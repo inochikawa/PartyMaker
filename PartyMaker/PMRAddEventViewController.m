@@ -45,7 +45,7 @@
 
 @property (nonatomic, weak) IBOutlet UIToolbar *datePickerToolBar;
 @property (nonatomic, weak) IBOutlet UIToolbar *keyboardToolBar;
-@property (weak, nonatomic) IBOutlet UIView *descriptionBall;
+
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *balls;
 
 @end
@@ -283,16 +283,24 @@
 }
 
 - (IBAction)moveBallToElement:(id)sender {
-    CGRect elementFrame = CGRectMake(((UIControl *)sender).frame.origin.x, ((UIControl *)sender).frame.origin.y, ((UIControl *)sender).frame.size.width, ((UIControl *)sender).frame.size.height);
-    float yCoordinate = elementFrame.origin.y + elementFrame.size.height / 2 - self.dynamicBall.frame.size.height / 2;
+    NSInteger tag = ((UIControl *)sender).tag;
+    UIView *currentBall;
+    
+    for (UIView *ball in self.balls) {
+        if (ball.tag == tag) {
+            currentBall = ball;
+        }
+    }
+    
     __block __weak PMRAddEventViewController *weakSelf = self;
     [UIView animateWithDuration:.3
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^ {
-                         weakSelf.dynamicBall.frame = CGRectMake(weakSelf.dynamicBall.frame.origin.x, roundf(yCoordinate), weakSelf.dynamicBall.frame.size.width, weakSelf.dynamicBall.frame.size.height);
+                         weakSelf.dynamicBall.center = currentBall.center;
                      }
                      completion:nil];
+    
 }
 
 #pragma mark - Delegate methods
@@ -356,6 +364,13 @@
     int minutes = totalMinutes % 60;
     int hours = totalMinutes / 60;
     return [NSString stringWithFormat:@"%02d:%02d",hours, minutes];
+}
+
+- (NSInteger)minutesFromTime:(NSString *)time {
+    NSArray *timeArray = [time componentsSeparatedByString:@":"];
+    NSInteger hours = [timeArray[0] integerValue];
+    NSInteger minutes = [timeArray[1] integerValue];
+    return hours * 60 + minutes;
 }
 
 - (void)saveParty {
@@ -431,11 +446,18 @@
         return;
     }
     
+    NSString *startTime = [self.party.startDate toStringWithDateFormat:@"HH:mm"];
+    NSString *endTime = [self.party.endDate toStringWithDateFormat:@"HH:mm"];
+    NSString *eventDate = [self.party.startDate toStringWithDateFormat:@"dd MMM yyyy"];
+    
     self.eventNameTextField.text = self.party.eventName;
     self.descriptionTextView.text = self.party.eventDescription;
-    [self.chooseDateButton setTitle:[self.party.startDate toStringWithDateFormat:@"dd MMM yyyy"] forState:UIControlStateNormal];
-    self.startTimeLabel.text = [self.party.startDate toStringWithDateFormat:@"HH:mm"];
-    self.endTimeLabel.text = [self.party.endDate toStringWithDateFormat:@"HH:mm"];
+    [self.chooseDateButton setTitle:eventDate forState:UIControlStateNormal];
+    self.startTimeLabel.text = startTime;
+    self.endTimeLabel.text = endTime;
+    self.datePickerControl.date = self.party.startDate;
+    self.startTimeSlider.value = [self minutesFromTime:startTime];
+    self.endTimeSlider.value = [self minutesFromTime:endTime];
     
     int partyImageIndex = 0;
     

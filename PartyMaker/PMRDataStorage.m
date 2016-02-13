@@ -53,24 +53,17 @@
     if (![self isPartyExist:party]) {
         [self.parties addObject:party];
     }
-//    else {
-//        int partyIndex = 0;
-//        for (PMRParty *currentPaty in self.parties) {
-//            if ([currentPaty isEqual:party]) {
-//                [self.parties removeObject:party];
-//                break;
-//            }
-//            partyIndex++;
-//        }
-//        [self.parties insertObject:party atIndex:partyIndex];
-//    }
     
+    [self savePlistFile];
+}
+
+- (void)savePlistFile {
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kDataFile];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
         [self copyPlistFile];
     }
-    
+
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     [archiver encodeObject:self.parties forKey:kDataKey];

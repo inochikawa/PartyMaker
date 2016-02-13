@@ -16,6 +16,7 @@
 
 - (void)loadAllParties;
 - (void)savePatryToPlist:(PMRParty *)party;
+- (void)savePlistFile;
 + (instancetype) dataStorage;
 
 @end
