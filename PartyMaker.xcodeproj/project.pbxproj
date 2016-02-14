@@ -109,6 +109,17 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
+		8344C7F01C70CA4C00528CC4 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				83F7E9FF1C6CCBF000243A5F /* NSDate+Utility.h */,
+				83F7EA001C6CCBF000243A5F /* NSDate+Utility.m */,
+				8344C7ED1C70107D00528CC4 /* UIImage+Utility.h */,
+				8344C7EE1C70107D00528CC4 /* UIImage+Utility.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		83E217BC1C6220E000C8BF08 = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +139,7 @@
 		83E217C71C6220E000C8BF08 /* PartyMaker */ = {
 			isa = PBXGroup;
 			children = (
+				8344C7F01C70CA4C00528CC4 /* Categories */,
 				540424EB1C6693D9002F77B9 /* Model */,
 				83E74DEB1C63508D00B0D255 /* Fonts */,
 				540424ED1C66942E002F77B9 /* Storyboards */,
@@ -138,12 +150,8 @@
 				83E217D91C6220E000C8BF08 /* Info.plist */,
 				83E217C81C6220E000C8BF08 /* Supporting Files */,
 				540424E91C667445002F77B9 /* Parties.plist */,
-				83F7E9FF1C6CCBF000243A5F /* NSDate+Utility.h */,
-				83F7EA001C6CCBF000243A5F /* NSDate+Utility.m */,
 				83267E5B1C6DD36C00CC0DC1 /* PMRGuid.h */,
 				83267E5C1C6DD36C00CC0DC1 /* PMRGuid.m */,
-				8344C7ED1C70107D00528CC4 /* UIImage+Utility.h */,
-				8344C7EE1C70107D00528CC4 /* UIImage+Utility.m */,
 			);
 			path = PartyMaker;
 			sourceTree = "<group>";

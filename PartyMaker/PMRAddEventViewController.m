@@ -314,6 +314,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField.text.length > 20) {
+        textField.text = [textField.text substringWithRange:NSMakeRange(0, 20)];
         return NO;
     }
     else {
@@ -353,7 +354,8 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if (textView.text.length > 200) {
+    if (textView.text.length > 400) {
+        textView.text = [textView.text substringWithRange:NSMakeRange(0, 400)];
         return NO;
     }
     return YES;
