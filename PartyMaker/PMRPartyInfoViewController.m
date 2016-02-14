@@ -87,6 +87,10 @@
 }
 
 - (NSString *)roundQuatesText:(NSString *)text {
+    if ([text isEqualToString:@""]) {
+        return @"";
+    }
+    
     NSMutableString *resultText = [[NSMutableString alloc] initWithString:@"\""];
     [resultText appendString:text];
     [resultText appendString:@"\""];

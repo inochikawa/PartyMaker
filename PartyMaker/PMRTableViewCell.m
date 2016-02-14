@@ -30,13 +30,10 @@
 
 - (void)prepareForReuse {
     [super prepareForReuse];
-    self.logoImageView = nil;
-    self.eventNameLabel = nil;
-    self.eventTimeStartLabel = nil;
 }
 
 + (NSString *)reuseIdentifier {
-    return @"PMRTableViewCell";
+    return @"PMRTableViewCellIdentifier";
 }
 
 - (void)configureWithName:(NSString *)eventName timeStart:(NSString *)eventTimeStart logo:(UIImage *)logo {

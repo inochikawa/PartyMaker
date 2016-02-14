@@ -10,9 +10,10 @@
 #import "PMRParty.h"
 #import "PMRDataStorage.h"
 #import "NSDate+Utility.h"
+#import "UIImage+Utility.h"
 
 #define kTimeDifference                     30
-#define kDistanceBetwenControls             5
+#define kDistanceBetwenControls             9
 #define kDefaultControlHeight               36
 #define kDistanceBetwenLeadingAndControls   120
 
@@ -422,7 +423,7 @@
 }
 
 - (void)loadPicturesToScrollView {
-    CGRect scrollViewFrame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - kDistanceBetwenLeadingAndControls - kDistanceBetwenControls, ([[UIScreen mainScreen] bounds].size.height - 8 * kDistanceBetwenControls - 5 * kDefaultControlHeight) / 2.);
+    CGRect scrollViewFrame = [self estimatedImageScrollViewFrame];
     self.imageScrollView.contentSize = CGSizeMake(scrollViewFrame.size.width * 6, scrollViewFrame.size.height);
     for (int i = 0; i < 6 ; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"PartyLogo_Small_%d", i]]];
@@ -438,6 +439,10 @@
         imageView.frame =CGRectMake(xOffset, yOffset, imageView.frame.size.width, imageView.frame.size.height);
         [self.imageScrollView addSubview:imageView];
     }
+}
+
+- (CGRect)estimatedImageScrollViewFrame {
+    return CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - kDistanceBetwenLeadingAndControls - kDistanceBetwenControls, ([[UIScreen mainScreen] bounds].size.height - 8 * kDistanceBetwenControls - 5 * kDefaultControlHeight) / 2.);
 }
 
 - (void)establishPartyInformation {
@@ -461,8 +466,8 @@
     
     int partyImageIndex = 0;
     
-    for (UIImage *image in self.imageScrollView.subviews) {
-        if ([image isEqual:[UIImage imageNamed:self.party.imagePath]]) {
+    for (UIImageView *imageView in self.imageScrollView.subviews) {
+        if ([imageView.image isEqualToImage:[UIImage imageNamed:self.party.imagePath]]) {
             break;
         }
         partyImageIndex++;
@@ -470,7 +475,8 @@
     
     self.imagePageControl.currentPage = partyImageIndex;
     
-    CGPoint contentOffset = CGPointMake(partyImageIndex * self.imageScrollView.frame.size.width, 0);
+    CGRect scrollViewFrame = [self estimatedImageScrollViewFrame];
+    CGPoint contentOffset = CGPointMake(partyImageIndex * scrollViewFrame.size.width, 0);
     [self.imageScrollView setContentOffset:contentOffset animated:YES];
 }
 

@@ -42,13 +42,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView endUpdates];
-    
-    
     [self.tableView reloadData];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -63,19 +57,12 @@
     PMRTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PMRTableViewCell reuseIdentifier] forIndexPath:indexPath];
     PMRParty *selectedParty = [PMRDataStorage dataStorage].parties[indexPath.row];
     [cell configureWithName:selectedParty.eventName timeStart:[selectedParty.startDate toString] logo:[UIImage imageNamed:selectedParty.imagePath]];
-    
-//    [self.tableView beginUpdates];
-//    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-//    [self.tableView endUpdates];
-    
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [PMRDataStorage dataStorage].parties.count;
 }
-
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"TableViewCellToPMRCurrentVIewControllerSegue"]) {
@@ -84,10 +71,6 @@
         PMRParty *selectedParty = [PMRDataStorage dataStorage].parties[selectedRow];
         partyInfoViewController.party = selectedParty;
     }
-}
-
-- (void)reloadRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation {
-    NSLog(@"LALALALALA --- %s", __PRETTY_FUNCTION__);
 }
 
 @end
