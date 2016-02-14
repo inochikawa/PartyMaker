@@ -706,11 +706,11 @@
                         <viewControllerLayoutGuide type="bottom" id="M49-Yr-Gxz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="96e-GJ-SIo">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="588"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="C2X-Sd-Ae8">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="588"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WWE-MW-r3k" userLabel="Party description view">
                                         <rect key="frame" x="13" y="27" width="294" height="278"/>
@@ -742,6 +742,7 @@
                                                 <rect key="frame" x="77" y="191" width="140" height="12"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="140" id="dwu-lb-TIW"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="250" constant="100" id="jMj-WX-igW"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="MyriadPro-It" family="Myriad Pro" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -904,6 +905,7 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="fbv-pW-iip" secondAttribute="bottom" id="1TG-JT-CfC"/>
                                             <constraint firstItem="hGF-FC-cgb" firstAttribute="top" secondItem="ehZ-N2-Y2X" secondAttribute="bottom" constant="21" id="5hn-JU-utZ"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="278" id="BIK-GX-0hI"/>
                                             <constraint firstItem="eAZ-xs-e4D" firstAttribute="top" secondItem="hGF-FC-cgb" secondAttribute="bottom" constant="20" id="GcW-8R-9II"/>
                                             <constraint firstItem="fbv-pW-iip" firstAttribute="leading" secondItem="WWE-MW-r3k" secondAttribute="leading" id="JZ8-yk-peF"/>
                                             <constraint firstItem="ehZ-N2-Y2X" firstAttribute="centerX" secondItem="WWE-MW-r3k" secondAttribute="centerX" id="XJj-a8-Ag5"/>
@@ -938,79 +940,92 @@
                                             <constraint firstAttribute="height" constant="55" id="yte-Qh-3yy"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efn-Wz-eIt">
-                                        <rect key="frame" x="64" y="360" width="192" height="36"/>
-                                        <color key="backgroundColor" red="0.19215686274509802" green="0.63137254901960782" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
+                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="236" translatesAutoresizingMaskIntoConstraints="NO" id="7Eg-LL-8dX" userLabel="Button container">
+                                        <rect key="frame" x="0.0" y="305" width="320" height="283"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11Y-iA-lnt">
+                                                <rect key="frame" x="64" y="124" width="192" height="36"/>
+                                                <color key="backgroundColor" red="0.5490196078431373" green="0.72941176470588232" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="3eI-sb-eRB"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
+                                                <state key="normal" title="EDIT">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onEditButtonTouchUpInside:" destination="Zat-RY-jB1" eventType="touchUpInside" id="LaY-x9-dep"/>
+                                                    <segue destination="TPF-f6-8pl" kind="show" identifier="PartyInfoViewControllerToAddEventViewController" id="Xxx-iK-O40"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weE-M8-cO5">
+                                                <rect key="frame" x="64" y="173" width="192" height="36"/>
+                                                <color key="backgroundColor" red="0.92549019607843142" green="0.27843137254901962" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
+                                                <state key="normal" title="DELETE">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onDeleteButtonTouchUpInside:" destination="Zat-RY-jB1" eventType="touchUpInside" id="LUR-Bq-MrB"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efn-Wz-eIt">
+                                                <rect key="frame" x="64" y="75" width="192" height="36"/>
+                                                <color key="backgroundColor" red="0.19215686274509802" green="0.63137254901960782" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="LOCATION"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onLocationButtonTouchUpInside:" destination="Zat-RY-jB1" eventType="touchUpInside" id="vIr-go-R8j"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="7Gd-Qg-BuC"/>
+                                            <constraint firstItem="11Y-iA-lnt" firstAttribute="centerY" secondItem="7Eg-LL-8dX" secondAttribute="centerY" id="242-wu-3xB"/>
+                                            <constraint firstItem="weE-M8-cO5" firstAttribute="top" secondItem="11Y-iA-lnt" secondAttribute="bottom" constant="13" id="3Ag-k3-i68"/>
+                                            <constraint firstItem="11Y-iA-lnt" firstAttribute="leading" secondItem="7Eg-LL-8dX" secondAttribute="leading" constant="64" id="89V-Vg-cpx"/>
+                                            <constraint firstItem="11Y-iA-lnt" firstAttribute="top" secondItem="efn-Wz-eIt" secondAttribute="bottom" constant="13" id="A8Q-bZ-Alf"/>
+                                            <constraint firstItem="weE-M8-cO5" firstAttribute="centerX" secondItem="efn-Wz-eIt" secondAttribute="centerX" id="AQe-7d-mHr"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="175" id="Gz8-bq-jtR"/>
+                                            <constraint firstItem="11Y-iA-lnt" firstAttribute="height" secondItem="efn-Wz-eIt" secondAttribute="height" id="Jt1-XZ-g2F"/>
+                                            <constraint firstItem="11Y-iA-lnt" firstAttribute="centerX" secondItem="7Eg-LL-8dX" secondAttribute="centerX" id="KqH-Nt-8aq"/>
+                                            <constraint firstAttribute="trailing" secondItem="11Y-iA-lnt" secondAttribute="trailing" constant="64" id="QLq-aF-gnd"/>
+                                            <constraint firstItem="weE-M8-cO5" firstAttribute="width" secondItem="efn-Wz-eIt" secondAttribute="width" id="YiT-VP-Uw3"/>
+                                            <constraint firstItem="weE-M8-cO5" firstAttribute="height" secondItem="efn-Wz-eIt" secondAttribute="height" id="dF5-af-ODX"/>
+                                            <constraint firstItem="11Y-iA-lnt" firstAttribute="centerX" secondItem="efn-Wz-eIt" secondAttribute="centerX" id="mBd-A2-NbU"/>
+                                            <constraint firstItem="11Y-iA-lnt" firstAttribute="width" secondItem="efn-Wz-eIt" secondAttribute="width" id="qVD-Ct-NEp"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
-                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="LOCATION"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="onLocationButtonTouchUpInside:" destination="Zat-RY-jB1" eventType="touchUpInside" id="vIr-go-R8j"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weE-M8-cO5">
-                                        <rect key="frame" x="64" y="458" width="192" height="36"/>
-                                        <color key="backgroundColor" red="0.92549019607843142" green="0.27843137254901962" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
-                                        <state key="normal" title="DELETE">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="onDeleteButtonTouchUpInside:" destination="Zat-RY-jB1" eventType="touchUpInside" id="LUR-Bq-MrB"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11Y-iA-lnt">
-                                        <rect key="frame" x="64" y="409" width="192" height="36"/>
-                                        <color key="backgroundColor" red="0.5490196078431373" green="0.72941176470588232" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
-                                        <state key="normal" title="EDIT">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="onEditButtonTouchUpInside:" destination="Zat-RY-jB1" eventType="touchUpInside" id="LaY-x9-dep"/>
-                                            <segue destination="TPF-f6-8pl" kind="show" identifier="PartyInfoViewControllerToAddEventViewController" id="Xxx-iK-O40"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="WWE-MW-r3k" secondAttribute="trailing" constant="13" id="3sN-fP-rR5"/>
                                     <constraint firstItem="nB1-QX-q1k" firstAttribute="leading" secondItem="UTd-BS-UL4" secondAttribute="trailing" id="BTu-cD-E4O"/>
-                                    <constraint firstItem="weE-M8-cO5" firstAttribute="top" secondItem="11Y-iA-lnt" secondAttribute="bottom" constant="13" id="BcJ-CK-pHq"/>
-                                    <constraint firstItem="11Y-iA-lnt" firstAttribute="width" secondItem="efn-Wz-eIt" secondAttribute="width" id="L3S-EC-DCA"/>
+                                    <constraint firstItem="7Eg-LL-8dX" firstAttribute="leading" secondItem="C2X-Sd-Ae8" secondAttribute="leading" id="CGp-Cz-Zv2"/>
                                     <constraint firstItem="YmE-v4-bOy" firstAttribute="bottom" secondItem="fbv-pW-iip" secondAttribute="bottom" id="MMf-YH-0A8"/>
-                                    <constraint firstItem="11Y-iA-lnt" firstAttribute="centerX" secondItem="efn-Wz-eIt" secondAttribute="centerX" id="PSF-ih-wBc"/>
-                                    <constraint firstItem="efn-Wz-eIt" firstAttribute="leading" secondItem="C2X-Sd-Ae8" secondAttribute="leading" constant="64" id="Ppz-nu-nKC"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Eg-LL-8dX" secondAttribute="trailing" id="MrT-t5-qtd"/>
+                                    <constraint firstItem="7Eg-LL-8dX" firstAttribute="top" secondItem="WWE-MW-r3k" secondAttribute="bottom" id="MzQ-Vt-RQX"/>
                                     <constraint firstAttribute="bottom" secondItem="WWE-MW-r3k" secondAttribute="bottom" constant="236" id="To9-4U-SHC"/>
                                     <constraint firstItem="nB1-QX-q1k" firstAttribute="bottom" secondItem="fbv-pW-iip" secondAttribute="bottom" id="YTj-j9-Mwl"/>
                                     <constraint firstItem="WWE-MW-r3k" firstAttribute="centerX" secondItem="C2X-Sd-Ae8" secondAttribute="centerX" id="agN-xJ-eGH"/>
-                                    <constraint firstItem="weE-M8-cO5" firstAttribute="height" secondItem="efn-Wz-eIt" secondAttribute="height" id="hlo-fN-Nav"/>
-                                    <constraint firstItem="weE-M8-cO5" firstAttribute="width" secondItem="efn-Wz-eIt" secondAttribute="width" id="huq-55-ZVa"/>
                                     <constraint firstItem="YmE-v4-bOy" firstAttribute="leading" secondItem="sDW-Bn-LUA" secondAttribute="trailing" id="jbb-0L-mXy"/>
-                                    <constraint firstItem="efn-Wz-eIt" firstAttribute="top" secondItem="WWE-MW-r3k" secondAttribute="bottom" constant="55" id="mIf-WN-yJi"/>
-                                    <constraint firstItem="11Y-iA-lnt" firstAttribute="height" secondItem="efn-Wz-eIt" secondAttribute="height" id="oZm-YE-VdB"/>
-                                    <constraint firstAttribute="trailing" secondItem="efn-Wz-eIt" secondAttribute="trailing" constant="64" id="obn-SO-2TC"/>
-                                    <constraint firstItem="weE-M8-cO5" firstAttribute="centerX" secondItem="efn-Wz-eIt" secondAttribute="centerX" id="thf-eh-Leq"/>
                                     <constraint firstItem="WWE-MW-r3k" firstAttribute="leading" secondItem="C2X-Sd-Ae8" secondAttribute="leading" constant="13" id="yt0-l2-xu2"/>
                                     <constraint firstItem="WWE-MW-r3k" firstAttribute="top" secondItem="C2X-Sd-Ae8" secondAttribute="top" constant="27" id="zmY-Ui-3hE"/>
-                                    <constraint firstItem="11Y-iA-lnt" firstAttribute="top" secondItem="efn-Wz-eIt" secondAttribute="bottom" constant="13" id="zxC-3m-jVL"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -1018,12 +1033,14 @@
                         <constraints>
                             <constraint firstItem="M49-Yr-Gxz" firstAttribute="top" secondItem="C2X-Sd-Ae8" secondAttribute="bottom" id="AxY-CV-p5x"/>
                             <constraint firstItem="C2X-Sd-Ae8" firstAttribute="leading" secondItem="96e-GJ-SIo" secondAttribute="leading" id="B9K-WP-YmH"/>
+                            <constraint firstItem="M49-Yr-Gxz" firstAttribute="top" secondItem="7Eg-LL-8dX" secondAttribute="bottom" priority="750" id="Kj7-O6-UqF"/>
                             <constraint firstItem="C2X-Sd-Ae8" firstAttribute="top" secondItem="aIh-Ro-QF7" secondAttribute="bottom" id="Wzy-t0-JP7"/>
                             <constraint firstAttribute="trailing" secondItem="C2X-Sd-Ae8" secondAttribute="trailing" id="aLr-WC-LLH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="PARTY INFO" id="1pL-hj-3jy"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="701"/>
                     <connections>
                         <outlet property="eventDateLabel" destination="4Tl-TR-P78" id="2aR-AF-hRK"/>
                         <outlet property="eventDescriptionLabel" destination="eAZ-xs-e4D" id="hJQ-xp-x8h"/>
@@ -1036,7 +1053,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtm-bZ-vaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="659" y="-683"/>
+            <point key="canvasLocation" x="659" y="-683.5"/>
         </scene>
     </scenes>
     <resources>
@@ -1048,7 +1065,7 @@
         <image name="TimePopup_1" width="40" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HSv-ua-Ffh"/>
+        <segue reference="Xxx-iK-O40"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
