@@ -13,6 +13,7 @@
 		83267E5D1C6DD36C00CC0DC1 /* PMRGuid.m in Sources */ = {isa = PBXBuildFile; fileRef = 83267E5C1C6DD36C00CC0DC1 /* PMRGuid.m */; };
 		83267E5F1C6E0AD000CC0DC1 /* MyriadProItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83267E5E1C6E0AD000CC0DC1 /* MyriadProItalic.ttf */; };
 		8344C7EF1C70107D00528CC4 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7EE1C70107D00528CC4 /* UIImage+Utility.m */; };
+		8344C7F31C71FA3900528CC4 /* PMRLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7F21C71FA3900528CC4 /* PMRLoginViewController.m */; };
 		83E217CA1C6220E000C8BF08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217C91C6220E000C8BF08 /* main.m */; };
 		83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */; };
 		83E217D31C6220E000C8BF08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D11C6220E000C8BF08 /* Main.storyboard */; };
@@ -39,6 +40,8 @@
 		83267E5E1C6E0AD000CC0DC1 /* MyriadProItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProItalic.ttf; sourceTree = "<group>"; };
 		8344C7ED1C70107D00528CC4 /* UIImage+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utility.h"; sourceTree = "<group>"; };
 		8344C7EE1C70107D00528CC4 /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
+		8344C7F11C71FA3900528CC4 /* PMRLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRLoginViewController.h; sourceTree = "<group>"; };
+		8344C7F21C71FA3900528CC4 /* PMRLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRLoginViewController.m; sourceTree = "<group>"; };
 		83E217C51C6220E000C8BF08 /* PartyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E217C91C6220E000C8BF08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E217CB1C6220E000C8BF08 /* PMRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMRAppDelegate.h; sourceTree = "<group>"; };
@@ -96,6 +99,8 @@
 				83F7E9FD1C6CBD8000243A5F /* PMRTableViewCell.m */,
 				83267E581C6DCF1600CC0DC1 /* PMRPartyInfoViewController.h */,
 				83267E591C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m */,
+				8344C7F11C71FA3900528CC4 /* PMRLoginViewController.h */,
+				8344C7F21C71FA3900528CC4 /* PMRLoginViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				83F7EA011C6CCBF000243A5F /* NSDate+Utility.m in Sources */,
 				83E217CA1C6220E000C8BF08 /* main.m in Sources */,
 				8344C7EF1C70107D00528CC4 /* UIImage+Utility.m in Sources */,
+				8344C7F31C71FA3900528CC4 /* PMRLoginViewController.m in Sources */,
 				83E217EA1C62286900C8BF08 /* PMRPartiesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

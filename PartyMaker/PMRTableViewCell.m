@@ -30,6 +30,9 @@
 
 - (void)prepareForReuse {
     [super prepareForReuse];
+    self.logoImageView.image = nil;
+    self.eventNameLabel.text = nil;
+    self.eventTimeStartLabel.text = nil;
 }
 
 + (NSString *)reuseIdentifier {

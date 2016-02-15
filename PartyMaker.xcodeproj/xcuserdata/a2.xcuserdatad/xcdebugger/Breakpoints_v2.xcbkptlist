@@ -45,11 +45,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRTableViewCell.m"
-            timestampString = "477104326.345542"
+            timestampString = "477233315.636001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "-configureWithName:timeStart:logo:"
             landmarkType = "5">
          </BreakpointContent>
