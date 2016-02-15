@@ -49,6 +49,8 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *balls;
 
+@property (nonatomic) BOOL isKeyboardOnDescriptionTextViewShowed;
+
 @end
 
 @implementation PMRAddEventViewController
@@ -57,6 +59,7 @@
     [super viewDidLoad];
 
     self.lastTextViewEditText = [[NSMutableString alloc] initWithString:@""];
+    self.isKeyboardOnDescriptionTextViewShowed = NO;
     
     [self configureDatePickerView];
     [self configureKeyboardToolBar];
@@ -138,16 +141,19 @@
 #pragma mark - Keyboard notifications
 
 - (void)keyboardWillShow:(NSNotification*)notification {
-    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    float duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    __block __weak PMRAddEventViewController *weakSelf = self;
-    
-    [UIView animateWithDuration:duration animations:^{
-        CGRect viewFrame = weakSelf.view.frame;
-        viewFrame.origin.y -= keyboardRect.size.height - 100;
-        weakSelf.view.frame = viewFrame;
-    }];
+    if (!self.isKeyboardOnDescriptionTextViewShowed) {
+        CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        
+        float duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+        __block __weak PMRAddEventViewController *weakSelf = self;
+        
+        [UIView animateWithDuration:duration animations:^{
+            CGRect viewFrame = weakSelf.view.frame;
+            viewFrame.origin.y -= keyboardRect.size.height - 100;
+            weakSelf.view.frame = viewFrame;
+        }];
+        self.isKeyboardOnDescriptionTextViewShowed = YES;
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification*)notification {
@@ -162,6 +168,7 @@
     }];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.isKeyboardOnDescriptionTextViewShowed = NO;
 }
 
 #pragma mark - IBActions
