@@ -14,6 +14,7 @@
 #define kStartDateKey           @"startDate"
 #define kEndDateKey             @"endDate"
 #define kImagePathKey           @"imagePath"
+#define kIdKey                  @"eventId"
 
 @implementation PMRParty
 
@@ -35,6 +36,7 @@
         return nil;
     }
     
+    self.Id = [aDecoder decodeObjectForKey:kIdKey];
     self.eventName = [aDecoder decodeObjectForKey:kEventNameKey];
     self.eventDescription = [aDecoder decodeObjectForKey:kEventDescriptionKey];
     self.startDate = [aDecoder decodeObjectForKey:kStartDateKey];
@@ -45,11 +47,19 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.Id forKey:kIdKey];
     [aCoder encodeObject:self.eventName forKey:kEventNameKey];
     [aCoder encodeObject:self.eventDescription forKey:kEventDescriptionKey];
     [aCoder encodeObject:self.startDate forKey:kStartDateKey];
     [aCoder encodeObject:self.endDate forKey:kEndDateKey];
     [aCoder encodeObject:self.imagePath forKey:kImagePathKey];
+}
+
+- (BOOL)isEqual:(PMRParty *)party {
+    if ([party.Id isEqualToString:self.Id]) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

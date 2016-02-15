@@ -77,16 +77,13 @@
     self.loginTextField.delegate = self;
     self.loginTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Login"
                                                                                 attributes:@{NSForegroundColorAttributeName: color}];
-    [self.loginTextField setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 40)]];
-    [self.loginTextField setLeftViewMode:UITextFieldViewModeAlways];
+
 
     
     self.passwordTextField.returnKeyType = UIReturnKeyDone;
     self.passwordTextField.delegate = self;
     self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password"
                                                                                 attributes:@{NSForegroundColorAttributeName: color}];
-    [self.passwordTextField setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 40)]];
-    [self.passwordTextField setLeftViewMode:UITextFieldViewModeAlways];
 }
 
 @end

@@ -60,7 +60,7 @@
     NSArray *parties = [PMRDataStorage dataStorage].parties;
     
     for (PMRParty *party in parties) {
-        if ([party.Id isEqualToString:self.party.Id]) {
+        if ([party isEqual:self.party]) {
             [[PMRDataStorage dataStorage].parties removeObject:party];
             break;
         }
