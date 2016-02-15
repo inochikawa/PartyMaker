@@ -14,9 +14,9 @@
 		83267E5F1C6E0AD000CC0DC1 /* MyriadProItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83267E5E1C6E0AD000CC0DC1 /* MyriadProItalic.ttf */; };
 		8344C7EF1C70107D00528CC4 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7EE1C70107D00528CC4 /* UIImage+Utility.m */; };
 		8344C7F31C71FA3900528CC4 /* PMRLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7F21C71FA3900528CC4 /* PMRLoginViewController.m */; };
+		8344C7F61C72138600528CC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8344C7F41C72138600528CC4 /* Main.storyboard */; };
 		83E217CA1C6220E000C8BF08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217C91C6220E000C8BF08 /* main.m */; };
 		83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */; };
-		83E217D31C6220E000C8BF08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D11C6220E000C8BF08 /* Main.storyboard */; };
 		83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D41C6220E000C8BF08 /* Assets.xcassets */; };
 		83E217D81C6220E000C8BF08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D61C6220E000C8BF08 /* LaunchScreen.storyboard */; };
 		83E217EA1C62286900C8BF08 /* PMRPartiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217E91C62286900C8BF08 /* PMRPartiesViewController.m */; };
@@ -42,11 +42,11 @@
 		8344C7EE1C70107D00528CC4 /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
 		8344C7F11C71FA3900528CC4 /* PMRLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRLoginViewController.h; sourceTree = "<group>"; };
 		8344C7F21C71FA3900528CC4 /* PMRLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRLoginViewController.m; sourceTree = "<group>"; };
+		8344C7F51C72138600528CC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		83E217C51C6220E000C8BF08 /* PartyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E217C91C6220E000C8BF08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E217CB1C6220E000C8BF08 /* PMRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMRAppDelegate.h; sourceTree = "<group>"; };
 		83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PMRAppDelegate.m; sourceTree = "<group>"; };
-		83E217D21C6220E000C8BF08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		83E217D41C6220E000C8BF08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83E217D71C6220E000C8BF08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83E217D91C6220E000C8BF08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		540424ED1C66942E002F77B9 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				83E217D11C6220E000C8BF08 /* Main.storyboard */,
+				8344C7F41C72138600528CC4 /* Main.storyboard */,
 				83E217D61C6220E000C8BF08 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
@@ -242,9 +242,9 @@
 				83E217D81C6220E000C8BF08 /* LaunchScreen.storyboard in Resources */,
 				83E74DEE1C6355E400B0D255 /* MyriadProBold.ttf in Resources */,
 				83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */,
+				8344C7F61C72138600528CC4 /* Main.storyboard in Resources */,
 				83F7E9CF1C68B91D00243A5F /* PMRAddEventViewController.xib in Resources */,
 				83267E5F1C6E0AD000CC0DC1 /* MyriadProItalic.ttf in Resources */,
-				83E217D31C6220E000C8BF08 /* Main.storyboard in Resources */,
 				83E74DEF1C6355E400B0D255 /* MyriadProRegular.ttf in Resources */,
 				540424EA1C667445002F77B9 /* Parties.plist in Resources */,
 			);
@@ -275,10 +275,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		83E217D11C6220E000C8BF08 /* Main.storyboard */ = {
+		8344C7F41C72138600528CC4 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				83E217D21C6220E000C8BF08 /* Base */,
+				8344C7F51C72138600528CC4 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
