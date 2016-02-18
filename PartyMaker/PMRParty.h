@@ -2,21 +2,21 @@
 //  PMRParty.h
 //  PartyMaker
 //
-//  Created by Maksim Stecenko on 2/4/16.
+//  Created by 2 on 2/17/16.
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@class UIImage;
+NS_ASSUME_NONNULL_BEGIN
 
-@interface PMRParty : NSObject <NSCoding>
+@interface PMRParty : NSManagedObject
 
-@property (nonatomic) NSString *Id;
-@property (nonatomic) NSString *eventName;
-@property (nonatomic) NSString *eventDescription;
-@property (nonatomic) NSString *imagePath;
-@property (nonatomic) NSDate *startDate;
-@property (nonatomic) NSDate *endDate;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "PMRParty+CoreDataProperties.h"

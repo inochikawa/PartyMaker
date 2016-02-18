@@ -41,6 +41,7 @@
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -111,7 +112,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="onRegisterButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="GN4-iY-7GJ"/>
+                                            <action selector="onRegisterButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="O58-OV-wnp"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eci-Tz-ETL">
@@ -130,8 +131,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="onSignInButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="20Z-tI-daV"/>
-                                            <segue destination="g2R-VA-TlU" kind="show" id="JAb-oO-7ja"/>
+                                            <action selector="onSignInButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="o4F-mQ-i64"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USL-VH-DCI" userLabel="Label container">
@@ -143,9 +143,19 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9s-dR-0UK">
+                                                <rect key="frame" x="22" y="101" width="28" height="12"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="12" id="ccx-hb-0bK"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
+                                                <color key="textColor" red="1" green="0.11694504310344828" blue="0.2464709051724138" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="o9s-dR-0UK" secondAttribute="bottom" id="1sg-PB-9za"/>
                                             <constraint firstAttribute="height" constant="113" id="76V-EW-s9W"/>
                                             <constraint firstItem="Js5-AH-SR0" firstAttribute="centerY" secondItem="USL-VH-DCI" secondAttribute="centerY" id="88C-ke-h7e"/>
                                             <constraint firstItem="Js5-AH-SR0" firstAttribute="centerX" secondItem="USL-VH-DCI" secondAttribute="centerX" id="fka-T1-7UB"/>
@@ -164,6 +174,7 @@
                                     <constraint firstAttribute="trailing" secondItem="1oM-Ci-0SQ" secondAttribute="trailing" constant="59" id="Rcv-ey-siL"/>
                                     <constraint firstItem="eci-Tz-ETL" firstAttribute="leading" secondItem="O9v-qQ-TQC" secondAttribute="leading" constant="59" id="V8c-ga-TIw"/>
                                     <constraint firstAttribute="trailing" secondItem="USL-VH-DCI" secondAttribute="trailing" id="ggp-Ol-aja"/>
+                                    <constraint firstItem="o9s-dR-0UK" firstAttribute="leading" secondItem="akZ-ab-apa" secondAttribute="leading" id="iLZ-JW-9I8"/>
                                     <constraint firstItem="FQt-4R-14b" firstAttribute="top" secondItem="akZ-ab-apa" secondAttribute="bottom" constant="15" id="k26-73-qNy"/>
                                     <constraint firstItem="USL-VH-DCI" firstAttribute="leading" secondItem="O9v-qQ-TQC" secondAttribute="leading" id="mDs-zL-Hci"/>
                                     <constraint firstItem="1oM-Ci-0SQ" firstAttribute="leading" secondItem="O9v-qQ-TQC" secondAttribute="leading" constant="59" id="opu-JB-oyp"/>
@@ -186,11 +197,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="errorLabel" destination="o9s-dR-0UK" id="7DO-46-xk7"/>
                         <outlet property="loginBackgroundView" destination="O9v-qQ-TQC" id="2tb-fm-sIx"/>
                         <outlet property="loginTextField" destination="akZ-ab-apa" id="Nia-B5-X96"/>
                         <outlet property="passwordTextField" destination="FQt-4R-14b" id="CWc-3H-ffG"/>
                         <outlet property="registerButton" destination="1oM-Ci-0SQ" id="3AZ-tv-7PS"/>
                         <outlet property="signInButton" destination="eci-Tz-ETL" id="mXy-pX-r1y"/>
+                        <segue destination="g2R-VA-TlU" kind="show" identifier="toTabControllerSegue" id="TIE-wJ-zyc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOQ-py-hLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -899,7 +912,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAZ-xs-e4D">
                                                 <rect key="frame" x="50" y="191" width="194" height="12"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="250" constant="100" id="jMj-WX-igW"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="250" constant="200" id="jMj-WX-igW"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="MyriadPro-It" family="Myriad Pro" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1225,7 +1238,7 @@
         <image name="TimePopup_1" width="40" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xxx-iK-O40"/>
+        <segue reference="HSv-ua-Ffh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

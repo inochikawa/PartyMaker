@@ -9,7 +9,8 @@
 #import "PMRPartyInfoViewController.h"
 #import "PMRAddEventViewController.h"
 #import "NSDate+Utility.h"
-#import "PMRDataStorage.h"
+#import "PMRCoreData.h"
+#import "PMRNetworkSDK.h"
 
 @interface PMRPartyInfoViewController()
 
@@ -57,33 +58,39 @@
 }
 
 - (IBAction)onDeleteButtonTouchUpInside:(id)sender {
-    NSArray *parties = [PMRDataStorage dataStorage].parties;
-    
-    for (PMRParty *party in parties) {
-        if ([party isEqual:self.party]) {
-            [[PMRDataStorage dataStorage].parties removeObject:party];
-            break;
-        }
-    }
-    
-    if ([self.navigationController isViewLoaded]) {
-        [self.navigationController popViewControllerAnimated:YES];
-        [[PMRDataStorage dataStorage] savePlistFile];
-    }
-    else {
-        NSLog(@"[Error] - Navigation controller isn't loaded");
-    }
+//    NSArray *parties = [PMRDataStorage dataStorage].parties;
+//    
+//    for (PMRParty *party in parties) {
+//        if ([party isEqual:self.party]) {
+//            [[PMRDataStorage dataStorage].parties removeObject:party];
+//            
+//            [[PMRPartyMakerSDK SDK] deleteParty:party callback:^(NSDictionary *response, NSError *error) {
+//                NSLog(@"[Party deleted] --- %@", response);
+//            }];
+//            
+//            break;
+//        }
+//    }
+//    
+//    if ([self.navigationController isViewLoaded]) {
+//        [self.navigationController popViewControllerAnimated:YES];
+//        [[PMRDataStorage dataStorage] savePlistFile];
+//    }
+//    else {
+//        NSLog(@"[Error] - Navigation controller isn't loaded");
+//    }
 }
 
 #pragma mark - Helpers
 
 - (void)configurePartyInfoView {
-    self.logoImageView.image = [UIImage imageNamed:self.party.imagePath];
+    NSString *imageName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [self.party.imageIndex integerValue]];
+    self.logoImageView.image = [UIImage imageNamed:imageName];
     self.eventNameLabel.text = self.party.eventName;
     self.eventDescriptionLabel.text = [self roundQuatesText:self.party.eventDescription];
-    self.eventDateLabel.text = [self.party.startDate toStringWithDateFormat:@"dd.MM.yyyy"];
-    self.eventStartTimeLabel.text = [self.party.startDate toStringWithDateFormat:@"HH:mm"];
-    self.eventEndTimeLabel.text = [self.party.endDate toStringWithDateFormat:@"HH:mm"];
+    self.eventDateLabel.text = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"dd.MM.yyyy"];
+    self.eventStartTimeLabel.text = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"HH:mm"];
+    self.eventEndTimeLabel.text = [NSDate stringDateFromSeconds:self.party.endTime withDateFormat:@"HH:mm"];
 }
 
 - (NSString *)roundQuatesText:(NSString *)text {

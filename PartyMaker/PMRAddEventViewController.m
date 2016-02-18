@@ -8,9 +8,10 @@
 
 #import "PMRAddEventViewController.h"
 #import "PMRParty.h"
-#import "PMRDataStorage.h"
+#import "PMRCoreData.h"
 #import "NSDate+Utility.h"
 #import "UIImage+Utility.h"
+#import "PMRNetworkSDK.h"
 
 #define kTimeDifference                     30
 #define kDistanceBetwenControls             9
@@ -388,13 +389,14 @@
         self.party = [PMRParty new];
     }
     
+    NSDate *startDate = [self selectedDateWithTime:self.startTimeLabel.text];
+    NSDate *endDate = [self selectedDateWithTime:self.endTimeLabel.text];
+    
     self.party.eventName = self.eventNameTextField.text;
     self.party.eventDescription = self.descriptionTextView.text;
-    self.party.startDate = [self selectedDateWithTime:self.startTimeLabel.text];
-    self.party.endDate = [self selectedDateWithTime:self.endTimeLabel.text];
-    self.party.imagePath = [self selectedImagePath];
-    
-    [[PMRDataStorage dataStorage] savePatryToPlist:self.party];
+    self.party.startTime = [startDate toSeconds];
+    self.party.endTime = [endDate toSeconds];
+    self.party.imageIndex = @(self.imagePageControl.currentPage);
 }
 
 - (NSDate *)selectedDateWithTime:(NSString *)time {
@@ -460,32 +462,23 @@
         return;
     }
     
-    NSString *startTime = [self.party.startDate toStringWithDateFormat:@"HH:mm"];
-    NSString *endTime = [self.party.endDate toStringWithDateFormat:@"HH:mm"];
-    NSString *eventDate = [self.party.startDate toStringWithDateFormat:@"dd MMM yyyy"];
+    NSString *startTime = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"HH:mm"];
+    NSString *endTime = [NSDate stringDateFromSeconds:self.party.endTime withDateFormat:@"HH:mm"];
+    NSString *eventDate = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"dd MMM yyyy"];
     
     self.eventNameTextField.text = self.party.eventName;
     self.descriptionTextView.text = self.party.eventDescription;
     [self.chooseDateButton setTitle:eventDate forState:UIControlStateNormal];
     self.startTimeLabel.text = startTime;
     self.endTimeLabel.text = endTime;
-    self.datePickerControl.date = self.party.startDate;
+    self.datePickerControl.date = [NSDate dateFromSeconds:self.party.startTime];
     self.startTimeSlider.value = [self minutesFromTime:startTime];
     self.endTimeSlider.value = [self minutesFromTime:endTime];
     
-    int partyImageIndex = 0;
-    
-    for (UIImageView *imageView in self.imageScrollView.subviews) {
-        if ([imageView.image isEqualToImage:[UIImage imageNamed:self.party.imagePath]]) {
-            break;
-        }
-        partyImageIndex++;
-    }
-    
-    self.imagePageControl.currentPage = partyImageIndex;
+    self.imagePageControl.currentPage = [self.party.imageIndex integerValue];
     
     CGRect scrollViewFrame = [self estimatedImageScrollViewFrame];
-    CGPoint contentOffset = CGPointMake(partyImageIndex * scrollViewFrame.size.width, 0);
+    CGPoint contentOffset = CGPointMake([self.party.imageIndex integerValue] * scrollViewFrame.size.width, 0);
     [self.imageScrollView setContentOffset:contentOffset animated:YES];
 }
 

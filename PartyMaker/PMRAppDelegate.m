@@ -7,7 +7,8 @@
 //
 
 #import "PMRAppDelegate.h"
-#import "PMRDataStorage.h"
+#import "PMRCoreData.h"
+#import "PMRNetworkSDK.h"
 
 @interface PMRAppDelegate ()
 
@@ -30,7 +31,11 @@
                                                         NSForegroundColorAttributeName : [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1]
                                                         } forState:UIControlStateNormal];
     
-    [[PMRDataStorage dataStorage] loadAllParties];
+
+    
+//    [[PMRPartyMakerSDK SDK] allUsersWithcallback:^(NSDictionary *response, NSError *error) {
+//        NSLog(@"%@", response);
+//    }];
     
     return YES;
 }

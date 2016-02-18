@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class PMRParty;
+
 @interface PMRTableViewCell : UITableViewCell
 
+@property (nonatomic) NSNumber *partyId;
+
 - (void)configureWithName:(NSString *)eventName timeStart:(NSString *)eventTimeStart logo:(UIImage *)logo;
+- (void)configureWithParty:(PMRParty *)party;
 + (NSString *)reuseIdentifier;
 
 @end

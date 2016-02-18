@@ -11,11 +11,15 @@
 @implementation PMRTextField
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectInset(bounds, 15, 15);
+    return CGRectInset(bounds, 15, 10);
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    return CGRectInset(bounds, 15, 15);
+    return CGRectInset(bounds, 15, 10);
+}
+
+- (void)awakeFromNib {
+    [self setFont:[UIFont fontWithName:@"MyriadPro-Regular" size:16]];
 }
 
 @end

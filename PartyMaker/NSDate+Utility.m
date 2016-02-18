@@ -10,20 +10,29 @@
 
 @implementation NSDate (Utility)
 
-- (NSString *)toString {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd.MM.yyyy HH:mm"];
-    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-    [dateFormatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
-    return [dateFormatter stringFromDate:self];
-}
-
 - (NSString *)toStringWithDateFormat:(NSString *)dateFormat {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:dateFormat];
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     [dateFormatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
     return [dateFormatter stringFromDate:self];
+}
+
+- (NSNumber *)toSeconds {
+    return @([self timeIntervalSince1970]);
+}
+
++ (NSDate *)dateFromSeconds:(NSNumber *)seconds {
+    return [NSDate dateWithTimeIntervalSince1970:(NSInteger)seconds];
+}
+
++ (NSString *)stringDateFromSeconds:(NSNumber *)seconds withDateFormat:(NSString *)dateFormat{
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:(NSInteger)seconds];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:dateFormat];
+    
+    return [formatter stringFromDate:date];
 }
 
 + (NSDate *)dateFromString:(NSString *)date withDateFormat:(NSString *)dateFormat {

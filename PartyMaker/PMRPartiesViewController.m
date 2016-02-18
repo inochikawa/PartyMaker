@@ -9,16 +9,19 @@
 #import "PMRPartiesViewController.h"
 #import "PMRAddEventViewController.h"
 #import "PMRTableViewCell.h"
-#import "PMRDataStorage.h"
 #import "PMRParty.h"
 #import "PMRPartyInfoViewController.h"
 #import "NSDate+Utility.h"
+#import "PMRApiController.h"
+#import "PMRUser.h"
 
 @interface PMRPartiesViewController() <UITableViewDataSource,
                                        UITableViewDelegate>
 
 @property (nonatomic) NSMutableArray *data;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic) NSMutableArray *parties;
+@property (nonatomic) PMRTableViewCell *selectedCell;
 
 @end
 
@@ -42,6 +45,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    __block __weak PMRPartiesViewController *weakSelf = self;
+    
+    [[PMRApiController apiController] loadAllPartiesByUserId:[PMRUser user].userId withCallback:^(NSArray *parties) {
+        weakSelf.parties = [[NSMutableArray alloc] initWithArray:parties];
+    }];
+    
     [self.tableView reloadData];
 }
 
@@ -55,22 +64,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PMRTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PMRTableViewCell reuseIdentifier] forIndexPath:indexPath];
-    PMRParty *selectedParty = [PMRDataStorage dataStorage].parties[indexPath.row];
-    [cell configureWithName:selectedParty.eventName timeStart:[selectedParty.startDate toString] logo:[UIImage imageNamed:selectedParty.imagePath]];
+    PMRParty *selectedParty = self.parties[indexPath.row];
+    [cell configureWithParty:selectedParty];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [PMRDataStorage dataStorage].parties.count;
+    return self.parties.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedCell = [self.tableView cellForRowAtIndexPath:indexPath];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"TableViewCellToPMRCurrentVIewControllerSegue"]) {
-        int selectedRow = (int)[self.tableView indexPathForSelectedRow].row;
         PMRPartyInfoViewController *partyInfoViewController = segue.destinationViewController;
-        PMRParty *selectedParty = [PMRDataStorage dataStorage].parties[selectedRow];
+        PMRParty *selectedParty = [self partyById:self.selectedCell.partyId];
         partyInfoViewController.party = selectedParty;
     }
+}
+
+- (PMRParty *)partyById:(NSNumber *)partyId {
+    for (PMRParty *party in self.parties) {
+        if ([party.eventId integerValue] == [partyId integerValue]) {
+            return party;
+        }
+    }
+    return nil;
 }
 
 @end

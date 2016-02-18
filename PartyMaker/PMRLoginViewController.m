@@ -7,6 +7,10 @@
 //
 
 #import "PMRLoginViewController.h"
+#import "PMRApiController.h"
+#import "PMRUser.h"
+
+#define kStatusCodeUserExist 400
 
 @interface PMRLoginViewController()<UITextFieldDelegate>
 
@@ -18,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
+
 @end
 
 @implementation PMRLoginViewController
@@ -27,6 +33,7 @@
     
     self.loginBackgroundView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginBackgroundView.layer.borderWidth = 2.0f;
+    //self.errorLabel.text = @"";
     
     [self configureTextFields];
 }
@@ -41,10 +48,36 @@
 
 #pragma mark - IBActions
 
-- (IBAction)onRegisterButtonTouchUpInside:(id)sender {
+- (IBAction)onSignInButtonTouchUpInside:(id)sender {
+    [PMRUser user].name = self.loginTextField.text;
+    [PMRUser user].password = self.passwordTextField.text;
+    
+    [[PMRApiController apiController] loginUser:[PMRUser user] withCallback:^(NSDictionary *response, NSError *error) {
+        if ([response[@"statusCode"] integerValue] == kStatusCodeUserExist) {
+            self.errorLabel.text = @"Invalid login or password";
+        } else {
+            //self.errorLabel.text = @"";
+            [self performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
+            NSLog(@"[User sign in] --- %@", response);
+        }
+    }];
 }
 
-- (IBAction)onSignInButtonTouchUpInside:(id)sender {
+- (IBAction)onRegisterButtonTouchUpInside:(id)sender {
+    [PMRUser user].name = self.loginTextField.text;
+    [PMRUser user].password = self.passwordTextField.text;
+    [PMRUser user].email = @"kuki";
+    
+    [[PMRApiController apiController] registerUser:[PMRUser user] withCallback:^(NSDictionary *response, NSError *error) {
+        if ([response[@"statusCode"] integerValue] == kStatusCodeUserExist) {
+            self.errorLabel.text = @"User exists or data is wrong";
+        } else {
+            self.errorLabel.text = @"";
+            [PMRUser user].userId = response[@"response"][@"Id"];
+            [self performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
+            NSLog(@"[User registered] --- %@", response);
+        }
+    }];
 }
 
 - (IBAction)onLoginTextFieldDidEndOnExit:(id)sender {

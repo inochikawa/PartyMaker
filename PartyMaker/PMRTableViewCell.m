@@ -7,6 +7,8 @@
 //
 
 #import "PMRTableViewCell.h"
+#import "PMRParty.h"
+#import "NSDate+Utility.h"
 
 @interface PMRTableViewCell()
 
@@ -24,8 +26,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)prepareForReuse {
@@ -43,6 +43,15 @@
     self.logoImageView.image = logo;
     self.eventNameLabel.text = eventName;
     self.eventTimeStartLabel.text = eventTimeStart;
+}
+
+- (void)configureWithParty:(PMRParty *)party {
+    NSString *logoName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [party.imageIndex integerValue]];
+    
+    self.logoImageView.image = [UIImage imageNamed:logoName];
+    self.eventNameLabel.text = party.eventName;
+    self.eventTimeStartLabel.text = [NSDate stringDateFromSeconds:party.startTime withDateFormat:@"HH:mm"];
+    self.partyId = party.eventId;
 }
 
 @end

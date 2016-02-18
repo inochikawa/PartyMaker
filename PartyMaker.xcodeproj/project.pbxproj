@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		540424EA1C667445002F77B9 /* Parties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 540424E91C667445002F77B9 /* Parties.plist */; };
-		546A501E1C63DE00004C36E5 /* PMRParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 546A501D1C63DE00004C36E5 /* PMRParty.m */; };
 		83267E5A1C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83267E591C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m */; };
 		83267E5D1C6DD36C00CC0DC1 /* PMRGuid.m in Sources */ = {isa = PBXBuildFile; fileRef = 83267E5C1C6DD36C00CC0DC1 /* PMRGuid.m */; };
 		83267E5F1C6E0AD000CC0DC1 /* MyriadProItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83267E5E1C6E0AD000CC0DC1 /* MyriadProItalic.ttf */; };
@@ -16,6 +15,13 @@
 		8344C7F31C71FA3900528CC4 /* PMRLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7F21C71FA3900528CC4 /* PMRLoginViewController.m */; };
 		8344C7F61C72138600528CC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8344C7F41C72138600528CC4 /* Main.storyboard */; };
 		8344C7FA1C724EB800528CC4 /* PMRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7F91C724EB800528CC4 /* PMRTextField.m */; };
+		8344C7FD1C732D0200528CC4 /* PMRUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7FC1C732D0200528CC4 /* PMRUser.m */; };
+		8344C8001C73310F00528CC4 /* PMRNetworkSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7FF1C73310F00528CC4 /* PMRNetworkSDK.m */; };
+		8344C8031C74870000528CC4 /* PMRDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8011C74870000528CC4 /* PMRDataModel.xcdatamodeld */; };
+		8344C8341C74B55100528CC4 /* PMRParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8321C74B55100528CC4 /* PMRParty.m */; };
+		8344C8371C7538CD00528CC4 /* PMRParty+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8361C7538CD00528CC4 /* PMRParty+CoreDataProperties.m */; };
+		8344C83A1C75AA6C00528CC4 /* PMRApiController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8391C75AA6C00528CC4 /* PMRApiController.m */; };
+		8344C8631C7612F100528CC4 /* PMRUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8621C7612F100528CC4 /* PMRUser+CoreDataProperties.m */; };
 		83E217CA1C6220E000C8BF08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217C91C6220E000C8BF08 /* main.m */; };
 		83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */; };
 		83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D41C6220E000C8BF08 /* Assets.xcassets */; };
@@ -24,16 +30,13 @@
 		83E74DEE1C6355E400B0D255 /* MyriadProBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83E74DEC1C6355E400B0D255 /* MyriadProBold.ttf */; };
 		83E74DEF1C6355E400B0D255 /* MyriadProRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83E74DED1C6355E400B0D255 /* MyriadProRegular.ttf */; };
 		83F7E9CE1C68B91D00243A5F /* PMRAddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F7E9CC1C68B91D00243A5F /* PMRAddEventViewController.m */; };
-		83F7E9CF1C68B91D00243A5F /* PMRAddEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83F7E9CD1C68B91D00243A5F /* PMRAddEventViewController.xib */; };
-		83F7E9D21C6A6FD000243A5F /* PMRDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F7E9D11C6A6FD000243A5F /* PMRDataStorage.m */; };
+		83F7E9D21C6A6FD000243A5F /* PMRCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F7E9D11C6A6FD000243A5F /* PMRCoreData.m */; };
 		83F7E9FE1C6CBD8000243A5F /* PMRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F7E9FD1C6CBD8000243A5F /* PMRTableViewCell.m */; };
 		83F7EA011C6CCBF000243A5F /* NSDate+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F7EA001C6CCBF000243A5F /* NSDate+Utility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		540424E91C667445002F77B9 /* Parties.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Parties.plist; sourceTree = "<group>"; };
-		546A501C1C63DE00004C36E5 /* PMRParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRParty.h; sourceTree = "<group>"; };
-		546A501D1C63DE00004C36E5 /* PMRParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRParty.m; sourceTree = "<group>"; };
 		83267E581C6DCF1600CC0DC1 /* PMRPartyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRPartyInfoViewController.h; sourceTree = "<group>"; };
 		83267E591C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRPartyInfoViewController.m; sourceTree = "<group>"; };
 		83267E5B1C6DD36C00CC0DC1 /* PMRGuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRGuid.h; sourceTree = "<group>"; };
@@ -46,6 +49,19 @@
 		8344C7F51C72138600528CC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8344C7F81C724EB800528CC4 /* PMRTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRTextField.h; sourceTree = "<group>"; };
 		8344C7F91C724EB800528CC4 /* PMRTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRTextField.m; sourceTree = "<group>"; };
+		8344C7FB1C732D0200528CC4 /* PMRUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRUser.h; sourceTree = "<group>"; };
+		8344C7FC1C732D0200528CC4 /* PMRUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRUser.m; sourceTree = "<group>"; };
+		8344C7FE1C73310F00528CC4 /* PMRNetworkSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRNetworkSDK.h; sourceTree = "<group>"; };
+		8344C7FF1C73310F00528CC4 /* PMRNetworkSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRNetworkSDK.m; sourceTree = "<group>"; };
+		8344C8021C74870000528CC4 /* PMRDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PMRDataModel.xcdatamodel; sourceTree = "<group>"; };
+		8344C8311C74B55100528CC4 /* PMRParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRParty.h; sourceTree = "<group>"; };
+		8344C8321C74B55100528CC4 /* PMRParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRParty.m; sourceTree = "<group>"; };
+		8344C8351C7538CD00528CC4 /* PMRParty+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PMRParty+CoreDataProperties.h"; sourceTree = "<group>"; };
+		8344C8361C7538CD00528CC4 /* PMRParty+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PMRParty+CoreDataProperties.m"; sourceTree = "<group>"; };
+		8344C8381C75AA6C00528CC4 /* PMRApiController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRApiController.h; sourceTree = "<group>"; };
+		8344C8391C75AA6C00528CC4 /* PMRApiController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRApiController.m; sourceTree = "<group>"; };
+		8344C8611C7612F100528CC4 /* PMRUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PMRUser+CoreDataProperties.h"; sourceTree = "<group>"; };
+		8344C8621C7612F100528CC4 /* PMRUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PMRUser+CoreDataProperties.m"; sourceTree = "<group>"; };
 		83E217C51C6220E000C8BF08 /* PartyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E217C91C6220E000C8BF08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E217CB1C6220E000C8BF08 /* PMRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMRAppDelegate.h; sourceTree = "<group>"; };
@@ -59,9 +75,8 @@
 		83E74DED1C6355E400B0D255 /* MyriadProRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProRegular.ttf; sourceTree = "<group>"; };
 		83F7E9CB1C68B91D00243A5F /* PMRAddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRAddEventViewController.h; sourceTree = "<group>"; };
 		83F7E9CC1C68B91D00243A5F /* PMRAddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRAddEventViewController.m; sourceTree = "<group>"; };
-		83F7E9CD1C68B91D00243A5F /* PMRAddEventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PMRAddEventViewController.xib; sourceTree = "<group>"; };
-		83F7E9D01C6A6FD000243A5F /* PMRDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRDataStorage.h; sourceTree = "<group>"; };
-		83F7E9D11C6A6FD000243A5F /* PMRDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRDataStorage.m; sourceTree = "<group>"; };
+		83F7E9D01C6A6FD000243A5F /* PMRCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRCoreData.h; sourceTree = "<group>"; };
+		83F7E9D11C6A6FD000243A5F /* PMRCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRCoreData.m; sourceTree = "<group>"; };
 		83F7E9FC1C6CBD8000243A5F /* PMRTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRTableViewCell.h; sourceTree = "<group>"; };
 		83F7E9FD1C6CBD8000243A5F /* PMRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRTableViewCell.m; sourceTree = "<group>"; };
 		83F7E9FF1C6CCBF000243A5F /* NSDate+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utility.h"; sourceTree = "<group>"; };
@@ -82,10 +97,13 @@
 		540424EB1C6693D9002F77B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				546A501C1C63DE00004C36E5 /* PMRParty.h */,
-				546A501D1C63DE00004C36E5 /* PMRParty.m */,
-				83F7E9D01C6A6FD000243A5F /* PMRDataStorage.h */,
-				83F7E9D11C6A6FD000243A5F /* PMRDataStorage.m */,
+				8344C8041C748FDD00528CC4 /* CoreData */,
+				83F7E9D01C6A6FD000243A5F /* PMRCoreData.h */,
+				83F7E9D11C6A6FD000243A5F /* PMRCoreData.m */,
+				8344C7FE1C73310F00528CC4 /* PMRNetworkSDK.h */,
+				8344C7FF1C73310F00528CC4 /* PMRNetworkSDK.m */,
+				8344C8381C75AA6C00528CC4 /* PMRApiController.h */,
+				8344C8391C75AA6C00528CC4 /* PMRApiController.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -97,7 +115,6 @@
 				83E217E91C62286900C8BF08 /* PMRPartiesViewController.m */,
 				83F7E9CB1C68B91D00243A5F /* PMRAddEventViewController.h */,
 				83F7E9CC1C68B91D00243A5F /* PMRAddEventViewController.m */,
-				83F7E9CD1C68B91D00243A5F /* PMRAddEventViewController.xib */,
 				83F7E9FC1C6CBD8000243A5F /* PMRTableViewCell.h */,
 				83F7E9FD1C6CBD8000243A5F /* PMRTableViewCell.m */,
 				83267E581C6DCF1600CC0DC1 /* PMRPartyInfoViewController.h */,
@@ -136,6 +153,30 @@
 				8344C7F91C724EB800528CC4 /* PMRTextField.m */,
 			);
 			name = UIViewControls;
+			sourceTree = "<group>";
+		};
+		8344C8041C748FDD00528CC4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				8344C8011C74870000528CC4 /* PMRDataModel.xcdatamodeld */,
+				8344C8641C76131A00528CC4 /* CoreDataModel */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		8344C8641C76131A00528CC4 /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				8344C7FB1C732D0200528CC4 /* PMRUser.h */,
+				8344C7FC1C732D0200528CC4 /* PMRUser.m */,
+				8344C8611C7612F100528CC4 /* PMRUser+CoreDataProperties.h */,
+				8344C8621C7612F100528CC4 /* PMRUser+CoreDataProperties.m */,
+				8344C8311C74B55100528CC4 /* PMRParty.h */,
+				8344C8321C74B55100528CC4 /* PMRParty.m */,
+				8344C8351C7538CD00528CC4 /* PMRParty+CoreDataProperties.h */,
+				8344C8361C7538CD00528CC4 /* PMRParty+CoreDataProperties.m */,
+			);
+			name = CoreDataModel;
 			sourceTree = "<group>";
 		};
 		83E217BC1C6220E000C8BF08 = {
@@ -256,7 +297,6 @@
 				83E74DEE1C6355E400B0D255 /* MyriadProBold.ttf in Resources */,
 				83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */,
 				8344C7F61C72138600528CC4 /* Main.storyboard in Resources */,
-				83F7E9CF1C68B91D00243A5F /* PMRAddEventViewController.xib in Resources */,
 				83267E5F1C6E0AD000CC0DC1 /* MyriadProItalic.ttf in Resources */,
 				83E74DEF1C6355E400B0D255 /* MyriadProRegular.ttf in Resources */,
 				540424EA1C667445002F77B9 /* Parties.plist in Resources */,
@@ -270,18 +310,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				546A501E1C63DE00004C36E5 /* PMRParty.m in Sources */,
 				83F7E9CE1C68B91D00243A5F /* PMRAddEventViewController.m in Sources */,
-				83F7E9D21C6A6FD000243A5F /* PMRDataStorage.m in Sources */,
+				83F7E9D21C6A6FD000243A5F /* PMRCoreData.m in Sources */,
+				8344C8341C74B55100528CC4 /* PMRParty.m in Sources */,
+				8344C8631C7612F100528CC4 /* PMRUser+CoreDataProperties.m in Sources */,
 				83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */,
+				8344C7FD1C732D0200528CC4 /* PMRUser.m in Sources */,
 				83267E5D1C6DD36C00CC0DC1 /* PMRGuid.m in Sources */,
 				83F7E9FE1C6CBD8000243A5F /* PMRTableViewCell.m in Sources */,
 				83267E5A1C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m in Sources */,
 				83F7EA011C6CCBF000243A5F /* NSDate+Utility.m in Sources */,
 				83E217CA1C6220E000C8BF08 /* main.m in Sources */,
 				8344C7EF1C70107D00528CC4 /* UIImage+Utility.m in Sources */,
+				8344C8371C7538CD00528CC4 /* PMRParty+CoreDataProperties.m in Sources */,
+				8344C83A1C75AA6C00528CC4 /* PMRApiController.m in Sources */,
+				8344C8031C74870000528CC4 /* PMRDataModel.xcdatamodeld in Sources */,
 				8344C7F31C71FA3900528CC4 /* PMRLoginViewController.m in Sources */,
 				8344C7FA1C724EB800528CC4 /* PMRTextField.m in Sources */,
+				8344C8001C73310F00528CC4 /* PMRNetworkSDK.m in Sources */,
 				83E217EA1C62286900C8BF08 /* PMRPartiesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +480,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8344C8011C74870000528CC4 /* PMRDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8344C8021C74870000528CC4 /* PMRDataModel.xcdatamodel */,
+			);
+			currentVersion = 8344C8021C74870000528CC4 /* PMRDataModel.xcdatamodel */;
+			path = PMRDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 83E217BD1C6220E000C8BF08 /* Project object */;
 }
