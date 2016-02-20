@@ -370,7 +370,6 @@
                                             <outlet property="eventNameLabel" destination="zPL-RN-ptg" id="Cc6-Q4-S0y"/>
                                             <outlet property="eventTimeStartLabel" destination="VfQ-ko-f9d" id="Q7P-vM-Gn5"/>
                                             <outlet property="logoImageView" destination="svD-Wt-5H9" id="fk0-Ef-jyb"/>
-                                            <segue destination="Zat-RY-jB1" kind="show" identifier="TableViewCellToPMRCurrentVIewControllerSegue" id="ZHy-dc-vT9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -400,6 +399,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="6Rq-at-Ywv" id="e7d-0q-HMF"/>
+                        <segue destination="Zat-RY-jB1" kind="show" identifier="ToPartyInfoViewController" id="YKM-9F-kZu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VmU-yh-aKk" userLabel="First Responder" sceneMemberID="firstResponder"/>

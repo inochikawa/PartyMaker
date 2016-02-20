@@ -23,11 +23,11 @@
 }
 
 + (NSDate *)dateFromSeconds:(NSNumber *)seconds {
-    return [NSDate dateWithTimeIntervalSince1970:(NSInteger)seconds];
+    return [NSDate dateWithTimeIntervalSince1970:[seconds integerValue]];
 }
 
 + (NSString *)stringDateFromSeconds:(NSNumber *)seconds withDateFormat:(NSString *)dateFormat{
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:(NSInteger)seconds];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[seconds integerValue]];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:dateFormat];

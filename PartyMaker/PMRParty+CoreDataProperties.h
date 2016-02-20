@@ -2,7 +2,7 @@
 //  PMRParty+CoreDataProperties.h
 //  PartyMaker
 //
-//  Created by 2 on 2/18/16.
+//  Created by 2 on 2/19/16.
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *eventName;
 @property (nullable, nonatomic, retain) NSNumber *creatorId;
 @property (nullable, nonatomic, retain) NSNumber *eventId;
+@property (nullable, nonatomic, retain) NSNumber *isPartyDeleted;
+@property (nullable, nonatomic, retain) NSNumber *isPartyChanged;
+@property (nullable, nonatomic, retain) PMRUser *partyToUser;
 
 @end
 

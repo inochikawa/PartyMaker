@@ -8,10 +8,11 @@
 
 #import "PMRAddEventViewController.h"
 #import "PMRParty.h"
+#import "PMRUser.h"
 #import "PMRCoreData.h"
 #import "NSDate+Utility.h"
 #import "UIImage+Utility.h"
-#import "PMRNetworkSDK.h"
+#import "PMRApiController.h"
 
 #define kTimeDifference                     30
 #define kDistanceBetwenControls             9
@@ -201,12 +202,7 @@
     
     [self saveParty];
     
-    if ([self.navigationController isViewLoaded]) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else {
-        NSLog(@"Error - navigation controller is not loaded");
-    }
+    
 }
 
 - (IBAction)onCancelButtonTouchUpInside {
@@ -386,17 +382,28 @@
 
 - (void)saveParty {
     if (!self.party) {
-        self.party = [PMRParty new];
+        self.party = [[PMRApiController apiController] createInstanseForParty];
     }
     
     NSDate *startDate = [self selectedDateWithTime:self.startTimeLabel.text];
     NSDate *endDate = [self selectedDateWithTime:self.endTimeLabel.text];
     
+    self.party.creatorId = [PMRUser user].userId;
     self.party.eventName = self.eventNameTextField.text;
     self.party.eventDescription = self.descriptionTextView.text;
     self.party.startTime = [startDate toSeconds];
     self.party.endTime = [endDate toSeconds];
     self.party.imageIndex = @(self.imagePageControl.currentPage);
+    
+    __block __weak PMRAddEventViewController *weakSelf = self;
+    [[PMRApiController apiController] saveOrUpdateParty:self.party withCallback:^{
+        if ([weakSelf.navigationController isViewLoaded]) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            NSLog(@"Error - navigation controller is not loaded");
+        }
+    }];
 }
 
 - (NSDate *)selectedDateWithTime:(NSString *)time {

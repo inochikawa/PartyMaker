@@ -40,6 +40,7 @@
     
     self.navigationItem.backBarButtonItem = backButton;
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:29/255. green:31/255. blue:36/255. alpha:1];
+    self.parties = [[NSMutableArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -48,10 +49,10 @@
     __block __weak PMRPartiesViewController *weakSelf = self;
     
     [[PMRApiController apiController] loadAllPartiesByUserId:[PMRUser user].userId withCallback:^(NSArray *parties) {
-        weakSelf.parties = [[NSMutableArray alloc] initWithArray:parties];
+        [weakSelf.parties removeAllObjects];
+        [weakSelf.parties addObjectsFromArray:parties];
+        [weakSelf.tableView reloadData];
     }];
-    
-    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -75,10 +76,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedCell = [self.tableView cellForRowAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"ToPartyInfoViewController" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"TableViewCellToPMRCurrentVIewControllerSegue"]) {
+    if ([segue.identifier isEqualToString:@"ToPartyInfoViewController"]) {
         PMRPartyInfoViewController *partyInfoViewController = segue.destinationViewController;
         PMRParty *selectedParty = [self partyById:self.selectedCell.partyId];
         partyInfoViewController.party = selectedParty;

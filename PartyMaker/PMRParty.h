@@ -2,12 +2,14 @@
 //  PMRParty.h
 //  PartyMaker
 //
-//  Created by 2 on 2/17/16.
+//  Created by 2 on 2/19/16.
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+
+@class PMRUser;
 
 NS_ASSUME_NONNULL_BEGIN
 

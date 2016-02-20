@@ -57,6 +57,7 @@
             self.errorLabel.text = @"Invalid login or password";
         } else {
             //self.errorLabel.text = @"";
+            [PMRUser user].userId = @([response[@"response"][@"id"] integerValue]);
             [self performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
             NSLog(@"[User sign in] --- %@", response);
         }
@@ -66,15 +67,14 @@
 - (IBAction)onRegisterButtonTouchUpInside:(id)sender {
     [PMRUser user].name = self.loginTextField.text;
     [PMRUser user].password = self.passwordTextField.text;
-    [PMRUser user].email = @"kuki";
+    [PMRUser user].email = @"lololo1456789";
     
     [[PMRApiController apiController] registerUser:[PMRUser user] withCallback:^(NSDictionary *response, NSError *error) {
         if ([response[@"statusCode"] integerValue] == kStatusCodeUserExist) {
             self.errorLabel.text = @"User exists or data is wrong";
         } else {
             self.errorLabel.text = @"";
-            [PMRUser user].userId = response[@"response"][@"Id"];
-            [self performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
+            // have to write smth to notificate user that he was registered successfully.
             NSLog(@"[User registered] --- %@", response);
         }
     }];

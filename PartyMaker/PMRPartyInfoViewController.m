@@ -10,7 +10,7 @@
 #import "PMRAddEventViewController.h"
 #import "NSDate+Utility.h"
 #import "PMRCoreData.h"
-#import "PMRNetworkSDK.h"
+#import "PMRApiController.h"
 
 @interface PMRPartyInfoViewController()
 
@@ -58,27 +58,15 @@
 }
 
 - (IBAction)onDeleteButtonTouchUpInside:(id)sender {
-//    NSArray *parties = [PMRDataStorage dataStorage].parties;
-//    
-//    for (PMRParty *party in parties) {
-//        if ([party isEqual:self.party]) {
-//            [[PMRDataStorage dataStorage].parties removeObject:party];
-//            
-//            [[PMRPartyMakerSDK SDK] deleteParty:party callback:^(NSDictionary *response, NSError *error) {
-//                NSLog(@"[Party deleted] --- %@", response);
-//            }];
-//            
-//            break;
-//        }
-//    }
-//    
-//    if ([self.navigationController isViewLoaded]) {
-//        [self.navigationController popViewControllerAnimated:YES];
-//        [[PMRDataStorage dataStorage] savePlistFile];
-//    }
-//    else {
-//        NSLog(@"[Error] - Navigation controller isn't loaded");
-//    }
+    __block __weak PMRPartyInfoViewController *weakSelf = self;
+    [[PMRApiController apiController] deleteParty:self.party withCallback:^{
+        if ([weakSelf.navigationController isViewLoaded]) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            NSLog(@"[Error] - Navigation controller isn't loaded");
+        }
+    }];
 }
 
 #pragma mark - Helpers

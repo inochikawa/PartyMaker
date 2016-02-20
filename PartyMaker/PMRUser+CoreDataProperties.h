@@ -2,7 +2,7 @@
 //  PMRUser+CoreDataProperties.h
 //  PartyMaker
 //
-//  Created by 2 on 2/18/16.
+//  Created by 2 on 2/19/16.
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -19,6 +19,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *email;
 @property (nullable, nonatomic, retain) NSString *password;
 @property (nullable, nonatomic, retain) NSNumber *userId;
+@property (nullable, nonatomic, retain) NSSet<PMRParty *> *userToParty;
+
+@end
+
+@interface PMRUser (CoreDataGeneratedAccessors)
+
+- (void)addUserToPartyObject:(PMRParty *)value;
+- (void)removeUserToPartyObject:(PMRParty *)value;
+- (void)addUserToParty:(NSSet<PMRParty *> *)values;
+- (void)removeUserToParty:(NSSet<PMRParty *> *)values;
 
 @end
 

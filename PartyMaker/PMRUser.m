@@ -1,12 +1,14 @@
 //
-//  PRMUser.m
+//  PMRUser.m
 //  PartyMaker
 //
-//  Created by 2 on 2/16/16.
+//  Created by 2 on 2/19/16.
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 
 #import "PMRUser.h"
+#import "PMRParty.h"
+#import "PMRApiController.h"
 
 @implementation PMRUser
 
@@ -14,13 +16,13 @@
     return [super init];
 }
 
-+ (instancetype) user {
++ (instancetype)user {
     static dispatch_once_t pred;
-    static id user = nil;
+    static id instance = nil;
     dispatch_once(&pred, ^{
-        user = [[super alloc] initUniqueInstance];
+        instance = [[PMRApiController apiController] createInstanseForUser];
     });
-    return user;
+    return instance;
 }
 
 @end

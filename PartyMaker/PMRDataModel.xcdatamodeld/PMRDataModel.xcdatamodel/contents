@@ -7,18 +7,20 @@
         <attribute name="eventId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="eventName" attributeType="String" syncable="YES"/>
         <attribute name="imageIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="isPartyChanged" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isPartyDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="startTime" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="userParty" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="partyUser" inverseEntity="User" syncable="YES"/>
+        <relationship name="partyToUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userToParty" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="PMRUser" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="partyUser" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Party" inverseName="userParty" inverseEntity="Party" syncable="YES"/>
+        <relationship name="userToParty" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Party" inverseName="partyToUser" inverseEntity="Party" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Party" positionX="117" positionY="10539" width="128" height="163"/>
+        <element name="Party" positionX="117" positionY="10539" width="128" height="193"/>
         <element name="User" positionX="135" positionY="10611" width="128" height="120"/>
     </elements>
 </model>

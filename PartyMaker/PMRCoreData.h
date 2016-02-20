@@ -16,19 +16,16 @@
 
 @interface PMRCoreData : NSObject
 
-NS_ASSUME_NONNULL_BEGIN
-
-@property (nonatomic) NSManagedObjectContext *mainManagedObjectContext;
-@property (nonatomic) NSManagedObjectContext *backgroundManagedObjectContext;
-@property (nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-NS_ASSUME_NONNULL_END
+- (nullable NSManagedObjectContext *)mainManagedObjectContext;
+- (nullable NSManagedObjectContext *)backgroundManagedObjectContext;
 
 - (nullable PMRParty *)fetchPartyByPartyId:(nonnull NSNumber *)partyId inContext:(nonnull NSManagedObjectContext *)context;
-- (nullable NSArray *)allPartiesInUser:(nonnull NSNumber *)userId;
+- (void)loadAllPartiesByUserId:(nonnull NSNumber *)userId withCallback:(void (^ _Nullable)(NSArray * _Nullable parties, NSError * _Nullable completionError))completion;
 - (void)saveParty:(nonnull PMRParty *)party withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
+- (void)savePartiesFromArray:(nonnull NSArray *)parties withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
 - (void)updateParty:(nonnull PMRParty *)party withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
-- (void)deleteParty:(nonnull PMRParty *)party withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
+- (void)deleteParty:(nonnull NSNumber *)eventID withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
+- (void)deleteAllUserPartiesByUserId:(nonnull NSNumber *)userId withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
+- (void)dropTableByEntityName:(nonnull NSString *)entityName withCallback:(void (^ _Nullable) (NSError * _Nullable completionError))completion;
 
 @end
