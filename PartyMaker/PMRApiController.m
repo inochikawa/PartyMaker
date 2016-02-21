@@ -155,8 +155,7 @@
             ///////////////////////////////////////////////////////////////////////////////////
             // loading parties from database
             [weakSelf.coreData loadAllPartiesByUserId:userId withCallback:^(NSArray * _Nullable partiesFromDatabase, NSError * _Nullable completionError) {
-                if (!completionError) {
-                    
+                if (!completionError) {                    
                     NSMutableArray *partiesFromServer = [NSMutableArray new];
                     for (NSDictionary *partyDictionary in arrayOfPartyDictionaries) {
                         PMRParty *party = [weakSelf createInstanseForParty];

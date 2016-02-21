@@ -108,7 +108,7 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-#pragma mark - Core data implementation
+#pragma mark - Party core data implementation
 
 - (void)loadAllPartiesByUserId:(NSNumber *)userId withCallback:(void (^)(NSArray *parties, NSError *completionError))completion {
     __weak PMRCoreData *weakSelf = self;
