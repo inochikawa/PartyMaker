@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "054AC2C75CB49F716F5DB8CF9F18DE3FB5CEBFE8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "054AC2C75CB49F716F5DB8CF9F18DE3FB5CEBFE8" : 0,
+    "D859FB261C95C74D69741AAEF987A2F51DC160B8" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F83EF0CD-F05B-4CBA-9D88-A1036C65C7F2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "054AC2C75CB49F716F5DB8CF9F18DE3FB5CEBFE8" : "PartyMaker\/",
+    "D859FB261C95C74D69741AAEF987A2F51DC160B8" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PartyMaker",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PartyMaker.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/msCube\/PartyMaker.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "054AC2C75CB49F716F5DB8CF9F18DE3FB5CEBFE8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/msCube\/Softheme.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D859FB261C95C74D69741AAEF987A2F51DC160B8"
+    }
+  ]
+}

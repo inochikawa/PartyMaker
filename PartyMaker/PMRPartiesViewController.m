@@ -14,6 +14,7 @@
 #import "NSDate+Utility.h"
 #import "PMRApiController.h"
 #import "PMRUser.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface PMRPartiesViewController() <UITableViewDataSource,
                                        UITableViewDelegate>
@@ -48,11 +49,22 @@
     
     __block __weak PMRPartiesViewController *weakSelf = self;
     
-    [[PMRApiController apiController] loadAllPartiesByUserId:[PMRUser user].userId withCallback:^(NSArray *parties) {
-        [weakSelf.parties removeAllObjects];
-        [weakSelf.parties addObjectsFromArray:parties];
-        [weakSelf.tableView reloadData];
-    }];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading";
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        PMRUser *user = [PMRApiController apiController].user;
+        [[PMRApiController apiController] loadAllPartiesByUserId:user.userId withCallback:^(NSArray *parties) {
+            [weakSelf.parties removeAllObjects];
+            [weakSelf.parties addObjectsFromArray:parties];
+            [weakSelf.tableView reloadData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [hud hide:YES];
+            });
+        }];
+    });
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {

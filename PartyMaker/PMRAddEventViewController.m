@@ -388,7 +388,6 @@
     NSDate *startDate = [self selectedDateWithTime:self.startTimeLabel.text];
     NSDate *endDate = [self selectedDateWithTime:self.endTimeLabel.text];
     
-    self.party.creatorId = [PMRUser user].userId;
     self.party.eventName = self.eventNameTextField.text;
     self.party.eventDescription = self.descriptionTextView.text;
     self.party.startTime = [startDate toSeconds];

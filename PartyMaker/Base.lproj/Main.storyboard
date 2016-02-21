@@ -3,9 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="MyriadProBold.ttf">
+            <string>MyriadPro-Bold</string>
+            <string>MyriadPro-Bold</string>
+            <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
@@ -42,9 +46,225 @@
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
+        <!--Register View Controller-->
+        <scene sceneID="FIL-5a-Mdz">
+            <objects>
+                <viewController id="Z98-jd-GQU" customClass="PMRRegisterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pb1-BF-jpY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ka0-Ja-6CP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TEw-US-8oK" userLabel="Main view">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="LoginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="wR3-0a-uIw">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsT-oS-pLZ" userLabel="Register background view">
+                                <rect key="frame" x="6" y="117" width="363" height="433"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Login" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yT2-fS-Gj2" customClass="PMRTextField">
+                                        <rect key="frame" x="22" y="65" width="319" height="40"/>
+                                        <color key="backgroundColor" red="0.13725490200000001" green="0.1450980392" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="cjH-C2-gDp"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onLoginTextFieldDidEndOnExit:" destination="Z98-jd-GQU" eventType="editingDidEndOnExit" id="Ffd-zD-kjx"/>
+                                            <action selector="onLoginTextFieldDidEndOnExit:" destination="Ymd-Dq-ej2" eventType="editingDidEndOnExit" id="dtC-cO-pPw"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hND-xk-5wL" customClass="PMRTextField">
+                                        <rect key="frame" x="22" y="120" width="319" height="40"/>
+                                        <color key="backgroundColor" red="0.13725490200000001" green="0.1450980392" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="fgE-YB-oih"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onEmailTextFieldDidEndOnExit:" destination="Z98-jd-GQU" eventType="editingDidEndOnExit" id="Fnc-UE-CZo"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDV-uP-KEB">
+                                        <rect key="frame" x="59" y="292" width="245" height="36"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.69411764710000001" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="7ad-bn-VfS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
+                                        <state key="normal" title="REGISTER">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onRegisterButtonTouchUpInside:" destination="Z98-jd-GQU" eventType="touchUpInside" id="lia-l5-knT"/>
+                                            <action selector="onRegisterButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="sZ9-o9-xrF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6OK-lk-lZo">
+                                        <rect key="frame" x="59" y="343" width="245" height="36"/>
+                                        <color key="backgroundColor" red="0.92549019607843142" green="0.27843137254901962" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="W4z-GR-T8G"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
+                                        <state key="normal" title="CANCEL">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onCancelButtonTouchUpInside:" destination="Z98-jd-GQU" eventType="touchUpInside" id="678-Zh-pfd"/>
+                                            <action selector="onSignInButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="TeJ-ai-uZL"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5q-Xe-rlX" userLabel="Label container">
+                                        <rect key="frame" x="0.0" y="0.0" width="363" height="65"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HELLO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Qm-KK-gEE">
+                                                <rect key="frame" x="129" y="14" width="106" height="36"/>
+                                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="36"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uG8-tg-Qlv">
+                                                <rect key="frame" x="22" y="53" width="28" height="12"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="12" id="sps-q5-B5M"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
+                                                <color key="textColor" red="1" green="0.11694504310000001" blue="0.24647090520000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="7Qm-KK-gEE" firstAttribute="centerY" secondItem="L5q-Xe-rlX" secondAttribute="centerY" id="3M4-eq-Ee9"/>
+                                            <constraint firstAttribute="bottom" secondItem="uG8-tg-Qlv" secondAttribute="bottom" id="Ot4-OD-8np"/>
+                                            <constraint firstItem="7Qm-KK-gEE" firstAttribute="centerX" secondItem="L5q-Xe-rlX" secondAttribute="centerX" id="W3G-X2-ueJ"/>
+                                            <constraint firstAttribute="height" constant="65" id="ku4-86-Z5F"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1GN-z9-Wh5" customClass="PMRTextField">
+                                        <rect key="frame" x="22" y="175" width="319" height="40"/>
+                                        <color key="backgroundColor" red="0.13725490200000001" green="0.1450980392" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onPasswordTextFieldDidEndOnExit:" destination="Z98-jd-GQU" eventType="editingDidEndOnExit" id="6fC-GP-2TY"/>
+                                            <action selector="onPasswordTextFieldEditingDidEnd:" destination="Z98-jd-GQU" eventType="editingDidEnd" id="dhD-kR-Jhp"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="evy-HB-V1w" customClass="PMRTextField">
+                                        <rect key="frame" x="22" y="230" width="319" height="40"/>
+                                        <color key="backgroundColor" red="0.13725490200000001" green="0.1450980392" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onRepeatPasswordEditingDidBegin:" destination="Z98-jd-GQU" eventType="editingDidBegin" id="4rr-iB-V4W"/>
+                                            <action selector="onRepeatPasswordTextFieldEditingDidEnd:" destination="Z98-jd-GQU" eventType="editingDidEnd" id="N5g-8N-oss"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="1GN-z9-Wh5" firstAttribute="centerX" secondItem="hND-xk-5wL" secondAttribute="centerX" id="16F-eW-d1f"/>
+                                    <constraint firstItem="evy-HB-V1w" firstAttribute="centerX" secondItem="1GN-z9-Wh5" secondAttribute="centerX" id="3zi-KY-Ed7"/>
+                                    <constraint firstAttribute="trailing" secondItem="LDV-uP-KEB" secondAttribute="trailing" constant="59" id="4FB-VR-to5"/>
+                                    <constraint firstAttribute="bottom" secondItem="6OK-lk-lZo" secondAttribute="bottom" constant="54" id="5h6-pf-obb"/>
+                                    <constraint firstItem="L5q-Xe-rlX" firstAttribute="leading" secondItem="hsT-oS-pLZ" secondAttribute="leading" id="812-Ae-6Jz"/>
+                                    <constraint firstItem="1GN-z9-Wh5" firstAttribute="width" secondItem="hND-xk-5wL" secondAttribute="width" id="87y-6p-3Er"/>
+                                    <constraint firstItem="1GN-z9-Wh5" firstAttribute="top" secondItem="hND-xk-5wL" secondAttribute="bottom" constant="15" id="FMG-90-NMb"/>
+                                    <constraint firstItem="evy-HB-V1w" firstAttribute="width" secondItem="1GN-z9-Wh5" secondAttribute="width" id="IqO-gm-ffu"/>
+                                    <constraint firstItem="LDV-uP-KEB" firstAttribute="leading" secondItem="hsT-oS-pLZ" secondAttribute="leading" constant="59" id="JOo-ku-4WQ"/>
+                                    <constraint firstItem="hND-xk-5wL" firstAttribute="top" secondItem="yT2-fS-Gj2" secondAttribute="bottom" constant="15" id="Ovb-7I-Ij0"/>
+                                    <constraint firstItem="1GN-z9-Wh5" firstAttribute="height" secondItem="hND-xk-5wL" secondAttribute="height" id="PIZ-mA-nma"/>
+                                    <constraint firstAttribute="trailing" secondItem="yT2-fS-Gj2" secondAttribute="trailing" constant="22" id="RNl-d0-x6q"/>
+                                    <constraint firstItem="6OK-lk-lZo" firstAttribute="leading" secondItem="hsT-oS-pLZ" secondAttribute="leading" constant="59" id="Snf-5g-wvi"/>
+                                    <constraint firstItem="yT2-fS-Gj2" firstAttribute="top" secondItem="L5q-Xe-rlX" secondAttribute="bottom" id="TSS-Zh-7kp"/>
+                                    <constraint firstItem="uG8-tg-Qlv" firstAttribute="leading" secondItem="yT2-fS-Gj2" secondAttribute="leading" id="UDV-Ng-la9"/>
+                                    <constraint firstAttribute="trailing" secondItem="L5q-Xe-rlX" secondAttribute="trailing" id="Zww-bC-jYV"/>
+                                    <constraint firstItem="6OK-lk-lZo" firstAttribute="top" secondItem="LDV-uP-KEB" secondAttribute="bottom" constant="15" id="dK2-dm-Gns"/>
+                                    <constraint firstItem="L5q-Xe-rlX" firstAttribute="top" secondItem="hsT-oS-pLZ" secondAttribute="top" id="fUe-HS-RKV"/>
+                                    <constraint firstItem="evy-HB-V1w" firstAttribute="top" secondItem="1GN-z9-Wh5" secondAttribute="bottom" constant="15" id="jhD-Tp-vWB"/>
+                                    <constraint firstItem="evy-HB-V1w" firstAttribute="height" secondItem="1GN-z9-Wh5" secondAttribute="height" id="l5U-qz-CFb"/>
+                                    <constraint firstItem="yT2-fS-Gj2" firstAttribute="leading" secondItem="hsT-oS-pLZ" secondAttribute="leading" constant="22" id="lXJ-FY-wh0"/>
+                                    <constraint firstItem="hND-xk-5wL" firstAttribute="leading" secondItem="hsT-oS-pLZ" secondAttribute="leading" constant="22" id="nqJ-W8-9gp"/>
+                                    <constraint firstAttribute="trailing" secondItem="hND-xk-5wL" secondAttribute="trailing" constant="22" id="oyg-9k-a6b"/>
+                                    <constraint firstAttribute="trailing" secondItem="6OK-lk-lZo" secondAttribute="trailing" constant="59" id="qp1-LR-o5i"/>
+                                    <constraint firstItem="LDV-uP-KEB" firstAttribute="top" secondItem="evy-HB-V1w" secondAttribute="bottom" constant="22" id="tvc-n4-8eh"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="hsT-oS-pLZ" firstAttribute="leading" secondItem="TEw-US-8oK" secondAttribute="leadingMargin" constant="-10" id="98P-5y-F7w"/>
+                            <constraint firstItem="hsT-oS-pLZ" firstAttribute="centerY" secondItem="TEw-US-8oK" secondAttribute="centerY" id="AlR-eo-s73"/>
+                            <constraint firstItem="wR3-0a-uIw" firstAttribute="top" secondItem="TEw-US-8oK" secondAttribute="top" id="CAn-Fj-kfz"/>
+                            <constraint firstItem="Ka0-Ja-6CP" firstAttribute="top" secondItem="wR3-0a-uIw" secondAttribute="bottom" id="D0y-ye-3pW"/>
+                            <constraint firstAttribute="trailing" secondItem="wR3-0a-uIw" secondAttribute="trailing" id="LyS-GT-oja"/>
+                            <constraint firstItem="wR3-0a-uIw" firstAttribute="leading" secondItem="TEw-US-8oK" secondAttribute="leading" id="MgP-RJ-frj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hsT-oS-pLZ" secondAttribute="trailing" constant="-10" id="vYz-iv-P5H"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="hND-xk-5wL" id="ZCM-8k-87Q"/>
+                        <outlet property="informationLabel" destination="uG8-tg-Qlv" id="EfH-ig-clJ"/>
+                        <outlet property="loginTextField" destination="yT2-fS-Gj2" id="QWd-jo-wVO"/>
+                        <outlet property="passwordTextField" destination="1GN-z9-Wh5" id="4fZ-GH-cqZ"/>
+                        <outlet property="registerBackgroundView" destination="hsT-oS-pLZ" id="qKd-c1-efR"/>
+                        <outlet property="repeatPasswordTextField" destination="evy-HB-V1w" id="Y0H-Pt-LtB"/>
+                        <segue destination="Ymd-Dq-ej2" kind="show" identifier="toLoginViewControllerSegue" id="NtY-eU-LVM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QkU-EB-s5S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2370.5" y="632.5"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="k9w-cu-KEb">
             <objects>
@@ -113,6 +333,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onRegisterButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="O58-OV-wnp"/>
+                                            <segue destination="Z98-jd-GQU" kind="show" id="Tej-MK-2eC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eci-Tz-ETL">
@@ -208,7 +429,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOQ-py-hLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2166.5" y="186.5"/>
+            <point key="canvasLocation" x="-2370.5" y="-317.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="2hM-Jd-rf2">
@@ -1238,7 +1459,7 @@
         <image name="TimePopup_1" width="40" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HSv-ua-Ffh"/>
+        <segue reference="Xxx-iK-O40"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

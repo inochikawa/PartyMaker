@@ -9,6 +9,7 @@
 #import "PMRLoginViewController.h"
 #import "PMRApiController.h"
 #import "PMRUser.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #define kStatusCodeUserExist 400
 
@@ -33,7 +34,7 @@
     
     self.loginBackgroundView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginBackgroundView.layer.borderWidth = 2.0f;
-    //self.errorLabel.text = @"";
+    self.errorLabel.text = @"";
     
     [self configureTextFields];
 }
@@ -49,35 +50,36 @@
 #pragma mark - IBActions
 
 - (IBAction)onSignInButtonTouchUpInside:(id)sender {
-    [PMRUser user].name = self.loginTextField.text;
-    [PMRUser user].password = self.passwordTextField.text;
+    __block __weak PMRLoginViewController *weakSelf = self;
+    __block PMRUser *user = [[PMRApiController apiController] createInstanseForUser];
     
-    [[PMRApiController apiController] loginUser:[PMRUser user] withCallback:^(NSDictionary *response, NSError *error) {
-        if ([response[@"statusCode"] integerValue] == kStatusCodeUserExist) {
-            self.errorLabel.text = @"Invalid login or password";
-        } else {
-            //self.errorLabel.text = @"";
-            [PMRUser user].userId = @([response[@"response"][@"id"] integerValue]);
-            [self performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
-            NSLog(@"[User sign in] --- %@", response);
-        }
-    }];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading";
+    
+    dispatch_async(dispatch_get_main_queue(), ^{        
+        user.name = weakSelf.loginTextField.text;
+        user.password = weakSelf.passwordTextField.text;
+        
+        [[PMRApiController apiController] loginUser:user withCallback:^(NSDictionary *response, NSError *error) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [hud hide:YES];
+            });
+            
+            if ([response[@"statusCode"] integerValue] == kStatusCodeUserExist) {
+                weakSelf.errorLabel.text = @"Invalid login or password";
+            } else {
+                weakSelf.errorLabel.text = @"";
+                user.userId = @([response[@"response"][@"id"] integerValue]);
+                [weakSelf performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
+                NSLog(@"[User sign in] --- %@", response);
+            }
+        }];
+    });
 }
 
 - (IBAction)onRegisterButtonTouchUpInside:(id)sender {
-    [PMRUser user].name = self.loginTextField.text;
-    [PMRUser user].password = self.passwordTextField.text;
-    [PMRUser user].email = @"lololo1456789";
     
-    [[PMRApiController apiController] registerUser:[PMRUser user] withCallback:^(NSDictionary *response, NSError *error) {
-        if ([response[@"statusCode"] integerValue] == kStatusCodeUserExist) {
-            self.errorLabel.text = @"User exists or data is wrong";
-        } else {
-            self.errorLabel.text = @"";
-            // have to write smth to notificate user that he was registered successfully.
-            NSLog(@"[User registered] --- %@", response);
-        }
-    }];
 }
 
 - (IBAction)onLoginTextFieldDidEndOnExit:(id)sender {

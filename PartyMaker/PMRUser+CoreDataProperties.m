@@ -2,7 +2,7 @@
 //  PMRUser+CoreDataProperties.m
 //  PartyMaker
 //
-//  Created by 2 on 2/19/16.
+//  Created by 2 on 2/21/16.
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,10 +13,10 @@
 
 @implementation PMRUser (CoreDataProperties)
 
-@dynamic name;
 @dynamic email;
-@dynamic password;
+@dynamic name;
 @dynamic userId;
+@dynamic password;
 @dynamic userToParty;
 
 @end

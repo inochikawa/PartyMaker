@@ -40,11 +40,6 @@
     return [[PMRUser alloc] initWithEntity:[NSEntityDescription entityForName:@"User" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
 }
 
-- (PMRUser *)createInstanseForUserInContext:(NSManagedObjectContext*)context {
-
-    return [[PMRUser alloc] initWithEntity:[NSEntityDescription entityForName:@"User" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
-}
-
 - (PMRParty *)createInstanseForParty {
     NSManagedObjectContext *context = [self.coreData mainManagedObjectContext];
     return [[PMRParty alloc] initWithEntity:[NSEntityDescription entityForName:@"Party" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
@@ -68,7 +63,9 @@
 }
 
 - (void)loginUser:(PMRUser *)user withCallback:(void (^) (NSDictionary *response, NSError *error))completion{
+    self.user = user;
     [self.networkSDK loginWithUserName:user.name withPassword:user.password callback:^(NSDictionary *response, NSError *error) {
+        self.user.userId = @([response[@"response"][@"id"] integerValue]);
         if (completion) {
             completion(response, error);
         }
@@ -79,6 +76,7 @@
 
 - (void)saveOrUpdateParty:(PMRParty *)party withCallback:(void (^) ())completion{
     __block __weak PMRApiController *weakSelf = self;
+    party.creatorId = self.user.userId;
     
     [self.networkSDK addPaty:party callback:^(NSDictionary *response, NSError *error) {
         NSUInteger statusRequest = [response[@"statusCode"] integerValue];
@@ -94,9 +92,9 @@
         
         // upload data to database
         NSManagedObjectContext *context = [weakSelf.coreData mainManagedObjectContext];
-        PMRParty *partyObject = [weakSelf.coreData fetchPartyByPartyId:party.eventId inContext:context];
+        PMRParty *partyObject = [weakSelf.coreData fetchObjectFromEntity:@"Party" forKey:@"eventId" withValue:party.eventId inContext:context];
         if (partyObject) {
-            [weakSelf.coreData saveParty:party withCallback:^(NSError * _Nullable completionError) {
+            [weakSelf.coreData updateParty:party withCallback:^(NSError * _Nullable completionError) {
                 if (!completionError) {
                     NSLog(@"%s --- Party [%@] was upadated in data base", __PRETTY_FUNCTION__, party.eventName);
                 } else {
@@ -115,7 +113,6 @@
                 [weakSelf pmr_performCompletionBlock:completion];
             }];
         }
-        //[weakSelf pmr_performCompletionBlock:completion];
     }];
 }
 
@@ -207,8 +204,7 @@
                     
                     [resultArrayOfParties addObjectsFromArray:partiesFromServer];
                     
-                    // And now we drop our "Party" table. And then we add new info to database
-                    
+                    // And now we delete all parties from "Party" table. And then we add new info to "Party" table.
                     [weakSelf.coreData deleteAllUserPartiesByUserId:userId withCallback:^(NSError * _Nullable completionError) {
                         if (!completionError) {
                             [weakSelf.coreData savePartiesFromArray:resultArrayOfParties withCallback:^(NSError * _Nullable completionError) {
@@ -221,14 +217,14 @@
                                         else {
                                             NSLog(@"%s --- party [%@] was added to server", __PRETTY_FUNCTION__, serverParty.eventName);
                                         }
-                                        
-                                        if (completion) {
-                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                NSLog(@"\n\n%s", __PRETTY_FUNCTION__);
-                                                completion(partiesFromServer);
-                                            });
-                                        }
                                     }];
+                                }
+                                
+                                if (completion) {
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        NSLog(@"\n\n%s", __PRETTY_FUNCTION__);
+                                        completion(partiesFromServer);
+                                    });
                                 }
                             }];
                         }
@@ -246,34 +242,6 @@
         }
     }];
 }
-
-- (PMRParty *)loadPartyById:(NSNumber *)partyId {
-    NSManagedObjectContext *context = [self.coreData mainManagedObjectContext];
-    return [self.coreData fetchPartyByPartyId:partyId inContext:context];
-}
-
-//- (void)saveOrUpdatePartyToDatabase:(PMRParty *)party{
-//    NSManagedObjectContext *context = [self.coreData mainManagedObjectContext];
-//    PMRParty *partyObject = [self.coreData fetchPartyByPartyId:party.eventId inContext:context];
-//    if (partyObject) {
-//        [self.coreData updateParty:party withCallback:^(NSError * _Nullable completionError) {
-//            if (!completionError) {
-//                NSLog(@"%s --- Party [%@] was upadated in data base", __PRETTY_FUNCTION__, party.eventName);
-//            } else {
-//                NSLog(@"%s [Core data error] --- Party [%@] was not upadated in data base --- [Error - %@, user info - %@", __PRETTY_FUNCTION__, party.eventName, completionError, completionError.userInfo);
-//            }
-//        }];
-//    }
-//    else {
-//        [self.coreData saveParty:party withCallback:^(NSError * _Nullable completionError) {
-//            if (!completionError) {
-//                NSLog(@"%s --- Party [%@] was upadated in data base", __PRETTY_FUNCTION__, party.eventName);
-//            } else {
-//                NSLog(@"%s [Core data error] --- Party [%@] was not saved to data base --- [Error - %@, user info - %@", __PRETTY_FUNCTION__, party.eventName, completionError, completionError.userInfo);
-//            }
-//        }];
-//    }
-//}
 
 - (void)pmr_performCompletionBlock:(void (^) ())block {
     if (block) {

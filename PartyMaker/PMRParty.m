@@ -7,7 +7,6 @@
 //
 
 #import "PMRParty.h"
-#import "PMRUser.h"
 
 @implementation PMRParty
 

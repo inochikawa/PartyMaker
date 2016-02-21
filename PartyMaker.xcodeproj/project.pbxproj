@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		540424EA1C667445002F77B9 /* Parties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 540424E91C667445002F77B9 /* Parties.plist */; };
+		7623C51180E0CF0363B8976D /* libPods-PartyMaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F338279C449E153065A3229 /* libPods-PartyMaker.a */; };
 		83267E5A1C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83267E591C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m */; };
 		83267E5D1C6DD36C00CC0DC1 /* PMRGuid.m in Sources */ = {isa = PBXBuildFile; fileRef = 83267E5C1C6DD36C00CC0DC1 /* PMRGuid.m */; };
 		83267E5F1C6E0AD000CC0DC1 /* MyriadProItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83267E5E1C6E0AD000CC0DC1 /* MyriadProItalic.ttf */; };
@@ -22,6 +23,7 @@
 		8344C8741C76AB1F00528CC4 /* PMRParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C86E1C76AB1F00528CC4 /* PMRParty.m */; };
 		8344C8751C76AB1F00528CC4 /* PMRUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8701C76AB1F00528CC4 /* PMRUser+CoreDataProperties.m */; };
 		8344C8761C76AB1F00528CC4 /* PMRUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8721C76AB1F00528CC4 /* PMRUser.m */; };
+		8344C8791C78F81300528CC4 /* PMRRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8781C78F81300528CC4 /* PMRRegisterViewController.m */; };
 		83E217CA1C6220E000C8BF08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217C91C6220E000C8BF08 /* main.m */; };
 		83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */; };
 		83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D41C6220E000C8BF08 /* Assets.xcassets */; };
@@ -36,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F338279C449E153065A3229 /* libPods-PartyMaker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PartyMaker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		540424E91C667445002F77B9 /* Parties.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Parties.plist; sourceTree = "<group>"; };
 		83267E581C6DCF1600CC0DC1 /* PMRPartyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRPartyInfoViewController.h; sourceTree = "<group>"; };
 		83267E591C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRPartyInfoViewController.m; sourceTree = "<group>"; };
@@ -62,6 +65,8 @@
 		8344C8701C76AB1F00528CC4 /* PMRUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PMRUser+CoreDataProperties.m"; sourceTree = "<group>"; };
 		8344C8711C76AB1F00528CC4 /* PMRUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRUser.h; sourceTree = "<group>"; };
 		8344C8721C76AB1F00528CC4 /* PMRUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRUser.m; sourceTree = "<group>"; };
+		8344C8771C78F81300528CC4 /* PMRRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRRegisterViewController.h; sourceTree = "<group>"; };
+		8344C8781C78F81300528CC4 /* PMRRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRRegisterViewController.m; sourceTree = "<group>"; };
 		83E217C51C6220E000C8BF08 /* PartyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E217C91C6220E000C8BF08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E217CB1C6220E000C8BF08 /* PMRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMRAppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +86,8 @@
 		83F7E9FD1C6CBD8000243A5F /* PMRTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRTableViewCell.m; sourceTree = "<group>"; };
 		83F7E9FF1C6CCBF000243A5F /* NSDate+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utility.h"; sourceTree = "<group>"; };
 		83F7EA001C6CCBF000243A5F /* NSDate+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utility.m"; sourceTree = "<group>"; };
+		B78338EB8851CA162365DA7F /* Pods-PartyMaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartyMaker.release.xcconfig"; path = "Pods/Target Support Files/Pods-PartyMaker/Pods-PartyMaker.release.xcconfig"; sourceTree = "<group>"; };
+		E50A315556D69D74D79F7926 /* Pods-PartyMaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PartyMaker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PartyMaker/Pods-PartyMaker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,18 +95,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7623C51180E0CF0363B8976D /* libPods-PartyMaker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C4C4ADE22DCC9D0AFB067D8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E50A315556D69D74D79F7926 /* Pods-PartyMaker.debug.xcconfig */,
+				B78338EB8851CA162365DA7F /* Pods-PartyMaker.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		38BCAE36DD120C4BE1A5ABED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F338279C449E153065A3229 /* libPods-PartyMaker.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		540424EB1C6693D9002F77B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				8344C8041C748FDD00528CC4 /* CoreData */,
-				83F7E9D01C6A6FD000243A5F /* PMRCoreData.h */,
-				83F7E9D11C6A6FD000243A5F /* PMRCoreData.m */,
 				8344C7FE1C73310F00528CC4 /* PMRNetworkSDK.h */,
 				8344C7FF1C73310F00528CC4 /* PMRNetworkSDK.m */,
 				8344C8381C75AA6C00528CC4 /* PMRApiController.h */,
@@ -111,6 +134,7 @@
 		540424EC1C6693E2002F77B9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8344C7F71C724E7900528CC4 /* UIViewControls */,
 				83E217E81C62286900C8BF08 /* PMRPartiesViewController.h */,
 				83E217E91C62286900C8BF08 /* PMRPartiesViewController.m */,
 				83F7E9CB1C68B91D00243A5F /* PMRAddEventViewController.h */,
@@ -121,7 +145,8 @@
 				83267E591C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m */,
 				8344C7F11C71FA3900528CC4 /* PMRLoginViewController.h */,
 				8344C7F21C71FA3900528CC4 /* PMRLoginViewController.m */,
-				8344C7F71C724E7900528CC4 /* UIViewControls */,
+				8344C8771C78F81300528CC4 /* PMRRegisterViewController.h */,
+				8344C8781C78F81300528CC4 /* PMRRegisterViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -159,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				8344C8011C74870000528CC4 /* PMRDataModel.xcdatamodeld */,
+				83F7E9D01C6A6FD000243A5F /* PMRCoreData.h */,
+				83F7E9D11C6A6FD000243A5F /* PMRCoreData.m */,
 				8344C8641C76131A00528CC4 /* CoreDataModel */,
 			);
 			name = CoreData;
@@ -184,6 +211,8 @@
 			children = (
 				83E217C71C6220E000C8BF08 /* PartyMaker */,
 				83E217C61C6220E000C8BF08 /* Products */,
+				2C4C4ADE22DCC9D0AFB067D8 /* Pods */,
+				38BCAE36DD120C4BE1A5ABED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -240,9 +269,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83E217DC1C6220E000C8BF08 /* Build configuration list for PBXNativeTarget "PartyMaker" */;
 			buildPhases = (
+				CE276F0A183BC942EA48AA2E /* Check Pods Manifest.lock */,
 				83E217C11C6220E000C8BF08 /* Sources */,
 				83E217C21C6220E000C8BF08 /* Frameworks */,
 				83E217C31C6220E000C8BF08 /* Resources */,
+				796C3886CDE6FCFFA41E2952 /* Embed Pods Frameworks */,
+				385C893D6C0FD864E137A760 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -305,6 +337,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		385C893D6C0FD864E137A760 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PartyMaker/Pods-PartyMaker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		796C3886CDE6FCFFA41E2952 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PartyMaker/Pods-PartyMaker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE276F0A183BC942EA48AA2E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		83E217C11C6220E000C8BF08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -315,6 +395,7 @@
 				83F7E9D21C6A6FD000243A5F /* PMRCoreData.m in Sources */,
 				8344C8731C76AB1F00528CC4 /* PMRParty+CoreDataProperties.m in Sources */,
 				8344C8741C76AB1F00528CC4 /* PMRParty.m in Sources */,
+				8344C8791C78F81300528CC4 /* PMRRegisterViewController.m in Sources */,
 				8344C8751C76AB1F00528CC4 /* PMRUser+CoreDataProperties.m in Sources */,
 				83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */,
 				83267E5D1C6DD36C00CC0DC1 /* PMRGuid.m in Sources */,
@@ -436,6 +517,7 @@
 		};
 		83E217DD1C6220E000C8BF08 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E50A315556D69D74D79F7926 /* Pods-PartyMaker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PartyMaker/Info.plist;
@@ -448,6 +530,7 @@
 		};
 		83E217DE1C6220E000C8BF08 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B78338EB8851CA162365DA7F /* Pods-PartyMaker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PartyMaker/Info.plist;

@@ -2,7 +2,7 @@
 //  PMRParty+CoreDataProperties.m
 //  PartyMaker
 //
-//  Created by 2 on 2/19/16.
+//  Created by 2 on 2/21/16.
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,15 +13,17 @@
 
 @implementation PMRParty (CoreDataProperties)
 
-@dynamic endTime;
-@dynamic startTime;
-@dynamic imageIndex;
-@dynamic eventDescription;
-@dynamic eventName;
 @dynamic creatorId;
+@dynamic endTime;
+@dynamic eventDescription;
 @dynamic eventId;
-@dynamic isPartyDeleted;
+@dynamic eventName;
+@dynamic imageIndex;
 @dynamic isPartyChanged;
+@dynamic isPartyDeleted;
+@dynamic startTime;
+@dynamic latitude;
+@dynamic longitude;
 @dynamic partyToUser;
 
 @end

@@ -50,7 +50,7 @@
     
     self.logoImageView.image = [UIImage imageNamed:logoName];
     self.eventNameLabel.text = party.eventName;
-    self.eventTimeStartLabel.text = [NSDate stringDateFromSeconds:party.startTime withDateFormat:@"HH:mm"];
+    self.eventTimeStartLabel.text = [NSDate stringDateFromSeconds:party.startTime withDateFormat:@"dd.MM.yyyy HH:mm"];
     self.partyId = party.eventId;
 }
 

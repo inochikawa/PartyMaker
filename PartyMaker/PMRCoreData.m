@@ -8,14 +8,20 @@
 
 #import "PMRCoreData.h"
 #import "PMRParty.h"
+#import "PMRUser.h"
 
-#define kEventId            @"eventId"
-#define kEventName          @"eventName"
-#define kEventDescription   @"eventDescription"
-#define kCreatorId          @"creatorId"
-#define kStartTime          @"startTime"
-#define kEndTime            @"endTime"
-#define kImageIndex         @"imageIndex"
+#define kPartyEventId            @"eventId"
+#define kPartyEventName          @"eventName"
+#define kPartyEventDescription   @"eventDescription"
+#define kPartyCreatorId          @"creatorId"
+#define kPartyStartTime          @"startTime"
+#define kPartyEndTime            @"endTime"
+#define kPartyImageIndex         @"imageIndex"
+
+#define kUserId         @"userId"
+#define kUserName       @"userName"
+#define kUserPassword   @"userPassword"
+#define kUserEmail      @"userEmail"
 
 @interface PMRCoreData()
 
@@ -84,7 +90,7 @@
     }
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PMRDataModel.sqlite"];
-    
+
     NSError *error = nil;
     self.coreDataPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![self.coreDataPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
@@ -106,7 +112,7 @@
 
 - (void)loadAllPartiesByUserId:(NSNumber *)userId withCallback:(void (^)(NSArray *parties, NSError *completionError))completion {
     __weak PMRCoreData *weakSelf = self;
-    [self deleteDublicatesFromBackgroundObjectContextByUserId:userId withCallback:^(NSError *completionError) {
+    [self deleteDublicatesFromMainObjectContextFromEntity:@"Party" withCallback:^(NSError *completionError) {
         NSManagedObjectContext *context = [weakSelf mainManagedObjectContext];
         
         NSFetchRequest *fetch = [NSFetchRequest new];
@@ -126,25 +132,6 @@
             });
         }
     }];
-    
-    
-//    NSManagedObjectContext *context = [self mainManagedObjectContext];
-//    
-//    NSFetchRequest *fetch = [NSFetchRequest new];
-//    fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
-//    fetch.predicate = [NSPredicate predicateWithFormat:@"creatorId == %@", userId];
-//    
-//    NSError *error = nil;
-//    NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&error];
-//    if ( error ) {
-//        NSLog(@"PMRPartyManagedObject pmr_fetchPartyWithName: failed with error %@", error);
-//    }
-//    
-//    if (completion) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            completion(fetchedObjects, error);
-//        });
-//    }
 }
 
 - (void)saveParty:(PMRParty *)party withCallback:(void (^)(NSError *completionError))completion{
@@ -154,13 +141,13 @@
  
     [context performBlock:^{
         PMRParty *partyObject = [NSEntityDescription insertNewObjectForEntityForName:@"Party" inManagedObjectContext:context];
-        partyObject.eventId = partyDictionary[kEventId];
-        partyObject.eventName = partyDictionary[kEventName];
-        partyObject.eventDescription = partyDictionary[kEventDescription];
-        partyObject.imageIndex = partyDictionary[kImageIndex];
-        partyObject.startTime = partyDictionary[kStartTime];
-        partyObject.endTime = partyDictionary[kEndTime];
-        partyObject.creatorId = partyDictionary[kCreatorId];
+        partyObject.eventId = partyDictionary[kPartyEventId];
+        partyObject.eventName = partyDictionary[kPartyEventName];
+        partyObject.eventDescription = partyDictionary[kPartyEventDescription];
+        partyObject.imageIndex = partyDictionary[kPartyImageIndex];
+        partyObject.startTime = partyDictionary[kPartyStartTime];
+        partyObject.endTime = partyDictionary[kPartyEndTime];
+        partyObject.creatorId = partyDictionary[kPartyCreatorId];
         
         NSError *error = nil;
         [context save:&error];
@@ -181,12 +168,12 @@
     
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     [context performBlock:^{
-        PMRParty *partyObject = [self fetchPartyByPartyId:partyDictionary[kEventId] inContext:context];
-        partyObject.eventName = partyDictionary[kEventName];
-        partyObject.eventDescription = partyDictionary[kEventDescription];
-        partyObject.imageIndex = partyDictionary[kImageIndex];
-        partyObject.startTime = partyDictionary[kStartTime];
-        partyObject.endTime = partyDictionary[kEndTime];
+        PMRParty *partyObject = [self fetchObjectFromEntity:@"Party" forKey:@"eventId" withValue:partyDictionary[kPartyEventId] inContext:context];
+        partyObject.eventName = partyDictionary[kPartyEventName];
+        partyObject.eventDescription = partyDictionary[kPartyEventDescription];
+        partyObject.imageIndex = partyDictionary[kPartyImageIndex];
+        partyObject.startTime = partyDictionary[kPartyStartTime];
+        partyObject.endTime = partyDictionary[kPartyEndTime];
         
         NSError *error = nil;
         if (partyObject.hasChanges) {
@@ -204,7 +191,7 @@
     __weak PMRCoreData *weakSelf = self;
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     [context performBlock:^{
-        PMRParty *partyObject = [weakSelf fetchPartyByPartyId:partyId inContext:context];
+        PMRParty *partyObject = [weakSelf fetchObjectFromEntity:@"Party" forKey:@"eventId" withValue:partyId inContext:context];
         
         NSError *error = nil;
         [context deleteObject:partyObject];
@@ -252,13 +239,13 @@
     [context performBlock:^{
         for (NSDictionary *dictionary in partyDictionaries) {
             PMRParty *partyObject = [NSEntityDescription insertNewObjectForEntityForName:@"Party" inManagedObjectContext:context];
-            partyObject.eventId = dictionary[kEventId];
-            partyObject.eventName = dictionary[kEventName];
-            partyObject.eventDescription = dictionary[kEventDescription];
-            partyObject.imageIndex = dictionary[kImageIndex];
-            partyObject.startTime = dictionary[kStartTime];
-            partyObject.endTime = dictionary[kEndTime];
-            partyObject.creatorId = dictionary[kCreatorId];
+            partyObject.eventId = dictionary[kPartyEventId];
+            partyObject.eventName = dictionary[kPartyEventName];
+            partyObject.eventDescription = dictionary[kPartyEventDescription];
+            partyObject.imageIndex = dictionary[kPartyImageIndex];
+            partyObject.startTime = dictionary[kPartyStartTime];
+            partyObject.endTime = dictionary[kPartyEndTime];
+            partyObject.creatorId = dictionary[kPartyCreatorId];
             
             NSError *error = nil;
             if (![context save:&error]) {
@@ -272,17 +259,65 @@
     }];
 }
 
-- (PMRParty *)fetchPartyByPartyId:(NSNumber *)partyId inContext:(NSManagedObjectContext *)context {
-    NSFetchRequest *fetch = [NSFetchRequest new];
-    fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
-    fetch.predicate = [NSPredicate predicateWithFormat:@"eventId == %@", partyId];
+#pragma mark - User core data implementation 
+
+- (void)saveUser:(PMRUser *)user withCallback:(void (^)(NSError *completionError))completion{
+    NSManagedObjectContext *context = [self backgroundManagedObjectContext];
+    NSDictionary *userDictionary = [self pmr_dictionaryOfUserPropertiesFromUser:user];
     
-    NSError *error = nil;
-    NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&error];
-    if ( error ) {
-        NSLog(@"PMRPartyManagedObject pmr_fetchPartyWithName: failed with error %@", error);
-    }
-    return [fetchedObjects firstObject];
+    [context performBlock:^{
+        PMRUser *userObject = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
+        userObject.userId = userDictionary[kUserId];
+        userObject.name = userDictionary[kUserName];
+        userObject.email = userDictionary[kUserEmail];
+        
+        NSError *error = nil;
+        [context save:&error];
+        
+        
+        if (error) {
+            NSLog(@"%s error saving context %@", __PRETTY_FUNCTION__, error);
+        }
+        
+        NSLog(@"%s --- Party was saved", __PRETTY_FUNCTION__);
+        
+        [self pmr_performCompletionBlock:completion withError:error];
+    }];
+}
+
+- (void)updateUser:(PMRUser *)user withCallback:(void (^)(NSError *completionError))completion {
+    NSDictionary *userDictionary = [self pmr_dictionaryOfUserPropertiesFromUser:user];
+    
+    NSManagedObjectContext *context = [self backgroundManagedObjectContext];
+    [context performBlock:^{
+        PMRUser *userObject = [self fetchObjectFromEntity:@"User" forKey:@"userId" withValue:userDictionary[kUserId] inContext:context];
+        userObject.name = userDictionary[kUserName];
+        userObject.email = userDictionary[kUserEmail];
+        
+        NSError *error = nil;
+        if (userObject.hasChanges) {
+            [context save:&error];
+            if (error) {
+                NSLog(@"%s error saving context %@", __PRETTY_FUNCTION__, error);
+            }
+        }
+        
+        [self pmr_performCompletionBlock:completion withError:error];
+    }];
+}
+
+- (void)deleteUser:(NSNumber *)userId withCallback:(void (^)(NSError *completionError))completion{
+    __weak PMRCoreData *weakSelf = self;
+    NSManagedObjectContext *context = [self backgroundManagedObjectContext];
+    [context performBlock:^{
+        PMRUser *userObject = [weakSelf fetchObjectFromEntity:@"User" forKey:@"userId" withValue:userId inContext:context];
+        
+        NSError *error = nil;
+        [context deleteObject:userObject];
+        [context save:&error];
+        
+        [self pmr_performCompletionBlock:completion withError:error];
+    }];
 }
 
 #pragma mark - Notification changes
@@ -316,48 +351,39 @@
 #pragma mark - Helpers
 
 - (NSDictionary *)pmr_dictionaryOfPartyPropertiesFromParty:(PMRParty *)party {
-    return @{kEventName:[party.eventName copy],
-             kEventDescription:[party.eventDescription copy],
-             kEventId:[party.eventId copy],
-             kStartTime:[party.startTime copy],
-             kEndTime:[party.endTime copy],
-             kImageIndex:[party.imageIndex copy],
-             kCreatorId:[party.creatorId copy]};
+    return @{kPartyEventName:[party.eventName copy],
+             kPartyEventDescription:[party.eventDescription copy],
+             kPartyEventId:[party.eventId copy],
+             kPartyStartTime:[party.startTime copy],
+             kPartyEndTime:[party.endTime copy],
+             kPartyImageIndex:[party.imageIndex copy],
+             kPartyCreatorId:[party.creatorId copy]};
 }
 
-- (void)deleteDublicatesFromBackgroundObjectContextByUserId:(NSNumber *)userId withCallback:(void (^)(NSError *completionError))completion {
+- (NSDictionary *)pmr_dictionaryOfUserPropertiesFromUser:(PMRUser *)user {
+    return @{kUserId:[user.userId copy],
+             kUserName:[user.name copy],
+             kUserEmail:[user.email copy]};
+}
+
+- (void)deleteDublicatesFromMainObjectContextFromEntity:(NSString *)entityName withCallback:(void (^)(NSError *completionError))completion {
     __weak PMRCoreData *weakSelf = self;
-    NSManagedObjectContext *context = [self backgroundManagedObjectContext];
+    NSManagedObjectContext *context = [self mainManagedObjectContext];
     [context performBlock:^{
         NSFetchRequest *fetch = [NSFetchRequest new];
-        fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
-        fetch.predicate = [NSPredicate predicateWithFormat:@"creatorId == %@", userId];
+        fetch.entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
         [fetch setReturnsObjectsAsFaults:NO];
         
         NSError *error = nil;
         NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&error];
         if (error) {
-            NSLog(@"PMRPartyManagedObject pmr_fetchPartyWithName: failed with error %@", error);
+            NSLog(@"%s --- failed with error %@", __PRETTY_FUNCTION__, error);
         }
-        
-        
         
         NSMutableArray *arrayForCheckingOnDublicate = [NSMutableArray new];
         BOOL isPartyObjectDublicate = NO;
 
         for (PMRParty *partyObject in fetchedObjects) {
-//            // check for nil managed object. First we must delete all nil objects and then delete dublicates.
-//            if (!partyObject.managedObjectContext) {
-//                NSError *error = nil;
-//                [context deleteObject:partyObject];
-//                [context save:&error];
-//                NSLog(@"%s --- Nil party object was deleted", __PRETTY_FUNCTION__);
-//                if (error) {
-//                    NSLog(@"%s --- [Error] - %@, user info - %@", __PRETTY_FUNCTION__, error, error.userInfo);
-//                }
-//                continue;
-//            }
-            
             isPartyObjectDublicate = NO;
             for (PMRParty *partyFromCheckingArray in arrayForCheckingOnDublicate) {
                 if ([partyObject.eventId integerValue] == [partyFromCheckingArray.eventId integerValue]) {
@@ -369,7 +395,7 @@
                 NSError *error = nil;
                 [context deleteObject:partyObject];
                 [context save:&error];
-                NSLog(@"%s --- Dublicated party was deleted", __PRETTY_FUNCTION__);
+                NSLog(@"%s --- Dublicated %@ was deleted", __PRETTY_FUNCTION__, entityName);
                 if (error) {
                     NSLog(@"%s --- [Error] - %@, user info - %@", __PRETTY_FUNCTION__, error, error.userInfo);
                 }
@@ -381,6 +407,19 @@
         
         [weakSelf pmr_performCompletionBlock:completion withError:error];
     }];
+}
+
+- (id)fetchObjectFromEntity:(NSString *)entityName forKey:(NSString *)key withValue:(NSNumber *)value inContext:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetch = [NSFetchRequest new];
+    fetch.entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    fetch.predicate = [NSPredicate predicateWithFormat:@"%@ == %@", key, value];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&error];
+    if ( error ) {
+        NSLog(@"Fetching failed with error %@", error);
+    }
+    return [fetchedObjects firstObject];
 }
 
 @end
