@@ -47,31 +47,33 @@
 }
 
 - (IBAction)onRegisterButtonTouchUpInside:(id)sender {
-    __block __weak PMRRegisterViewController *weakSelf = self;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading...";
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        PMRUser *user = [[PMRApiController apiController] createInstanseForUser];
-        user.name = weakSelf.loginTextField.text;
-        user.password = weakSelf.passwordTextField.text;
-        user.email = weakSelf.emailTextField.text;
+    if ([self notificateAboutPasswords]) {
+        __block __weak PMRRegisterViewController *weakSelf = self;
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Loading...";
         
-        [[PMRApiController apiController] registerUser:user withCallback:^(NSDictionary *response, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [hud hide:YES];
-            });
+        dispatch_async(dispatch_get_main_queue(), ^{
+            PMRUser *user = [[PMRApiController apiController] createInstanseForUser];
+            user.name = weakSelf.loginTextField.text;
+            user.password = weakSelf.passwordTextField.text;
+            user.email = weakSelf.emailTextField.text;
             
-            if ([response[@"statusCode"] integerValue] == kStatusCodeUserExist) {
-                weakSelf.informationLabel.text = @"User exists or data is wrong";
-            } else {
-                weakSelf.informationLabel.text = @"";
-                // have to write smth to notificate user that he was registered successfully.
-                NSLog(@"[User registered] --- %@", response);
-                [weakSelf performSegueWithIdentifier:@"toLoginViewControllerSegue" sender:weakSelf];
-            }
-        }];
-    });
+            [[PMRApiController apiController] registerUser:user withCallback:^(NSDictionary *response, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [hud hide:YES];
+                });
+                
+                if ([response[@"statusCode"] integerValue] == kStatusCodeUserExist) {
+                    weakSelf.informationLabel.text = @"User exists or data is wrong";
+                } else {
+                    weakSelf.informationLabel.text = @"";
+                    // have to write smth to notificate user that he was registered successfully.
+                    NSLog(@"[User registered] --- %@", response);
+                    [weakSelf performSegueWithIdentifier:@"toLoginViewControllerSegue" sender:weakSelf];
+                }
+            }];
+        });
+    }
 }
 
 - (IBAction)onCancelButtonTouchUpInside:(id)sender {
@@ -166,13 +168,13 @@
     return NO;
 }
 
-- (void)notificateAboutPasswords {
+- (BOOL)notificateAboutPasswords {
     if (![self isPaswordsIdentity]) {
         self.informationLabel.text = @"Passwords aren't equals.";
+        return NO;
     }
-    else {
-        self.informationLabel.text = @"";
-    }
+    self.informationLabel.text = @"";
+    return YES;
 }
 
 #pragma mark - Keyboard notifications
