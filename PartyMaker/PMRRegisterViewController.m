@@ -49,7 +49,7 @@
 - (IBAction)onRegisterButtonTouchUpInside:(id)sender {
     __block __weak PMRRegisterViewController *weakSelf = self;
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    hud.labelText = @"Loading...";
     
     dispatch_async(dispatch_get_main_queue(), ^{
         PMRUser *user = [[PMRApiController apiController] createInstanseForUser];

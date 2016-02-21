@@ -54,7 +54,7 @@
     __block PMRUser *user = [[PMRApiController apiController] createInstanseForUser];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading";
+    hud.labelText = @"Loading...";
     
     dispatch_async(dispatch_get_main_queue(), ^{        
         user.name = weakSelf.loginTextField.text;
@@ -76,10 +76,6 @@
             }
         }];
     });
-}
-
-- (IBAction)onRegisterButtonTouchUpInside:(id)sender {
-    
 }
 
 - (IBAction)onLoginTextFieldDidEndOnExit:(id)sender {

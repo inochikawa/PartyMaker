@@ -13,6 +13,7 @@
 #import "NSDate+Utility.h"
 #import "UIImage+Utility.h"
 #import "PMRApiController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #define kTimeDifference                     30
 #define kDistanceBetwenControls             9
@@ -395,14 +396,25 @@
     self.party.imageIndex = @(self.imagePageControl.currentPage);
     
     __block __weak PMRAddEventViewController *weakSelf = self;
-    [[PMRApiController apiController] saveOrUpdateParty:self.party withCallback:^{
-        if ([weakSelf.navigationController isViewLoaded]) {
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        }
-        else {
-            NSLog(@"Error - navigation controller is not loaded");
-        }
-    }];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading...";
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [[PMRApiController apiController] saveOrUpdateParty:self.party withCallback:^{
+            if ([weakSelf.navigationController isViewLoaded]) {
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }
+            else {
+                NSLog(@"Error - navigation controller is not loaded");
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [hud hide:YES];
+            });
+        }];
+    });
 }
 
 - (NSDate *)selectedDateWithTime:(NSString *)time {

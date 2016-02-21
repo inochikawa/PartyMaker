@@ -261,7 +261,7 @@
 
 #pragma mark - User core data implementation 
 
-- (void)saveUser:(PMRUser *)user withCallback:(void (^)(NSError *completionError))completion{
+- (void)saveUser:(PMRUser *)user withCallback:(void (^)(NSError *completionError))completion {
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     NSDictionary *userDictionary = [self pmr_dictionaryOfUserPropertiesFromUser:user];
     
@@ -306,7 +306,7 @@
     }];
 }
 
-- (void)deleteUser:(NSNumber *)userId withCallback:(void (^)(NSError *completionError))completion{
+- (void)deleteUser:(NSNumber *)userId withCallback:(void (^)(NSError *completionError))completion {
     __weak PMRCoreData *weakSelf = self;
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     [context performBlock:^{

@@ -88,7 +88,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onLoginTextFieldDidEndOnExit:" destination="Z98-jd-GQU" eventType="editingDidEndOnExit" id="Ffd-zD-kjx"/>
-                                            <action selector="onLoginTextFieldDidEndOnExit:" destination="Ymd-Dq-ej2" eventType="editingDidEndOnExit" id="dtC-cO-pPw"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hND-xk-5wL" customClass="PMRTextField">
@@ -126,7 +125,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onRegisterButtonTouchUpInside:" destination="Z98-jd-GQU" eventType="touchUpInside" id="lia-l5-knT"/>
-                                            <action selector="onRegisterButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="sZ9-o9-xrF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6OK-lk-lZo">
@@ -146,7 +144,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onCancelButtonTouchUpInside:" destination="Z98-jd-GQU" eventType="touchUpInside" id="678-Zh-pfd"/>
-                                            <action selector="onSignInButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="TeJ-ai-uZL"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5q-Xe-rlX" userLabel="Label container">
@@ -298,7 +295,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="onLoginTextFieldDidEndOnExit:" destination="Ymd-Dq-ej2" eventType="editingDidEndOnExit" id="BL2-RN-t5b"/>
+                                            <action selector="onLoginTextFieldDidEndOnExit:" destination="Ymd-Dq-ej2" eventType="editingDidEndOnExit" id="gzZ-tX-duD"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FQt-4R-14b" customClass="PMRTextField">
@@ -332,7 +329,6 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="onRegisterButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="O58-OV-wnp"/>
                                             <segue destination="Z98-jd-GQU" kind="show" id="Tej-MK-2eC"/>
                                         </connections>
                                     </button>
@@ -352,7 +348,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="onSignInButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="o4F-mQ-i64"/>
+                                            <action selector="onSignInButtonTouchUpInside:" destination="Ymd-Dq-ej2" eventType="touchUpInside" id="Zcy-Ne-ify"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USL-VH-DCI" userLabel="Label container">

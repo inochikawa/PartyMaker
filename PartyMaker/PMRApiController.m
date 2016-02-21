@@ -146,7 +146,7 @@
     // loading parties from server
     [self.networkSDK loadAllPartiesByUserId:userId callback:^(NSDictionary *response, NSError *error) {
         if (!error) {
-            NSMutableArray *partiesFromServer = [NSMutableArray new];
+            __block NSMutableArray *partiesFromServer = [NSMutableArray new];
             NSMutableArray *arrayOfPartyDictionaries = [[NSMutableArray alloc]init];
             
             if (![response[@"response"] isEqual:[NSNull null]]) {
@@ -154,7 +154,7 @@
             }
             
             for (NSDictionary *partyDictionary in arrayOfPartyDictionaries) {
-                PMRParty *party = [self createInstanseForParty];
+                PMRParty *party = [weakSelf createInstanseForParty];
                 party.eventName = partyDictionary[@"name"];
                 party.eventId = @([partyDictionary[@"id"] integerValue]);
                 party.eventDescription = partyDictionary[@"comment"];
@@ -164,6 +164,7 @@
                 party.creatorId = @([partyDictionary[@"creator_id"] integerValue]);
                 [partiesFromServer addObject:party];
             }
+            
             ///////////////////////////////////////////////////////////////////////////////////
             // loading parties from database
             [weakSelf.coreData loadAllPartiesByUserId:userId withCallback:^(NSArray * _Nullable partiesFromDatabase, NSError * _Nullable completionError) {
@@ -173,36 +174,51 @@
                     NSMutableArray *resultArrayOfParties = [[NSMutableArray  alloc] init];
                     
                     BOOL isDatabasePartyExist = NO;
+                    BOOL isServerPartiesBodyFault = NO;
                     
-                    for (PMRParty *databaseParty in partiesFromDatabase) {
-                        isDatabasePartyExist = NO;
-                        for (PMRParty *serverParty in partiesFromServer) {
-                            // if party exist in server we must check was party changed in offline mode?
-                            if ([databaseParty.eventId integerValue] == [serverParty.eventId integerValue]) {
-                                isDatabasePartyExist = YES;
-                                if (databaseParty.isPartyChanged) {
-                                    serverParty.eventName = databaseParty.eventName;
-                                    serverParty.eventDescription = databaseParty.eventDescription;
-                                    serverParty.imageIndex = databaseParty.imageIndex;
-                                    serverParty.startTime = databaseParty.startTime;
-                                    serverParty.endTime = databaseParty.endTime;
-                                    //need add latitude and longtitude
-                                    break;
-                                }
-                            }
-                        }
-                        // if party doesn't exist in server we must check party Id. If Id = 0 - party was added to database in offline mode and we must add this party to server. If Id != 0 - party was deleted from server but it was not deleted from database => we mark this party as FOR DELETED.
-                        if (!isDatabasePartyExist) {
-                            if ([databaseParty.eventId intValue] != 0) {
-                                databaseParty.isPartyDeleted = @1;
-                            }
-                            else if (!databaseParty.isPartyDeleted) {
-                                [resultArrayOfParties addObject:databaseParty];
-                            }
+                    // Check serverParties on body fault. Usually if one server party has body fault - other serverParties also has body fault. Becouse of this we break loop of checking serverParties.
+                    for (PMRParty *serverParty in partiesFromServer) {
+                        if (!serverParty.managedObjectContext) {
+                            isServerPartiesBodyFault = YES;
+                            break;
                         }
                     }
                     
-                    [resultArrayOfParties addObjectsFromArray:partiesFromServer];
+                    // if serverParties have body fault we cannot check serverParties with databaseParties. Becouse of this we add all databaseParties to result array and that's all.
+                    if (isServerPartiesBodyFault) {
+                        [resultArrayOfParties addObjectsFromArray:partiesFromDatabase];
+                    }
+                    else {
+                        for (PMRParty *databaseParty in partiesFromDatabase) {
+                            isDatabasePartyExist = NO;
+                            for (PMRParty *serverParty in partiesFromServer) {
+                                // if party exist in server we must check was party changed in offline mode?
+                                if ([databaseParty.eventId integerValue] == [serverParty.eventId integerValue]) {
+                                    isDatabasePartyExist = YES;
+                                    if (databaseParty.isPartyChanged) {
+                                        serverParty.eventName = databaseParty.eventName;
+                                        serverParty.eventDescription = databaseParty.eventDescription;
+                                        serverParty.imageIndex = databaseParty.imageIndex;
+                                        serverParty.startTime = databaseParty.startTime;
+                                        serverParty.endTime = databaseParty.endTime;
+                                        //need add latitude and longtitude
+                                        break;
+                                    }
+                                }
+                            }
+                            // if party doesn't exist in server we must check party Id. If Id = 0 - party was added to database in offline mode and we must add this party to server. If Id != 0 - party was deleted from server but it was not deleted from database => we mark this party as FOR DELETED.
+                            if (!isDatabasePartyExist) {
+                                if ([databaseParty.eventId intValue] != 0) {
+                                    databaseParty.isPartyDeleted = @1;
+                                }
+                                else if (!databaseParty.isPartyDeleted) {
+                                    [resultArrayOfParties addObject:databaseParty];
+                                }
+                            }
+                        }
+                        
+                        [resultArrayOfParties addObjectsFromArray:partiesFromServer];
+                    }
                     
                     // And now we delete all parties from "Party" table. And then we add new info to "Party" table.
                     [weakSelf.coreData deleteAllUserPartiesByUserId:userId withCallback:^(NSError * _Nullable completionError) {
@@ -223,7 +239,7 @@
                                 if (completion) {
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         NSLog(@"\n\n%s", __PRETTY_FUNCTION__);
-                                        completion(partiesFromServer);
+                                        completion(resultArrayOfParties);
                                     });
                                 }
                             }];
