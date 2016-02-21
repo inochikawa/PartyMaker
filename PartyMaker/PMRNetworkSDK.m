@@ -33,8 +33,8 @@ static NSString *APIURLLink;
 - (void)configureSession {
     APIURLLink = @"http://itworksinua.km.ua/party";
     NSURLSessionConfiguration *sessionConf = [NSURLSessionConfiguration defaultSessionConfiguration];
-    sessionConf.timeoutIntervalForRequest = 500.;
-    sessionConf.timeoutIntervalForResource = 500.;
+    sessionConf.timeoutIntervalForRequest = 5.;
+    sessionConf.timeoutIntervalForResource = 10.;
     sessionConf.allowsCellularAccess = NO;
     self.defaultSession = [NSURLSession sessionWithConfiguration:sessionConf];
 }
@@ -58,7 +58,6 @@ static NSString *APIURLLink;
         
         [urlString setString:[urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         urlRequest.URL = [NSURL URLWithString:urlString];
-        NSLog(@"%@", urlString);
         
     } else if ([HTTPmethod isEqualToString:@"POST"]){
         NSMutableString *tempUrl = [[NSMutableString alloc] initWithString:@""];
@@ -90,12 +89,10 @@ static NSString *APIURLLink;
 - (void) loadAllPartiesByUserId:(NSNumber *)userId callback:(void (^) (NSDictionary *response, NSError *error))block {
     NSURLRequest *request = [self requestWithHTTPMethod:@"GET" withMetodAPI:@"party" withHeaderDictionary:nil withParametersDictionary:@{@"creator_id":userId}];
     __weak __block PMRNetworkSDK *weakSelf = self;
-    NSLog(@"%s --- 1", __PRETTY_FUNCTION__);
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (block) {
             NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:@([(NSHTTPURLResponse *)response statusCode])];
             [weakSelf pmr_performCompletionBlock:block responce:responseDictionary error:error];
-            NSLog(@"%s --- 2", __PRETTY_FUNCTION__);
         }
     }] resume];
 }
@@ -149,7 +146,6 @@ static NSString *APIURLLink;
                                                           @"latitude":@"",
                                                           @"longitude":@"" }
                                withParametersDictionary:nil];
-    NSLog(@"%s --- 1", __PRETTY_FUNCTION__);
     NSNumber *partyCreatorId = [party.creatorId copy];
     __block __weak PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -158,7 +154,6 @@ static NSString *APIURLLink;
                 NSMutableDictionary *responseDictionary = [[NSMutableDictionary alloc] initWithDictionary:[weakSelf serialize:data statusCode:@([(NSHTTPURLResponse *)response statusCode])]];
                 [responseDictionary addEntriesFromDictionary:@{@"partyId":partyId}];
                 [weakSelf pmr_performCompletionBlock:block responce:responseDictionary error:error];
-                NSLog(@"%s --- 2", __PRETTY_FUNCTION__);
             }];
         }
     }] resume];
@@ -181,8 +176,7 @@ static NSString *APIURLLink;
 
 - (void)pmr_performCompletionBlock:(void (^) (NSDictionary *response, NSError *error))block responce:(NSDictionary *)response error:(NSError *)error {
     if (block) {
-        dispatch_async(dispatch_get_main_queue(), ^{NSLog(
-            @"%s --- 1", __PRETTY_FUNCTION__);
+        dispatch_async(dispatch_get_main_queue(), ^{
             block(response, error);
         });
     }

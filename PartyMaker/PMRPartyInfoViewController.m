@@ -72,7 +72,7 @@
 #pragma mark - Helpers
 
 - (void)configurePartyInfoView {
-    NSString *imageName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [self.party.imageIndex integerValue]];
+    NSString *imageName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [self.party.imageIndex intValue]];
     self.logoImageView.image = [UIImage imageNamed:imageName];
     self.eventNameLabel.text = self.party.eventName;
     self.eventDescriptionLabel.text = [self roundQuatesText:self.party.eventDescription];

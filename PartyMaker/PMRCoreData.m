@@ -90,7 +90,7 @@
     }
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PMRDataModel.sqlite"];
-
+    NSLog(@"%@", storeURL);
     NSError *error = nil;
     self.coreDataPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![self.coreDataPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
@@ -188,16 +188,19 @@
 }
 
 - (void)deleteParty:(NSNumber *)partyId withCallback:(void (^)(NSError *completionError))completion{
-    __weak PMRCoreData *weakSelf = self;
+    __block __weak PMRCoreData *weakSelf = self;
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     [context performBlock:^{
         PMRParty *partyObject = [weakSelf fetchObjectFromEntity:@"Party" forKey:@"eventId" withValue:partyId inContext:context];
         
         NSError *error = nil;
-        [context deleteObject:partyObject];
-        [context save:&error];
         
-        [self pmr_performCompletionBlock:completion withError:error];
+        if (partyObject) {
+            [context deleteObject:partyObject];
+            [context save:&error];
+        }
+        
+        [weakSelf pmr_performCompletionBlock:completion withError:error];
     }];
 }
 

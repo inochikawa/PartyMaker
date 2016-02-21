@@ -146,29 +146,30 @@
     // loading parties from server
     [self.networkSDK loadAllPartiesByUserId:userId callback:^(NSDictionary *response, NSError *error) {
         if (!error) {
-            __block NSMutableArray *partiesFromServer = [NSMutableArray new];
             NSMutableArray *arrayOfPartyDictionaries = [[NSMutableArray alloc]init];
             
             if (![response[@"response"] isEqual:[NSNull null]]) {
                 [arrayOfPartyDictionaries addObjectsFromArray:response[@"response"]];
             }
             
-            for (NSDictionary *partyDictionary in arrayOfPartyDictionaries) {
-                PMRParty *party = [weakSelf createInstanseForParty];
-                party.eventName = partyDictionary[@"name"];
-                party.eventId = @([partyDictionary[@"id"] integerValue]);
-                party.eventDescription = partyDictionary[@"comment"];
-                party.startTime = @([partyDictionary[@"start_time"] integerValue]);
-                party.endTime = @([partyDictionary[@"end_time"] integerValue]);
-                party.imageIndex = @([partyDictionary[@"logo_id"] integerValue]);
-                party.creatorId = @([partyDictionary[@"creator_id"] integerValue]);
-                [partiesFromServer addObject:party];
-            }
-            
             ///////////////////////////////////////////////////////////////////////////////////
             // loading parties from database
             [weakSelf.coreData loadAllPartiesByUserId:userId withCallback:^(NSArray * _Nullable partiesFromDatabase, NSError * _Nullable completionError) {
                 if (!completionError) {
+                    
+                    NSMutableArray *partiesFromServer = [NSMutableArray new];
+                    for (NSDictionary *partyDictionary in arrayOfPartyDictionaries) {
+                        PMRParty *party = [weakSelf createInstanseForParty];
+                        party.eventName = partyDictionary[@"name"];
+                        party.eventId = @([partyDictionary[@"id"] integerValue]);
+                        party.eventDescription = partyDictionary[@"comment"];
+                        party.startTime = @([partyDictionary[@"start_time"] integerValue]);
+                        party.endTime = @([partyDictionary[@"end_time"] integerValue]);
+                        party.imageIndex = @([partyDictionary[@"logo_id"] integerValue]);
+                        party.creatorId = @([partyDictionary[@"creator_id"] integerValue]);
+                        [partiesFromServer addObject:party];
+                    }
+                    
                     NSLog(@"%s --- Party array was loaded from data base", __PRETTY_FUNCTION__);
                     
                     NSMutableArray *resultArrayOfParties = [[NSMutableArray  alloc] init];
