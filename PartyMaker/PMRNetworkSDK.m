@@ -33,7 +33,7 @@ static NSString *APIURLLink;
 - (void)configureSession {
     APIURLLink = @"http://itworksinua.km.ua/party";
     NSURLSessionConfiguration *sessionConf = [NSURLSessionConfiguration defaultSessionConfiguration];
-    sessionConf.timeoutIntervalForRequest = 0.001;
+    sessionConf.timeoutIntervalForRequest = 5.;
     sessionConf.allowsCellularAccess = NO;
     self.defaultSession = [NSURLSession sessionWithConfiguration:sessionConf];
 }
