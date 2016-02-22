@@ -54,16 +54,4 @@
 
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification
-                                                                              *)notification {
-    NSDictionary *data = [notification userInfo];
-    PMRParty *party = [[PMRApiController apiController] fetchPartyById:data[@"eventId"]];
-
-}
-
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier
-forLocalNotification:(UILocalNotification *)notification completionHandler:(void(^)())completionHandler {
-    
-}
-
 @end

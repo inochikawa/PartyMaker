@@ -45,11 +45,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRPartiesViewController.m"
-            timestampString = "477701967.824122"
+            timestampString = "477824325.182136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
             <Locations>
@@ -189,7 +189,7 @@
                   moduleName = "PartyMaker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a2/Desktop/GitSoftheme/PartyMaker/PartyMaker/PMRCoreData.m"
-                  timestampString = "477822086.864677"
+                  timestampString = "477825400.955129"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "193"
@@ -204,7 +204,7 @@
                   moduleName = "PartyMaker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a2/Desktop/GitSoftheme/PartyMaker/PartyMaker/PMRCoreData.m"
-                  timestampString = "477822086.870289"
+                  timestampString = "477825400.956788"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "193"
@@ -233,7 +233,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRNetworkSDK.m"
@@ -249,7 +249,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRNetworkSDK.m"
@@ -297,7 +297,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRNetworkSDK.m"
@@ -550,7 +550,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRNetworkSDK.m"
@@ -666,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRPartiesViewController.m"
-            timestampString = "477701967.824122"
+            timestampString = "477824325.182136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -682,11 +682,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRPartiesViewController.m"
-            timestampString = "477701967.824122"
+            timestampString = "477824325.182136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -810,11 +810,11 @@
                   moduleName = "PartyMaker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a2/Desktop/GitSoftheme/PartyMaker/PartyMaker/PMRApiController.m"
-                  timestampString = "477822086.952522"
+                  timestampString = "477825400.998064"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
                   offsetFromSymbolStart = "346">
                </Location>
                <Location
@@ -825,11 +825,11 @@
                   moduleName = "PartyMaker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a2/Desktop/GitSoftheme/PartyMaker/PartyMaker/PMRApiController.m"
-                  timestampString = "477822086.960704"
+                  timestampString = "477825400.99893"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
                   offsetFromSymbolStart = "86">
                </Location>
             </Locations>
@@ -918,7 +918,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRNetworkSDK.m"
@@ -986,11 +986,11 @@
                   moduleName = "PartyMaker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a2/Desktop/GitSoftheme/PartyMaker/PartyMaker/PMRApiController.m"
-                  timestampString = "477822086.99878"
+                  timestampString = "477825401.009087"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
                   offsetFromSymbolStart = "1348">
                </Location>
                <Location
@@ -1001,11 +1001,11 @@
                   moduleName = "PartyMaker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a2/Desktop/GitSoftheme/PartyMaker/PartyMaker/PMRApiController.m"
-                  timestampString = "477822086.999022"
+                  timestampString = "477825401.015051"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
                   offsetFromSymbolStart = "36">
                </Location>
             </Locations>

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class PMRParty;
+
 @interface PMRPartyMakerNotification : UILocalNotification
+
++ (void)createNewLocalNotificationForParty:(PMRParty *)party;
++ (void)createNewLocalNotificationsForParties:(NSArray *)parties;
++ (void)deleteAllLocalNotifications;
 
 @end

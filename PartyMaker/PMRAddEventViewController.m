@@ -13,6 +13,7 @@
 #import "NSDate+Utility.h"
 #import "UIImage+Utility.h"
 #import "PMRApiController.h"
+#import "PMRPartyMakerNotification.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
 #define kTimeDifference                     30
@@ -394,6 +395,8 @@
     self.party.startTime = [startDate toSeconds];
     self.party.endTime = [endDate toSeconds];
     self.party.imageIndex = @(self.imagePageControl.currentPage);
+    
+    [PMRPartyMakerNotification createNewLocalNotificationForParty:self.party];
     
     __block __weak PMRAddEventViewController *weakSelf = self;
     

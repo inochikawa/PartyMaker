@@ -14,6 +14,7 @@
 #import "NSDate+Utility.h"
 #import "PMRApiController.h"
 #import "PMRUser.h"
+#import "PMRPartyMakerNotification.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
 @interface PMRPartiesViewController() <UITableViewDataSource,
@@ -58,12 +59,14 @@
             [weakSelf.parties removeAllObjects];
             [weakSelf.parties addObjectsFromArray:parties];
             [weakSelf.tableView reloadData];
+            [weakSelf recreateAllNotificationsForEachParty];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [hud hide:YES];
             });
         }];
     });
+    
     
 }
 
@@ -106,6 +109,11 @@
         }
     }
     return nil;
+}
+
+- (void)recreateAllNotificationsForEachParty {
+    [PMRPartyMakerNotification deleteAllLocalNotifications];
+    [PMRPartyMakerNotification createNewLocalNotificationsForParties:self.parties];
 }
 
 @end
