@@ -259,6 +259,11 @@
     }];
 }
 
+- (PMRParty *)fetchPartyById:(NSNumber *)partyId {
+    NSManagedObjectContext *context = [self.coreData mainManagedObjectContext];
+    return [self.coreData fetchObjectFromEntity:@"Party" forKey:@"eventId" withValue:partyId inContext:context];
+}
+
 - (void)pmr_performCompletionBlock:(void (^) ())block {
     if (block) {
         dispatch_async(dispatch_get_main_queue(), ^{

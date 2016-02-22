@@ -24,6 +24,7 @@
 		8344C8751C76AB1F00528CC4 /* PMRUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8701C76AB1F00528CC4 /* PMRUser+CoreDataProperties.m */; };
 		8344C8761C76AB1F00528CC4 /* PMRUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8721C76AB1F00528CC4 /* PMRUser.m */; };
 		8344C8791C78F81300528CC4 /* PMRRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8781C78F81300528CC4 /* PMRRegisterViewController.m */; };
+		8344C87C1C7A64CD00528CC4 /* PMRPartyMakerNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C87B1C7A64CD00528CC4 /* PMRPartyMakerNotification.m */; };
 		83E217CA1C6220E000C8BF08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217C91C6220E000C8BF08 /* main.m */; };
 		83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */; };
 		83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D41C6220E000C8BF08 /* Assets.xcassets */; };
@@ -67,6 +68,8 @@
 		8344C8721C76AB1F00528CC4 /* PMRUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRUser.m; sourceTree = "<group>"; };
 		8344C8771C78F81300528CC4 /* PMRRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRRegisterViewController.h; sourceTree = "<group>"; };
 		8344C8781C78F81300528CC4 /* PMRRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRRegisterViewController.m; sourceTree = "<group>"; };
+		8344C87A1C7A64CD00528CC4 /* PMRPartyMakerNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRPartyMakerNotification.h; sourceTree = "<group>"; };
+		8344C87B1C7A64CD00528CC4 /* PMRPartyMakerNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRPartyMakerNotification.m; sourceTree = "<group>"; };
 		83E217C51C6220E000C8BF08 /* PartyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E217C91C6220E000C8BF08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E217CB1C6220E000C8BF08 /* PMRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMRAppDelegate.h; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 				8344C7FF1C73310F00528CC4 /* PMRNetworkSDK.m */,
 				8344C8381C75AA6C00528CC4 /* PMRApiController.h */,
 				8344C8391C75AA6C00528CC4 /* PMRApiController.m */,
+				8344C87A1C7A64CD00528CC4 /* PMRPartyMakerNotification.h */,
+				8344C87B1C7A64CD00528CC4 /* PMRPartyMakerNotification.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -393,6 +398,7 @@
 				8344C8761C76AB1F00528CC4 /* PMRUser.m in Sources */,
 				83F7E9CE1C68B91D00243A5F /* PMRAddEventViewController.m in Sources */,
 				83F7E9D21C6A6FD000243A5F /* PMRCoreData.m in Sources */,
+				8344C87C1C7A64CD00528CC4 /* PMRPartyMakerNotification.m in Sources */,
 				8344C8731C76AB1F00528CC4 /* PMRParty+CoreDataProperties.m in Sources */,
 				8344C8741C76AB1F00528CC4 /* PMRParty.m in Sources */,
 				8344C8791C78F81300528CC4 /* PMRRegisterViewController.m in Sources */,

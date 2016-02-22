@@ -24,6 +24,7 @@
 
 - (PMRUser *)createInstanseForUser;
 - (PMRParty *)createInstanseForParty;
+- (PMRParty *)fetchPartyById:(NSNumber *)partyId;
 
 + (instancetype)apiController;
 

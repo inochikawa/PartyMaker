@@ -7,8 +7,8 @@
 //
 
 #import "PMRAppDelegate.h"
-#import "PMRCoreData.h"
-#import "PMRNetworkSDK.h"
+#import "PMRParty.h"
+#import "PMRApiController.h"
 
 @interface PMRAppDelegate ()
 
@@ -30,13 +30,7 @@
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"MyriadPro-Regular" size:12.0f],
                                                         NSForegroundColorAttributeName : [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1]
                                                         } forState:UIControlStateNormal];
-    
 
-    
-//    [[PMRPartyMakerSDK SDK] allUsersWithcallback:^(NSDictionary *response, NSError *error) {
-//        NSLog(@"%@", response);
-//    }];
-    
     return YES;
 }
 
@@ -58,6 +52,18 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification
+                                                                              *)notification {
+    NSDictionary *data = [notification userInfo];
+    PMRParty *party = [[PMRApiController apiController] fetchPartyById:data[@"eventId"]];
+
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier
+forLocalNotification:(UILocalNotification *)notification completionHandler:(void(^)())completionHandler {
+    
 }
 
 @end
