@@ -161,7 +161,7 @@
                                                     <constraint firstAttribute="height" constant="12" id="sps-q5-B5M"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                                <color key="textColor" red="1" green="0.11694504310000001" blue="0.24647090520000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.93725490199999995" green="0.69411764710000001" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -366,7 +366,7 @@
                                                     <constraint firstAttribute="height" constant="12" id="ccx-hb-0bK"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                                <color key="textColor" red="1" green="0.11694504310344828" blue="0.2464709051724138" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.93725490199999995" green="0.69411764710000001" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -976,7 +976,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="E6g-lw-Ryc">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="onSaveButtonTouchUpInside" destination="TPF-f6-8pl" id="xOm-NO-iOu"/>
+                                <action selector="onSaveButtonTouchUpInside" destination="TPF-f6-8pl" id="mzl-NI-orR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

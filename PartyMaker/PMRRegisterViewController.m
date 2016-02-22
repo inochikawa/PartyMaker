@@ -12,7 +12,7 @@
 #import "PMRUser.h"
 #import "PMRApiController.h"
 
-#define kStatusCodeUserExist 400
+#define kStatusCodeSuccess 200
 
 @interface PMRRegisterViewController ()<UITextFieldDelegate>
 
@@ -63,11 +63,16 @@
                     [hud hide:YES];
                 });
                 
-                if ([response[@"statusCode"] integerValue] == kStatusCodeUserExist) {
-                    weakSelf.informationLabel.text = @"User exists or data is wrong";
-                } else {
+                if (error) {
+                    if ([response[@"response"] isEqual:[NSNull null]]) {
+                        weakSelf.informationLabel.text = @"The request is timeout";
+                    }
+                    else {
+                        weakSelf.informationLabel.text = response[@"response"][@"msg"];
+                    }
+                }
+                else {
                     weakSelf.informationLabel.text = @"";
-                    // have to write smth to notificate user that he was registered successfully.
                     NSLog(@"[User registered] --- %@", response);
                     [weakSelf performSegueWithIdentifier:@"toLoginViewControllerSegue" sender:weakSelf];
                 }
@@ -118,7 +123,7 @@
 #pragma mark - Text field delegate methods
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField.text.length > 20) {
+    if (textField.text.length > 30) {
         textField.text = [textField.text substringWithRange:NSMakeRange(0, 20)];
         return NO;
     }

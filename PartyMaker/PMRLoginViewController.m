@@ -11,7 +11,7 @@
 #import "PMRUser.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
-#define kStatusCodeUserExist 400
+#define kStatusCodeSuccess 200
 
 @interface PMRLoginViewController()<UITextFieldDelegate>
 
@@ -66,9 +66,15 @@
                 [hud hide:YES];
             });
             
-            if ([response[@"statusCode"] integerValue] == kStatusCodeUserExist) {
-                weakSelf.errorLabel.text = @"Invalid login or password";
-            } else {
+            if (error) {
+                if ([response[@"response"] isEqual:[NSNull null]]) {
+                    weakSelf.errorLabel.text = @"The request is timeout";
+                }
+                else {
+                    weakSelf.errorLabel.text = response[@"response"][@"msg"];
+                }
+            }
+            else {
                 weakSelf.errorLabel.text = @"";
                 user.userId = @([response[@"response"][@"id"] integerValue]);
                 [weakSelf performSegueWithIdentifier:@"toTabControllerSegue" sender:self];

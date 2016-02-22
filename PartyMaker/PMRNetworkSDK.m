@@ -33,8 +33,7 @@ static NSString *APIURLLink;
 - (void)configureSession {
     APIURLLink = @"http://itworksinua.km.ua/party";
     NSURLSessionConfiguration *sessionConf = [NSURLSessionConfiguration defaultSessionConfiguration];
-    sessionConf.timeoutIntervalForRequest = 5.;
-    sessionConf.timeoutIntervalForResource = 10.;
+    sessionConf.timeoutIntervalForRequest = 0.001;
     sessionConf.allowsCellularAccess = NO;
     self.defaultSession = [NSURLSession sessionWithConfiguration:sessionConf];
 }
@@ -161,7 +160,7 @@ static NSString *APIURLLink;
 
 - (NSDictionary *) serialize:(NSData *) data statusCode:(NSNumber *) statusCode {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    if (statusCode)
+    if (statusCode && [statusCode intValue] != 0)
         [dict setValue:statusCode forKey:@"statusCode"];
     else
         [dict setValue:@505 forKey:@"statusCode"];
