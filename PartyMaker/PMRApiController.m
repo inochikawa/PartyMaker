@@ -184,10 +184,9 @@
                                 if (!error) {
                                     [partyDictionary setValue:partyId forKey:kPartyEventId];
                                     [resultPartyDicrionaries addObject:partyDictionary];
-                                    [weakSelf.coreData saveParty:partyDictionary withCallback:^(NSError * _Nullable completionError) {
-                                        if (completionError) {
-                                            NSLog(@"%s --- [Core data error] - %@, user info - %@", __PRETTY_FUNCTION__, completionError, completionError.userInfo);
-                                        }
+                                    NSManagedObjectContext *context = [weakSelf.coreData backgroundManagedObjectContext];
+                                    [context performBlock:^{
+                                        [weakSelf.coreData saveOrUpadatePartyFromPartyDictionary:partyDictionary inContext:context];
                                     }];
                                 }
                                 else {
