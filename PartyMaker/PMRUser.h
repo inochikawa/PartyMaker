@@ -7,17 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
-@class PMRParty;
+@interface PMRUser : NSObject
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface PMRUser : NSManagedObject
-
+@property (nullable, nonatomic) NSString *name;
+@property (nullable, nonatomic) NSNumber *userId;
+@property (nullable, nonatomic) NSString *password;
+@property (nullable, nonatomic) NSString *email;
 
 @end
 
-NS_ASSUME_NONNULL_END
-
-#import "PMRUser+CoreDataProperties.h"

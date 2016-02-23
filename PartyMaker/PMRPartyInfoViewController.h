@@ -11,6 +11,6 @@
 
 @interface PMRPartyInfoViewController : UIViewController
 
-@property (nonatomic, weak) PMRParty *party;
+@property (nonatomic, weak) NSDictionary *partyDictionary;
 
 @end

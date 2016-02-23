@@ -18,13 +18,9 @@
 - (void)registerUser:(PMRUser *)user withCallback:(void (^) (NSDictionary *response, NSError *error))completion;
 - (void)loginUser:(PMRUser *)user withCallback:(void (^) (NSDictionary *response, NSError *error))completion;
 
-- (void)saveOrUpdateParty:(PMRParty *)party withCallback:(void (^) ())completion;
-- (void)deleteParty:(PMRParty *)party  withCallback:(void (^) ())completion;
+- (void)saveOrUpdateParty:(NSMutableDictionary *)partyDictionary withCallback:(void (^) ())completion;
+- (void)deletePartyWithPartyId:(NSNumber *)partyId withCreatorId:(NSNumber *)creatorId withCallback:(void (^) ())completion;
 - (void)loadAllPartiesByUserId:(NSNumber *)userId withCallback:(void (^) (NSArray *parties))completion;
-
-- (PMRUser *)createInstanseForUser;
-- (PMRParty *)createInstanseForParty;
-- (PMRParty *)fetchPartyById:(NSNumber *)partyId;
 
 + (instancetype)apiController;
 

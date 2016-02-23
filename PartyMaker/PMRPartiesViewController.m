@@ -17,6 +17,18 @@
 #import "PMRPartyMakerNotification.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
+#define kPartyEventId            @"id"
+#define kPartyEventName          @"name"
+#define kPartyEventDescription   @"comment"
+#define kPartyCreatorId          @"creator_id"
+#define kPartyStartTime          @"start_time"
+#define kPartyEndTime            @"end_time"
+#define kPartyImageIndex         @"logo_id"
+#define kPartyIsChanged          @"isPartyChahged"
+#define kPartyIsDeleted          @"isPartyDeleted"
+#define kPartyLatitude           @"latitude"
+#define kPartyLongitude          @"longitude"
+
 @interface PMRPartiesViewController() <UITableViewDataSource,
                                        UITableViewDelegate>
 
@@ -80,8 +92,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PMRTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PMRTableViewCell reuseIdentifier] forIndexPath:indexPath];
-    PMRParty *selectedParty = self.parties[indexPath.row];
-    [cell configureWithParty:selectedParty];
+    NSDictionary *selectedPartyDictionary = self.parties[indexPath.row];
+    [cell configureWithPartyDictionary:selectedPartyDictionary];
     return cell;
 }
 
@@ -97,15 +109,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ToPartyInfoViewController"]) {
         PMRPartyInfoViewController *partyInfoViewController = segue.destinationViewController;
-        PMRParty *selectedParty = [self partyById:self.selectedCell.partyId];
-        partyInfoViewController.party = selectedParty;
+        NSDictionary *selectedPartyDictionary = [self partyDictionaryById:self.selectedCell.partyId];
+        partyInfoViewController.partyDictionary = selectedPartyDictionary;
     }
 }
 
-- (PMRParty *)partyById:(NSNumber *)partyId {
-    for (PMRParty *party in self.parties) {
-        if ([party.eventId integerValue] == [partyId integerValue]) {
-            return party;
+- (NSDictionary *)partyDictionaryById:(NSNumber *)partyId {
+    for (NSDictionary *partyDictionary in self.parties) {
+        if ([partyDictionary[kPartyEventId] integerValue] == [partyId integerValue]) {
+            return partyDictionary;
         }
     }
     return nil;

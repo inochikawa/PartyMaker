@@ -1,0 +1,138 @@
+
+/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "11Y-iA-lnt"; */
+"11Y-iA-lnt.normalTitle" = "EDIT";
+
+/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "1oM-Ci-0SQ"; */
+"1oM-Ci-0SQ.normalTitle" = "REGISTER";
+
+/* Class = "UINavigationItem"; title = "PARTY INFO"; ObjectID = "1pL-hj-3jy"; */
+"1pL-hj-3jy.title" = "PARTY INFO";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "4Tl-TR-P78"; */
+"4Tl-TR-P78.text" = "Label";
+
+/* Class = "UILabel"; text = "END"; ObjectID = "4yb-Cx-FVd"; */
+"4yb-Cx-FVd.text" = "END";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "6OK-lk-lZo"; */
+"6OK-lk-lZo.normalTitle" = "CANCEL";
+
+/* Class = "UILabel"; text = "HELLO"; ObjectID = "7Qm-KK-gEE"; */
+"7Qm-KK-gEE.text" = "HELLO";
+
+/* Class = "UILabel"; text = "LOGO"; ObjectID = "BRt-Bt-TPk"; */
+"BRt-Bt-TPk.text" = "LOGO";
+
+/* Class = "UILabel"; text = "DATE"; ObjectID = "E2k-El-En8"; */
+"E2k-El-En8.text" = "DATE";
+
+/* Class = "UITabBarItem"; title = "Parties"; ObjectID = "JfL-lh-h4d"; */
+"JfL-lh-h4d.title" = "Parties";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "Jmw-b6-nIw"; */
+"Jmw-b6-nIw.title" = "Cancel";
+
+/* Class = "UILabel"; text = "HELLO"; ObjectID = "Js5-AH-SR0"; */
+"Js5-AH-SR0.text" = "HELLO";
+
+/* Class = "UINavigationItem"; title = "CREATE PARTY"; ObjectID = "K0X-xg-51U"; */
+"K0X-xg-51U.title" = "CREATE PARTY";
+
+/* Class = "UINavigationItem"; title = "SETTINGS"; ObjectID = "L9x-GI-Q8b"; */
+"L9x-GI-Q8b.title" = "SETTINGS";
+
+/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "LDV-uP-KEB"; */
+"LDV-uP-KEB.normalTitle" = "REGISTER";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "Ptg-T6-1iS"; */
+"Ptg-T6-1iS.title" = "Settings";
+
+/* Class = "UIButton"; normalTitle = "LOCATION"; ObjectID = "QVP-fS-GsD"; */
+"QVP-fS-GsD.normalTitle" = "LOCATION";
+
+/* Class = "UIButton"; normalTitle = "CHOOSE DATE"; ObjectID = "RpX-WW-JR2"; */
+"RpX-WW-JR2.normalTitle" = "CHOOSE DATE";
+
+/* Class = "UIViewController"; title = "CREATE PARTY"; ObjectID = "TPF-f6-8pl"; */
+"TPF-f6-8pl.title" = "CREATE PARTY";
+
+/* Class = "UILabel"; text = "END"; ObjectID = "TSw-mc-PV4"; */
+"TSw-mc-PV4.text" = "END";
+
+/* Class = "UILabel"; text = "00:30"; ObjectID = "TjF-AP-B2k"; */
+"TjF-AP-B2k.text" = "00:30";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "VfQ-ko-f9d"; */
+"VfQ-ko-f9d.text" = "Label";
+
+/* Class = "UILabel"; text = "START"; ObjectID = "ZKv-xO-UXv"; */
+"ZKv-xO-UXv.text" = "START";
+
+/* Class = "UINavigationItem"; title = "PARTY MAKER"; ObjectID = "Zhf-PR-5H3"; */
+"Zhf-PR-5H3.title" = "PARTY MAKER";
+
+/* Class = "UITextField"; placeholder = "Login"; ObjectID = "akZ-ab-apa"; */
+"akZ-ab-apa.placeholder" = "Login";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "b9L-eM-6gT"; */
+"b9L-eM-6gT.title" = "Cancel";
+
+/* Class = "UILabel"; text = "DESCRIPTION"; ObjectID = "bEU-U2-pHj"; */
+"bEU-U2-pHj.text" = "DESCRIPTION";
+
+/* Class = "UILabel"; text = "Sample description"; ObjectID = "eAZ-xs-e4D"; */
+"eAZ-xs-e4D.text" = "Sample description";
+
+/* Class = "UIButton"; normalTitle = "SIGN IN"; ObjectID = "eci-Tz-ETL"; */
+"eci-Tz-ETL.normalTitle" = "SIGN IN";
+
+/* Class = "UIButton"; normalTitle = "LOCATION"; ObjectID = "efn-Wz-eIt"; */
+"efn-Wz-eIt.normalTitle" = "LOCATION";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "f5G-Q9-4Iv"; */
+"f5G-Q9-4Iv.text" = "Label";
+
+/* Class = "UILabel"; text = "PARTY NAME"; ObjectID = "fT1-rL-cNV"; */
+"fT1-rL-cNV.text" = "PARTY NAME";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gBO-Te-TTB"; */
+"gBO-Te-TTB.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "gj4-2h-VEz"; */
+"gj4-2h-VEz.title" = "Done";
+
+/* Class = "UILabel"; text = "Event Name"; ObjectID = "hGF-FC-cgb"; */
+"hGF-FC-cgb.text" = "Event Name";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "jCc-cX-CjC"; */
+"jCc-cX-CjC.text" = "00:00";
+
+/* Class = "UILabel"; text = "START"; ObjectID = "jFa-kj-IJg"; */
+"jFa-kj-IJg.text" = "START";
+
+/* Class = "UILabel"; text = "LOCATION"; ObjectID = "mFI-XJ-LlD"; */
+"mFI-XJ-LlD.text" = "LOCATION";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "o9s-dR-0UK"; */
+"o9s-dR-0UK.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "oGd-do-rUn"; */
+"oGd-do-rUn.title" = "Done";
+
+/* Class = "UITextField"; placeholder = "Your party Name"; ObjectID = "qHZ-ie-Ekl"; */
+"qHZ-ie-Ekl.placeholder" = "Your party Name";
+
+/* Class = "UILabel"; text = "CHOOSE DATE"; ObjectID = "rmd-ot-Dgl"; */
+"rmd-ot-Dgl.text" = "CHOOSE DATE";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "uG8-tg-Qlv"; */
+"uG8-tg-Qlv.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "weE-M8-cO5"; */
+"weE-M8-cO5.normalTitle" = "DELETE";
+
+/* Class = "UITextField"; placeholder = "Login"; ObjectID = "yT2-fS-Gj2"; */
+"yT2-fS-Gj2.placeholder" = "Login";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "zPL-RN-ptg"; */
+"zPL-RN-ptg.text" = "Label";

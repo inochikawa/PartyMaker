@@ -25,6 +25,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
+@property (nonatomic) NSString *string;
+
 @end
 
 @implementation PMRLoginViewController
@@ -35,6 +37,9 @@
     self.loginBackgroundView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginBackgroundView.layer.borderWidth = 2.0f;
     self.errorLabel.text = @"";
+    
+    self.string = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Hello Max", @"Language", nil)];
+    self.errorLabel.text = self.string;
     
     [self configureTextFields];
 }
@@ -51,7 +56,7 @@
 
 - (IBAction)onSignInButtonTouchUpInside:(id)sender {
     __block __weak PMRLoginViewController *weakSelf = self;
-    __block PMRUser *user = [[PMRApiController apiController] createInstanseForUser];
+    __block PMRUser *user = [PMRUser new];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Loading...";

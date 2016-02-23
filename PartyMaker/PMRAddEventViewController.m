@@ -21,6 +21,18 @@
 #define kDefaultControlHeight               36
 #define kDistanceBetwenLeadingAndControls   120
 
+#define kPartyEventId            @"id"
+#define kPartyEventName          @"name"
+#define kPartyEventDescription   @"comment"
+#define kPartyCreatorId          @"creator_id"
+#define kPartyStartTime          @"start_time"
+#define kPartyEndTime            @"end_time"
+#define kPartyImageIndex         @"logo_id"
+#define kPartyIsChanged          @"isPartyChahged"
+#define kPartyIsDeleted          @"isPartyDeleted"
+#define kPartyLatitude           @"latitude"
+#define kPartyLongitude          @"longitude"
+
 @interface PMRAddEventViewController ()<UITextFieldDelegate,
                                         UIScrollViewDelegate,
                                         UITextViewDelegate>
@@ -79,7 +91,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -383,20 +395,31 @@
 }
 
 - (void)saveParty {
-    if (!self.party) {
-        self.party = [[PMRApiController apiController] createInstanseForParty];
+    if (!self.partyDictionary) {
+        self.partyDictionary = [NSMutableDictionary new];
+        
+        [self.partyDictionary addEntriesFromDictionary:@{kPartyEventId:@0,
+                                                         kPartyLatitude:@"",
+                                                         kPartyLongitude:@"",
+                                                         kPartyIsChanged:@0,
+                                                         kPartyIsDeleted:@0}];
     }
-    
+    else {
+        [self.partyDictionary removeObjectForKey:kPartyEventName];
+        [self.partyDictionary removeObjectForKey:kPartyEventDescription];
+        [self.partyDictionary removeObjectForKey:kPartyStartTime];
+        [self.partyDictionary removeObjectForKey:kPartyEndTime];
+        [self.partyDictionary removeObjectForKey:kPartyImageIndex];
+    }
+
     NSDate *startDate = [self selectedDateWithTime:self.startTimeLabel.text];
     NSDate *endDate = [self selectedDateWithTime:self.endTimeLabel.text];
     
-    self.party.eventName = self.eventNameTextField.text;
-    self.party.eventDescription = self.descriptionTextView.text;
-    self.party.startTime = [startDate toSeconds];
-    self.party.endTime = [endDate toSeconds];
-    self.party.imageIndex = @(self.imagePageControl.currentPage);
-    
-    [PMRPartyMakerNotification createNewLocalNotificationForParty:self.party];
+    [self.partyDictionary addEntriesFromDictionary:@{kPartyEventName:self.eventNameTextField.text,
+                                                     kPartyEventDescription:self.descriptionTextView.text,
+                                                     kPartyStartTime:[startDate toSeconds],
+                                                     kPartyEndTime:[endDate toSeconds],
+                                                     kPartyImageIndex:@(self.imagePageControl.currentPage)}];
     
     __block __weak PMRAddEventViewController *weakSelf = self;
     
@@ -405,9 +428,9 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        [[PMRApiController apiController] saveOrUpdateParty:self.party withCallback:^{
+        [[PMRApiController apiController] saveOrUpdateParty:self.partyDictionary withCallback:^{
             if ([weakSelf.navigationController isViewLoaded]) {
-                [weakSelf.navigationController popViewControllerAnimated:YES];
+                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
             }
             else {
                 NSLog(@"Error - navigation controller is not loaded");
@@ -478,28 +501,28 @@
 }
 
 - (void)establishPartyInformation {
-    if (!self.party) {
+    if (!self.partyDictionary) {
         NSLog(@"%s - Party is nil", __PRETTY_FUNCTION__);
         return;
     }
     
-    NSString *startTime = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"HH:mm"];
-    NSString *endTime = [NSDate stringDateFromSeconds:self.party.endTime withDateFormat:@"HH:mm"];
-    NSString *eventDate = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"dd MMM yyyy"];
+    NSString *startTime = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyStartTime] withDateFormat:@"HH:mm"];
+    NSString *endTime = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyEndTime] withDateFormat:@"HH:mm"];
+    NSString *eventDate = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyStartTime] withDateFormat:@"dd MMM yyyy"];
     
-    self.eventNameTextField.text = self.party.eventName;
-    self.descriptionTextView.text = self.party.eventDescription;
+    self.eventNameTextField.text = self.partyDictionary[kPartyEventName];
+    self.descriptionTextView.text = self.partyDictionary[kPartyEventDescription];
     [self.chooseDateButton setTitle:eventDate forState:UIControlStateNormal];
     self.startTimeLabel.text = startTime;
     self.endTimeLabel.text = endTime;
-    self.datePickerControl.date = [NSDate dateFromSeconds:self.party.startTime];
+    self.datePickerControl.date = [NSDate dateFromSeconds:self.partyDictionary[kPartyStartTime]];
     self.startTimeSlider.value = [self minutesFromTime:startTime];
     self.endTimeSlider.value = [self minutesFromTime:endTime];
     
-    self.imagePageControl.currentPage = [self.party.imageIndex integerValue];
+    self.imagePageControl.currentPage = [self.partyDictionary[kPartyImageIndex] integerValue];
     
     CGRect scrollViewFrame = [self estimatedImageScrollViewFrame];
-    CGPoint contentOffset = CGPointMake([self.party.imageIndex integerValue] * scrollViewFrame.size.width, 0);
+    CGPoint contentOffset = CGPointMake([self.partyDictionary[kPartyImageIndex] integerValue] * scrollViewFrame.size.width, 0);
     [self.imageScrollView setContentOffset:contentOffset animated:YES];
 }
 

@@ -10,6 +10,11 @@
 #import "PMRParty.h"
 #import "NSDate+Utility.h"
 
+#define kPartyEventId            @"id"
+#define kPartyEventName          @"name"
+#define kPartyStartTime          @"start_time"
+#define kPartyImageIndex         @"logo_id"
+
 @interface PMRTableViewCell()
 
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
@@ -45,13 +50,13 @@
     self.eventTimeStartLabel.text = eventTimeStart;
 }
 
-- (void)configureWithParty:(PMRParty *)party {
-    NSString *logoName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [party.imageIndex intValue]];
+- (void)configureWithPartyDictionary:(NSDictionary *)partyDictionary {
+    NSString *logoName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [partyDictionary[kPartyImageIndex] intValue]];
     
     self.logoImageView.image = [UIImage imageNamed:logoName];
-    self.eventNameLabel.text = party.eventName;
-    self.eventTimeStartLabel.text = [NSDate stringDateFromSeconds:party.startTime withDateFormat:@"dd.MM.yyyy HH:mm"];
-    self.partyId = party.eventId;
+    self.eventNameLabel.text = partyDictionary[kPartyEventName];
+    self.eventTimeStartLabel.text = [NSDate stringDateFromSeconds:partyDictionary[kPartyStartTime] withDateFormat:@"dd.MM.yyyy HH:mm"];
+    self.partyId = partyDictionary[kPartyEventId];
 }
 
 @end

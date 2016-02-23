@@ -53,7 +53,7 @@
         hud.labelText = @"Loading...";
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            PMRUser *user = [[PMRApiController apiController] createInstanseForUser];
+            PMRUser *user = [PMRUser new];
             user.name = weakSelf.loginTextField.text;
             user.password = weakSelf.passwordTextField.text;
             user.email = weakSelf.emailTextField.text;

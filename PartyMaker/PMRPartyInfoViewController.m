@@ -12,6 +12,14 @@
 #import "PMRCoreData.h"
 #import "PMRApiController.h"
 
+#define kPartyEventId            @"id"
+#define kPartyEventName          @"name"
+#define kPartyEventDescription   @"comment"
+#define kPartyCreatorId          @"creator_id"
+#define kPartyStartTime          @"start_time"
+#define kPartyEndTime            @"end_time"
+#define kPartyImageIndex         @"logo_id"
+
 @interface PMRPartyInfoViewController()
 
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
@@ -45,7 +53,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"PartyInfoViewControllerToAddEventViewController"]) {
         PMRAddEventViewController *addEventViewController = segue.destinationViewController;
-        addEventViewController.party = self.party;
+        addEventViewController.partyDictionary = [[NSMutableDictionary alloc] initWithDictionary:self.partyDictionary];
     }
 }
 
@@ -59,7 +67,7 @@
 
 - (IBAction)onDeleteButtonTouchUpInside:(id)sender {
     __block __weak PMRPartyInfoViewController *weakSelf = self;
-    [[PMRApiController apiController] deleteParty:self.party withCallback:^{
+    [[PMRApiController apiController] deletePartyWithPartyId:self.partyDictionary[kPartyEventId] withCreatorId:self.partyDictionary[kPartyCreatorId] withCallback:^{
         if ([weakSelf.navigationController isViewLoaded]) {
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
@@ -72,13 +80,13 @@
 #pragma mark - Helpers
 
 - (void)configurePartyInfoView {
-    NSString *imageName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [self.party.imageIndex intValue]];
+    NSString *imageName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [self.partyDictionary[kPartyImageIndex] intValue]];
     self.logoImageView.image = [UIImage imageNamed:imageName];
-    self.eventNameLabel.text = self.party.eventName;
-    self.eventDescriptionLabel.text = [self roundQuatesText:self.party.eventDescription];
-    self.eventDateLabel.text = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"dd.MM.yyyy"];
-    self.eventStartTimeLabel.text = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"HH:mm"];
-    self.eventEndTimeLabel.text = [NSDate stringDateFromSeconds:self.party.endTime withDateFormat:@"HH:mm"];
+    self.eventNameLabel.text = self.partyDictionary[kPartyEventName];
+    self.eventDescriptionLabel.text = [self roundQuatesText:self.partyDictionary[kPartyEventDescription]];
+    self.eventDateLabel.text = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyStartTime] withDateFormat:@"dd.MM.yyyy"];
+    self.eventStartTimeLabel.text = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyStartTime] withDateFormat:@"HH:mm"];
+    self.eventEndTimeLabel.text = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyEndTime] withDateFormat:@"HH:mm"];
 }
 
 - (NSString *)roundQuatesText:(NSString *)text {

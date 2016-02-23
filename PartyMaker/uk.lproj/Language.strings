@@ -1,0 +1,18 @@
+/* 
+  Language.strings
+  PartyMaker
+
+  Created by 2 on 2/22/16.
+  Copyright © 2016 Maksim Stecenko. All rights reserved.
+*/
+
+"Hello Max" = "Привіт Максим";
+"Loading..." = "Зачекайте...";
+"PARTY MAKER" = "Вечірки";
+"LOCATION" = "РОЗТАШУВАННЯ";
+"EDIT" = "РЕДАГУВАТИ";
+"DELETE" = "ВИДАЛИТИ";
+"Date" = "Дата";
+"Start" = "Початок";
+"End" = "Кінець";
+"PARTY INFO" = "";

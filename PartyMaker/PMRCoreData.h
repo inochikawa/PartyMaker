@@ -20,17 +20,14 @@
 - (nullable NSManagedObjectContext *)mainManagedObjectContext;
 - (nullable NSManagedObjectContext *)backgroundManagedObjectContext;
 
-- (nullable id)fetchObjectFromEntity:(nonnull NSString *)entityName forKey:(nonnull NSString *)key withValue:(nonnull NSNumber *)value inContext:(nonnull NSManagedObjectContext *)context;
-
-- (void)loadAllPartiesByUserId:(nonnull NSNumber *)userId withCallback:(void (^ _Nullable)(NSArray * _Nullable parties, NSError * _Nullable completionError))completion;
-- (void)saveParty:(nonnull PMRParty *)party withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
-- (void)savePartiesFromArray:(nonnull NSArray *)parties withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
-- (void)updateParty:(nonnull PMRParty *)party withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
+- (nullable NSArray *)loadAllPartiesByUserId:(nonnull NSNumber *)userId;
+- (void)saveParty:(nonnull NSDictionary *)partyDictionary withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
+- (void)saveOrUpadatePartiesFromArrayOfPartyDictionaries:(nonnull NSArray *)partyDictionaries withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
+- (void)saveOrUpadatePartyFromPartyDictionary:(nonnull NSDictionary *)partyDictionary inContext:(nonnull NSManagedObjectContext *)context;
+- (void)updateParty:(nonnull NSDictionary *)partyDictionary withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
 - (void)deleteParty:(nonnull NSNumber *)eventID withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
 - (void)deleteAllUserPartiesByUserId:(nonnull NSNumber *)userId withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
 
-- (void)saveUser:(nonnull PMRUser *)user withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
-- (void)updateUser:(nonnull PMRUser *)user withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
-- (void)deleteUser:(nonnull NSNumber *)userId withCallback:(void (^ _Nullable)(NSError *_Nullable completionError))completion;
+- (void)markPartyAsDeletedByPartyId:(nonnull NSNumber *)partyId;
 
 @end

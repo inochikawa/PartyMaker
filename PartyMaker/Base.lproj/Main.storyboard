@@ -1455,7 +1455,7 @@
         <image name="TimePopup_1" width="40" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xxx-iK-O40"/>
+        <segue reference="HSv-ua-Ffh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
