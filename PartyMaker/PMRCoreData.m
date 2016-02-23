@@ -168,7 +168,13 @@
     __block __weak PMRCoreData *weakSelf = self;
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     [context performBlock:^{
-        PMRParty *partyObject = [weakSelf fetchObjectFromEntity:@"Party" forKey:@"eventId" withValue:partyId inContext:context];
+        
+        NSFetchRequest *fetch = [NSFetchRequest new];
+        fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
+        fetch.predicate = [NSPredicate predicateWithFormat:@"eventId == %@", partyId];
+        NSError *fetchError = nil;
+        NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&fetchError];
+        PMRParty *partyObject = [fetchedObjects firstObject];
         
         NSError *error = nil;
         
@@ -177,6 +183,7 @@
             [context save:&error];
         }
         
+        NSLog(@"%s --- Party [%@] was deleted", __PRETTY_FUNCTION__, partyObject.eventName);
         [weakSelf pmr_performCompletionBlock:completion withError:error];
     }];
 }
