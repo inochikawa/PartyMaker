@@ -126,44 +126,6 @@
     return fetchedObjects;
 }
 
-- (void)saveParty:(NSDictionary *)partyDictionary withCallback:(void (^)(NSError *completionError))completion {
-    NSManagedObjectContext *context = [self backgroundManagedObjectContext];
-    [context performBlock:^{
-        PMRParty *partyObject = [NSEntityDescription insertNewObjectForEntityForName:@"Party" inManagedObjectContext:context];
-        [self performParty:partyObject FromDictionaty:partyDictionary];
-        
-        NSError *error = nil;
-        [context save:&error];
-        
-        
-        if (error) {
-            NSLog(@"%s error saving context %@", __PRETTY_FUNCTION__, error);
-        }
-        
-        NSLog(@"%s --- Party was saved", __PRETTY_FUNCTION__);
-        
-        [self pmr_performCompletionBlock:completion withError:error];
-    }];
-}
-
-- (void)updateParty:(NSDictionary *)partyDictionary withCallback:(void (^)(NSError *completionError))completion {
-    NSManagedObjectContext *context = [self backgroundManagedObjectContext];
-    [context performBlock:^{
-        PMRParty *partyObject = [self fetchObjectFromEntity:@"Party" forKey:@"eventId" withValue:partyDictionary[kPartyEventId] inContext:context];
-        [self performParty:partyObject FromDictionaty:partyDictionary];
-        
-        NSError *error = nil;
-        if (partyObject.hasChanges) {
-            [context save:&error];
-            if (error) {
-                NSLog(@"%s error saving context %@", __PRETTY_FUNCTION__, error);
-            }
-        }
-
-        [self pmr_performCompletionBlock:completion withError:error];
-    }];
-}
-
 - (void)deleteParty:(NSNumber *)partyId withCallback:(void (^)(NSError *completionError))completion{
     __block __weak PMRCoreData *weakSelf = self;
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
