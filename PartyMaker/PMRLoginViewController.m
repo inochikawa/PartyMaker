@@ -71,13 +71,12 @@
                 [hud hide:YES];
             });
             
-            if (error) {
-                if ([response[@"response"] isEqual:[NSNull null]]) {
+
+            if ([response[@"response"] isEqual:[NSNull null]]) {
                     weakSelf.errorLabel.text = @"The request is timeout";
-                }
-                else {
-                    weakSelf.errorLabel.text = response[@"response"][@"msg"];
-                }
+            }
+            else if ([response[@"response"][@"status"] isEqualToString:@"Failed"]) {
+                weakSelf.errorLabel.text = response[@"response"][@"msg"];
             }
             else {
                 weakSelf.errorLabel.text = @"";

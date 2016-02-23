@@ -63,18 +63,17 @@
                     [hud hide:YES];
                 });
                 
-                if (error) {
-                    if ([response[@"response"] isEqual:[NSNull null]]) {
-                        weakSelf.informationLabel.text = @"The request is timeout";
-                    }
-                    else {
-                        weakSelf.informationLabel.text = response[@"response"][@"msg"];
-                    }
+                if ([response[@"response"] isEqual:[NSNull null]]) {
+                    weakSelf.informationLabel.text = @"The request is timeout";
+                }
+                else if ([response[@"response"][@"status"] isEqualToString:@"Failed"]) {
+                    weakSelf.informationLabel.text = response[@"response"][@"msg"];
                 }
                 else {
                     weakSelf.informationLabel.text = @"";
-                    NSLog(@"[User registered] --- %@", response);
-                    [weakSelf performSegueWithIdentifier:@"toLoginViewControllerSegue" sender:weakSelf];
+                    user.userId = @([response[@"response"][@"id"] integerValue]);
+                    [weakSelf performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
+                    NSLog(@"[User sign in] --- %@", response);
                 }
             }];
         });
