@@ -34,15 +34,20 @@
     self.navigationItem.title = NSLocalizedStringFromTable(@"LOCATION", @"Language", nil);
     
     [self configureLocationManager];
-    [self configureMapView];
     [self configureActionForLongTapRecognized];
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
     
-        if ([self isValidLocationString:self.party.longitude]) {
-            CLLocationCoordinate2D partyLocation = [self parseLocationFromString:self.party.longitude];
-            [self configurePartyAnnotationWithCoordinate:partyLocation];
-        }
+    if ([self isValidLocationString:self.party.longitude]) {
+        CLLocationCoordinate2D partyCoordinate = [self parseLocationFromString:self.party.longitude];
+        [self configurePartyAnnotationWithCoordinate:partyCoordinate];
+        [self configureMapViewWithCoordinate:partyCoordinate];
+    }
+    else {
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(self.locationManager.location.coordinate.latitude,
+                                                                       self.locationManager.location.coordinate.longitude);
+        [self configureMapViewWithCoordinate:coordinate];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,12 +65,12 @@
     [self.locationManager requestAlwaysAuthorization];
 }
 
-- (void)configureMapView {
+- (void)configureMapViewWithCoordinate:(CLLocationCoordinate2D)coordinate {
     float spanX = 0.00725;
     float spanY = 0.00725;
     MKCoordinateRegion region;
-    region.center.latitude = self.locationManager.location.coordinate.latitude;
-    region.center.longitude = self.locationManager.location.coordinate.longitude;
+    region.center.latitude = coordinate.latitude;
+    region.center.longitude = coordinate.longitude;
     region.span = MKCoordinateSpanMake(spanX, spanY);
     [self.mapView setRegion:region animated:YES];
 }
@@ -96,38 +101,36 @@
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     
-    // Handle any custom annotations.
     if ([annotation isKindOfClass:[PMRAnnotation class]]) {
-        // Try to dequeue an existing pin view first.
-        MKAnnotationView* pinView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"PMRAnnotation"];
+        MKAnnotationView* annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"PMRAnnotation"];
         
-        if (!pinView) {
-            pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation
+        if (!annotationView) {
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
                                                       reuseIdentifier:@"PMRAnnotation"];
             UIImage *pinImage = [UIImage imageNamed:@"blue_pin"];
-            pinView.image = pinImage;
-            pinView.centerOffset = CGPointMake(10, - (pinImage.size.height / 2.));
-            pinView.canShowCallout = YES;
-            pinView.draggable = YES;
+            annotationView.image = pinImage;
+            annotationView.centerOffset = CGPointMake(10, - (pinImage.size.height / 2.));
+            annotationView.canShowCallout = YES;
+            annotationView.draggable = self.editingMode;
             
             UIImage *rightButtonImage = [UIImage imageNamed:@"done"];
             
             UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
             [rightButton setImage:rightButtonImage forState:UIControlStateNormal];
             [rightButton addTarget:self action:@selector(onDoneButtonTouch) forControlEvents:UIControlEventTouchUpInside];
-            pinView.rightCalloutAccessoryView = rightButton;
+            annotationView.rightCalloutAccessoryView = rightButton;
             
             UIImage *partyImage = [UIImage imageNamed:[NSString stringWithFormat:@"PartyLogo_Small_%d", [self.party.imageIndex intValue]]];
             UIImageView *myCustomImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
             myCustomImage.image = partyImage;
             myCustomImage.contentMode = UIViewContentModeScaleAspectFit;
-            pinView.leftCalloutAccessoryView = myCustomImage;
+            annotationView.leftCalloutAccessoryView = myCustomImage;
             
         }
         else {
-            pinView.annotation = annotation;
+            annotationView.annotation = annotation;
         }
-        return pinView;
+        return annotationView;
     }
     return nil;
 }
@@ -148,10 +151,7 @@
     }
 }
 
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    CLLocationCoordinate2D userCoordinate = self.mapView.userLocation.location.coordinate;
-    [self.mapView setCenterCoordinate:userCoordinate animated:YES];
-}
+#pragma mark - Action methods
 
 -(void)mapPressed:(UILongPressGestureRecognizer *)recognizer {
     if (self.editingMode) {

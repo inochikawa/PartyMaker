@@ -33,6 +33,7 @@
 		839C7A331C7D19D900F33909 /* PMRParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 839C7A321C7D19D900F33909 /* PMRParty.m */; };
 		839C7A351C7D3C2800F33909 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839C7A341C7D3C2800F33909 /* AddressBookUI.framework */; };
 		839C7A371C7D3C5B00F33909 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839C7A361C7D3C5B00F33909 /* Contacts.framework */; };
+		839C7A411C7DD4B200F33909 /* PMRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 839C7A401C7DD4B200F33909 /* PMRSettingsViewController.m */; };
 		83E217CA1C6220E000C8BF08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217C91C6220E000C8BF08 /* main.m */; };
 		83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */; };
 		83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D41C6220E000C8BF08 /* Assets.xcassets */; };
@@ -92,6 +93,8 @@
 		839C7A321C7D19D900F33909 /* PMRParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRParty.m; sourceTree = "<group>"; };
 		839C7A341C7D3C2800F33909 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		839C7A361C7D3C5B00F33909 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		839C7A3F1C7DD4B200F33909 /* PMRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRSettingsViewController.h; sourceTree = "<group>"; };
+		839C7A401C7DD4B200F33909 /* PMRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRSettingsViewController.m; sourceTree = "<group>"; };
 		83E217C51C6220E000C8BF08 /* PartyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E217C91C6220E000C8BF08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E217CB1C6220E000C8BF08 /* PMRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMRAppDelegate.h; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 				8344C8781C78F81300528CC4 /* PMRRegisterViewController.m */,
 				8344C8B61C7CD2B700528CC4 /* PMRLocationViewController.h */,
 				8344C8B71C7CD2B700528CC4 /* PMRLocationViewController.m */,
+				839C7A3F1C7DD4B200F33909 /* PMRSettingsViewController.h */,
+				839C7A401C7DD4B200F33909 /* PMRSettingsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				8344C8761C76AB1F00528CC4 /* PMRUser.m in Sources */,
 				83F7E9CE1C68B91D00243A5F /* PMRAddEventViewController.m in Sources */,
 				83F7E9D21C6A6FD000243A5F /* PMRCoreData.m in Sources */,
+				839C7A411C7DD4B200F33909 /* PMRSettingsViewController.m in Sources */,
 				839C7A331C7D19D900F33909 /* PMRParty.m in Sources */,
 				8344C87C1C7A64CD00528CC4 /* PMRPartyMakerNotification.m in Sources */,
 				839C7A301C7D19C200F33909 /* PMRPartyManagedObject.m in Sources */,

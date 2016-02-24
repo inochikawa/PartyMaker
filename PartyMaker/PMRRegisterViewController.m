@@ -81,7 +81,7 @@
                 else {
                     weakSelf.informationLabel.text = @"";
                     user.userId = @([response[@"response"][@"id"] integerValue]);
-                    [weakSelf performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
+                    [weakSelf performSegueWithIdentifier:@"toLoginViewControllerSegue" sender:self];
                     NSLog(@"[User sign in] --- %@", response);
                 }
             }];

@@ -483,7 +483,7 @@
                         <viewControllerLayoutGuide type="top" id="KtO-N3-ezF"/>
                         <viewControllerLayoutGuide type="bottom" id="YdC-Zg-FoI"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="n0u-eG-F7k">
+                    <view key="view" contentMode="scaleToFill" id="n0u-eG-F7k" customClass="PMRSettt">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
