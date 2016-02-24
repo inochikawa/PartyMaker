@@ -649,8 +649,156 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qUv-hL-Ina" userLabel="Right view">
+                                <rect key="frame" x="115" y="0.0" width="205" height="455"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RpX-WW-JR2">
+                                        <rect key="frame" x="5" y="9" width="191" height="36"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.69411764710000001" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="6r8-zy-peq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="CHOOSE DATE">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="6EM-RK-zrY"/>
+                                            <action selector="onChooseDateButtonTouchUpInside" destination="TPF-f6-8pl" eventType="touchUpInside" id="fAE-n5-Mhd"/>
+                                        </connections>
+                                    </button>
+                                    <slider opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1409" minimumValueImage="TimePopup" translatesAutoresizingMaskIntoConstraints="NO" id="LlZ-BH-Vf0">
+                                        <rect key="frame" x="3" y="99" width="195" height="37"/>
+                                        <color key="tintColor" red="0.4823529411764706" green="0.69019607843137254" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="7wc-A4-YiP"/>
+                                            <action selector="onStartTimeSliderValueChanged:" destination="TPF-f6-8pl" eventType="valueChanged" id="ywE-R0-LPP"/>
+                                        </connections>
+                                    </slider>
+                                    <slider opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="30" maxValue="1439" maximumValueImage="TimePopup_1" translatesAutoresizingMaskIntoConstraints="NO" id="na2-Jb-rNj">
+                                        <rect key="frame" x="3" y="144" width="195" height="37"/>
+                                        <color key="tintColor" red="0.4823529411764706" green="0.69019607843137254" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="u40-jo-Bkz"/>
+                                            <action selector="onEndTimeSliderValueChanged:" destination="TPF-f6-8pl" eventType="valueChanged" id="za2-PI-OiH"/>
+                                        </connections>
+                                    </slider>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="VoO-jp-0pQ">
+                                        <rect key="frame" x="5" y="189" width="191" height="102"/>
+                                        <color key="backgroundColor" red="0.2666666667" green="0.28627450980000002" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </scrollView>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="6" translatesAutoresizingMaskIntoConstraints="NO" id="EoL-BE-EUh">
+                                        <rect key="frame" x="5" y="271" width="191" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="kmF-UT-J9F"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="onImagePageChanged:" destination="TPF-f6-8pl" eventType="valueChanged" id="wY5-48-8Vn"/>
+                                        </connections>
+                                    </pageControl>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCc-cX-CjC">
+                                        <rect key="frame" x="7" y="112" width="24" height="11"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="10.5"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjF-AP-B2k">
+                                        <rect key="frame" x="170" y="157" width="24" height="11"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="10.5"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="6" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Ufr-9o-qH6">
+                                        <rect key="frame" x="5" y="300" width="191" height="101"/>
+                                        <color key="backgroundColor" red="0.13725490200000001" green="0.1450980392" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QVP-fS-GsD">
+                                        <rect key="frame" x="5" y="410" width="191" height="36"/>
+                                        <color key="backgroundColor" red="0.16078431372549018" green="0.5607843137254902" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
+                                        <state key="normal" title="LOCATION">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="Z61-cc-UH4"/>
+                                            <segue destination="Urg-4J-CRV" kind="show" identifier="addEventViewControllerToLocationViewController" id="hMY-fl-L4d"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhU-hI-tYQ" userLabel="White line">
+                                        <rect key="frame" x="5" y="300" width="191" height="5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.15686274510000001" green="0.51764705879999995" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" id="9gk-p0-shM"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your party Name" textAlignment="center" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="qHZ-ie-Ekl">
+                                        <rect key="frame" x="5" y="54" width="191" height="36"/>
+                                        <color key="backgroundColor" red="0.13725490200000001" green="0.1450980392" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="0.0" maxY="-1"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="Gfb-d1-YoH"/>
+                                            <action selector="onEventNameTextFieldTouchDown" destination="TPF-f6-8pl" eventType="touchDown" id="hnJ-Nz-Q8k"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="QVP-fS-GsD" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="3Fj-hC-wsb"/>
+                                    <constraint firstItem="nhU-hI-tYQ" firstAttribute="top" secondItem="Ufr-9o-qH6" secondAttribute="top" id="5RU-eE-eIT"/>
+                                    <constraint firstItem="VoO-jp-0pQ" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="9fe-oH-gzq"/>
+                                    <constraint firstItem="nhU-hI-tYQ" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="DMd-2R-81F"/>
+                                    <constraint firstItem="LlZ-BH-Vf0" firstAttribute="top" secondItem="qHZ-ie-Ekl" secondAttribute="bottom" constant="9" id="EAm-RR-UNI"/>
+                                    <constraint firstItem="TjF-AP-B2k" firstAttribute="trailing" secondItem="na2-Jb-rNj" secondAttribute="trailing" constant="-2" id="GRN-0K-fV5"/>
+                                    <constraint firstItem="EoL-BE-EUh" firstAttribute="bottom" secondItem="VoO-jp-0pQ" secondAttribute="bottom" id="GRi-4J-3If"/>
+                                    <constraint firstItem="qHZ-ie-Ekl" firstAttribute="top" secondItem="RpX-WW-JR2" secondAttribute="bottom" constant="9" id="Hcl-ld-9qR"/>
+                                    <constraint firstItem="QVP-fS-GsD" firstAttribute="top" secondItem="Ufr-9o-qH6" secondAttribute="bottom" constant="9" id="JU4-cr-0tZ"/>
+                                    <constraint firstItem="qHZ-ie-Ekl" firstAttribute="height" secondItem="RpX-WW-JR2" secondAttribute="height" id="KMa-Q7-hkd"/>
+                                    <constraint firstItem="RpX-WW-JR2" firstAttribute="top" secondItem="qUv-hL-Ina" secondAttribute="top" constant="9" id="Nqp-sL-ORy"/>
+                                    <constraint firstItem="Ufr-9o-qH6" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="QY6-d8-1RU"/>
+                                    <constraint firstItem="VoO-jp-0pQ" firstAttribute="top" secondItem="na2-Jb-rNj" secondAttribute="bottom" constant="9" id="W9F-ge-aIG"/>
+                                    <constraint firstItem="qHZ-ie-Ekl" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="WS4-FA-0m0"/>
+                                    <constraint firstItem="Ufr-9o-qH6" firstAttribute="height" secondItem="VoO-jp-0pQ" secondAttribute="height" id="XHl-xk-M5Z"/>
+                                    <constraint firstItem="qHZ-ie-Ekl" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="Zgg-Fx-fJW"/>
+                                    <constraint firstItem="Ufr-9o-qH6" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="aZi-ym-1sh"/>
+                                    <constraint firstItem="na2-Jb-rNj" firstAttribute="top" secondItem="LlZ-BH-Vf0" secondAttribute="bottom" constant="9" id="ajK-FB-8Xb"/>
+                                    <constraint firstItem="LlZ-BH-Vf0" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="awb-IS-Iz9"/>
+                                    <constraint firstItem="jCc-cX-CjC" firstAttribute="centerY" secondItem="LlZ-BH-Vf0" secondAttribute="centerY" id="c13-2A-0eU"/>
+                                    <constraint firstItem="QVP-fS-GsD" firstAttribute="height" secondItem="RpX-WW-JR2" secondAttribute="height" id="c4b-Qp-wjo"/>
+                                    <constraint firstItem="na2-Jb-rNj" firstAttribute="height" secondItem="RpX-WW-JR2" secondAttribute="height" id="hHA-cV-EDq"/>
+                                    <constraint firstItem="RpX-WW-JR2" firstAttribute="leading" secondItem="qUv-hL-Ina" secondAttribute="leading" constant="5" id="iih-jq-ixI"/>
+                                    <constraint firstItem="LlZ-BH-Vf0" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="io1-FF-FiQ"/>
+                                    <constraint firstItem="na2-Jb-rNj" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="j5v-VC-2KA"/>
+                                    <constraint firstItem="TjF-AP-B2k" firstAttribute="centerY" secondItem="na2-Jb-rNj" secondAttribute="centerY" id="k1J-7h-gUp"/>
+                                    <constraint firstItem="jCc-cX-CjC" firstAttribute="leading" secondItem="LlZ-BH-Vf0" secondAttribute="leading" constant="2" id="nXX-7C-8hZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="RpX-WW-JR2" secondAttribute="trailing" constant="9" id="nrJ-5R-V55"/>
+                                    <constraint firstItem="LlZ-BH-Vf0" firstAttribute="height" secondItem="RpX-WW-JR2" secondAttribute="height" id="p3q-Hp-TC6"/>
+                                    <constraint firstAttribute="bottom" secondItem="QVP-fS-GsD" secondAttribute="bottom" constant="9" id="pOz-ix-gsV"/>
+                                    <constraint firstItem="nhU-hI-tYQ" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="sha-YR-hFB"/>
+                                    <constraint firstItem="QVP-fS-GsD" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="tPl-1H-46G"/>
+                                    <constraint firstItem="na2-Jb-rNj" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="w37-Ad-IhM"/>
+                                    <constraint firstItem="Ufr-9o-qH6" firstAttribute="top" secondItem="VoO-jp-0pQ" secondAttribute="bottom" constant="9" id="wOW-QJ-Z3o"/>
+                                    <constraint firstItem="EoL-BE-EUh" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="wPu-SP-CYP"/>
+                                    <constraint firstItem="VoO-jp-0pQ" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="zJ7-77-apB"/>
+                                    <constraint firstItem="EoL-BE-EUh" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="zVK-Dh-aFe"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lrB-9s-ayy" userLabel="Left view">
-                                <rect key="frame" x="0.0" y="0.0" width="110" height="455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="115" height="455"/>
                                 <subviews>
                                     <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MoO-cK-gOo" userLabel="Ball">
                                         <rect key="frame" x="11" y="22" width="10" height="10"/>
@@ -802,157 +950,9 @@
                                     <constraint firstItem="ZKv-xO-UXv" firstAttribute="leading" secondItem="rmd-ot-Dgl" secondAttribute="leading" id="ok6-x3-i1N"/>
                                     <constraint firstItem="YgH-yt-K6r" firstAttribute="leading" secondItem="MoO-cK-gOo" secondAttribute="leading" id="s3c-iY-g0V"/>
                                     <constraint firstItem="Mpn-wb-vfb" firstAttribute="leading" secondItem="MoO-cK-gOo" secondAttribute="leading" id="seu-4e-qkR"/>
-                                    <constraint firstAttribute="width" constant="110" id="tt3-Ao-3Gx"/>
+                                    <constraint firstAttribute="width" constant="115" id="tt3-Ao-3Gx"/>
                                     <constraint firstItem="BRt-Bt-TPk" firstAttribute="leading" secondItem="rmd-ot-Dgl" secondAttribute="leading" id="v7c-Br-wgM"/>
                                     <constraint firstItem="YSv-cG-PJo" firstAttribute="height" secondItem="MoO-cK-gOo" secondAttribute="height" id="xwk-ai-c7O"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qUv-hL-Ina" userLabel="Right view">
-                                <rect key="frame" x="110" y="0.0" width="210" height="455"/>
-                                <subviews>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RpX-WW-JR2">
-                                        <rect key="frame" x="10" y="9" width="191" height="36"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.69411764710000001" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="6r8-zy-peq"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
-                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="CHOOSE DATE">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="6EM-RK-zrY"/>
-                                            <action selector="onChooseDateButtonTouchUpInside" destination="TPF-f6-8pl" eventType="touchUpInside" id="fAE-n5-Mhd"/>
-                                        </connections>
-                                    </button>
-                                    <slider opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1409" minimumValueImage="TimePopup" translatesAutoresizingMaskIntoConstraints="NO" id="LlZ-BH-Vf0">
-                                        <rect key="frame" x="8" y="99" width="195" height="37"/>
-                                        <color key="tintColor" red="0.4823529411764706" green="0.69019607843137254" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="7wc-A4-YiP"/>
-                                            <action selector="onStartTimeSliderValueChanged:" destination="TPF-f6-8pl" eventType="valueChanged" id="ywE-R0-LPP"/>
-                                        </connections>
-                                    </slider>
-                                    <slider opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="30" maxValue="1439" maximumValueImage="TimePopup_1" translatesAutoresizingMaskIntoConstraints="NO" id="na2-Jb-rNj">
-                                        <rect key="frame" x="8" y="144" width="195" height="37"/>
-                                        <color key="tintColor" red="0.4823529411764706" green="0.69019607843137254" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="u40-jo-Bkz"/>
-                                            <action selector="onEndTimeSliderValueChanged:" destination="TPF-f6-8pl" eventType="valueChanged" id="za2-PI-OiH"/>
-                                        </connections>
-                                    </slider>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="VoO-jp-0pQ">
-                                        <rect key="frame" x="10" y="189" width="191" height="102"/>
-                                        <color key="backgroundColor" red="0.2666666667" green="0.28627450980000002" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </scrollView>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="6" translatesAutoresizingMaskIntoConstraints="NO" id="EoL-BE-EUh">
-                                        <rect key="frame" x="10" y="271" width="191" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="kmF-UT-J9F"/>
-                                        </constraints>
-                                        <connections>
-                                            <action selector="onImagePageChanged:" destination="TPF-f6-8pl" eventType="valueChanged" id="wY5-48-8Vn"/>
-                                        </connections>
-                                    </pageControl>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCc-cX-CjC">
-                                        <rect key="frame" x="12" y="112" width="24" height="11"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="10.5"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjF-AP-B2k">
-                                        <rect key="frame" x="175" y="157" width="24" height="11"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="10.5"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="6" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Ufr-9o-qH6">
-                                        <rect key="frame" x="10" y="300" width="191" height="101"/>
-                                        <color key="backgroundColor" red="0.13725490200000001" green="0.1450980392" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QVP-fS-GsD">
-                                        <rect key="frame" x="10" y="410" width="191" height="36"/>
-                                        <color key="backgroundColor" red="0.16078431372549018" green="0.5607843137254902" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="16"/>
-                                        <state key="normal" title="LOCATION">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="Z61-cc-UH4"/>
-                                            <segue destination="Urg-4J-CRV" kind="show" identifier="addEventViewControllerToLocationViewController" id="hMY-fl-L4d"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhU-hI-tYQ" userLabel="White line">
-                                        <rect key="frame" x="10" y="300" width="191" height="5"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <color key="tintColor" red="0.15686274510000001" green="0.51764705879999995" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="5" id="9gk-p0-shM"/>
-                                        </constraints>
-                                    </view>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your party Name" textAlignment="center" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="qHZ-ie-Ekl">
-                                        <rect key="frame" x="10" y="54" width="191" height="36"/>
-                                        <color key="backgroundColor" red="0.13725490200000001" green="0.1450980392" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="0.0" maxY="-1"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="Gfb-d1-YoH"/>
-                                            <action selector="onEventNameTextFieldTouchDown" destination="TPF-f6-8pl" eventType="touchDown" id="hnJ-Nz-Q8k"/>
-                                        </connections>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="QVP-fS-GsD" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="3Fj-hC-wsb"/>
-                                    <constraint firstItem="nhU-hI-tYQ" firstAttribute="top" secondItem="Ufr-9o-qH6" secondAttribute="top" id="5RU-eE-eIT"/>
-                                    <constraint firstItem="VoO-jp-0pQ" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="9fe-oH-gzq"/>
-                                    <constraint firstItem="nhU-hI-tYQ" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="DMd-2R-81F"/>
-                                    <constraint firstItem="LlZ-BH-Vf0" firstAttribute="top" secondItem="qHZ-ie-Ekl" secondAttribute="bottom" constant="9" id="EAm-RR-UNI"/>
-                                    <constraint firstItem="TjF-AP-B2k" firstAttribute="trailing" secondItem="na2-Jb-rNj" secondAttribute="trailing" constant="-2" id="GRN-0K-fV5"/>
-                                    <constraint firstItem="EoL-BE-EUh" firstAttribute="bottom" secondItem="VoO-jp-0pQ" secondAttribute="bottom" id="GRi-4J-3If"/>
-                                    <constraint firstItem="qHZ-ie-Ekl" firstAttribute="top" secondItem="RpX-WW-JR2" secondAttribute="bottom" constant="9" id="Hcl-ld-9qR"/>
-                                    <constraint firstItem="QVP-fS-GsD" firstAttribute="top" secondItem="Ufr-9o-qH6" secondAttribute="bottom" constant="9" id="JU4-cr-0tZ"/>
-                                    <constraint firstItem="qHZ-ie-Ekl" firstAttribute="height" secondItem="RpX-WW-JR2" secondAttribute="height" id="KMa-Q7-hkd"/>
-                                    <constraint firstItem="RpX-WW-JR2" firstAttribute="top" secondItem="qUv-hL-Ina" secondAttribute="top" constant="9" id="Nqp-sL-ORy"/>
-                                    <constraint firstItem="Ufr-9o-qH6" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="QY6-d8-1RU"/>
-                                    <constraint firstItem="VoO-jp-0pQ" firstAttribute="top" secondItem="na2-Jb-rNj" secondAttribute="bottom" constant="9" id="W9F-ge-aIG"/>
-                                    <constraint firstItem="qHZ-ie-Ekl" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="WS4-FA-0m0"/>
-                                    <constraint firstItem="Ufr-9o-qH6" firstAttribute="height" secondItem="VoO-jp-0pQ" secondAttribute="height" id="XHl-xk-M5Z"/>
-                                    <constraint firstItem="qHZ-ie-Ekl" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="Zgg-Fx-fJW"/>
-                                    <constraint firstItem="Ufr-9o-qH6" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="aZi-ym-1sh"/>
-                                    <constraint firstItem="na2-Jb-rNj" firstAttribute="top" secondItem="LlZ-BH-Vf0" secondAttribute="bottom" constant="9" id="ajK-FB-8Xb"/>
-                                    <constraint firstItem="LlZ-BH-Vf0" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="awb-IS-Iz9"/>
-                                    <constraint firstItem="jCc-cX-CjC" firstAttribute="centerY" secondItem="LlZ-BH-Vf0" secondAttribute="centerY" id="c13-2A-0eU"/>
-                                    <constraint firstItem="QVP-fS-GsD" firstAttribute="height" secondItem="RpX-WW-JR2" secondAttribute="height" id="c4b-Qp-wjo"/>
-                                    <constraint firstItem="na2-Jb-rNj" firstAttribute="height" secondItem="RpX-WW-JR2" secondAttribute="height" id="hHA-cV-EDq"/>
-                                    <constraint firstItem="RpX-WW-JR2" firstAttribute="leading" secondItem="qUv-hL-Ina" secondAttribute="leading" constant="10" id="iih-jq-ixI"/>
-                                    <constraint firstItem="LlZ-BH-Vf0" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="io1-FF-FiQ"/>
-                                    <constraint firstItem="na2-Jb-rNj" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="j5v-VC-2KA"/>
-                                    <constraint firstItem="TjF-AP-B2k" firstAttribute="centerY" secondItem="na2-Jb-rNj" secondAttribute="centerY" id="k1J-7h-gUp"/>
-                                    <constraint firstItem="jCc-cX-CjC" firstAttribute="leading" secondItem="LlZ-BH-Vf0" secondAttribute="leading" constant="2" id="nXX-7C-8hZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="RpX-WW-JR2" secondAttribute="trailing" constant="9" id="nrJ-5R-V55"/>
-                                    <constraint firstItem="LlZ-BH-Vf0" firstAttribute="height" secondItem="RpX-WW-JR2" secondAttribute="height" id="p3q-Hp-TC6"/>
-                                    <constraint firstAttribute="bottom" secondItem="QVP-fS-GsD" secondAttribute="bottom" constant="9" id="pOz-ix-gsV"/>
-                                    <constraint firstItem="nhU-hI-tYQ" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="sha-YR-hFB"/>
-                                    <constraint firstItem="QVP-fS-GsD" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="tPl-1H-46G"/>
-                                    <constraint firstItem="na2-Jb-rNj" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="w37-Ad-IhM"/>
-                                    <constraint firstItem="Ufr-9o-qH6" firstAttribute="top" secondItem="VoO-jp-0pQ" secondAttribute="bottom" constant="9" id="wOW-QJ-Z3o"/>
-                                    <constraint firstItem="EoL-BE-EUh" firstAttribute="width" secondItem="RpX-WW-JR2" secondAttribute="width" id="wPu-SP-CYP"/>
-                                    <constraint firstItem="VoO-jp-0pQ" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="zJ7-77-apB"/>
-                                    <constraint firstItem="EoL-BE-EUh" firstAttribute="leading" secondItem="RpX-WW-JR2" secondAttribute="leading" id="zVK-Dh-aFe"/>
                                 </constraints>
                             </view>
                         </subviews>
