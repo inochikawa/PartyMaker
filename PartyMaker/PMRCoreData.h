@@ -21,8 +21,8 @@
 - (nullable NSManagedObjectContext *)backgroundManagedObjectContext;
 
 - (nullable NSArray *)loadAllPartiesByUserId:(nonnull NSNumber *)userId;
-- (void)saveOrUpadatePartiesFromArrayOfParties:(nonnull NSArray *)parties withCallback:(void (^ _Nullable)(NSError *_Nullable completionError))completion;
-- (void)saveOrUpadateParty:(nonnull PMRParty *)party inContext:(nonnull NSManagedObjectContext *)context;
+- (void)saveOrUpdatePartiesFromArrayOfParties:(nonnull NSArray *)parties withCallback:(void (^ _Nullable)(NSError *_Nullable completionError))completion;
+- (void)saveOrUpdateParty:(nonnull PMRParty *)party inContext:(nonnull NSManagedObjectContext *)context;
 - (void)deleteParty:(nonnull NSNumber *)eventID withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
 - (void)deleteAllUserPartiesByUserId:(nonnull NSNumber *)userId withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
 

@@ -10,6 +10,19 @@
 
 @implementation PMRPartyManagedObject
 
-// Insert code here to add functionality to your managed object subclass
++ (instancetype)fetchFromContext:(NSManagedObjectContext *)context withPartyId:(NSNumber *)partyId {
+    NSFetchRequest *fetch = [NSFetchRequest new];
+    fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
+    fetch.predicate = [NSPredicate predicateWithFormat:@"eventId == %@", partyId];
+    NSError *fetchError = nil;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&fetchError];
+    
+    if (fetchError) {
+        NSLog(@"%s --- [Fetch error] - %@, user info - %@", __PRETTY_FUNCTION__, fetchError, fetchError.userInfo);
+        return nil;
+    }
+    
+    return [fetchedObjects firstObject];
+}
 
 @end

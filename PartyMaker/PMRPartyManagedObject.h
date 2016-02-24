@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PMRPartyManagedObject : NSManagedObject
 
-// Insert code here to declare functionality of your managed object subclass
++ (instancetype)fetchFromContext:(NSManagedObjectContext *)context withPartyId:(NSNumber *)partyId;
 
 @end
 

@@ -115,7 +115,7 @@
     
     for (PMRPartyManagedObject *partyObject in fetchedObjects) {
         PMRParty *party = [PMRParty new];
-        [self performParty:party usingPartyObject:partyObject];
+        [self produceParty:party usingPartyObject:partyObject];
         [parties addObject:party];
     }
     
@@ -126,13 +126,7 @@
     __block __weak PMRCoreData *weakSelf = self;
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     [context performBlock:^{
-        
-        NSFetchRequest *fetch = [NSFetchRequest new];
-        fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
-        fetch.predicate = [NSPredicate predicateWithFormat:@"eventId == %@", partyId];
-        NSError *fetchError = nil;
-        NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&fetchError];
-        PMRPartyManagedObject *partyObject = [fetchedObjects firstObject];
+        PMRPartyManagedObject *partyObject = [PMRPartyManagedObject fetchFromContext:context withPartyId:partyId];
         
         NSError *error = nil;
         
@@ -174,25 +168,14 @@
     }];
 }
 
-- (void)saveOrUpadateParty:(PMRParty *)party inContext:(NSManagedObjectContext *)context {
-    NSFetchRequest *fetch = [NSFetchRequest new];
-    fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
-    fetch.predicate = [NSPredicate predicateWithFormat:@"eventId == %@", party.eventId];
-    
-    NSError *fetchError = nil;
-    NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&fetchError];
-    
-    if (fetchError) {
-        NSLog(@"%s --- [Error] - %@, user info - %@", __PRETTY_FUNCTION__, fetchError, fetchError.userInfo);
-    }
-    
-    PMRPartyManagedObject *partyObject = [fetchedObjects firstObject];
+- (void)saveOrUpdateParty:(PMRParty *)party inContext:(NSManagedObjectContext *)context {
+    PMRPartyManagedObject *partyObject = [PMRPartyManagedObject fetchFromContext:context withPartyId:party.eventId];
     
     if (!partyObject) {
         partyObject = [NSEntityDescription insertNewObjectForEntityForName:@"Party" inManagedObjectContext:context];
     }
     
-    [self performPartyObject:partyObject usingParty:party];
+    [self producePartyObject:partyObject usingParty:party];
     
     NSError *error = nil;
     if (![context save:&error]) {
@@ -202,12 +185,12 @@
     NSLog(@"%s --- Party [%@] was saved", __PRETTY_FUNCTION__, partyObject.eventName);
 }
 
-- (void)saveOrUpadatePartiesFromArrayOfParties:(NSArray *)parties withCallback:(void (^)(NSError *completionError))completion {
+- (void)saveOrUpdatePartiesFromArrayOfParties:(NSArray *)parties withCallback:(void (^)(NSError *completionError))completion {
     __block __weak PMRCoreData *weakSelf = self;
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     [context performBlock:^{
         for (PMRParty *party in parties) {
-            [weakSelf saveOrUpadateParty:party inContext:context];
+            [weakSelf saveOrUpdateParty:party inContext:context];
         }
         [weakSelf pmr_performCompletionBlock:completion withError:nil];
     }];
@@ -243,25 +226,11 @@
 
 #pragma mark - Helpers
 
-- (id)fetchObjectFromEntity:(NSString *)entityName forKey:(NSString *)key withValue:(NSNumber *)value inContext:(NSManagedObjectContext *)context {
-    NSFetchRequest *fetch = [NSFetchRequest new];
-    fetch.entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-    fetch.predicate = [NSPredicate predicateWithFormat:@"%@ == %@", key, value];
-    
-    NSError *error = nil;
-    NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&error];
-    if ( error ) {
-        NSLog(@"Fetching failed with error %@", error);
-    }
-    return [fetchedObjects firstObject];
-}
-
 - (void)markPartyAsDeletedByPartyId:(NSNumber *)partyId {
-    __block __weak PMRCoreData *weakSelf = self;
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     
     [context performBlock:^{
-        PMRPartyManagedObject *partyObject = [weakSelf fetchObjectFromEntity:@"Party" forKey:@"eventId" withValue:partyId inContext:context];
+        PMRPartyManagedObject *partyObject = [PMRPartyManagedObject fetchFromContext:context withPartyId:partyId];
         partyObject.isPartyDeleted = @1;
         NSError *error;
         [context save:&error];
@@ -271,7 +240,7 @@
     }];
 }
 
-- (void)performPartyObject:(PMRPartyManagedObject *)partyObject usingParty:(PMRParty *)party {
+- (void)producePartyObject:(PMRPartyManagedObject *)partyObject usingParty:(PMRParty *)party {
     partyObject.eventId = party.eventId;
     partyObject.eventName = party.eventName;
     partyObject.eventDescription = party.eventDescription;
@@ -285,7 +254,7 @@
     partyObject.longitude = party.longitude;
 }
 
-- (void)performParty:(PMRParty *)party usingPartyObject:(PMRPartyManagedObject *)partyObject {
+- (void)produceParty:(PMRParty *)party usingPartyObject:(PMRPartyManagedObject *)partyObject {
     party.eventId = partyObject.eventId;
     party.eventName = partyObject.eventName;
     party.eventDescription = partyObject.eventDescription;

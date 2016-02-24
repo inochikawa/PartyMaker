@@ -93,7 +93,7 @@
         // upload data to database
         NSManagedObjectContext *context = [weakSelf.coreData backgroundManagedObjectContext];
         [context performBlock:^{
-            [weakSelf.coreData saveOrUpadateParty:party inContext:context];
+            [weakSelf.coreData saveOrUpdateParty:party inContext:context];
             [weakSelf pmr_performCompletionBlock:completion];
         }];
     }];
@@ -107,7 +107,7 @@
         if (!networkError) {
             [weakSelf.coreData deleteParty:partyId withCallback:^(NSError * _Nullable completionError) {
                 if (!completionError) {
-                    NSLog(@"%s --- Party [%@] was deleted in data base", __PRETTY_FUNCTION__, partyId);
+                    NSLog(@"%s --- Party [%@] was deleted from data base", __PRETTY_FUNCTION__, partyId);
                 } else {
                     NSLog(@"%s [Core data error] --- Party [%@] was not deleted from data base --- [Error - %@, user info - %@", __PRETTY_FUNCTION__, partyId, completionError, completionError.userInfo);
                 }
@@ -127,62 +127,10 @@
 
     [self.networkSDK loadAllPartiesByUserId:userId callback:^(NSArray *partiesFromServer, NSError *error) {
         if (!error) {
-            
-            NSMutableArray *resultArrayOfParties = [[NSMutableArray alloc] init];
-
-            [weakSelf.coreData saveOrUpadatePartiesFromArrayOfParties:partiesFromServer withCallback:^(NSError * _Nullable completionError) {
-                
-                BOOL isDatabasePartyExist = NO;
-                
+            [weakSelf.coreData saveOrUpdatePartiesFromArrayOfParties:partiesFromServer withCallback:^(NSError * _Nullable completionError) {
                 NSArray *partiesFromDatabase = [weakSelf.coreData loadAllPartiesByUserId:userId];
-                /**************************************************************************************/
-                for (PMRParty *databaseParty in partiesFromDatabase) {
-                    isDatabasePartyExist = NO;
-                    /**********************************************************************************/
-                    for (PMRParty *serverParty in partiesFromServer) {
-                        // if party exist in server we must check was party changed in offline mode?
-                        if ([databaseParty.eventId integerValue] == [serverParty.eventId integerValue]) {
-                            isDatabasePartyExist = YES;
-                            if (databaseParty.isPartyChanged == NO) {
-                                [weakSelf.networkSDK addPaty:databaseParty callback:^(NSNumber *partyId, NSError *error) {
-                                    if (error) {
-                                        NSLog(@"%s --- [Network error] - %@, user info - %@", __PRETTY_FUNCTION__, error, error.userInfo);
-                                    }
-                                }];
-                                break;
-                            }
-                        }
-                    }
-                    /**********************************************************************************/
-                    if (!isDatabasePartyExist) {
-                        if ([databaseParty.eventId intValue] != 0 || databaseParty.isPartyDeleted != NO) {
-                            [weakSelf deletePartyWithPartyId:databaseParty.eventId withCreatorId:databaseParty.creatorId withCallback:^{
-                                
-                            }];
-                        }
-                        else {
-                            [weakSelf.networkSDK addPaty:databaseParty callback:^(NSNumber *partyId, NSError *error) {
-                                if (!error) {
-                                    databaseParty.eventId = partyId;
-                                    [resultArrayOfParties addObject:databaseParty];
-                                    NSManagedObjectContext *context = [weakSelf.coreData backgroundManagedObjectContext];
-                                    [context performBlock:^{
-                                        [weakSelf.coreData saveOrUpadateParty:databaseParty inContext:context];
-                                    }];
-                                }
-                                else {
-                                    NSLog(@"%s --- [Network error] - %@, user info - %@", __PRETTY_FUNCTION__, error, error.userInfo);
-                                }
-                            }];
-                        }
-                    }
-                    else {
-                        [resultArrayOfParties addObject:databaseParty];
-                    }
-                    /**********************************************************************************/
-
-                }
-                /**************************************************************************************/
+                NSArray *resultArrayOfParties = [weakSelf produceResultArrayOfPartiesUsingPartiesFromServer:partiesFromServer
+                                                                                     andPartiesFromDatabase:partiesFromDatabase];
                 
                 if (completion) {
                     completion(resultArrayOfParties);
@@ -199,6 +147,57 @@
             block();
         });
     }
+}
+
+- (NSArray *)produceResultArrayOfPartiesUsingPartiesFromServer:(NSArray *)partiesFromServer andPartiesFromDatabase:(NSArray *)partiesFromDatabase {
+    BOOL isDatabasePartyExist = NO;
+    NSMutableArray *resultArrayOfParties = [[NSMutableArray alloc] init];
+    __block __weak PMRApiController *weakSelf = self;
+    
+    for (PMRParty *databaseParty in partiesFromDatabase) {
+        isDatabasePartyExist = NO;
+        for (PMRParty *serverParty in partiesFromServer) {
+            // if party exist in server we must check was party changed in offline mode?
+            if ([databaseParty.eventId integerValue] == [serverParty.eventId integerValue]) {
+                isDatabasePartyExist = YES;
+                if (![databaseParty.isPartyChanged boolValue]) {
+                    [self.networkSDK addPaty:databaseParty callback:^(NSNumber *partyId, NSError *error) {
+                        if (error) {
+                            NSLog(@"%s --- [Network error] - %@, user info - %@", __PRETTY_FUNCTION__, error, error.userInfo);
+                        }
+                    }];
+                    break;
+                }
+            }
+        }
+        if (!isDatabasePartyExist) {
+            if ([databaseParty.eventId intValue] != 0 || ![databaseParty.isPartyDeleted boolValue]) {
+                [self deletePartyWithPartyId:databaseParty.eventId withCreatorId:databaseParty.creatorId withCallback:^{
+                    
+                }];
+            }
+            else {
+                [self.networkSDK addPaty:databaseParty callback:^(NSNumber *partyId, NSError *error) {
+                    if (!error) {
+                        databaseParty.eventId = partyId;
+                        [resultArrayOfParties addObject:databaseParty];
+                        NSManagedObjectContext *context = [weakSelf.coreData backgroundManagedObjectContext];
+                        [context performBlock:^{
+                            [weakSelf.coreData saveOrUpdateParty:databaseParty inContext:context];
+                        }];
+                    }
+                    else {
+                        NSLog(@"%s --- [Network error] - %@, user info - %@", __PRETTY_FUNCTION__, error, error.userInfo);
+                    }
+                }];
+            }
+        }
+        else {
+            [resultArrayOfParties addObject:databaseParty];
+        }
+    }
+    
+    return resultArrayOfParties;
 }
 
 @end
