@@ -172,7 +172,8 @@
 
 - (void)onDoneButtonTouch {
     if (self.delegate && [self.delegate respondsToSelector:@selector(locationWithLatitude:withLongitude:withAddress:)]) {
-        [self.delegate locationWithLatitude:self.partyAnnotation.coordinate.latitude withLongitude:self.partyAnnotation.coordinate.longitude withAddress:self.partyAnnotation.subtitle];
+        NSString *resultAddress = [self.partyAnnotation.subtitle stringByReplacingOccurrencesOfString:@"'" withString:@""];
+        [self.delegate locationWithLatitude:self.partyAnnotation.coordinate.latitude withLongitude:self.partyAnnotation.coordinate.longitude withAddress:resultAddress];
     }
     if ([self.navigationController isViewLoaded]) {
         [self.navigationController popViewControllerAnimated:YES];
