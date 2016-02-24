@@ -51,6 +51,7 @@
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
+            <string>MyriadPro-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -249,11 +250,14 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="cancelButton" destination="6OK-lk-lZo" id="m6D-PZ-lAH"/>
                         <outlet property="emailTextField" destination="hND-xk-5wL" id="ZCM-8k-87Q"/>
+                        <outlet property="helloLabel" destination="7Qm-KK-gEE" id="04d-ZX-yL8"/>
                         <outlet property="informationLabel" destination="uG8-tg-Qlv" id="EfH-ig-clJ"/>
                         <outlet property="loginTextField" destination="yT2-fS-Gj2" id="QWd-jo-wVO"/>
                         <outlet property="passwordTextField" destination="1GN-z9-Wh5" id="4fZ-GH-cqZ"/>
                         <outlet property="registerBackgroundView" destination="hsT-oS-pLZ" id="qKd-c1-efR"/>
+                        <outlet property="registerButton" destination="LDV-uP-KEB" id="65m-Me-4gP"/>
                         <outlet property="repeatPasswordTextField" destination="evy-HB-V1w" id="Y0H-Pt-LtB"/>
                         <segue destination="Ymd-Dq-ej2" kind="show" identifier="toLoginViewControllerSegue" id="NtY-eU-LVM"/>
                     </connections>
@@ -414,7 +418,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="errorLabel" destination="o9s-dR-0UK" id="7DO-46-xk7"/>
+                        <outlet property="helloLabel" destination="Js5-AH-SR0" id="7ma-YP-SWu"/>
+                        <outlet property="informationLabel" destination="o9s-dR-0UK" id="ohe-Xf-qMC"/>
                         <outlet property="loginBackgroundView" destination="O9v-qQ-TQC" id="2tb-fm-sIx"/>
                         <outlet property="loginTextField" destination="akZ-ab-apa" id="Nia-B5-X96"/>
                         <outlet property="passwordTextField" destination="FQt-4R-14b" id="CWc-3H-ffG"/>
@@ -546,7 +551,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPL-RN-ptg">
-                                                    <rect key="frame" x="75" y="17" width="245" height="18"/>
+                                                    <rect key="frame" x="75" y="5" width="245" height="18"/>
                                                     <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -564,12 +569,21 @@
                                                         <constraint firstAttribute="height" constant="1" id="ASo-fH-IAR"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjF-oy-Z6h">
+                                                    <rect key="frame" x="70" y="28" width="44" height="12"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
+                                                    <color key="textColor" red="0.38431372549019605" green="0.41176470588235292" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Ckk-O3-nXa" secondAttribute="trailing" id="0f2-mY-0Yn"/>
+                                                <constraint firstItem="TjF-oy-Z6h" firstAttribute="top" secondItem="zPL-RN-ptg" secondAttribute="bottom" constant="5" id="2Ox-vx-Bdp"/>
                                                 <constraint firstItem="Ckk-O3-nXa" firstAttribute="leading" secondItem="6d7-H5-zVd" secondAttribute="leading" id="Bfh-bb-1CZ"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ckk-O3-nXa" secondAttribute="bottom" id="GQw-gs-fUr"/>
                                                 <constraint firstAttribute="trailing" secondItem="zPL-RN-ptg" secondAttribute="trailing" id="KSm-Bb-jeX"/>
+                                                <constraint firstItem="VfQ-ko-f9d" firstAttribute="top" secondItem="TjF-oy-Z6h" secondAttribute="bottom" id="Xgg-Cn-Nha"/>
+                                                <constraint firstItem="TjF-oy-Z6h" firstAttribute="leading" secondItem="VfQ-ko-f9d" secondAttribute="leading" id="c1o-yE-UWh"/>
                                                 <constraint firstAttribute="trailing" secondItem="VfQ-ko-f9d" secondAttribute="trailing" id="rYs-qz-LeT"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -578,7 +592,6 @@
                                             <constraint firstItem="svD-Wt-5H9" firstAttribute="leading" secondItem="pdf-O3-oeh" secondAttribute="leading" constant="6" id="J4l-CM-0kD"/>
                                             <constraint firstItem="VfQ-ko-f9d" firstAttribute="leading" secondItem="pdf-O3-oeh" secondAttribute="leading" constant="70" id="J4u-ah-fi1"/>
                                             <constraint firstItem="zPL-RN-ptg" firstAttribute="leading" secondItem="pdf-O3-oeh" secondAttribute="leading" constant="75" id="Kym-0D-AMV"/>
-                                            <constraint firstItem="zPL-RN-ptg" firstAttribute="top" secondItem="pdf-O3-oeh" secondAttribute="top" constant="17" id="L4W-O5-R9x"/>
                                             <constraint firstAttribute="bottom" secondItem="svD-Wt-5H9" secondAttribute="bottom" constant="17" id="dHo-4H-kdB"/>
                                             <constraint firstAttribute="bottom" secondItem="VfQ-ko-f9d" secondAttribute="bottom" constant="18" id="s8F-jc-L38"/>
                                         </constraints>
@@ -586,6 +599,7 @@
                                         <connections>
                                             <outlet property="eventNameLabel" destination="zPL-RN-ptg" id="Cc6-Q4-S0y"/>
                                             <outlet property="eventTimeStartLabel" destination="VfQ-ko-f9d" id="Q7P-vM-Gn5"/>
+                                            <outlet property="locationLabel" destination="TjF-oy-Z6h" id="FAc-n0-e7K"/>
                                             <outlet property="logoImageView" destination="svD-Wt-5H9" id="fk0-Ef-jyb"/>
                                         </connections>
                                     </tableViewCell>
@@ -875,6 +889,7 @@
                                         </state>
                                         <connections>
                                             <action selector="moveBallToElement:" destination="TPF-f6-8pl" eventType="touchDown" id="Z61-cc-UH4"/>
+                                            <segue destination="Urg-4J-CRV" kind="show" identifier="addEventViewControllerToLocationViewController" id="hMY-fl-L4d"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhU-hI-tYQ" userLabel="White line">
@@ -982,12 +997,15 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="choodeDateLabel" destination="rmd-ot-Dgl" id="2RY-6r-Eop"/>
                         <outlet property="chooseDateButton" destination="RpX-WW-JR2" id="EJo-0O-qWH"/>
                         <outlet property="datePickerControl" destination="LsC-gX-HtG" id="drm-sE-LT1"/>
                         <outlet property="datePickerToolBar" destination="LrX-94-pXs" id="0KS-By-Kmq"/>
                         <outlet property="datePickerView" destination="KNP-b8-6ik" id="k52-Nz-Gnk"/>
+                        <outlet property="descriptionLabel" destination="bEU-U2-pHj" id="sq3-2z-xXP"/>
                         <outlet property="descriptionTextView" destination="Ufr-9o-qH6" id="49O-3B-0NJ"/>
                         <outlet property="dynamicBall" destination="c2Q-4g-BUg" id="SkJ-uD-rQU"/>
+                        <outlet property="endLabel" destination="4yb-Cx-FVd" id="RwO-kY-QLU"/>
                         <outlet property="endTimeLabel" destination="TjF-AP-B2k" id="971-3I-a1F"/>
                         <outlet property="endTimeSlider" destination="na2-Jb-rNj" id="H32-EU-dkK"/>
                         <outlet property="eventNameTextField" destination="qHZ-ie-Ekl" id="rxa-H0-NJq"/>
@@ -995,6 +1013,10 @@
                         <outlet property="imageScrollView" destination="VoO-jp-0pQ" id="R0g-7o-5Eb"/>
                         <outlet property="keyboardToolBar" destination="fEB-zj-Ivr" id="RdJ-nZ-c5a"/>
                         <outlet property="locationButton" destination="QVP-fS-GsD" id="2lK-NN-2QS"/>
+                        <outlet property="locationLabel" destination="mFI-XJ-LlD" id="fsV-VX-WRa"/>
+                        <outlet property="logoLabel" destination="BRt-Bt-TPk" id="bSk-3X-0hK"/>
+                        <outlet property="partyNameLabel" destination="fT1-rL-cNV" id="Vf9-dv-W7h"/>
+                        <outlet property="startLabel" destination="ZKv-xO-UXv" id="h2m-rV-88p"/>
                         <outlet property="startTimeLabel" destination="jCc-cX-CjC" id="YdA-D0-6OH"/>
                         <outlet property="startTimeSlider" destination="LlZ-BH-Vf0" id="zFl-c1-bzQ"/>
                         <outletCollection property="balls" destination="MoO-cK-gOo" id="tFz-bz-toH"/>
@@ -1381,6 +1403,7 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onLocationButtonTouchUpInside:" destination="Zat-RY-jB1" eventType="touchUpInside" id="vIr-go-R8j"/>
+                                                    <segue destination="Urg-4J-CRV" kind="show" identifier="partyInfoViewControllerToLocationViewController" id="kVc-26-rkW"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1431,18 +1454,58 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="701"/>
                     <connections>
+                        <outlet property="dateLabel" destination="E2k-El-En8" id="29h-vR-sHS"/>
+                        <outlet property="deleteButton" destination="weE-M8-cO5" id="Nhn-M8-1Jr"/>
+                        <outlet property="editButton" destination="11Y-iA-lnt" id="mgR-LP-wrH"/>
+                        <outlet property="endLabel" destination="TSw-mc-PV4" id="at0-iI-u2X"/>
                         <outlet property="eventDateLabel" destination="4Tl-TR-P78" id="2aR-AF-hRK"/>
                         <outlet property="eventDescriptionLabel" destination="eAZ-xs-e4D" id="hJQ-xp-x8h"/>
                         <outlet property="eventEndTimeLabel" destination="f5G-Q9-4Iv" id="sgk-zY-FvM"/>
                         <outlet property="eventNameLabel" destination="hGF-FC-cgb" id="18i-Sq-WqL"/>
                         <outlet property="eventStartTimeLabel" destination="gBO-Te-TTB" id="7Q0-7w-0p8"/>
                         <outlet property="imageHolderView" destination="ehZ-N2-Y2X" id="aVQ-jU-K0k"/>
+                        <outlet property="locationButton" destination="efn-Wz-eIt" id="RiZ-Ds-W35"/>
                         <outlet property="logoImageView" destination="utp-Gj-L66" id="Cbo-ch-aMS"/>
+                        <outlet property="startLabel" destination="jFa-kj-IJg" id="mtL-og-G9T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtm-bZ-vaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="659" y="-683.5"/>
+        </scene>
+        <!--LOCATION-->
+        <scene sceneID="X9f-Jl-a3W">
+            <objects>
+                <viewController id="Urg-4J-CRV" customClass="PMRLocationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h49-ck-y2X"/>
+                        <viewControllerLayoutGuide type="bottom" id="25O-BB-WiQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Qzp-Io-SAq">
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ua9-Jq-qfk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ua9-Jq-qfk" firstAttribute="leading" secondItem="Qzp-Io-SAq" secondAttribute="leading" id="4yu-Wj-v7Y"/>
+                            <constraint firstAttribute="trailing" secondItem="ua9-Jq-qfk" secondAttribute="trailing" id="PGQ-X9-JcQ"/>
+                            <constraint firstItem="25O-BB-WiQ" firstAttribute="top" secondItem="ua9-Jq-qfk" secondAttribute="bottom" id="bPJ-1Y-Wzc"/>
+                            <constraint firstItem="ua9-Jq-qfk" firstAttribute="top" secondItem="h49-ck-y2X" secondAttribute="bottom" id="rFY-Lm-Ppz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="LOCATION" id="xQx-tC-dVl"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mapView" destination="ua9-Jq-qfk" id="I7G-AV-qrN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N7s-Im-Mtx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1104.5" y="-700.5"/>
         </scene>
     </scenes>
     <resources>
@@ -1456,6 +1519,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="HSv-ua-Ffh"/>
+        <segue reference="hMY-fl-L4d"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

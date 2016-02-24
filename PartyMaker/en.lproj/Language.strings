@@ -6,6 +6,42 @@
   Copyright © 2016 Maksim Stecenko. All rights reserved.
 */
 
-"Hello Max" = "Hello Max";
 "Loading..." = "Loading...";
 "PARTY MAKER" = "PARTY MAKER";
+"LOCATION" = "LOCATION";
+"EDIT" = "EDIT";
+"DELETE" = "DELETE";
+"DATE" = "DATE";
+"START" = "START";
+"END" = "END";
+"PARTY INFO" = "PARTY INFO";
+"CREATE PARTY" = "CREATE PARTY";
+"Save" = "Save";
+"Cancel" = "Cancel";
+"CHOOSE DATE" = "CHOOSE DATE";
+"PARTY NAME" = "PARTY NAME";
+"START" = "START";
+"END" = "END";
+"LOGO" = "LOGO";
+"DESCRIPTION" = "DESCRIPTION";
+"SETTINGS" = "SETTINGS";
+"Settings" = "Settings";
+"Parties" = "Parties";
+"HELLO" = "HELLO";
+"SIGN IN" = "SIGN IN";
+"REGISTER" = "REGISTER";
+"CANCEL" = "CANCEL";
+"Login" = "Login";
+"Password" = "Password";
+"Email" = "Email";
+"Repeat password" = "Repeat password";
+"Passwords aren't equals." = "Passwords aren't equals.";
+"Back" = "Back";
+"Your party Name" = "Your party Name";
+"Error" = "Error";
+"You did not choose date." = "Ви не вибрали дату події.";
+"You did not input event name." = "Ви не ввели ім'я події.";
+"Invalid Username address or Password" = "Invalid login or password.";
+"User exists or data is wrong" = "User exists or data is wrong.";
+"The request is timeout" = "The request is timeout.";
+"party is about to begin!" = "party is about to begin!";

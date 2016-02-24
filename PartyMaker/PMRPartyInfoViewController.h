@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PMRParty.h"
+
+@class PMRParty;
 
 @interface PMRPartyInfoViewController : UIViewController
 
-@property (nonatomic, weak) NSDictionary *partyDictionary;
+@property (nonatomic, weak) PMRParty *party;
 
 @end

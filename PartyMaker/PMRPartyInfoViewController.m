@@ -8,17 +8,10 @@
 
 #import "PMRPartyInfoViewController.h"
 #import "PMRAddEventViewController.h"
+#import "PMRLocationViewController.h"
 #import "NSDate+Utility.h"
-#import "PMRCoreData.h"
 #import "PMRApiController.h"
-
-#define kPartyEventId            @"id"
-#define kPartyEventName          @"name"
-#define kPartyEventDescription   @"comment"
-#define kPartyCreatorId          @"creator_id"
-#define kPartyStartTime          @"start_time"
-#define kPartyEndTime            @"end_time"
-#define kPartyImageIndex         @"logo_id"
+#import "PMRParty.h"
 
 @interface PMRPartyInfoViewController()
 
@@ -30,8 +23,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventStartTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventEndTimeLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *locationButton;
+
 
 @property (weak, nonatomic) IBOutlet UIView *imageHolderView;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *startLabel;
+@property (weak, nonatomic) IBOutlet UILabel *endLabel;
+
 
 @end
 
@@ -40,9 +42,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"Back", @"Language", nil)]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:nil
+                                                                  action:nil];
+    [backButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                        [UIColor colorWithRed:29/255. green:31/255. blue:36/255. alpha:1], NSForegroundColorAttributeName, [UIFont fontWithName:@"MyriadPro-Regular" size:16], NSFontAttributeName,nil] forState:UIControlStateNormal];
+    
+    self.navigationItem.backBarButtonItem = backButton;
+
+    
     self.imageHolderView.layer.borderColor = [UIColor colorWithRed:31/255. green:34/255. blue:39/255. alpha:1].CGColor;
     self.imageHolderView.layer.borderWidth = 3.0f;
     self.imageHolderView.layer.cornerRadius = self.imageHolderView.frame.size.width / 2.;
+    
+    self.navigationItem.title = NSLocalizedStringFromTable(@"PARTY INFO", @"Language", nil);
+    self.dateLabel.text = NSLocalizedStringFromTable(@"DATE", @"Language", nil);
+    self.startLabel.text = NSLocalizedStringFromTable(@"START", @"Language", nil);
+    self.endLabel.text = NSLocalizedStringFromTable(@"END", @"Language", nil);
+    
+    [self.locationButton setTitle:NSLocalizedStringFromTable(@"LOCATION", @"Language", nil) forState:UIControlStateNormal];
+    [self.editButton setTitle:NSLocalizedStringFromTable(@"EDIT", @"Language", nil) forState:UIControlStateNormal];
+    [self.deleteButton setTitle:NSLocalizedStringFromTable(@"DELETE", @"Language", nil) forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,7 +74,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"PartyInfoViewControllerToAddEventViewController"]) {
         PMRAddEventViewController *addEventViewController = segue.destinationViewController;
-        addEventViewController.partyDictionary = [[NSMutableDictionary alloc] initWithDictionary:self.partyDictionary];
+        addEventViewController.party = self.party;
+    }
+    if ([segue.identifier isEqualToString:@"partyInfoViewControllerToLocationViewController"]) {
+        PMRLocationViewController *locationViewController = segue.destinationViewController;
+        locationViewController.party = self.party;
+        locationViewController.editingMode = NO;
     }
 }
 
@@ -67,7 +93,7 @@
 
 - (IBAction)onDeleteButtonTouchUpInside:(id)sender {
     __block __weak PMRPartyInfoViewController *weakSelf = self;
-    [[PMRApiController apiController] deletePartyWithPartyId:self.partyDictionary[kPartyEventId] withCreatorId:self.partyDictionary[kPartyCreatorId] withCallback:^{
+    [[PMRApiController apiController] deletePartyWithPartyId:self.party.eventId withCreatorId:self.party.creatorId withCallback:^{
         if ([weakSelf.navigationController isViewLoaded]) {
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
@@ -80,13 +106,13 @@
 #pragma mark - Helpers
 
 - (void)configurePartyInfoView {
-    NSString *imageName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [self.partyDictionary[kPartyImageIndex] intValue]];
+    NSString *imageName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [self.party.imageIndex intValue]];
     self.logoImageView.image = [UIImage imageNamed:imageName];
-    self.eventNameLabel.text = self.partyDictionary[kPartyEventName];
-    self.eventDescriptionLabel.text = [self roundQuatesText:self.partyDictionary[kPartyEventDescription]];
-    self.eventDateLabel.text = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyStartTime] withDateFormat:@"dd.MM.yyyy"];
-    self.eventStartTimeLabel.text = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyStartTime] withDateFormat:@"HH:mm"];
-    self.eventEndTimeLabel.text = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyEndTime] withDateFormat:@"HH:mm"];
+    self.eventNameLabel.text = self.party.eventName;
+    self.eventDescriptionLabel.text = [self roundQuatesText:self.party.eventDescription];
+    self.eventDateLabel.text = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"dd.MM.yyyy"];
+    self.eventStartTimeLabel.text = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"HH:mm"];
+    self.eventEndTimeLabel.text = [NSDate stringDateFromSeconds:self.party.endTime withDateFormat:@"HH:mm"];
 }
 
 - (NSString *)roundQuatesText:(NSString *)text {

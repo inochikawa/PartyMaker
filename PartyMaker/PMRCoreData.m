@@ -8,19 +8,7 @@
 
 #import "PMRCoreData.h"
 #import "PMRParty.h"
-#import "PMRUser.h"
-
-#define kPartyEventId            @"id"
-#define kPartyEventName          @"name"
-#define kPartyEventDescription   @"comment"
-#define kPartyCreatorId          @"creator_id"
-#define kPartyStartTime          @"start_time"
-#define kPartyEndTime            @"end_time"
-#define kPartyImageIndex         @"logo_id"
-#define kPartyIsChanged          @"isPartyChahged"
-#define kPartyIsDeleted          @"isPartyDeleted"
-#define kPartyLatitude           @"latitude"
-#define kPartyLongitude          @"longitude"
+#import "PMRPartyManagedObject.h"
 
 @interface PMRCoreData()
 
@@ -123,7 +111,15 @@
         NSLog(@"PMRPartyManagedObject pmr_fetchPartyWithName: failed with error %@", error);
     }
     
-    return fetchedObjects;
+    NSMutableArray *parties = [NSMutableArray new];
+    
+    for (PMRPartyManagedObject *partyObject in fetchedObjects) {
+        PMRParty *party = [PMRParty new];
+        [self performParty:party usingPartyObject:partyObject];
+        [parties addObject:party];
+    }
+    
+    return parties;
 }
 
 - (void)deleteParty:(NSNumber *)partyId withCallback:(void (^)(NSError *completionError))completion{
@@ -136,7 +132,7 @@
         fetch.predicate = [NSPredicate predicateWithFormat:@"eventId == %@", partyId];
         NSError *fetchError = nil;
         NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&fetchError];
-        PMRParty *partyObject = [fetchedObjects firstObject];
+        PMRPartyManagedObject *partyObject = [fetchedObjects firstObject];
         
         NSError *error = nil;
         
@@ -164,7 +160,7 @@
             NSLog(@"PMRPartyManagedObject pmr_fetchPartyWithName: failed with error %@", error);
         }
         
-        for (PMRParty *partyObject in fetchedObjects) {
+        for (PMRPartyManagedObject *partyObject in fetchedObjects) {
             NSError *error = nil;
             [context deleteObject:partyObject];
             [context save:&error];
@@ -178,10 +174,10 @@
     }];
 }
 
-- (void)saveOrUpadatePartyFromPartyDictionary:(NSDictionary *)partyDictionary inContext:(NSManagedObjectContext *)context {
+- (void)saveOrUpadateParty:(PMRParty *)party inContext:(NSManagedObjectContext *)context {
     NSFetchRequest *fetch = [NSFetchRequest new];
     fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
-    fetch.predicate = [NSPredicate predicateWithFormat:@"eventId == %@", @([partyDictionary[kPartyEventId] integerValue])];
+    fetch.predicate = [NSPredicate predicateWithFormat:@"eventId == %@", party.eventId];
     
     NSError *fetchError = nil;
     NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&fetchError];
@@ -190,13 +186,13 @@
         NSLog(@"%s --- [Error] - %@, user info - %@", __PRETTY_FUNCTION__, fetchError, fetchError.userInfo);
     }
     
-    PMRParty *partyObject = [fetchedObjects firstObject];
+    PMRPartyManagedObject *partyObject = [fetchedObjects firstObject];
     
     if (!partyObject) {
         partyObject = [NSEntityDescription insertNewObjectForEntityForName:@"Party" inManagedObjectContext:context];
     }
     
-    [self performParty:partyObject FromDictionaty:partyDictionary];
+    [self performPartyObject:partyObject usingParty:party];
     
     NSError *error = nil;
     if (![context save:&error]) {
@@ -206,12 +202,12 @@
     NSLog(@"%s --- Party [%@] was saved", __PRETTY_FUNCTION__, partyObject.eventName);
 }
 
-- (void)saveOrUpadatePartiesFromArrayOfPartyDictionaries:(NSArray *)partyDictionaries withCallback:(void (^)(NSError *completionError))completion {
+- (void)saveOrUpadatePartiesFromArrayOfParties:(NSArray *)parties withCallback:(void (^)(NSError *completionError))completion {
     __block __weak PMRCoreData *weakSelf = self;
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     [context performBlock:^{
-        for (NSDictionary *dictionary in partyDictionaries) {
-            [weakSelf saveOrUpadatePartyFromPartyDictionary:dictionary inContext:context];
+        for (PMRParty *party in parties) {
+            [weakSelf saveOrUpadateParty:party inContext:context];
         }
         [weakSelf pmr_performCompletionBlock:completion withError:nil];
     }];
@@ -265,7 +261,7 @@
     NSManagedObjectContext *context = [self backgroundManagedObjectContext];
     
     [context performBlock:^{
-        PMRParty *partyObject = [weakSelf fetchObjectFromEntity:@"Party" forKey:@"eventId" withValue:partyId inContext:context];
+        PMRPartyManagedObject *partyObject = [weakSelf fetchObjectFromEntity:@"Party" forKey:@"eventId" withValue:partyId inContext:context];
         partyObject.isPartyDeleted = @1;
         NSError *error;
         [context save:&error];
@@ -275,18 +271,32 @@
     }];
 }
 
-- (void)performParty:(PMRParty *)partyObject FromDictionaty:(NSDictionary *)partyDictionary {
-    partyObject.eventId = @([partyDictionary[kPartyEventId] integerValue]);
-    partyObject.eventName = partyDictionary[kPartyEventName];
-    partyObject.eventDescription = partyDictionary[kPartyEventDescription];
-    partyObject.imageIndex = @([partyDictionary[kPartyImageIndex] integerValue]);
-    partyObject.startTime = @([partyDictionary[kPartyStartTime] integerValue]);
-    partyObject.endTime = @([partyDictionary[kPartyEndTime] integerValue]);
-    partyObject.creatorId = @([partyDictionary[kPartyCreatorId] integerValue]);
-    partyObject.isPartyChanged = @([partyDictionary[kPartyIsChanged] integerValue]);
-    partyObject.isPartyDeleted = @([partyDictionary[kPartyIsDeleted] integerValue]);
-    partyObject.latitude = partyDictionary[kPartyLatitude];
-    partyObject.longitude = partyDictionary[kPartyLongitude];
+- (void)performPartyObject:(PMRPartyManagedObject *)partyObject usingParty:(PMRParty *)party {
+    partyObject.eventId = party.eventId;
+    partyObject.eventName = party.eventName;
+    partyObject.eventDescription = party.eventDescription;
+    partyObject.imageIndex = party.imageIndex;
+    partyObject.startTime = party.startTime;
+    partyObject.endTime = party.endTime;
+    partyObject.creatorId = party.creatorId;
+    partyObject.isPartyChanged = party.isPartyChanged;
+    partyObject.isPartyDeleted = party.isPartyDeleted;
+    partyObject.latitude = party.latitude;
+    partyObject.longitude = party.longitude;
+}
+
+- (void)performParty:(PMRParty *)party usingPartyObject:(PMRPartyManagedObject *)partyObject {
+    party.eventId = partyObject.eventId;
+    party.eventName = partyObject.eventName;
+    party.eventDescription = partyObject.eventDescription;
+    party.imageIndex = partyObject.imageIndex;
+    party.startTime = partyObject.startTime;
+    party.endTime = partyObject.endTime;
+    party.creatorId = partyObject.creatorId;
+    party.isPartyChanged = partyObject.isPartyChanged;
+    party.isPartyDeleted = partyObject.isPartyDeleted;
+    party.latitude = partyObject.latitude;
+    party.longitude = partyObject.longitude;
 }
 
 @end

@@ -17,17 +17,6 @@
 #import "PMRPartyMakerNotification.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
-#define kPartyEventId            @"id"
-#define kPartyEventName          @"name"
-#define kPartyEventDescription   @"comment"
-#define kPartyCreatorId          @"creator_id"
-#define kPartyStartTime          @"start_time"
-#define kPartyEndTime            @"end_time"
-#define kPartyImageIndex         @"logo_id"
-#define kPartyIsChanged          @"isPartyChahged"
-#define kPartyIsDeleted          @"isPartyDeleted"
-#define kPartyLatitude           @"latitude"
-#define kPartyLongitude          @"longitude"
 
 @interface PMRPartiesViewController() <UITableViewDataSource,
                                        UITableViewDelegate>
@@ -45,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"Back", @"Language", nil)]
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:nil
                                                                   action:nil];
@@ -55,6 +44,9 @@
     self.navigationItem.backBarButtonItem = backButton;
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:29/255. green:31/255. blue:36/255. alpha:1];
     self.parties = [[NSMutableArray alloc] init];
+    
+    [self.tabBarItem setTitle:@"STROka"];
+    self.navigationItem.title = NSLocalizedStringFromTable(@"PARTY MAKER", @"Language", nil);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,7 +55,7 @@
     __block __weak PMRPartiesViewController *weakSelf = self;
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading...";
+    hud.labelText = NSLocalizedStringFromTable(@"Loading...", @"Language", nil);
     
     dispatch_async(dispatch_get_main_queue(), ^{
         PMRUser *user = [PMRApiController apiController].user;
@@ -92,8 +84,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PMRTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PMRTableViewCell reuseIdentifier] forIndexPath:indexPath];
-    NSDictionary *selectedPartyDictionary = self.parties[indexPath.row];
-    [cell configureWithPartyDictionary:selectedPartyDictionary];
+    PMRParty *selectedParty = self.parties[indexPath.row];
+    [cell configureWithParty:selectedParty];
     return cell;
 }
 
@@ -109,15 +101,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ToPartyInfoViewController"]) {
         PMRPartyInfoViewController *partyInfoViewController = segue.destinationViewController;
-        NSDictionary *selectedPartyDictionary = [self partyDictionaryById:self.selectedCell.partyId];
-        partyInfoViewController.partyDictionary = selectedPartyDictionary;
+        PMRParty *selectedParty = [self partyDictionaryById:self.selectedCell.partyId];
+        partyInfoViewController.party = selectedParty;
     }
 }
 
-- (NSDictionary *)partyDictionaryById:(NSNumber *)partyId {
-    for (NSDictionary *partyDictionary in self.parties) {
-        if ([partyDictionary[kPartyEventId] integerValue] == [partyId integerValue]) {
-            return partyDictionary;
+- (PMRParty *)partyDictionaryById:(NSNumber *)partyId {
+    for (PMRParty *party in self.parties) {
+        if ([party.eventId integerValue] == [partyId integerValue]) {
+            return party;
         }
     }
     return nil;

@@ -19,15 +19,20 @@
 		8344C8001C73310F00528CC4 /* PMRNetworkSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7FF1C73310F00528CC4 /* PMRNetworkSDK.m */; };
 		8344C8031C74870000528CC4 /* PMRDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8011C74870000528CC4 /* PMRDataModel.xcdatamodeld */; };
 		8344C83A1C75AA6C00528CC4 /* PMRApiController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8391C75AA6C00528CC4 /* PMRApiController.m */; };
-		8344C8731C76AB1F00528CC4 /* PMRParty+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C86C1C76AB1F00528CC4 /* PMRParty+CoreDataProperties.m */; };
-		8344C8741C76AB1F00528CC4 /* PMRParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C86E1C76AB1F00528CC4 /* PMRParty.m */; };
 		8344C8761C76AB1F00528CC4 /* PMRUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8721C76AB1F00528CC4 /* PMRUser.m */; };
 		8344C8791C78F81300528CC4 /* PMRRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8781C78F81300528CC4 /* PMRRegisterViewController.m */; };
 		8344C87C1C7A64CD00528CC4 /* PMRPartyMakerNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C87B1C7A64CD00528CC4 /* PMRPartyMakerNotification.m */; };
 		8344C87F1C7B1ABC00528CC4 /* Language.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8344C8811C7B1ABC00528CC4 /* Language.strings */; };
 		8344C8881C7B438300528CC4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8871C7B438300528CC4 /* Reachability.m */; };
 		8344C88A1C7B43D000528CC4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8344C8891C7B43D000528CC4 /* SystemConfiguration.framework */; };
-		8344C88D1C7B5AEB00528CC4 /* PMRDictionaryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C88C1C7B5AEB00528CC4 /* PMRDictionaryHelper.m */; };
+		8344C8B81C7CD2B700528CC4 /* PMRLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8B71C7CD2B700528CC4 /* PMRLocationViewController.m */; };
+		8344C8BA1C7CD31600528CC4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8344C8B91C7CD31600528CC4 /* CoreLocation.framework */; };
+		8344C8BE1C7CF6A200528CC4 /* PMRAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8BD1C7CF6A200528CC4 /* PMRAnnotation.m */; };
+		839C7A2F1C7D19C200F33909 /* PMRPartyManagedObject+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 839C7A2C1C7D19C200F33909 /* PMRPartyManagedObject+CoreDataProperties.m */; };
+		839C7A301C7D19C200F33909 /* PMRPartyManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 839C7A2E1C7D19C200F33909 /* PMRPartyManagedObject.m */; };
+		839C7A331C7D19D900F33909 /* PMRParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 839C7A321C7D19D900F33909 /* PMRParty.m */; };
+		839C7A351C7D3C2800F33909 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839C7A341C7D3C2800F33909 /* AddressBookUI.framework */; };
+		839C7A371C7D3C5B00F33909 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839C7A361C7D3C5B00F33909 /* Contacts.framework */; };
 		83E217CA1C6220E000C8BF08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217C91C6220E000C8BF08 /* main.m */; };
 		83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */; };
 		83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D41C6220E000C8BF08 /* Assets.xcassets */; };
@@ -61,10 +66,6 @@
 		8344C8021C74870000528CC4 /* PMRDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PMRDataModel.xcdatamodel; sourceTree = "<group>"; };
 		8344C8381C75AA6C00528CC4 /* PMRApiController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRApiController.h; sourceTree = "<group>"; };
 		8344C8391C75AA6C00528CC4 /* PMRApiController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRApiController.m; sourceTree = "<group>"; };
-		8344C86B1C76AB1F00528CC4 /* PMRParty+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PMRParty+CoreDataProperties.h"; sourceTree = "<group>"; };
-		8344C86C1C76AB1F00528CC4 /* PMRParty+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PMRParty+CoreDataProperties.m"; sourceTree = "<group>"; };
-		8344C86D1C76AB1F00528CC4 /* PMRParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRParty.h; sourceTree = "<group>"; };
-		8344C86E1C76AB1F00528CC4 /* PMRParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRParty.m; sourceTree = "<group>"; };
 		8344C8711C76AB1F00528CC4 /* PMRUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRUser.h; sourceTree = "<group>"; };
 		8344C8721C76AB1F00528CC4 /* PMRUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRUser.m; sourceTree = "<group>"; };
 		8344C8771C78F81300528CC4 /* PMRRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRRegisterViewController.h; sourceTree = "<group>"; };
@@ -76,8 +77,21 @@
 		8344C8861C7B438300528CC4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8344C8871C7B438300528CC4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8344C8891C7B43D000528CC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		8344C88B1C7B5AEB00528CC4 /* PMRDictionaryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRDictionaryHelper.h; sourceTree = "<group>"; };
-		8344C88C1C7B5AEB00528CC4 /* PMRDictionaryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRDictionaryHelper.m; sourceTree = "<group>"; };
+		8344C8B41C7C79CF00528CC4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		8344C8B51C7C79D700528CC4 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
+		8344C8B61C7CD2B700528CC4 /* PMRLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRLocationViewController.h; sourceTree = "<group>"; };
+		8344C8B71C7CD2B700528CC4 /* PMRLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRLocationViewController.m; sourceTree = "<group>"; };
+		8344C8B91C7CD31600528CC4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8344C8BC1C7CF6A200528CC4 /* PMRAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRAnnotation.h; sourceTree = "<group>"; };
+		8344C8BD1C7CF6A200528CC4 /* PMRAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRAnnotation.m; sourceTree = "<group>"; };
+		839C7A2B1C7D19C200F33909 /* PMRPartyManagedObject+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PMRPartyManagedObject+CoreDataProperties.h"; sourceTree = "<group>"; };
+		839C7A2C1C7D19C200F33909 /* PMRPartyManagedObject+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PMRPartyManagedObject+CoreDataProperties.m"; sourceTree = "<group>"; };
+		839C7A2D1C7D19C200F33909 /* PMRPartyManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRPartyManagedObject.h; sourceTree = "<group>"; };
+		839C7A2E1C7D19C200F33909 /* PMRPartyManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRPartyManagedObject.m; sourceTree = "<group>"; };
+		839C7A311C7D19D900F33909 /* PMRParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRParty.h; sourceTree = "<group>"; };
+		839C7A321C7D19D900F33909 /* PMRParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRParty.m; sourceTree = "<group>"; };
+		839C7A341C7D3C2800F33909 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		839C7A361C7D3C5B00F33909 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		83E217C51C6220E000C8BF08 /* PartyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E217C91C6220E000C8BF08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E217CB1C6220E000C8BF08 /* PMRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMRAppDelegate.h; sourceTree = "<group>"; };
@@ -106,6 +120,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				839C7A371C7D3C5B00F33909 /* Contacts.framework in Frameworks */,
+				839C7A351C7D3C2800F33909 /* AddressBookUI.framework in Frameworks */,
+				8344C8BA1C7CD31600528CC4 /* CoreLocation.framework in Frameworks */,
 				8344C88A1C7B43D000528CC4 /* SystemConfiguration.framework in Frameworks */,
 				7623C51180E0CF0363B8976D /* libPods-PartyMaker.a in Frameworks */,
 			);
@@ -126,6 +143,9 @@
 		38BCAE36DD120C4BE1A5ABED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				839C7A361C7D3C5B00F33909 /* Contacts.framework */,
+				839C7A341C7D3C2800F33909 /* AddressBookUI.framework */,
+				8344C8B91C7CD31600528CC4 /* CoreLocation.framework */,
 				8344C8891C7B43D000528CC4 /* SystemConfiguration.framework */,
 				4F338279C449E153065A3229 /* libPods-PartyMaker.a */,
 			);
@@ -136,16 +156,10 @@
 			isa = PBXGroup;
 			children = (
 				8344C8041C748FDD00528CC4 /* CoreData */,
+				839C7A311C7D19D900F33909 /* PMRParty.h */,
+				839C7A321C7D19D900F33909 /* PMRParty.m */,
 				8344C8711C76AB1F00528CC4 /* PMRUser.h */,
 				8344C8721C76AB1F00528CC4 /* PMRUser.m */,
-				8344C7FE1C73310F00528CC4 /* PMRNetworkSDK.h */,
-				8344C7FF1C73310F00528CC4 /* PMRNetworkSDK.m */,
-				8344C8381C75AA6C00528CC4 /* PMRApiController.h */,
-				8344C8391C75AA6C00528CC4 /* PMRApiController.m */,
-				8344C87A1C7A64CD00528CC4 /* PMRPartyMakerNotification.h */,
-				8344C87B1C7A64CD00528CC4 /* PMRPartyMakerNotification.m */,
-				8344C88B1C7B5AEB00528CC4 /* PMRDictionaryHelper.h */,
-				8344C88C1C7B5AEB00528CC4 /* PMRDictionaryHelper.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -166,6 +180,8 @@
 				8344C7F21C71FA3900528CC4 /* PMRLoginViewController.m */,
 				8344C8771C78F81300528CC4 /* PMRRegisterViewController.h */,
 				8344C8781C78F81300528CC4 /* PMRRegisterViewController.m */,
+				8344C8B61C7CD2B700528CC4 /* PMRLocationViewController.h */,
+				8344C8B71C7CD2B700528CC4 /* PMRLocationViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -213,12 +229,41 @@
 		8344C8641C76131A00528CC4 /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
-				8344C86B1C76AB1F00528CC4 /* PMRParty+CoreDataProperties.h */,
-				8344C86C1C76AB1F00528CC4 /* PMRParty+CoreDataProperties.m */,
-				8344C86D1C76AB1F00528CC4 /* PMRParty.h */,
-				8344C86E1C76AB1F00528CC4 /* PMRParty.m */,
+				839C7A2B1C7D19C200F33909 /* PMRPartyManagedObject+CoreDataProperties.h */,
+				839C7A2C1C7D19C200F33909 /* PMRPartyManagedObject+CoreDataProperties.m */,
+				839C7A2D1C7D19C200F33909 /* PMRPartyManagedObject.h */,
+				839C7A2E1C7D19C200F33909 /* PMRPartyManagedObject.m */,
 			);
 			name = CoreDataModel;
+			sourceTree = "<group>";
+		};
+		8344C8BB1C7CF66300528CC4 /* MapKitAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				8344C8BC1C7CF6A200528CC4 /* PMRAnnotation.h */,
+				8344C8BD1C7CF6A200528CC4 /* PMRAnnotation.m */,
+			);
+			name = MapKitAnnotation;
+			sourceTree = "<group>";
+		};
+		839C7A391C7DBC9700F33909 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8344C7FE1C73310F00528CC4 /* PMRNetworkSDK.h */,
+				8344C7FF1C73310F00528CC4 /* PMRNetworkSDK.m */,
+				8344C8381C75AA6C00528CC4 /* PMRApiController.h */,
+				8344C8391C75AA6C00528CC4 /* PMRApiController.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		839C7A3A1C7DBCDA00F33909 /* Party notifications */ = {
+			isa = PBXGroup;
+			children = (
+				8344C87A1C7A64CD00528CC4 /* PMRPartyMakerNotification.h */,
+				8344C87B1C7A64CD00528CC4 /* PMRPartyMakerNotification.m */,
+			);
+			name = "Party notifications";
 			sourceTree = "<group>";
 		};
 		83E217BC1C6220E000C8BF08 = {
@@ -242,9 +287,12 @@
 		83E217C71C6220E000C8BF08 /* PartyMaker */ = {
 			isa = PBXGroup;
 			children = (
-				8344C7F01C70CA4C00528CC4 /* Categories */,
-				540424EB1C6693D9002F77B9 /* Model */,
+				839C7A391C7DBC9700F33909 /* API */,
 				83E74DEB1C63508D00B0D255 /* Fonts */,
+				8344C7F01C70CA4C00528CC4 /* Categories */,
+				8344C8BB1C7CF66300528CC4 /* MapKitAnnotation */,
+				540424EB1C6693D9002F77B9 /* Model */,
+				839C7A3A1C7DBCDA00F33909 /* Party notifications */,
 				540424ED1C66942E002F77B9 /* Storyboards */,
 				540424EC1C6693E2002F77B9 /* ViewControllers */,
 				83E217CB1C6220E000C8BF08 /* PMRAppDelegate.h */,
@@ -413,10 +461,9 @@
 				8344C8761C76AB1F00528CC4 /* PMRUser.m in Sources */,
 				83F7E9CE1C68B91D00243A5F /* PMRAddEventViewController.m in Sources */,
 				83F7E9D21C6A6FD000243A5F /* PMRCoreData.m in Sources */,
+				839C7A331C7D19D900F33909 /* PMRParty.m in Sources */,
 				8344C87C1C7A64CD00528CC4 /* PMRPartyMakerNotification.m in Sources */,
-				8344C8731C76AB1F00528CC4 /* PMRParty+CoreDataProperties.m in Sources */,
-				8344C8741C76AB1F00528CC4 /* PMRParty.m in Sources */,
-				8344C88D1C7B5AEB00528CC4 /* PMRDictionaryHelper.m in Sources */,
+				839C7A301C7D19C200F33909 /* PMRPartyManagedObject.m in Sources */,
 				8344C8791C78F81300528CC4 /* PMRRegisterViewController.m in Sources */,
 				83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */,
 				83267E5D1C6DD36C00CC0DC1 /* PMRGuid.m in Sources */,
@@ -429,9 +476,12 @@
 				8344C83A1C75AA6C00528CC4 /* PMRApiController.m in Sources */,
 				8344C8031C74870000528CC4 /* PMRDataModel.xcdatamodeld in Sources */,
 				8344C7F31C71FA3900528CC4 /* PMRLoginViewController.m in Sources */,
+				8344C8B81C7CD2B700528CC4 /* PMRLocationViewController.m in Sources */,
+				8344C8BE1C7CF6A200528CC4 /* PMRAnnotation.m in Sources */,
 				8344C7FA1C724EB800528CC4 /* PMRTextField.m in Sources */,
 				8344C8001C73310F00528CC4 /* PMRNetworkSDK.m in Sources */,
 				83E217EA1C62286900C8BF08 /* PMRPartiesViewController.m in Sources */,
+				839C7A2F1C7D19C200F33909 /* PMRPartyManagedObject+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +492,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				8344C7F51C72138600528CC4 /* Base */,
+				8344C8B41C7C79CF00528CC4 /* en */,
+				8344C8B51C7C79D700528CC4 /* uk */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

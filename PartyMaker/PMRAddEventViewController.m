@@ -14,6 +14,7 @@
 #import "UIImage+Utility.h"
 #import "PMRApiController.h"
 #import "PMRPartyMakerNotification.h"
+#import "PMRLocationViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
 #define kTimeDifference                     30
@@ -21,26 +22,23 @@
 #define kDefaultControlHeight               36
 #define kDistanceBetwenLeadingAndControls   120
 
-#define kPartyEventId            @"id"
-#define kPartyEventName          @"name"
-#define kPartyEventDescription   @"comment"
-#define kPartyCreatorId          @"creator_id"
-#define kPartyStartTime          @"start_time"
-#define kPartyEndTime            @"end_time"
-#define kPartyImageIndex         @"logo_id"
-#define kPartyIsChanged          @"isPartyChahged"
-#define kPartyIsDeleted          @"isPartyDeleted"
-#define kPartyLatitude           @"latitude"
-#define kPartyLongitude          @"longitude"
-
 @interface PMRAddEventViewController ()<UITextFieldDelegate,
                                         UIScrollViewDelegate,
-                                        UITextViewDelegate>
+                                        UITextViewDelegate,
+                                        PMRLocationViewControllerProtocol>
 
 @property (nonatomic) NSMutableString* lastTextViewEditText;
 
 @property (nonatomic, weak) IBOutlet UIButton *chooseDateButton;
 @property (nonatomic, weak) IBOutlet UIButton *locationButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *choodeDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *partyNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *startLabel;
+@property (weak, nonatomic) IBOutlet UILabel *endLabel;
+@property (weak, nonatomic) IBOutlet UILabel *logoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 
 @property (nonatomic, weak) IBOutlet UITextField *eventNameTextField;
 
@@ -73,9 +71,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"Back", @"Language", nil)]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:nil
+                                                                  action:nil];
+    [backButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                        [UIColor colorWithRed:29/255. green:31/255. blue:36/255. alpha:1], NSForegroundColorAttributeName, [UIFont fontWithName:@"MyriadPro-Regular" size:16], NSFontAttributeName,nil] forState:UIControlStateNormal];
+    
+    self.navigationItem.backBarButtonItem = backButton;
 
     self.lastTextViewEditText = [[NSMutableString alloc] initWithString:@""];
     self.isKeyboardOnDescriptionTextViewShowed = NO;
+    
+    self.choodeDateLabel.text = NSLocalizedStringFromTable(@"CHOOSE DATE", @"Language", nil);
+    self.partyNameLabel.text = NSLocalizedStringFromTable(@"PARTY NAME", @"Language", nil);
+    self.startLabel.text = NSLocalizedStringFromTable(@"START", @"Language", nil);
+    self.endLabel.text = NSLocalizedStringFromTable(@"END", @"Language", nil);
+    self.logoLabel.text = NSLocalizedStringFromTable(@"LOGO", @"Language", nil);
+    self.descriptionLabel.text = NSLocalizedStringFromTable(@"DESCRIPTION", @"Language", nil);
+    self.locationLabel.text = NSLocalizedStringFromTable(@"LOCATION", @"Language", nil);
+    
+    self.navigationItem.title = NSLocalizedStringFromTable(@"CREATE PARTY", @"Language", nil);
+    
+    if (!self.party) {
+        [self createDefaultPartyInstanse];
+    }
     
     [self configureDatePickerView];
     [self configureKeyboardToolBar];
@@ -99,11 +120,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Create default party
+
+- (void)createDefaultPartyInstanse {
+    NSDate *startDate = [self selectedDateWithTime:@"00:00"];
+    NSDate *endDate = [self selectedDateWithTime:@"00:30"];
+    
+    self.party = [PMRParty new];
+    self.party.eventId = @0;
+    self.party.creatorId = @0;
+    self.party.latitude = @"";
+    self.party.longitude = @"";
+    self.party.eventName = @"";
+    self.party.eventDescription = @"";
+    self.party.startTime = [startDate toSeconds];
+    self.party.endTime = [endDate toSeconds];
+    self.party.imageIndex = @0;
+    self.party.latitude = @"";
+    self.party.longitude = @"";
+
+}
+
 #pragma mark - Configure methods
 
 - (void)configureButton {
     self.chooseDateButton.layer.cornerRadius = 5.;
     self.locationButton.layer.cornerRadius = 5.;
+    [self.locationButton setTitle:NSLocalizedStringFromTable(@"LOCATION", @"Language", nil) forState:UIControlStateNormal];
+    [self.chooseDateButton setTitle:NSLocalizedStringFromTable(@"CHOOSE DATE", @"Language", nil) forState:UIControlStateNormal];
 }
 
 - (void)configureEventNameTextField {
@@ -113,7 +157,7 @@
     self.eventNameTextField.delegate = self;
     if ([self.eventNameTextField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor colorWithRed:76/255. green:82/255. blue:92/255. alpha:1];
-        self.eventNameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Your party Name"
+        self.eventNameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedStringFromTable(@"Your party Name", @"Language", nil)
                                                                                    attributes:@{NSForegroundColorAttributeName: color}];
     } else {
         NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
@@ -196,8 +240,8 @@
 }
 
 - (IBAction)onSaveButtonTouchUpInside {
-    if ([self.chooseDateButton.titleLabel.text  isEqual: @"CHOOSE DATE"]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You did not choose date." preferredStyle:UIAlertControllerStyleAlert];
+    if ([self.chooseDateButton.titleLabel.text  isEqual:NSLocalizedStringFromTable(@"CHOOSE DATE", @"Language", nil)]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"Error", @"Language", nil) message:NSLocalizedStringFromTable(@"You did not choose date.", @"Language", nil) preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
         
         [alertController addAction:okAction];
@@ -206,7 +250,7 @@
     }
     
     if ([self.eventNameTextField.text isEqual:@""]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"You did not input event name." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"Error", @"Language", nil) message:NSLocalizedStringFromTable(@"You did not input event name.", @"Language", nil) preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction =[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
         
         [alertController addAction:okAction];
@@ -327,6 +371,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     [self.chooseDateButton setUserInteractionEnabled:YES];
+    self.party.eventName = textField.text;
     return YES;
 }
 
@@ -344,6 +389,7 @@
     [self moveBallToElement:scrollView];
     NSInteger currentPage = scrollView.contentOffset.x / self.imageScrollView.frame.size.width;
     [self.imagePageControl setCurrentPage:currentPage];
+    self.party.imageIndex = @(currentPage);
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
@@ -395,40 +441,23 @@
 }
 
 - (void)saveParty {
-    if (!self.partyDictionary) {
-        self.partyDictionary = [NSMutableDictionary new];
-        
-        [self.partyDictionary addEntriesFromDictionary:@{kPartyEventId:@0,
-                                                         kPartyLatitude:@"",
-                                                         kPartyLongitude:@"",
-                                                         kPartyIsChanged:@0,
-                                                         kPartyIsDeleted:@0}];
-    }
-    else {
-        [self.partyDictionary removeObjectForKey:kPartyEventName];
-        [self.partyDictionary removeObjectForKey:kPartyEventDescription];
-        [self.partyDictionary removeObjectForKey:kPartyStartTime];
-        [self.partyDictionary removeObjectForKey:kPartyEndTime];
-        [self.partyDictionary removeObjectForKey:kPartyImageIndex];
-    }
-
     NSDate *startDate = [self selectedDateWithTime:self.startTimeLabel.text];
     NSDate *endDate = [self selectedDateWithTime:self.endTimeLabel.text];
     
-    [self.partyDictionary addEntriesFromDictionary:@{kPartyEventName:self.eventNameTextField.text,
-                                                     kPartyEventDescription:self.descriptionTextView.text,
-                                                     kPartyStartTime:[startDate toSeconds],
-                                                     kPartyEndTime:[endDate toSeconds],
-                                                     kPartyImageIndex:@(self.imagePageControl.currentPage)}];
+    self.party.eventName = self.eventNameTextField.text;
+    self.party.eventDescription = self.descriptionTextView.text;
+    self.party.startTime = [startDate toSeconds];
+    self.party.endTime = [endDate toSeconds];
+    self.party.imageIndex = @(self.imagePageControl.currentPage);
     
     __block __weak PMRAddEventViewController *weakSelf = self;
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading...";
+    hud.labelText = NSLocalizedStringFromTable(@"Loading...", @"Language", nil);
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        [[PMRApiController apiController] saveOrUpdateParty:self.partyDictionary withCallback:^{
+        [[PMRApiController apiController] saveOrUpdateParty:self.party withCallback:^{
             if ([weakSelf.navigationController isViewLoaded]) {
                 [weakSelf.navigationController popToRootViewControllerAnimated:YES];
             }
@@ -501,29 +530,44 @@
 }
 
 - (void)establishPartyInformation {
-    if (!self.partyDictionary) {
-        NSLog(@"%s - Party is nil", __PRETTY_FUNCTION__);
-        return;
-    }
+    NSString *startTime = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"HH:mm"];
+    NSString *endTime = [NSDate stringDateFromSeconds:self.party.endTime withDateFormat:@"HH:mm"];
     
-    NSString *startTime = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyStartTime] withDateFormat:@"HH:mm"];
-    NSString *endTime = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyEndTime] withDateFormat:@"HH:mm"];
-    NSString *eventDate = [NSDate stringDateFromSeconds:self.partyDictionary[kPartyStartTime] withDateFormat:@"dd MMM yyyy"];
-    
-    self.eventNameTextField.text = self.partyDictionary[kPartyEventName];
-    self.descriptionTextView.text = self.partyDictionary[kPartyEventDescription];
-    [self.chooseDateButton setTitle:eventDate forState:UIControlStateNormal];
+    self.eventNameTextField.text = self.party.eventName;
+    self.descriptionTextView.text = self.party.eventDescription;
+    [self.chooseDateButton setTitle:NSLocalizedStringFromTable(@"CHOOSE DATE", @"Language", nil) forState:UIControlStateNormal];
     self.startTimeLabel.text = startTime;
     self.endTimeLabel.text = endTime;
-    self.datePickerControl.date = [NSDate dateFromSeconds:self.partyDictionary[kPartyStartTime]];
+    self.datePickerControl.date = [NSDate dateFromSeconds:self.party.startTime];
     self.startTimeSlider.value = [self minutesFromTime:startTime];
     self.endTimeSlider.value = [self minutesFromTime:endTime];
+    if (![self.party.latitude isEqualToString:@""]) {
+        [self.locationButton setTitle:self.party.latitude forState:UIControlStateNormal];
+    }    
     
-    self.imagePageControl.currentPage = [self.partyDictionary[kPartyImageIndex] integerValue];
+    self.imagePageControl.currentPage = [self.party.imageIndex integerValue];
     
     CGRect scrollViewFrame = [self estimatedImageScrollViewFrame];
-    CGPoint contentOffset = CGPointMake([self.partyDictionary[kPartyImageIndex] integerValue] * scrollViewFrame.size.width, 0);
+    CGPoint contentOffset = CGPointMake([self.party.imageIndex integerValue] * scrollViewFrame.size.width, 0);
     [self.imageScrollView setContentOffset:contentOffset animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"addEventViewControllerToLocationViewController"]) {
+        PMRLocationViewController *locationViewController = segue.destinationViewController;
+        locationViewController.party = self.party;
+        locationViewController.delegate = self;
+        locationViewController.editingMode = YES;
+    }
+}
+
+#pragma mark - Implement PMRLocationViewControllerProtocol
+
+- (void)locationWithLatitude:(double)latitude withLongitude:(double)longitude withAddress:(NSString *)address {
+    NSString *coordinateString = [NSString stringWithFormat:@"%f;%f", latitude, longitude];
+    [self.locationButton setTitle:address forState:UIControlStateNormal];
+    self.party.latitude = address;
+    self.party.longitude = coordinateString;
 }
 
 @end

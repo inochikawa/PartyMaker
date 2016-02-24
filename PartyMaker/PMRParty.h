@@ -2,23 +2,24 @@
 //  PMRParty.h
 //  PartyMaker
 //
-//  Created by 2 on 2/19/16.
+//  Created by 2 on 2/24/16.
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
 
-@class PMRUser;
+@interface PMRParty : NSObject
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface PMRParty : NSManagedObject
-
-// Insert code here to declare functionality of your managed object subclass
+@property (nullable, nonatomic, retain) NSNumber *creatorId;
+@property (nullable, nonatomic, retain) NSNumber *endTime;
+@property (nullable, nonatomic, retain) NSString *eventDescription;
+@property (nullable, nonatomic, retain) NSNumber *eventId;
+@property (nullable, nonatomic, retain) NSString *eventName;
+@property (nullable, nonatomic, retain) NSNumber *imageIndex;
+@property (nullable, nonatomic, retain) NSNumber *isPartyChanged;
+@property (nullable, nonatomic, retain) NSNumber *isPartyDeleted;
+@property (nullable, nonatomic, retain) NSString *latitude;
+@property (nullable, nonatomic, retain) NSString *longitude;
+@property (nullable, nonatomic, retain) NSNumber *startTime;
 
 @end
-
-NS_ASSUME_NONNULL_END
-
-#import "PMRParty+CoreDataProperties.h"

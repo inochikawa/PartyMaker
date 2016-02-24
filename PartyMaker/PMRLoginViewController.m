@@ -23,9 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 
-@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
-
-@property (nonatomic) NSString *string;
+@property (weak, nonatomic) IBOutlet UILabel *informationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *helloLabel;
 
 @end
 
@@ -36,10 +35,11 @@
     
     self.loginBackgroundView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginBackgroundView.layer.borderWidth = 2.0f;
-    self.errorLabel.text = @"";
+    self.informationLabel.text = @"";
     
-    self.string = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Hello Max", @"Language", nil)];
-    self.errorLabel.text = self.string;
+    self.helloLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"HELLO", @"Language", nil)];
+    [self.signInButton setTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"SIGN IN", @"Language", nil)] forState:UIControlStateNormal];
+    [self.registerButton setTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"REGISTER", @"Language", nil)] forState:UIControlStateNormal];
     
     [self configureTextFields];
 }
@@ -59,7 +59,7 @@
     __block PMRUser *user = [PMRUser new];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading...";
+    hud.labelText = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Loading...", @"Language", nil)];
     
     dispatch_async(dispatch_get_main_queue(), ^{        
         user.name = weakSelf.loginTextField.text;
@@ -73,13 +73,13 @@
             
 
             if ([response[@"response"] isEqual:[NSNull null]]) {
-                    weakSelf.errorLabel.text = @"The request is timeout";
+                    weakSelf.informationLabel.text = NSLocalizedStringFromTable(@"The request is timeout", @"Language", nil);
             }
             else if ([response[@"response"][@"status"] isEqualToString:@"Failed"]) {
-                weakSelf.errorLabel.text = response[@"response"][@"msg"];
+                weakSelf.informationLabel.text = NSLocalizedStringFromTable(response[@"response"][@"msg"], @"Language", nil);
             }
             else {
-                weakSelf.errorLabel.text = @"";
+                weakSelf.informationLabel.text = @"";
                 user.userId = @([response[@"response"][@"id"] integerValue]);
                 [weakSelf performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
                 NSLog(@"[User sign in] --- %@", response);
@@ -113,17 +113,19 @@
 
 - (void)configureTextFields {
     UIColor *color = [UIColor colorWithRed:76/255. green:82/255. blue:92/255. alpha:1];
+    NSString *loginPlaceholder = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Login", @"Language", nil)];
+    NSString *passwordPlaceholder = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Password", @"Language", nil)];
     
     self.loginTextField.returnKeyType = UIReturnKeyNext;
     self.loginTextField.delegate = self;
-    self.loginTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Login"
+    self.loginTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:loginPlaceholder
                                                                                 attributes:@{NSForegroundColorAttributeName: color}];
 
 
     
     self.passwordTextField.returnKeyType = UIReturnKeyDone;
     self.passwordTextField.delegate = self;
-    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password"
+    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:passwordPlaceholder
                                                                                 attributes:@{NSForegroundColorAttributeName: color}];
 }
 

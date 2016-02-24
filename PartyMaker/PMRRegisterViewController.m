@@ -24,6 +24,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *informationLabel;
 @property (weak, nonatomic) IBOutlet UIView *registerBackgroundView;
 
+@property (weak, nonatomic) IBOutlet UILabel *helloLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+
 @property (nonatomic) BOOL isMainViewSwipedUp;
 
 @end
@@ -38,6 +43,10 @@
     self.registerBackgroundView.layer.borderWidth = 2.0f;
     self.informationLabel.text = @"";
     
+    self.helloLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"HELLO", @"Language", nil)];
+    [self.cancelButton setTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"CANCEL", @"Language", nil)] forState:UIControlStateNormal];
+    [self.registerButton setTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"REGISTER", @"Language", nil)] forState:UIControlStateNormal];
+    
     [self configureTextFields];
 }
 
@@ -50,7 +59,7 @@
     if ([self notificateAboutPasswords]) {
         __block __weak PMRRegisterViewController *weakSelf = self;
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"Loading...";
+        hud.labelText = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Loading...", @"Language", nil)];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             PMRUser *user = [PMRUser new];
@@ -64,10 +73,10 @@
                 });
                 
                 if ([response[@"response"] isEqual:[NSNull null]]) {
-                    weakSelf.informationLabel.text = @"The request is timeout";
+                    weakSelf.informationLabel.text = NSLocalizedStringFromTable(@"The request is timeout", @"Language", nil);
                 }
                 else if ([response[@"response"][@"status"] isEqualToString:@"Failed"]) {
-                    weakSelf.informationLabel.text = response[@"response"][@"msg"];
+                    weakSelf.informationLabel.text = NSLocalizedStringFromTable(response[@"response"][@"msg"], @"Language", nil);
                 }
                 else {
                     weakSelf.informationLabel.text = @"";
@@ -141,24 +150,29 @@
 - (void)configureTextFields {
     UIColor *color = [UIColor colorWithRed:76/255. green:82/255. blue:92/255. alpha:1];
     
+    NSString *loginPlaceholder = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Login", @"Language", nil)];
+    NSString *passwordPlaceholder = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Password", @"Language", nil)];
+    NSString *emailPlaceholder = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Email", @"Language", nil)];
+    NSString *repeatPasswordPlaceholder = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Repeat password", @"Language", nil)];
+    
     self.loginTextField.delegate = self;
-    self.loginTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Login"
+    self.loginTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:loginPlaceholder
                                                                                 attributes:@{NSForegroundColorAttributeName: color}];
     
     
     
     self.passwordTextField.delegate = self;
-    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password"
+    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:passwordPlaceholder
                                                                                    attributes:@{NSForegroundColorAttributeName: color}];
     
     self.emailTextField.delegate = self;
-    self.emailTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Email"
+    self.emailTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:emailPlaceholder
                                                                                 attributes:@{NSForegroundColorAttributeName: color}];
     
     
     
     self.repeatPasswordTextField.delegate = self;
-    self.repeatPasswordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Repeat password"
+    self.repeatPasswordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:repeatPasswordPlaceholder
                                                                                    attributes:@{NSForegroundColorAttributeName: color}];
 }
 
@@ -174,7 +188,7 @@
 
 - (BOOL)notificateAboutPasswords {
     if (![self isPaswordsIdentity]) {
-        self.informationLabel.text = @"Passwords aren't equals.";
+        self.informationLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Passwords aren't equals.", @"Language", nil)];
         return NO;
     }
     self.informationLabel.text = @"";

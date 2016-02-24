@@ -11,19 +11,7 @@
 #import "PMRNetworkSDK.h"
 #import "PMRParty.h"
 #import "PMRUser.h"
-#import "PMRDictionaryHelper.h"
-
-#define kPartyEventId            @"id"
-#define kPartyEventName          @"name"
-#define kPartyEventDescription   @"comment"
-#define kPartyCreatorId          @"creator_id"
-#define kPartyStartTime          @"start_time"
-#define kPartyEndTime            @"end_time"
-#define kPartyImageIndex         @"logo_id"
-#define kPartyIsChanged          @"isPartyChahged"
-#define kPartyIsDeleted          @"isPartyDeleted"
-#define kPartyLatitude           @"latitude"
-#define kPartyLongitude          @"longitude"
+#import <CoreData/CoreData.h>
 
 @interface PMRApiController()
 
@@ -86,26 +74,26 @@
 
 #pragma mark - API party methods
 
-- (void)saveOrUpdateParty:(NSMutableDictionary *)partyDictionary withCallback:(void (^) ())completion{
+- (void)saveOrUpdateParty:(PMRParty *)party withCallback:(void (^) ())completion{
     __block __weak PMRApiController *weakSelf = self;
     
-    [partyDictionary addEntriesFromDictionary:@{kPartyCreatorId: self.user.userId}];
+    party.creatorId = self.user.userId;
     
-    [self.networkSDK addPaty:partyDictionary callback:^(NSNumber *partyId, NSError *error) {
+    [self.networkSDK addPaty:party callback:^(NSNumber *partyId, NSError *error) {
         NSError *networkError = error;
         
         if (!networkError) {
-            [partyDictionary addEntriesFromDictionary:@{kPartyEventId: partyId}];
+            party.eventId = partyId;
         }
         else {
             NSLog(@"%s --- [Network error] - %@, user info - %@", __PRETTY_FUNCTION__, networkError, networkError.userInfo);
-            [partyDictionary addEntriesFromDictionary:@{kPartyIsChanged: @1}];
+            party.isPartyChanged = @1;
         }
         
         // upload data to database
         NSManagedObjectContext *context = [weakSelf.coreData backgroundManagedObjectContext];
         [context performBlock:^{
-            [weakSelf.coreData saveOrUpadatePartyFromPartyDictionary:partyDictionary inContext:context];
+            [weakSelf.coreData saveOrUpadateParty:party inContext:context];
             [weakSelf pmr_performCompletionBlock:completion];
         }];
     }];
@@ -134,20 +122,15 @@
     }];
 }
 
-- (void)loadAllPartiesByUserId:(NSNumber *)userId withCallback:(void (^) (NSArray *partyDictionaries))completion {
+- (void)loadAllPartiesByUserId:(NSNumber *)userId withCallback:(void (^) (NSArray *parties))completion {
     __block __weak PMRApiController *weakSelf = self;
 
-    [self.networkSDK loadAllPartiesByUserId:userId callback:^(NSDictionary *response, NSError *error) {
+    [self.networkSDK loadAllPartiesByUserId:userId callback:^(NSArray *partiesFromServer, NSError *error) {
         if (!error) {
             
-            NSMutableArray *resultPartyDicrionaries = [[NSMutableArray alloc] init];
-            NSMutableArray *partiesFromServer = [[NSMutableArray alloc] init];
-            
-            if (![response[@"response"] isEqual:[NSNull null]]) {
-                [partiesFromServer addObjectsFromArray:response[@"response"]];
-            }
-            
-            [weakSelf.coreData saveOrUpadatePartiesFromArrayOfPartyDictionaries:partiesFromServer withCallback:^(NSError * _Nullable completionError) {
+            NSMutableArray *resultArrayOfParties = [[NSMutableArray alloc] init];
+
+            [weakSelf.coreData saveOrUpadatePartiesFromArrayOfParties:partiesFromServer withCallback:^(NSError * _Nullable completionError) {
                 
                 BOOL isDatabasePartyExist = NO;
                 
@@ -156,13 +139,12 @@
                 for (PMRParty *databaseParty in partiesFromDatabase) {
                     isDatabasePartyExist = NO;
                     /**********************************************************************************/
-                    for (NSDictionary *serverPartyDictionary in partiesFromServer) {
+                    for (PMRParty *serverParty in partiesFromServer) {
                         // if party exist in server we must check was party changed in offline mode?
-                        if ([databaseParty.eventId integerValue] == [serverPartyDictionary[@"id"] integerValue]) {
+                        if ([databaseParty.eventId integerValue] == [serverParty.eventId integerValue]) {
                             isDatabasePartyExist = YES;
                             if (databaseParty.isPartyChanged == NO) {
-                                NSDictionary *partyDictionary = [PMRDictionaryHelper fullPartyDictionary:databaseParty];
-                                [weakSelf.networkSDK addPaty:partyDictionary callback:^(NSNumber *partyId, NSError *error) {
+                                [weakSelf.networkSDK addPaty:databaseParty callback:^(NSNumber *partyId, NSError *error) {
                                     if (error) {
                                         NSLog(@"%s --- [Network error] - %@, user info - %@", __PRETTY_FUNCTION__, error, error.userInfo);
                                     }
@@ -179,14 +161,13 @@
                             }];
                         }
                         else {
-                            NSMutableDictionary *partyDictionary = [[NSMutableDictionary alloc] initWithDictionary:[PMRDictionaryHelper fullPartyDictionary:databaseParty]];
-                            [weakSelf.networkSDK addPaty:partyDictionary callback:^(NSNumber *partyId, NSError *error) {
+                            [weakSelf.networkSDK addPaty:databaseParty callback:^(NSNumber *partyId, NSError *error) {
                                 if (!error) {
-                                    [partyDictionary setValue:partyId forKey:kPartyEventId];
-                                    [resultPartyDicrionaries addObject:partyDictionary];
+                                    databaseParty.eventId = partyId;
+                                    [resultArrayOfParties addObject:databaseParty];
                                     NSManagedObjectContext *context = [weakSelf.coreData backgroundManagedObjectContext];
                                     [context performBlock:^{
-                                        [weakSelf.coreData saveOrUpadatePartyFromPartyDictionary:partyDictionary inContext:context];
+                                        [weakSelf.coreData saveOrUpadateParty:databaseParty inContext:context];
                                     }];
                                 }
                                 else {
@@ -196,8 +177,7 @@
                         }
                     }
                     else {
-                        NSDictionary *resultPartyDictionary = [PMRDictionaryHelper fullPartyDictionary:databaseParty];
-                        [resultPartyDicrionaries addObject:resultPartyDictionary];
+                        [resultArrayOfParties addObject:databaseParty];
                     }
                     /**********************************************************************************/
 
@@ -205,7 +185,7 @@
                 /**************************************************************************************/
                 
                 if (completion) {
-                    completion(resultPartyDicrionaries);
+                    completion(resultArrayOfParties);
                 }
                 
             }];

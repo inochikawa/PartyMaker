@@ -12,6 +12,6 @@
 
 @interface PMRAddEventViewController : UIViewController
 
-@property (nonatomic) NSMutableDictionary *partyDictionary;
+@property (nonatomic) PMRParty *party;
 
 @end

@@ -10,18 +10,6 @@
 #import "PMRParty.h"
 #import "NSDate+Utility.h"
 
-#define kPartyEventId            @"id"
-#define kPartyEventName          @"name"
-#define kPartyEventDescription   @"comment"
-#define kPartyCreatorId          @"creator_id"
-#define kPartyStartTime          @"start_time"
-#define kPartyEndTime            @"end_time"
-#define kPartyImageIndex         @"logo_id"
-#define kPartyIsChanged          @"isPartyChahged"
-#define kPartyIsDeleted          @"isPartyDeleted"
-#define kPartyLatitude           @"latitude"
-#define kPartyLongitude          @"longitude"
-
 static NSString *APIURLLink;
 
 @interface PMRNetworkSDK()
@@ -97,13 +85,40 @@ static NSString *APIURLLink;
     }] resume];
 }
 
-- (void) loadAllPartiesByUserId:(NSNumber *)userId callback:(void (^) (NSDictionary *response, NSError *error))block {
+- (void) loadAllPartiesByUserId:(NSNumber *)userId callback:(void (^) (NSArray *parties, NSError *error))block {
     NSURLRequest *request = [self requestWithHTTPMethod:@"GET" withMetodAPI:@"party" withHeaderDictionary:nil withParametersDictionary:@{@"creator_id":userId}];
     __weak __block PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (block) {
             NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:@([(NSHTTPURLResponse *)response statusCode])];
-            [weakSelf pmr_performCompletionBlock:block responce:responseDictionary error:error];
+            
+            NSMutableArray *parties = [NSMutableArray new];
+            NSMutableArray *arrayOfDictionaries = [NSMutableArray new];
+            
+            if (![responseDictionary[@"response"] isEqual:[NSNull null]]) {
+                [arrayOfDictionaries addObjectsFromArray:responseDictionary[@"response"]];
+            }
+            
+            for (NSDictionary *dictionary in arrayOfDictionaries) {
+                PMRParty *party = [PMRParty new];
+                party.eventId = @([dictionary[@"id"] integerValue]);
+                party.eventName = dictionary[@"name"];
+                party.eventDescription = dictionary[@"comment"];
+                party.startTime = @([dictionary[@"start_time"] integerValue]);
+                party.endTime = @([dictionary[@"end_time"] integerValue]);
+                party.imageIndex = @([dictionary[@"logo_id"] integerValue]);
+                party.latitude = dictionary[@"latitude"];
+                party.longitude = dictionary[@"longitude"];
+                party.creatorId = @([dictionary[@"creator_id"] integerValue]);
+                
+                [parties addObject:party];
+            }
+            
+            if (block) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    block(parties, error);
+                });
+            }
         }
     }] resume];
 }
@@ -144,20 +159,20 @@ static NSString *APIURLLink;
     }] resume];
 }
 
-- (void)addPaty:(NSDictionary *)partyDictionary callback:(void (^) (NSNumber *partyId, NSError *error))block {
+- (void)addPaty:(PMRParty *)party callback:(void (^) (NSNumber *partyId, NSError *error))block {
     NSURLRequest *request = [self requestWithHTTPMethod:@"POST"
                                            withMetodAPI:@"addParty"
-                                   withHeaderDictionary:@{@"party_id":partyDictionary[kPartyEventId],
-                                                          @"name":partyDictionary[kPartyEventName],
-                                                          @"start_time":partyDictionary[kPartyStartTime],
-                                                          @"end_time":partyDictionary[kPartyEndTime],
-                                                          @"logo_id":partyDictionary[kPartyImageIndex],
-                                                          @"comment":partyDictionary[kPartyEventDescription],
-                                                          @"creator_id":partyDictionary[kPartyCreatorId],
-                                                          @"latitude":@"",
-                                                          @"longitude":@"" }
+                                   withHeaderDictionary:@{@"party_id":party.eventId,
+                                                          @"name":party.eventName,
+                                                          @"start_time":party.startTime,
+                                                          @"end_time":party.endTime,
+                                                          @"logo_id":party.imageIndex,
+                                                          @"comment":party.eventDescription,
+                                                          @"creator_id":party.creatorId,
+                                                          @"latitude":party.latitude,
+                                                          @"longitude":party.longitude }
                                withParametersDictionary:nil];
-    NSNumber *partyCreatorId = partyDictionary[kPartyCreatorId];
+    NSNumber *partyCreatorId = party.creatorId;
     __block __weak PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (block) {
@@ -196,14 +211,13 @@ static NSString *APIURLLink;
 }
 
 - (void)partyIdByUserId:(NSNumber *)userId withCallback:(void (^) (NSNumber *partyId))callback{
-    [self loadAllPartiesByUserId:userId callback:^(NSDictionary *response, NSError *error) {
+    [self loadAllPartiesByUserId:userId callback:^(NSArray *parties, NSError *error) {
         if (!error) {
-            NSArray *parties = response[@"response"];
             NSInteger neededId = 0;
             
-            for (NSDictionary *party in parties) {
-                if ([party[@"id"] integerValue] > neededId) {
-                    neededId = [party[@"id"] integerValue];
+            for (PMRParty *party in parties) {
+                if ([party.eventId integerValue] > neededId) {
+                    neededId = [party.eventId integerValue];
                 }
             }
             

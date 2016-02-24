@@ -27,7 +27,7 @@
 "E2k-El-En8.text" = "DATE";
 
 /* Class = "UITabBarItem"; title = "Parties"; ObjectID = "JfL-lh-h4d"; */
-"JfL-lh-h4d.title" = "Події";
+"JfL-lh-h4d.title" = "Parties";
 
 /* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "Jmw-b6-nIw"; */
 "Jmw-b6-nIw.title" = "Cancel";
@@ -45,7 +45,7 @@
 "LDV-uP-KEB.normalTitle" = "REGISTER";
 
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "Ptg-T6-1iS"; */
-"Ptg-T6-1iS.title" = "Налаштування";
+"Ptg-T6-1iS.title" = "Settings";
 
 /* Class = "UIButton"; normalTitle = "LOCATION"; ObjectID = "QVP-fS-GsD"; */
 "QVP-fS-GsD.normalTitle" = "LOCATION";

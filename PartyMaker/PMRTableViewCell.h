@@ -15,7 +15,7 @@
 @property (nonatomic) NSNumber *partyId;
 
 - (void)configureWithName:(NSString *)eventName timeStart:(NSString *)eventTimeStart logo:(UIImage *)logo;
-- (void)configureWithPartyDictionary:(NSDictionary *)partyDictionary;
+- (void)configureWithParty:(PMRParty *)partyDictionary;
 + (NSString *)reuseIdentifier;
 
 @end
