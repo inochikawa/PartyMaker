@@ -10,18 +10,19 @@
 
 @class PMRParty;
 @class PMRUser;
+@class PMRCoreData;
+@class PMRNetworkSDK;
 
 @interface PMRApiController : NSObject
 
 @property (nonatomic) PMRUser *user;
+@property (nonatomic) PMRCoreData *coreData;
+@property (nonatomic) PMRNetworkSDK *networkSDK;
 
-- (void)registerUser:(PMRUser *)user withCallback:(void (^) (NSDictionary *response, NSError *error))completion;
-- (void)loginUser:(PMRUser *)user withCallback:(void (^) (NSDictionary *response, NSError *error))completion;
-
-- (void)saveOrUpdateParty:(PMRParty *)partyDictionary withCallback:(void (^) ())completion;
-- (void)deletePartyWithPartyId:(NSNumber *)partyId withCreatorId:(NSNumber *)creatorId withCallback:(void (^) ())completion;
-- (void)loadAllPartiesByUserId:(NSNumber *)userId withCallback:(void (^) (NSArray *parties))completion;
-
+- (void)pmr_performCompletionBlock:(void (^) ())block;
 + (instancetype)apiController;
 
 @end
+
+#import "PMRApiController+UserApi.h"
+#import "PMRApiController+PartyApi.h"

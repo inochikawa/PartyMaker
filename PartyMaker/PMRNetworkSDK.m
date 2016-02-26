@@ -134,13 +134,24 @@ static NSString *APIURLLink;
     }] resume];
 }
 
-- (void)allUsersWithcallback:(void (^) (NSDictionary *response, NSError *error))block {
+- (void)allUsersWithcallback:(void (^) (NSArray *users))block {
     NSURLRequest *request = [self requestWithHTTPMethod:@"GET" withMetodAPI:@"allUsers" withHeaderDictionary:nil withParametersDictionary:nil];
     __weak __block PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (block) {
             NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:@([(NSHTTPURLResponse *)response statusCode])];
-            [weakSelf pmr_performCompletionBlock:block responce:responseDictionary error:error];
+            
+            NSMutableArray *users = [NSMutableArray new];
+            
+            for (NSDictionary *userDictionary in responseDictionary[@"response"]) {
+                [users addObject:userDictionary[@"name"]];
+            }
+            
+            if (block) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    block(users);
+                });
+            }
         }
     }] resume];
 }

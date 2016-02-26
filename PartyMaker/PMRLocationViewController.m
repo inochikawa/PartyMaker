@@ -9,8 +9,6 @@
 #import "PMRLocationViewController.h"
 #import "PMRAnnotation.h"
 #import "PMRParty.h"
-#import <AddressBookUI/AddressBookUI.h>
-#import <ContactsUI/ContactsUI.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 

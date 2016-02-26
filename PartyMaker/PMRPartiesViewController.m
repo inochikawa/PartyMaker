@@ -8,7 +8,7 @@
 
 #import "PMRPartiesViewController.h"
 #import "PMRAddEventViewController.h"
-#import "PMRTableViewCell.h"
+#import "PMRPartyTableViewCell.h"
 #import "PMRParty.h"
 #import "PMRPartyInfoViewController.h"
 #import "NSDate+Utility.h"
@@ -21,10 +21,9 @@
 @interface PMRPartiesViewController() <UITableViewDataSource,
                                        UITableViewDelegate>
 
-@property (nonatomic) NSMutableArray *data;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic) NSMutableArray *parties;
-@property (nonatomic) PMRTableViewCell *selectedCell;
+@property (nonatomic) PMRPartyTableViewCell *selectedCell;
 
 @end
 
@@ -83,7 +82,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PMRTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PMRTableViewCell reuseIdentifier] forIndexPath:indexPath];
+    PMRPartyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PMRPartyTableViewCell reuseIdentifier] forIndexPath:indexPath];
     PMRParty *selectedParty = self.parties[indexPath.row];
     [cell configureWithParty:selectedParty];
     return cell;
@@ -95,11 +94,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedCell = [self.tableView cellForRowAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"ToPartyInfoViewController" sender:self];
+    [self performSegueWithIdentifier:@"PartyMkerViewControllerToPartyInfoViewController" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"ToPartyInfoViewController"]) {
+    if ([segue.identifier isEqualToString:@"PartyMkerViewControllerToPartyInfoViewController"]) {
         PMRPartyInfoViewController *partyInfoViewController = segue.destinationViewController;
         PMRParty *selectedParty = [self partyDictionaryById:self.selectedCell.partyId];
         partyInfoViewController.party = selectedParty;

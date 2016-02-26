@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *developedInformationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *aboutDeveloperLabel;
 @property (weak, nonatomic) IBOutlet UIView *informationBackgroundView;
+@property (weak, nonatomic) IBOutlet UIButton *signOutButton;
 
 @end
 
@@ -25,6 +26,7 @@
     self.informationBackgroundView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.informationBackgroundView.layer.borderWidth = 2.0f;
     
+    [self.signOutButton setTitle:NSLocalizedStringFromTable(@"SIGN OUT", @"Language", nil) forState:UIControlStateNormal];
     self.versionLabel.text = [NSString stringWithFormat:@"Party Maker 2016 (c) %@: 1.0(1)", NSLocalizedStringFromTable(@"Version", @"Language", nil)];
     self.developedInformationLabel.text = [NSString stringWithFormat:@"%@ Softheme iOS Intership 2016", NSLocalizedStringFromTable(@"Developed for", @"Language", nil)];
     self.aboutDeveloperLabel.text = NSLocalizedStringFromTable(@"Developer: Maksim Stecenko", @"Language", nil);
@@ -38,6 +40,7 @@
 }
 
 - (IBAction)onSignOutButtonTouchUpInside:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

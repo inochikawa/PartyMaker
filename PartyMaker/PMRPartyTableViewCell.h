@@ -10,11 +10,10 @@
 
 @class PMRParty;
 
-@interface PMRTableViewCell : UITableViewCell
+@interface PMRPartyTableViewCell : UITableViewCell
 
 @property (nonatomic) NSNumber *partyId;
 
-- (void)configureWithName:(NSString *)eventName timeStart:(NSString *)eventTimeStart logo:(UIImage *)logo;
 - (void)configureWithParty:(PMRParty *)partyDictionary;
 + (NSString *)reuseIdentifier;
 

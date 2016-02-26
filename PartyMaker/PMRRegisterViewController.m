@@ -81,7 +81,9 @@
                 else {
                     weakSelf.informationLabel.text = @"";
                     user.userId = @([response[@"response"][@"id"] integerValue]);
-                    [weakSelf performSegueWithIdentifier:@"toLoginViewControllerSegue" sender:self];
+                    
+                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
+                    
                     NSLog(@"[User sign in] --- %@", response);
                 }
             }];
@@ -90,7 +92,7 @@
 }
 
 - (IBAction)onCancelButtonTouchUpInside:(id)sender {
-    [self performSegueWithIdentifier:@"toLoginViewControllerSegue" sender:self];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)onLoginTextFieldDidEndOnExit:(id)sender {

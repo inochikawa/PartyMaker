@@ -25,11 +25,13 @@
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
             <string>MyriadPro-Bold</string>
+            <string>MyriadPro-Bold</string>
         </mutableArray>
         <mutableArray key="MyriadProItalic.ttf">
             <string>MyriadPro-It</string>
         </mutableArray>
         <mutableArray key="MyriadProRegular.ttf">
+            <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
             <string>MyriadPro-Regular</string>
@@ -264,7 +266,6 @@
                         <outlet property="registerBackgroundView" destination="hsT-oS-pLZ" id="qKd-c1-efR"/>
                         <outlet property="registerButton" destination="LDV-uP-KEB" id="65m-Me-4gP"/>
                         <outlet property="repeatPasswordTextField" destination="evy-HB-V1w" id="Y0H-Pt-LtB"/>
-                        <segue destination="Ymd-Dq-ej2" kind="show" identifier="toLoginViewControllerSegue" id="NtY-eU-LVM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QkU-EB-s5S" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -455,7 +456,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="enQ-bq-O4f" kind="relationship" relationship="viewControllers" id="8qa-uu-L42"/>
-                        <segue destination="f8M-DT-RiE" kind="relationship" relationship="viewControllers" id="48o-Oz-v1W"/>
+                        <segue destination="y5a-26-XLo" kind="relationship" relationship="viewControllers" id="UK9-Bz-pga"/>
+                        <segue destination="f8M-DT-RiE" kind="relationship" relationship="viewControllers" id="CXl-fw-d3K"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ElT-mR-c8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -478,7 +480,123 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MzG-ho-AWo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-577" y="753"/>
+            <point key="canvasLocation" x="-577.5" y="444.5"/>
+        </scene>
+        <!--Location-->
+        <scene sceneID="ZMj-RR-wua">
+            <objects>
+                <navigationController id="y5a-26-XLo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Location" image="Map-1" selectedImage="Map" id="Eim-9D-oIt"/>
+                    <navigationItem key="navigationItem" id="Vew-Xx-lRf"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ipy-NY-hef">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.26666666666666666" green="0.28627450980392155" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="sMC-2b-Cne" kind="relationship" relationship="rootViewController" id="GFj-LI-315"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JXi-JI-32F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-577.5" y="1190.5"/>
+        </scene>
+        <!--Show Parties Location View Controller-->
+        <scene sceneID="e3J-QY-Fwu">
+            <objects>
+                <viewController id="sMC-2b-Cne" customClass="PMRShowPartiesLocationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uy7-11-cFD"/>
+                        <viewControllerLayoutGuide type="bottom" id="XdL-12-NMb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zAz-6h-iZ2">
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zbc-EQ-P4J">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="XdL-12-NMb" firstAttribute="top" secondItem="zbc-EQ-P4J" secondAttribute="bottom" id="6J4-jA-CeU"/>
+                            <constraint firstItem="zbc-EQ-P4J" firstAttribute="top" secondItem="Uy7-11-cFD" secondAttribute="bottom" id="LZs-8G-C6w"/>
+                            <constraint firstItem="zbc-EQ-P4J" firstAttribute="leading" secondItem="zAz-6h-iZ2" secondAttribute="leading" id="LeY-Xm-gOf"/>
+                            <constraint firstAttribute="trailing" secondItem="zbc-EQ-P4J" secondAttribute="trailing" id="cps-ea-o6E"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="FrK-AX-sow">
+                        <barButtonItem key="leftBarButtonItem" title="Select Friend" style="done" id="7VR-mt-3K5">
+                            <connections>
+                                <action selector="onSelectFriendButtonTouch:" destination="sMC-2b-Cne" id="A60-bt-8XJ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Reset" id="MWD-vn-gSq"/>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mapView" destination="zbc-EQ-P4J" id="1uV-fb-ro2"/>
+                        <outlet property="usersTableView" destination="rhE-mh-G4x" id="A7Z-31-HcP"/>
+                        <segue destination="Zat-RY-jB1" kind="show" identifier="ShowPartiesLocationViewControllerToPartyInfoViewController" id="Xlp-av-PiG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XTF-yr-sCd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="47" sectionHeaderHeight="28" sectionFooterHeight="28" id="rhE-mh-G4x">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <prototypes>
+                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PMRUserTableViewCellIdentifier" rowHeight="47" id="Usr-VO-Ff9" customClass="PMRUserTableViewCell">
+                            <rect key="frame" x="0.0" y="28" width="240" height="47"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Usr-VO-Ff9" id="Ova-q8-Cju">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maksim" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1D-4d-Z2q">
+                                        <rect key="frame" x="8" y="8" width="53" height="15"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="max.stecenko.max@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfn-UE-h2Q">
+                                        <rect key="frame" x="18" y="26" width="154" height="12"/>
+                                        <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LjZ-BS-L4y" userLabel="Separator view">
+                                        <rect key="frame" x="61" y="45" width="179" height="1"/>
+                                        <color key="backgroundColor" red="0.26666666666666666" green="0.28627450980392155" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="M5H-7c-1Jt"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="R1D-4d-Z2q" firstAttribute="top" secondItem="Ova-q8-Cju" secondAttribute="topMargin" id="9cV-nO-Tkh"/>
+                                    <constraint firstAttribute="trailing" secondItem="LjZ-BS-L4y" secondAttribute="trailing" id="KsR-ZK-4Wj"/>
+                                    <constraint firstAttribute="leadingMargin" secondItem="R1D-4d-Z2q" secondAttribute="leading" id="Uok-yG-lEB"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="nfn-UE-h2Q" secondAttribute="bottom" id="ZmG-DF-0Gz"/>
+                                    <constraint firstItem="nfn-UE-h2Q" firstAttribute="leading" secondItem="Ova-q8-Cju" secondAttribute="leadingMargin" constant="10" id="fbH-xM-t1p"/>
+                                    <constraint firstAttribute="bottom" secondItem="LjZ-BS-L4y" secondAttribute="bottom" id="qnD-Zd-2qj"/>
+                                    <constraint firstItem="LjZ-BS-L4y" firstAttribute="leading" secondItem="R1D-4d-Z2q" secondAttribute="trailing" id="rTl-I4-EAE"/>
+                                </constraints>
+                            </tableViewCellContentView>
+                            <color key="backgroundColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <outlet property="userEmailLabel" destination="nfn-UE-h2Q" id="OMj-l8-Hj0"/>
+                                <outlet property="userNameLabel" destination="R1D-4d-Z2q" id="hpn-Bh-hn8"/>
+                            </connections>
+                        </tableViewCell>
+                    </prototypes>
+                    <connections>
+                        <outlet property="dataSource" destination="sMC-2b-Cne" id="F4q-3L-5xK"/>
+                        <outlet property="delegate" destination="sMC-2b-Cne" id="buW-Vj-WUe"/>
+                    </connections>
+                </tableView>
+            </objects>
+            <point key="canvasLocation" x="220.5" y="1190.5"/>
         </scene>
         <!--SETTINGS-->
         <scene sceneID="avX-gR-yM5">
@@ -574,12 +692,13 @@
                         <outlet property="aboutDeveloperLabel" destination="6mQ-6c-aYJ" id="x4G-wG-J3A"/>
                         <outlet property="developedInformationLabel" destination="Vzc-TC-Eye" id="rfT-BT-ynu"/>
                         <outlet property="informationBackgroundView" destination="ZBt-ai-Seh" id="2Qt-HJ-6PT"/>
+                        <outlet property="signOutButton" destination="POX-Md-fIg" id="JAr-5s-gga"/>
                         <outlet property="versionLabel" destination="mn0-l1-HV0" id="8X6-rl-4L3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9jC-tV-0og" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="225.5" y="751.5"/>
+            <point key="canvasLocation" x="220.5" y="444.5"/>
         </scene>
         <!--Parties-->
         <scene sceneID="gPf-bT-SxU">
@@ -623,7 +742,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PMRTableViewCellIdentifier" focusStyle="custom" rowHeight="70" id="pdf-O3-oeh" customClass="PMRTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PMRPartyTableViewCellIdentifier" focusStyle="custom" rowHeight="70" id="pdf-O3-oeh" customClass="PMRPartyTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pdf-O3-oeh" id="6d7-H5-zVd">
@@ -643,12 +762,6 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfQ-ko-f9d">
-                                                    <rect key="frame" x="70" y="40" width="250" height="12"/>
-                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
-                                                    <color key="textColor" red="0.38431372549019605" green="0.41176470588235292" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ckk-O3-nXa">
                                                     <rect key="frame" x="0.0" y="69" width="320" height="1"/>
                                                     <color key="backgroundColor" red="0.26666666666666666" green="0.28627450980392155" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
@@ -658,6 +771,12 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjF-oy-Z6h">
                                                     <rect key="frame" x="70" y="28" width="44" height="12"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
+                                                    <color key="textColor" red="0.38431372549019605" green="0.41176470588235292" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfQ-ko-f9d">
+                                                    <rect key="frame" x="70" y="40" width="250" height="12"/>
                                                     <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="12"/>
                                                     <color key="textColor" red="0.38431372549019605" green="0.41176470588235292" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -717,7 +836,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="6Rq-at-Ywv" id="e7d-0q-HMF"/>
-                        <segue destination="Zat-RY-jB1" kind="show" identifier="ToPartyInfoViewController" id="YKM-9F-kZu"/>
+                        <segue destination="Zat-RY-jB1" kind="show" identifier="PartyMkerViewControllerToPartyInfoViewController" id="YKM-9F-kZu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VmU-yh-aKk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1192,7 +1311,7 @@
                     <color key="barTintColor" red="0.2666666667" green="0.28627450980000002" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                 </toolbar>
             </objects>
-            <point key="canvasLocation" x="653" y="30"/>
+            <point key="canvasLocation" x="659" y="54"/>
         </scene>
         <!--PARTY INFO-->
         <scene sceneID="ii9-bo-4Lx">
@@ -1592,13 +1711,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N7s-Im-Mtx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104.5" y="-700.5"/>
+            <point key="canvasLocation" x="1150.5" y="-247.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="List" width="30" height="30"/>
         <image name="List-1" width="30" height="30"/>
         <image name="LoginBackground" width="320" height="568"/>
+        <image name="Map" width="30" height="30"/>
+        <image name="Map-1" width="30" height="30"/>
         <image name="Settings" width="30" height="30"/>
         <image name="Settings-1" width="30" height="30"/>
         <image name="TimePopup" width="40" height="31"/>
@@ -1606,7 +1727,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="HSv-ua-Ffh"/>
-        <segue reference="hMY-fl-L4d"/>
+        <segue reference="Xlp-av-PiG"/>
+        <segue reference="kVc-26-rkW"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

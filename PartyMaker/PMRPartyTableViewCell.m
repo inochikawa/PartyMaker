@@ -6,11 +6,11 @@
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 
-#import "PMRTableViewCell.h"
+#import "PMRPartyTableViewCell.h"
 #import "PMRParty.h"
 #import "NSDate+Utility.h"
 
-@interface PMRTableViewCell()
+@interface PMRPartyTableViewCell()
 
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *eventNameLabel;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation PMRTableViewCell
+@implementation PMRPartyTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -37,13 +37,7 @@
 }
 
 + (NSString *)reuseIdentifier {
-    return @"PMRTableViewCellIdentifier";
-}
-
-- (void)configureWithName:(NSString *)eventName timeStart:(NSString *)eventTimeStart logo:(UIImage *)logo {
-    self.logoImageView.image = logo;
-    self.eventNameLabel.text = eventName;
-    self.eventTimeStartLabel.text = eventTimeStart;
+    return @"PMRPartyTableViewCellIdentifier";
 }
 
 - (void)configureWithParty:(PMRParty *)party {
