@@ -45,3 +45,7 @@
 "User exists or data is wrong." = "Користувач вже існує або введени неправильні дані.";
 "The request is timeout" = "Сервер не відповідає.";
 "party is about to begin!" = "подія скоро настане!";
+"Version" = "Версія";
+"Developed for" = "Розроблено для";
+"Developer: Maksim Stecenko" = "Розробник: Максим Стеценко";
+"SIGN OUT" = "ВИЙТИ";
