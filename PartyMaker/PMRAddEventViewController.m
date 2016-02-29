@@ -117,9 +117,6 @@
 #pragma mark - Create default party
 
 - (void)createDefaultPartyInstanse {
-    NSDate *startDate = [self selectedDateWithTime:@"00:00"];
-    NSDate *endDate = [self selectedDateWithTime:@"00:30"];
-    
     self.party = [PMRParty new];
     self.party.eventId = 0;
     self.party.creatorId = 0;
@@ -127,8 +124,8 @@
     self.party.longitude = @"";
     self.party.eventName = @"";
     self.party.eventDescription = @"";
-    self.party.startTime = [startDate toSeconds];
-    self.party.endTime = [endDate toSeconds];
+    self.party.startTime = 0;
+    self.party.endTime = 0;
     self.party.imageIndex = 0;
     self.party.latitude = @"";
     self.party.longitude = @"";
@@ -540,19 +537,22 @@
     
     self.eventNameTextField.text = self.party.eventName;
     self.descriptionTextView.text = self.party.eventDescription;
-    self.startTimeLabel.text = startTime;
-    self.endTimeLabel.text = endTime;
-    self.datePickerControl.date = [NSDate dateFromSeconds:(NSInteger)self.party.startTime];
-    self.startTimeSlider.value = [self minutesFromTime:startTime];
-    self.endTimeSlider.value = [self minutesFromTime:endTime];
     if (![self.party.latitude isEqualToString:@""]) {
         [self.locationButton setTitle:self.party.latitude forState:UIControlStateNormal];
     }
     
-    // if start time and end time are equals, it's mean start and endt times aren't seted to party.
-    // Becouse the difference between the start time and the end time must be at least 30 minutes
-    if (self.party.startTime != self.party.endTime) {
+    if (self.party.startTime == 0) {
+        self.startLabel.text = @"00:00";
+        self.endTimeLabel.text = @"00:30";
+        
+    }
+    else {
+        self.startTimeLabel.text = startTime;
+        self.endTimeLabel.text = endTime;
         [self.chooseDateButton setTitle:date forState:UIControlStateNormal];
+        self.datePickerControl.date = [NSDate dateFromSeconds:(NSInteger)self.party.startTime];
+        self.startTimeSlider.value = [self minutesFromTime:startTime];
+        self.endTimeSlider.value = [self minutesFromTime:endTime];
     }
     
     self.imagePageControl.currentPage = self.party.imageIndex;
