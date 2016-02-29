@@ -551,7 +551,7 @@
     
     // if start time and end time are equals, it's mean start and endt times aren't seted to party.
     // Becouse the difference between the start time and the end time must be at least 30 minutes
-    if (self.party.startTime == self.party.endTime) {
+    if (self.party.startTime != self.party.endTime) {
         [self.chooseDateButton setTitle:date forState:UIControlStateNormal];
     }
     

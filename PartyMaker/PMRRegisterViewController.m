@@ -12,8 +12,6 @@
 #import "PMRUser.h"
 #import "PMRApiController.h"
 
-#define kStatusCodeSuccess 200
-
 @interface PMRRegisterViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet PMRTextField *loginTextField;

@@ -11,8 +11,6 @@
 #import "PMRUser.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
-#define kStatusCodeSuccess 200
-
 @interface PMRLoginViewController()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *loginBackgroundView;
@@ -78,6 +76,8 @@
         }
         else {
             weakSelf.informationLabel.text = @"";
+            self.loginTextField.text = @"";
+            self.passwordTextField.text = @"";
             user.userId = [response[@"response"][@"id"] integerValue];
             
             [self writeUserIdToUserDefaults:user.userId];

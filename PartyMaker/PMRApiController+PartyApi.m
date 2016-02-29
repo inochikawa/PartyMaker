@@ -113,13 +113,12 @@
 
 - (NSArray *)produceResultArrayOfPartiesUsingPartiesFromServer:(NSArray *)partiesFromServer andPartiesFromDatabase:(NSArray *)partiesFromDatabase {
     BOOL isDatabasePartyExist = NO;
-    NSMutableArray *resultArrayOfParties = [[NSMutableArray alloc] init];
+    NSMutableArray *resultArrayOfParties = [[NSMutableArray alloc] initWithArray:partiesFromServer];
     __block __weak PMRApiController *weakSelf = self;
     
     for (PMRParty *databaseParty in partiesFromDatabase) {
         isDatabasePartyExist = NO;
         for (PMRParty *serverParty in partiesFromServer) {
-            // if party exist in server we must check was party changed in offline mode?
             if (databaseParty.eventId == serverParty.eventId) {
                 isDatabasePartyExist = YES;
                 if (!databaseParty.isPartyChanged) {
@@ -128,6 +127,8 @@
                             NSLog(@"%s --- [Network error] - %@, user info - %@", __PRETTY_FUNCTION__, error, error.userInfo);
                         }
                     }];
+                    [resultArrayOfParties removeObject:serverParty];
+                    [resultArrayOfParties addObject:databaseParty];
                     break;
                 }
             }
@@ -151,8 +152,18 @@
                 }];
             }
         }
-        else {
-            [resultArrayOfParties addObject:databaseParty];
+    }
+    
+    BOOL isServerPartyExist = NO;
+    for (PMRParty *serverParty in partiesFromServer) {
+        isServerPartyExist = NO;
+        for (PMRParty * databaseParty in partiesFromDatabase) {
+            if (serverParty.eventId == databaseParty.eventId) {
+                isServerPartyExist = YES;
+            }
+        }
+        if (!isServerPartyExist) {
+            [weakSelf.coreData saveOrUpdateParty:serverParty];
         }
     }
     
