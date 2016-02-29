@@ -72,14 +72,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"Back", @"Language", nil)]
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:nil
-                                                                  action:nil];
-    [backButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                        [UIColor colorWithRed:29/255. green:31/255. blue:36/255. alpha:1], NSForegroundColorAttributeName, [UIFont fontWithName:@"MyriadPro-Regular" size:16], NSFontAttributeName,nil] forState:UIControlStateNormal];
     
-    self.navigationItem.backBarButtonItem = backButton;
 
     self.lastTextViewEditText = [[NSMutableString alloc] initWithString:@""];
     self.isKeyboardOnDescriptionTextViewShowed = NO;
@@ -98,6 +91,7 @@
         [self createDefaultPartyInstanse];
     }
     
+    [self configureBackBarButton];
     [self configureDatePickerView];
     [self configureKeyboardToolBar];
     [self configureDynamicBall];
@@ -142,6 +136,16 @@
 }
 
 #pragma mark - Configure methods
+
+- (void)configureBackBarButton {
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"Back", @"Language", nil)]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:nil
+                                                                  action:nil];
+    [backButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                        [UIColor colorWithRed:29/255. green:31/255. blue:36/255. alpha:1], NSForegroundColorAttributeName, [UIFont fontWithName:@"MyriadPro-Regular" size:16], NSFontAttributeName,nil] forState:UIControlStateNormal];
+    self.navigationItem.backBarButtonItem = backButton;
+}
 
 - (void)configureButton {
     self.chooseDateButton.layer.cornerRadius = 5.;

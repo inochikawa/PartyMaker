@@ -33,20 +33,6 @@
 
 @implementation PMRShowPartiesLocationViewController
 
-- (void)dealloc {
-    
-    NSLog(@"sdf");
-    self.mapView = nil;
-    self.mapView.delegate = nil;
-    [self.mapView removeFromSuperview];
-    self.parties = nil;
-    self.users = nil;
-    self.selectedAnnotation = nil;
-    self.locationManager.delegate = nil;
-    self.locationManager = nil;
-    self.usersTableView = nil;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureUsersTableView];
@@ -60,15 +46,6 @@
     
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)configureUsersTableView {
@@ -108,6 +85,7 @@
                          weakSelf.usersTableView.frame = CGRectMake(- tableViewWidth, 0, tableViewWidth, tableViewHeight);
                      }
                      completion:nil];
+    self.isUsersTableViewOpened = NO;
 }
 
 #pragma mark - MapKit implementation
@@ -187,8 +165,6 @@
         [[PMRApiController apiController] loadAllUsersWithCallback:^(NSArray *users) {
             [weakSelf.users removeAllObjects];
             NSInteger currentUserId = [PMRApiController apiController].user.userId;
-            
-
             
             NSArray *sortedArrayOfUsers = [users sortedArrayUsingComparator:^NSComparisonResult(PMRUser * _Nonnull obj1, PMRUser *  _Nonnull obj2) {
                 NSString *firstUserName = obj1.name;

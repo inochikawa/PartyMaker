@@ -143,10 +143,7 @@
                     if (!error) {
                         databaseParty.eventId = partyId;
                         [resultArrayOfParties addObject:databaseParty];
-                        NSManagedObjectContext *context = [weakSelf.coreData.coreDataStack backgroundManagedObjectContext];
-                        [context performBlock:^{
-                            [weakSelf.coreData saveOrUpdateParty:databaseParty inContext:context];
-                        }];
+                        [weakSelf.coreData saveOrUpdateParty:databaseParty];
                     }
                     else {
                         NSLog(@"%s --- [Network error] - %@, user info - %@", __PRETTY_FUNCTION__, error, error.userInfo);

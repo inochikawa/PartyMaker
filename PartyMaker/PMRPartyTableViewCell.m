@@ -21,14 +21,6 @@
 
 @implementation PMRPartyTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-}
-
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.logoImageView.image = nil;

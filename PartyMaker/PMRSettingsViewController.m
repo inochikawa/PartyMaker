@@ -34,11 +34,6 @@
     self.navigationItem.title = NSLocalizedStringFromTable(@"SETTINGS", @"Language", nil);
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (IBAction)onSignOutButtonTouchUpInside:(id)sender {
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"userId"];
     [[NSUserDefaults standardUserDefaults] synchronize];

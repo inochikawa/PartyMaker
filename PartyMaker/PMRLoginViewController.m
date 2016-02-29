@@ -44,11 +44,6 @@
     [self configureTextFields];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSInteger userId = [[[NSUserDefaults standardUserDefaults]
@@ -69,34 +64,28 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Loading...", @"Language", nil)];
     
-    dispatch_async(dispatch_get_main_queue(), ^{        
         user.name = weakSelf.loginTextField.text;
         user.password = weakSelf.passwordTextField.text;
         
-        [[PMRApiController apiController] loginUser:user withCallback:^(NSDictionary *response, NSError *error) {
+    [[PMRApiController apiController] loginUser:user withCallback:^(NSDictionary *response, NSError *error) {
+        [hud hide:YES];
+        
+        if ([response[@"response"] isEqual:[NSNull null]]) {
+            weakSelf.informationLabel.text = NSLocalizedStringFromTable(@"The request is timeout", @"Language", nil);
+        }
+        else if ([response[@"response"][@"status"] isEqualToString:@"Failed"]) {
+            weakSelf.informationLabel.text = NSLocalizedStringFromTable(response[@"response"][@"msg"], @"Language", nil);
+        }
+        else {
+            weakSelf.informationLabel.text = @"";
+            user.userId = [response[@"response"][@"id"] integerValue];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [hud hide:YES];
-            });
+            [self writeUserIdToUserDefaults:user.userId];
             
-
-            if ([response[@"response"] isEqual:[NSNull null]]) {
-                    weakSelf.informationLabel.text = NSLocalizedStringFromTable(@"The request is timeout", @"Language", nil);
-            }
-            else if ([response[@"response"][@"status"] isEqualToString:@"Failed"]) {
-                weakSelf.informationLabel.text = NSLocalizedStringFromTable(response[@"response"][@"msg"], @"Language", nil);
-            }
-            else {
-                weakSelf.informationLabel.text = @"";
-                user.userId = [response[@"response"][@"id"] integerValue];
-                
-                [self writeUserIdToUserDefaults:user.userId];
-                
-                [weakSelf performSegueWithIdentifier:@"toTabControllerSegue" sender:weakSelf];
-                NSLog(@"[User sign in] --- %@", response);
-            }
-        }];
-    });
+            [weakSelf performSegueWithIdentifier:@"toTabControllerSegue" sender:weakSelf];
+            NSLog(@"[User sign in] --- %@", response);
+        }
+    }];
 }
 
 - (IBAction)onLoginTextFieldDidEndOnExit:(id)sender {

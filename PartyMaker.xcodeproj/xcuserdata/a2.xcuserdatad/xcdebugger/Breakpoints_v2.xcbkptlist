@@ -45,11 +45,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRPartiesViewController.m"
-            timestampString = "478441929.892609"
+            timestampString = "478450153.246857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
             <Locations>
@@ -93,11 +93,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRCoreData.m"
-            timestampString = "478368047.581127"
+            timestampString = "478450153.246857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "-deleteParty:withCallback:"
             landmarkType = "5">
             <Locations>
@@ -331,22 +331,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRNetworkSDK.m"
-            timestampString = "478430582.2072"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "-loadAllPartiesByUserId:callback:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PartyMaker/PMRNetworkSDK.m"
             timestampString = "478435973.266195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -363,11 +347,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRCoreData.m"
-            timestampString = "478368047.581127"
+            timestampString = "478450153.246857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "-deleteParty:withCallback:"
             landmarkType = "5">
          </BreakpointContent>
@@ -395,11 +379,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRPartiesViewController.m"
-            timestampString = "478441929.892609"
+            timestampString = "478450153.246857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -411,11 +395,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRPartiesViewController.m"
-            timestampString = "478441929.892609"
+            timestampString = "478450153.246857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -427,27 +411,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRPartyInfoViewController.m"
-            timestampString = "478354184.15531"
+            timestampString = "478451663.849895"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PartyMaker/PMRPartyInfoViewController.m"
-            timestampString = "478354184.15531"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "-configurePartyInfoView"
             landmarkType = "5">
          </BreakpointContent>

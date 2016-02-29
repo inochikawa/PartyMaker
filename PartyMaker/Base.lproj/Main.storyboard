@@ -1361,7 +1361,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAZ-xs-e4D">
                                                 <rect key="frame" x="50" y="191" width="194" height="12"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="250" constant="500" id="jMj-WX-igW"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="250" constant="10000" id="jMj-WX-igW"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="MyriadPro-It" family="Myriad Pro" pointSize="12"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1580,7 +1580,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="onEditButtonTouchUpInside:" destination="Zat-RY-jB1" eventType="touchUpInside" id="LaY-x9-dep"/>
                                                     <segue destination="TPF-f6-8pl" kind="show" identifier="PartyInfoViewControllerToAddEventViewController" id="Xxx-iK-O40"/>
                                                 </connections>
                                             </button>
@@ -1612,7 +1611,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="onLocationButtonTouchUpInside:" destination="Zat-RY-jB1" eventType="touchUpInside" id="vIr-go-R8j"/>
                                                     <segue destination="Urg-4J-CRV" kind="show" identifier="partyInfoViewControllerToLocationViewController" id="kVc-26-rkW"/>
                                                 </connections>
                                             </button>
@@ -1676,7 +1674,6 @@
                         <outlet property="imageHolderView" destination="ehZ-N2-Y2X" id="aVQ-jU-K0k"/>
                         <outlet property="locationButton" destination="efn-Wz-eIt" id="RiZ-Ds-W35"/>
                         <outlet property="logoImageView" destination="utp-Gj-L66" id="Cbo-ch-aMS"/>
-                        <outlet property="mainScrollView" destination="C2X-Sd-Ae8" id="7qy-9S-eF2"/>
                         <outlet property="startLabel" destination="jFa-kj-IJg" id="mtL-og-G9T"/>
                     </connections>
                 </viewController>

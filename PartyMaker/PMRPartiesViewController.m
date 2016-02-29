@@ -7,11 +7,9 @@
 //
 
 #import "PMRPartiesViewController.h"
-#import "PMRAddEventViewController.h"
 #import "PMRPartyTableViewCell.h"
 #import "PMRParty.h"
 #import "PMRPartyInfoViewController.h"
-#import "NSDate+Utility.h"
 #import "PMRApiController.h"
 #import "PMRUser.h"
 #import "PMRPartyMakerNotification.h"
@@ -56,28 +54,19 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedStringFromTable(@"Loading...", @"Language", nil);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        PMRUser *user = [PMRApiController apiController].user;
-        [[PMRApiController apiController] loadAllPartiesByUserId:user.userId withCallback:^(NSArray *parties) {
-            [weakSelf.parties removeAllObjects];
-            [weakSelf.parties addObjectsFromArray:parties];
-            [weakSelf.tableView reloadData];
-            [weakSelf recreateAllNotificationsForEachParty];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [hud hide:YES];
-            });
-        }];
-    });
+    PMRUser *user = [PMRApiController apiController].user;
+    [[PMRApiController apiController] loadAllPartiesByUserId:user.userId withCallback:^(NSArray *parties) {
+        [weakSelf.parties removeAllObjects];
+        [weakSelf.parties addObjectsFromArray:parties];
+        [weakSelf.tableView reloadData];
+        [weakSelf recreateAllNotificationsForEachParty];
+        
+        [hud hide:YES];
+        
+    }];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
+#pragma mark - TableView delegates methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PMRPartyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[PMRPartyTableViewCell reuseIdentifier] forIndexPath:indexPath];
@@ -102,6 +91,8 @@
         partyInfoViewController.party = selectedParty;
     }
 }
+
+#pragma mark - Helpers
 
 - (PMRParty *)partyDictionaryById:(NSInteger)partyId {
     for (PMRParty *party in self.parties) {

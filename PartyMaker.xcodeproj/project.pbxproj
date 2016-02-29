@@ -6,20 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		83B8516C1C804D8F000B4F17 /* Mogenerator */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 83B8516D1C804D8F000B4F17 /* Build configuration list for PBXAggregateTarget "Mogenerator" */;
-			buildPhases = (
-				83B851701C804D92000B4F17 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = Mogenerator;
-			productName = Mogenerator;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		540424EA1C667445002F77B9 /* Parties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 540424E91C667445002F77B9 /* Parties.plist */; };
 		7623C51180E0CF0363B8976D /* libPods-PartyMaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F338279C449E153065A3229 /* libPods-PartyMaker.a */; };
@@ -420,9 +406,6 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Maksim Stecenko";
 				TargetAttributes = {
-					83B8516C1C804D8F000B4F17 = {
-						CreatedOnToolsVersion = 7.2;
-					};
 					83E217C41C6220E000C8BF08 = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -443,7 +426,6 @@
 			projectRoot = "";
 			targets = (
 				83E217C41C6220E000C8BF08 /* PartyMaker */,
-				83B8516C1C804D8F000B4F17 /* Mogenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -496,19 +478,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PartyMaker/Pods-PartyMaker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		83B851701C804D92000B4F17 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "mogenerator --v2 --model PartyMaker/PMRDataModel.xcdatamodeld/ --machine-dir PartyMaker/GeneratedEntities/ --human PartyMaker/Entities";
 		};
 		CE276F0A183BC942EA48AA2E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -599,20 +568,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		83B8516E1C804D8F000B4F17 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		83B8516F1C804D8F000B4F17 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		83E217DA1C6220E000C8BF08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -722,14 +677,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		83B8516D1C804D8F000B4F17 /* Build configuration list for PBXAggregateTarget "Mogenerator" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				83B8516E1C804D8F000B4F17 /* Debug */,
-				83B8516F1C804D8F000B4F17 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
 		83E217C01C6220E000C8BF08 /* Build configuration list for PBXProject "PartyMaker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

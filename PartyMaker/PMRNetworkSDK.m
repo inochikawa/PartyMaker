@@ -91,37 +91,37 @@ static NSString *APIURLLink;
     NSURLRequest *request = [self requestWithHTTPMethod:@"GET" withMetodAPI:@"party" withHeaderDictionary:nil withParametersDictionary:@{@"creator_id":@(userId)}];
     __weak __block PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (block) {
-            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:[(NSHTTPURLResponse *)response statusCode]];
-            
-            NSMutableArray *parties = [NSMutableArray new];
-            NSMutableArray *arrayOfDictionaries = [NSMutableArray new];
-            
-            if (![responseDictionary[@"response"] isEqual:[NSNull null]]) {
-                [arrayOfDictionaries addObjectsFromArray:responseDictionary[@"response"]];
-            }
-            
-            for (NSDictionary *dictionary in arrayOfDictionaries) {
-                PMRParty *party = [PMRParty new];
-                party.eventId = [dictionary[@"id"] integerValue];
-                party.eventName = dictionary[@"name"];
-                party.eventDescription = dictionary[@"comment"];
-                party.startTime = [dictionary[@"start_time"] integerValue];
-                party.endTime = [dictionary[@"end_time"] integerValue];
-                party.imageIndex = [dictionary[@"logo_id"] integerValue];
-                party.latitude = dictionary[@"latitude"];
-                party.longitude = dictionary[@"longitude"];
-                party.creatorId = [dictionary[@"creator_id"] integerValue];
-                
-                [parties addObject:party];
-            }
-            
-            if (block) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    block(parties, error);
-                });
-            }
+       
+        NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:[(NSHTTPURLResponse *)response statusCode]];
+        
+        NSMutableArray *parties = [NSMutableArray new];
+        NSMutableArray *arrayOfDictionaries = [NSMutableArray new];
+        
+        if (![responseDictionary[@"response"] isEqual:[NSNull null]]) {
+            [arrayOfDictionaries addObjectsFromArray:responseDictionary[@"response"]];
         }
+        
+        for (NSDictionary *dictionary in arrayOfDictionaries) {
+            PMRParty *party = [PMRParty new];
+            party.eventId = [dictionary[@"id"] integerValue];
+            party.eventName = dictionary[@"name"];
+            party.eventDescription = dictionary[@"comment"];
+            party.startTime = [dictionary[@"start_time"] integerValue];
+            party.endTime = [dictionary[@"end_time"] integerValue];
+            party.imageIndex = [dictionary[@"logo_id"] integerValue];
+            party.latitude = dictionary[@"latitude"];
+            party.longitude = dictionary[@"longitude"];
+            party.creatorId = [dictionary[@"creator_id"] integerValue];
+            
+            [parties addObject:party];
+        }
+        
+        if (block) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(parties, error);
+            });
+        }
+        
     }] resume];
 }
 

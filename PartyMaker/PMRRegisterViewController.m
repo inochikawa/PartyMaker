@@ -50,44 +50,35 @@
     [self configureTextFields];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (IBAction)onRegisterButtonTouchUpInside:(id)sender {
     if ([self notificateAboutPasswords]) {
         __block __weak PMRRegisterViewController *weakSelf = self;
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Loading...", @"Language", nil)];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            PMRUser *user = [PMRUser new];
-            user.name = weakSelf.loginTextField.text;
-            user.password = weakSelf.passwordTextField.text;
-            user.email = weakSelf.emailTextField.text;
+        PMRUser *user = [PMRUser new];
+        user.name = weakSelf.loginTextField.text;
+        user.password = weakSelf.passwordTextField.text;
+        user.email = weakSelf.emailTextField.text;
+        
+        [[PMRApiController apiController] registerUser:user withCallback:^(NSDictionary *response, NSError *error) {
+            [hud hide:YES];
             
-            [[PMRApiController apiController] registerUser:user withCallback:^(NSDictionary *response, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [hud hide:YES];
-                });
+            if ([response[@"response"] isEqual:[NSNull null]]) {
+                weakSelf.informationLabel.text = NSLocalizedStringFromTable(@"The request is timeout", @"Language", nil);
+            }
+            else if ([response[@"response"][@"status"] isEqualToString:@"Failed"]) {
+                weakSelf.informationLabel.text = NSLocalizedStringFromTable(response[@"response"][@"msg"], @"Language", nil);
+            }
+            else {
+                weakSelf.informationLabel.text = @"";
+                user.userId = [response[@"response"][@"id"] integerValue];
                 
-                if ([response[@"response"] isEqual:[NSNull null]]) {
-                    weakSelf.informationLabel.text = NSLocalizedStringFromTable(@"The request is timeout", @"Language", nil);
-                }
-                else if ([response[@"response"][@"status"] isEqualToString:@"Failed"]) {
-                    weakSelf.informationLabel.text = NSLocalizedStringFromTable(response[@"response"][@"msg"], @"Language", nil);
-                }
-                else {
-                    weakSelf.informationLabel.text = @"";
-                    user.userId = [response[@"response"][@"id"] integerValue];
-                    
-                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
-                    
-                    NSLog(@"[User sign in] --- %@", response);
-                }
-            }];
-        });
+                [weakSelf dismissViewControllerAnimated:YES completion:nil];
+                
+                NSLog(@"[User sign in] --- %@", response);
+            }
+        }];
     }
 }
 
@@ -105,7 +96,6 @@
 
 - (IBAction)onPasswordTextFieldDidEndOnExit:(id)sender {
     [self.repeatPasswordTextField becomeFirstResponder];
-    
 }
 
 - (IBAction)onRepeatPasswordEditingDidBegin:(id)sender {
@@ -161,8 +151,6 @@
     self.loginTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:loginPlaceholder
                                                                                 attributes:@{NSForegroundColorAttributeName: color}];
     
-    
-    
     self.passwordTextField.delegate = self;
     self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:passwordPlaceholder
                                                                                    attributes:@{NSForegroundColorAttributeName: color}];
@@ -170,8 +158,6 @@
     self.emailTextField.delegate = self;
     self.emailTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:emailPlaceholder
                                                                                 attributes:@{NSForegroundColorAttributeName: color}];
-    
-    
     
     self.repeatPasswordTextField.delegate = self;
     self.repeatPasswordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:repeatPasswordPlaceholder

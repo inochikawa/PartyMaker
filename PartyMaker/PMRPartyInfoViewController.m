@@ -32,29 +32,19 @@
 
 @property (weak, nonatomic) IBOutlet UIView *imageHolderView;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
-
 @end
 
 @implementation PMRPartyInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"Back", @"Language", nil)]
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:nil
-                                                                  action:nil];
-    [backButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                        [UIColor colorWithRed:29/255. green:31/255. blue:36/255. alpha:1], NSForegroundColorAttributeName, [UIFont fontWithName:@"MyriadPro-Regular" size:16], NSFontAttributeName,nil] forState:UIControlStateNormal];
-    
-    self.navigationItem.backBarButtonItem = backButton;
+    [self configureBackBarButton];
+    [self configurePartyInfoView];
     
     if (self.needHideButtons) {
-        self.locationButton.hidden = YES;
-        self.editButton.hidden = YES;
-        self.deleteButton.hidden = YES;
-        self.mainScrollView.scrollEnabled = NO;
+        [self.locationButton removeFromSuperview];
+        [self.editButton removeFromSuperview];
+        [self.deleteButton removeFromSuperview];
     }
     else {
         [self.locationButton setTitle:NSLocalizedStringFromTable(@"LOCATION", @"Language", nil) forState:UIControlStateNormal];
@@ -72,9 +62,14 @@
     self.endLabel.text = NSLocalizedStringFromTable(@"END", @"Language", nil);
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configurePartyInfoView];
+- (void)configureBackBarButton {
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"Back", @"Language", nil)]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:nil
+                                                                  action:nil];
+    [backButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                        [UIColor colorWithRed:29/255. green:31/255. blue:36/255. alpha:1], NSForegroundColorAttributeName, [UIFont fontWithName:@"MyriadPro-Regular" size:16], NSFontAttributeName,nil] forState:UIControlStateNormal];
+    self.navigationItem.backBarButtonItem = backButton;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -90,12 +85,6 @@
 }
 
 #pragma mark - IBActions
-
-- (IBAction)onLocationButtonTouchUpInside:(id)sender {
-}
-
-- (IBAction)onEditButtonTouchUpInside:(id)sender {
-}
 
 - (IBAction)onDeleteButtonTouchUpInside:(id)sender {
     __block __weak PMRPartyInfoViewController *weakSelf = self;

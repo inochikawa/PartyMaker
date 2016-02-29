@@ -21,18 +21,7 @@
 
 - (NSArray *)loadAllPartiesByUserId:(NSInteger)userId {
     NSManagedObjectContext *context = [self.coreDataStack mainManagedObjectContext];
-    
-    NSFetchRequest *fetch = [NSFetchRequest new];
-    fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
-    fetch.predicate = [NSPredicate predicateWithFormat:@"creatorId == %@", @(userId)];
-    fetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:YES]];
-    
-    NSError *error = nil;
-    NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&error];
-    if ( error ) {
-        NSLog(@"PMRPartyManagedObject pmr_fetchPartyWithName: failed with error %@", error);
-    }
-    
+    NSArray *fetchedObjects = [self fetchAllPartiesByUserId:userId fromContext:context];
     NSMutableArray *parties = [NSMutableArray new];
     
     for (PMRPartyManagedObject *partyObject in fetchedObjects) {
@@ -57,7 +46,7 @@
         }
         
         NSLog(@"%s --- Party [%@] was deleted", __PRETTY_FUNCTION__, partyObject.eventName);
-        [weakSelf pmr_performCompletionBlock:completion withError:error];
+        [weakSelf performCompletionBlock:completion withError:error];
     }];
 }
 
@@ -65,15 +54,7 @@
     __weak PMRCoreData *weakSelf = self;
     NSManagedObjectContext *context = [self.coreDataStack backgroundManagedObjectContext];
     [context performBlock:^{
-        NSFetchRequest *fetch = [NSFetchRequest new];
-        fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
-        fetch.predicate = [NSPredicate predicateWithFormat:@"creatorId == %@", userId];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&error];
-        if (error) {
-            NSLog(@"PMRPartyManagedObject pmr_fetchPartyWithName: failed with error %@", error);
-        }
+        NSArray *fetchedObjects = [self fetchAllPartiesByUserId:userId fromContext:context];
         
         for (PMRPartyManagedObject *partyObject in fetchedObjects) {
             NSError *error = nil;
@@ -85,7 +66,14 @@
             }
         }
         
-        [weakSelf pmr_performCompletionBlock:completion withError:error];
+        [weakSelf performCompletionBlock:completion withError:nil];
+    }];
+}
+
+- (void)saveOrUpdateParty:(PMRParty *)party {
+    NSManagedObjectContext *context = [self.coreDataStack backgroundManagedObjectContext];
+    [context performBlock:^{
+        [self saveOrUpdateParty:party inContext:context];
     }];
 }
 
@@ -113,7 +101,7 @@
         for (PMRParty *party in parties) {
             [weakSelf saveOrUpdateParty:party inContext:context];
         }
-        [weakSelf pmr_performCompletionBlock:completion withError:nil];
+        [weakSelf performCompletionBlock:completion withError:nil];
     }];
 }
 
@@ -133,7 +121,7 @@
 
 #pragma mark - Perform completion block
 
-- (void)pmr_performCompletionBlock:(void (^) (NSError *completionError))block withError:(NSError *)error{
+- (void)performCompletionBlock:(void (^) (NSError *completionError))block withError:(NSError *)error{
     if (block) {
         dispatch_async(dispatch_get_main_queue(), ^{
             block(error);
@@ -143,6 +131,20 @@
 
 #pragma mark - User core data implementation.
 
-
+- (NSArray *)fetchAllPartiesByUserId:(NSInteger)userId fromContext:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetch = [NSFetchRequest new];
+    fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
+    fetch.predicate = [NSPredicate predicateWithFormat:@"creatorId == %@", @(userId)];
+    fetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:YES]];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&error];
+    
+    if (error) {
+        NSLog(@"%s --- [Fetch error] %@", __PRETTY_FUNCTION__, error);
+    }
+    
+    return fetchedObjects;
+}
 
 @end
