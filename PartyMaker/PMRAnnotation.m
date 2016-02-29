@@ -37,7 +37,7 @@
     
     self.title = party.eventName;
     self.subtitle = party.latitude;
-    self.partyId = party.eventId;
+    self.partyId = (NSInteger)party.eventId;
     self.partyLogoIndex = party.imageIndex;
     return self;
 

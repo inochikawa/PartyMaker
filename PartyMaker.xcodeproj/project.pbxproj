@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		540424EA1C667445002F77B9 /* Parties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 540424E91C667445002F77B9 /* Parties.plist */; };
 		7623C51180E0CF0363B8976D /* libPods-PartyMaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F338279C449E153065A3229 /* libPods-PartyMaker.a */; };
 		83267E5A1C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83267E591C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m */; };
-		83267E5D1C6DD36C00CC0DC1 /* PMRGuid.m in Sources */ = {isa = PBXBuildFile; fileRef = 83267E5C1C6DD36C00CC0DC1 /* PMRGuid.m */; };
 		83267E5F1C6E0AD000CC0DC1 /* MyriadProItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83267E5E1C6E0AD000CC0DC1 /* MyriadProItalic.ttf */; };
 		8344C7EF1C70107D00528CC4 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7EE1C70107D00528CC4 /* UIImage+Utility.m */; };
 		8344C7F31C71FA3900528CC4 /* PMRLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C7F21C71FA3900528CC4 /* PMRLoginViewController.m */; };
@@ -23,7 +21,6 @@
 		8344C8791C78F81300528CC4 /* PMRRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8781C78F81300528CC4 /* PMRRegisterViewController.m */; };
 		8344C87C1C7A64CD00528CC4 /* PMRPartyMakerNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C87B1C7A64CD00528CC4 /* PMRPartyMakerNotification.m */; };
 		8344C87F1C7B1ABC00528CC4 /* Language.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8344C8811C7B1ABC00528CC4 /* Language.strings */; };
-		8344C8881C7B438300528CC4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8871C7B438300528CC4 /* Reachability.m */; };
 		8344C88A1C7B43D000528CC4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8344C8891C7B43D000528CC4 /* SystemConfiguration.framework */; };
 		8344C8B81C7CD2B700528CC4 /* PMRLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8344C8B71C7CD2B700528CC4 /* PMRLocationViewController.m */; };
 		8344C8BA1C7CD31600528CC4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8344C8B91C7CD31600528CC4 /* CoreLocation.framework */; };
@@ -39,7 +36,6 @@
 		83B851B61C80B180000B4F17 /* PMRApiController+UserApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B851B51C80B180000B4F17 /* PMRApiController+UserApi.m */; };
 		83B851B91C80B61A000B4F17 /* PMRApiController+PartyApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B851B81C80B61A000B4F17 /* PMRApiController+PartyApi.m */; };
 		83B851BC1C833D68000B4F17 /* PMRCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B851BB1C833D68000B4F17 /* PMRCoreDataStack.m */; };
-		83B851C51C8357CC000B4F17 /* PMRTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B851C41C8357CC000B4F17 /* PMRTabViewController.m */; };
 		83E217CA1C6220E000C8BF08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217C91C6220E000C8BF08 /* main.m */; };
 		83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */; };
 		83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D41C6220E000C8BF08 /* Assets.xcassets */; };
@@ -55,11 +51,8 @@
 
 /* Begin PBXFileReference section */
 		4F338279C449E153065A3229 /* libPods-PartyMaker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PartyMaker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		540424E91C667445002F77B9 /* Parties.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Parties.plist; sourceTree = "<group>"; };
 		83267E581C6DCF1600CC0DC1 /* PMRPartyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRPartyInfoViewController.h; sourceTree = "<group>"; };
 		83267E591C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRPartyInfoViewController.m; sourceTree = "<group>"; };
-		83267E5B1C6DD36C00CC0DC1 /* PMRGuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRGuid.h; sourceTree = "<group>"; };
-		83267E5C1C6DD36C00CC0DC1 /* PMRGuid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRGuid.m; sourceTree = "<group>"; };
 		83267E5E1C6E0AD000CC0DC1 /* MyriadProItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MyriadProItalic.ttf; sourceTree = "<group>"; };
 		8344C7ED1C70107D00528CC4 /* UIImage+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utility.h"; sourceTree = "<group>"; };
 		8344C7EE1C70107D00528CC4 /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
@@ -81,8 +74,6 @@
 		8344C87B1C7A64CD00528CC4 /* PMRPartyMakerNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRPartyMakerNotification.m; sourceTree = "<group>"; };
 		8344C8801C7B1ABC00528CC4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Language.strings; sourceTree = "<group>"; };
 		8344C8851C7B1B5900528CC4 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Language.strings; sourceTree = "<group>"; };
-		8344C8861C7B438300528CC4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		8344C8871C7B438300528CC4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8344C8891C7B43D000528CC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8344C8B61C7CD2B700528CC4 /* PMRLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRLocationViewController.h; sourceTree = "<group>"; };
 		8344C8B71C7CD2B700528CC4 /* PMRLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRLocationViewController.m; sourceTree = "<group>"; };
@@ -109,8 +100,6 @@
 		83B851B81C80B61A000B4F17 /* PMRApiController+PartyApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PMRApiController+PartyApi.m"; sourceTree = "<group>"; };
 		83B851BA1C833D68000B4F17 /* PMRCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRCoreDataStack.h; sourceTree = "<group>"; };
 		83B851BB1C833D68000B4F17 /* PMRCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRCoreDataStack.m; sourceTree = "<group>"; };
-		83B851C31C8357CC000B4F17 /* PMRTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRTabViewController.h; sourceTree = "<group>"; };
-		83B851C41C8357CC000B4F17 /* PMRTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRTabViewController.m; sourceTree = "<group>"; };
 		83B851C91C845F8F000B4F17 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		83B851CB1C845F91000B4F17 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		83E217C51C6220E000C8BF08 /* PartyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				83B851AD1C80A56D000B4F17 /* Table view cells */,
-				8344C7F71C724E7900528CC4 /* UIViewControls */,
 				83E217E81C62286900C8BF08 /* PMRPartiesViewController.h */,
 				83E217E91C62286900C8BF08 /* PMRPartiesViewController.m */,
 				83F7E9CB1C68B91D00243A5F /* PMRAddEventViewController.h */,
@@ -206,8 +194,6 @@
 				839C7A401C7DD4B200F33909 /* PMRSettingsViewController.m */,
 				83B851B11C80AC84000B4F17 /* PMRShowPartiesLocationViewController.h */,
 				83B851B21C80AC84000B4F17 /* PMRShowPartiesLocationViewController.m */,
-				83B851C31C8357CC000B4F17 /* PMRTabViewController.h */,
-				83B851C41C8357CC000B4F17 /* PMRTabViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -232,13 +218,13 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		8344C7F71C724E7900528CC4 /* UIViewControls */ = {
+		8344C7F71C724E7900528CC4 /* UIViews */ = {
 			isa = PBXGroup;
 			children = (
 				8344C7F81C724EB800528CC4 /* PMRTextField.h */,
 				8344C7F91C724EB800528CC4 /* PMRTextField.m */,
 			);
-			name = UIViewControls;
+			name = UIViews;
 			sourceTree = "<group>";
 		};
 		8344C8041C748FDD00528CC4 /* CoreData */ = {
@@ -340,12 +326,10 @@
 				540424EC1C6693E2002F77B9 /* ViewControllers */,
 				83E217CB1C6220E000C8BF08 /* PMRAppDelegate.h */,
 				83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */,
+				8344C7F71C724E7900528CC4 /* UIViews */,
 				83E217D41C6220E000C8BF08 /* Assets.xcassets */,
 				83E217D91C6220E000C8BF08 /* Info.plist */,
 				83E217C81C6220E000C8BF08 /* Supporting Files */,
-				540424E91C667445002F77B9 /* Parties.plist */,
-				83267E5B1C6DD36C00CC0DC1 /* PMRGuid.h */,
-				83267E5C1C6DD36C00CC0DC1 /* PMRGuid.m */,
 			);
 			path = PartyMaker;
 			sourceTree = "<group>";
@@ -353,8 +337,6 @@
 		83E217C81C6220E000C8BF08 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8344C8861C7B438300528CC4 /* Reachability.h */,
-				8344C8871C7B438300528CC4 /* Reachability.m */,
 				83E217C91C6220E000C8BF08 /* main.m */,
 				8344C8811C7B1ABC00528CC4 /* Language.strings */,
 			);
@@ -442,7 +424,6 @@
 				8344C87F1C7B1ABC00528CC4 /* Language.strings in Resources */,
 				83267E5F1C6E0AD000CC0DC1 /* MyriadProItalic.ttf in Resources */,
 				83E74DEF1C6355E400B0D255 /* MyriadProRegular.ttf in Resources */,
-				540424EA1C667445002F77B9 /* Parties.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,16 +492,13 @@
 				8344C87C1C7A64CD00528CC4 /* PMRPartyMakerNotification.m in Sources */,
 				839C7A301C7D19C200F33909 /* PMRPartyManagedObject.m in Sources */,
 				8344C8791C78F81300528CC4 /* PMRRegisterViewController.m in Sources */,
-				83B851C51C8357CC000B4F17 /* PMRTabViewController.m in Sources */,
 				83B851B01C80A679000B4F17 /* PMRUserTableViewCell.m in Sources */,
 				83B851B31C80AC84000B4F17 /* PMRShowPartiesLocationViewController.m in Sources */,
 				83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */,
-				83267E5D1C6DD36C00CC0DC1 /* PMRGuid.m in Sources */,
 				83F7E9FE1C6CBD8000243A5F /* PMRPartyTableViewCell.m in Sources */,
 				83267E5A1C6DCF1600CC0DC1 /* PMRPartyInfoViewController.m in Sources */,
 				83F7EA011C6CCBF000243A5F /* NSDate+Utility.m in Sources */,
 				83E217CA1C6220E000C8BF08 /* main.m in Sources */,
-				8344C8881C7B438300528CC4 /* Reachability.m in Sources */,
 				8344C7EF1C70107D00528CC4 /* UIImage+Utility.m in Sources */,
 				8344C83A1C75AA6C00528CC4 /* PMRApiController.m in Sources */,
 				8344C8031C74870000528CC4 /* PMRDataModel.xcdatamodeld in Sources */,

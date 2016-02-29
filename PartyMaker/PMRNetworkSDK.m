@@ -10,7 +10,6 @@
 #import "PMRParty.h"
 #import "PMRUser.h"
 #import "NSDate+Utility.h"
-#import "Reachability.h"
 
 static NSString *APIURLLink;
 
@@ -190,14 +189,14 @@ static NSString *APIURLLink;
                                                           @"latitude":party.latitude,
                                                           @"longitude":party.longitude }
                                withParametersDictionary:nil];
-    NSInteger partyCreatorId = party.creatorId;
+    NSInteger partyCreatorId = (NSInteger)party.creatorId;
     __block __weak PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (block) {
             if (party.eventId) {
                 if (block) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        block(party.eventId, error);
+                        block((NSInteger)party.eventId, error);
                     });
                 }
             }
@@ -244,7 +243,7 @@ static NSString *APIURLLink;
             
             for (PMRParty *party in parties) {
                 if (party.eventId > neededId) {
-                    neededId = party.eventId;
+                    neededId = (NSInteger)party.eventId;
                 }
             }
             

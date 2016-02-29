@@ -37,8 +37,8 @@
     
     self.logoImageView.image = [UIImage imageNamed:logoName];
     self.eventNameLabel.text = party.eventName;
-    self.eventTimeStartLabel.text = [NSDate stringDateFromSeconds:party.startTime withDateFormat:@"dd.MM.yyyy HH:mm"];
-    self.partyId = party.eventId;
+    self.eventTimeStartLabel.text = [NSDate stringDateFromSeconds:(NSInteger)party.startTime withDateFormat:@"dd.MM.yyyy HH:mm"];
+    self.partyId = (NSInteger)party.eventId;
     self.locationLabel.text = party.latitude;
 }
 

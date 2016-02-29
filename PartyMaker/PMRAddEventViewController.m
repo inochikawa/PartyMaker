@@ -534,15 +534,15 @@
 }
 
 - (void)establishPartyInformation {
-    NSString *startTime = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"HH:mm"];
-    NSString *endTime = [NSDate stringDateFromSeconds:self.party.endTime withDateFormat:@"HH:mm"];
-    NSString *date = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"dd MMM yyyy"];
+    NSString *startTime = [NSDate stringDateFromSeconds:(NSInteger)self.party.startTime withDateFormat:@"HH:mm"];
+    NSString *endTime = [NSDate stringDateFromSeconds:(NSInteger)self.party.endTime withDateFormat:@"HH:mm"];
+    NSString *date = [NSDate stringDateFromSeconds:(NSInteger)self.party.startTime withDateFormat:@"dd MMM yyyy"];
     
     self.eventNameTextField.text = self.party.eventName;
     self.descriptionTextView.text = self.party.eventDescription;
     self.startTimeLabel.text = startTime;
     self.endTimeLabel.text = endTime;
-    self.datePickerControl.date = [NSDate dateFromSeconds:self.party.startTime];
+    self.datePickerControl.date = [NSDate dateFromSeconds:(NSInteger)self.party.startTime];
     self.startTimeSlider.value = [self minutesFromTime:startTime];
     self.endTimeSlider.value = [self minutesFromTime:endTime];
     if (![self.party.latitude isEqualToString:@""]) {

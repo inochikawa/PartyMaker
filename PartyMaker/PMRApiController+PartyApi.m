@@ -29,7 +29,7 @@
         }
         else {
             NSLog(@"%s --- [Network error] - %@, user info - %@", __PRETTY_FUNCTION__, networkError, networkError.userInfo);
-            party.isPartyChanged = @1;
+            party.isPartyChanged = YES;
         }
         
         // upload data to database
@@ -95,7 +95,7 @@
             // delete all parties marked DELETED
             for (PMRParty *databaseParty in partiesFromDatabase) {
                 if (databaseParty.isPartyDeleted) {
-                    [weakSelf deletePartyWithPartyId:databaseParty.eventId withCreatorId:databaseParty.creatorId withCallback:^{
+                    [weakSelf deletePartyWithPartyId:(NSInteger)databaseParty.eventId withCreatorId:(NSInteger)databaseParty.creatorId withCallback:^{
                         NSLog(@"Party deleted");
                     }];
                     [partiesFromDatabase removeObject:databaseParty];
@@ -134,7 +134,7 @@
         }
         if (!isDatabasePartyExist) {
             if (databaseParty.eventId != 0) {
-                [self deletePartyWithPartyId:databaseParty.eventId withCreatorId:databaseParty.creatorId withCallback:^{
+                [self deletePartyWithPartyId:(NSInteger)databaseParty.eventId withCreatorId:(NSInteger)databaseParty.creatorId withCallback:^{
                     
                 }];
             }

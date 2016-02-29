@@ -13,7 +13,7 @@
 @implementation PMRPartyMakerNotification
 
 + (void)createNewLocalNotificationForParty:(PMRParty *)party {
-    NSDate *partyFireDate = [NSDate dateFromSeconds:party.startTime];
+    NSDate *partyFireDate = [NSDate dateFromSeconds:(NSInteger)party.startTime];
     
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     localNotification.alertBody = [NSString stringWithFormat:@"\"%@\" party is about to begin!", party.eventName];

@@ -88,7 +88,7 @@
 
 - (IBAction)onDeleteButtonTouchUpInside:(id)sender {
     __block __weak PMRPartyInfoViewController *weakSelf = self;
-    [[PMRApiController apiController] deletePartyWithPartyId:self.party.eventId withCreatorId:self.party.creatorId withCallback:^{
+    [[PMRApiController apiController] deletePartyWithPartyId:(NSInteger)self.party.eventId withCreatorId:(NSInteger)self.party.creatorId withCallback:^{
         if ([weakSelf.navigationController isViewLoaded]) {
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
@@ -105,9 +105,9 @@
     self.logoImageView.image = [UIImage imageNamed:imageName];
     self.eventNameLabel.text = self.party.eventName;
     self.eventDescriptionLabel.text = [self roundQuatesText:self.party.eventDescription];
-    self.eventDateLabel.text = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"dd.MM.yyyy"];
-    self.eventStartTimeLabel.text = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"HH:mm"];
-    self.eventEndTimeLabel.text = [NSDate stringDateFromSeconds:self.party.endTime withDateFormat:@"HH:mm"];
+    self.eventDateLabel.text = [NSDate stringDateFromSeconds:(NSInteger)self.party.startTime withDateFormat:@"dd.MM.yyyy"];
+    self.eventStartTimeLabel.text = [NSDate stringDateFromSeconds:(NSInteger)self.party.startTime withDateFormat:@"HH:mm"];
+    self.eventEndTimeLabel.text = [NSDate stringDateFromSeconds:(NSInteger)self.party.endTime withDateFormat:@"HH:mm"];
 }
 
 - (NSString *)roundQuatesText:(NSString *)text {

@@ -52,7 +52,7 @@
     self.isUsersTableViewOpened = NO;
     [self.view addSubview:self.usersTableView];
     float tableViewWidth = self.view.bounds.size.width / 2.;
-    float tableViewHeight = self.view.bounds.size.height;
+    float tableViewHeight = self.view.bounds.size.height - 110;
     CGRect tableViewRect = CGRectMake(- tableViewWidth, 0, tableViewWidth, tableViewHeight);
     self.usersTableView.frame = tableViewRect;
 }

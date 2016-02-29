@@ -78,7 +78,7 @@
 }
 
 - (void)saveOrUpdateParty:(PMRParty *)party inContext:(NSManagedObjectContext *)context {
-    PMRPartyManagedObject *partyObject = [PMRPartyManagedObject fetchFromContext:context withPartyId:party.eventId];
+    PMRPartyManagedObject *partyObject = [PMRPartyManagedObject fetchFromContext:context withPartyId:(NSInteger)party.eventId];
     
     if (!partyObject) {
         partyObject = [NSEntityDescription insertNewObjectForEntityForName:@"Party" inManagedObjectContext:context];
@@ -110,7 +110,7 @@
     
     [context performBlock:^{
         PMRPartyManagedObject *partyObject = [PMRPartyManagedObject fetchFromContext:context withPartyId:partyId];
-        partyObject.isPartyDeleted = @1;
+        partyObject.isPartyDeleted = YES;
         NSError *error;
         [context save:&error];
         if (error) {

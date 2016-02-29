@@ -7,7 +7,6 @@
 //
 
 #import "PMRAppDelegate.h"
-#import "PMRTabViewController.h"
 #import "PMRLoginViewController.h"
 #import "PMRApiController.h"
 #import "PMRUser.h"
