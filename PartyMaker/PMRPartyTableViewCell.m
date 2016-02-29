@@ -41,7 +41,7 @@
 }
 
 - (void)configureWithParty:(PMRParty *)party {
-    NSString *logoName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [party.imageIndex intValue]];
+    NSString *logoName = [NSString stringWithFormat:@"PartyLogo_Small_%d", party.imageIndex];
     
     self.logoImageView.image = [UIImage imageNamed:logoName];
     self.eventNameLabel.text = party.eventName;

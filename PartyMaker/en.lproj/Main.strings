@@ -17,14 +17,23 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "6OK-lk-lZo"; */
 "6OK-lk-lZo.normalTitle" = "CANCEL";
 
+/* Class = "UILabel"; text = "About me"; ObjectID = "6mQ-6c-aYJ"; */
+"6mQ-6c-aYJ.text" = "About me";
+
 /* Class = "UILabel"; text = "HELLO"; ObjectID = "7Qm-KK-gEE"; */
 "7Qm-KK-gEE.text" = "HELLO";
+
+/* Class = "UIBarButtonItem"; title = "Select Friend"; ObjectID = "7VR-mt-3K5"; */
+"7VR-mt-3K5.title" = "Select Friend";
 
 /* Class = "UILabel"; text = "LOGO"; ObjectID = "BRt-Bt-TPk"; */
 "BRt-Bt-TPk.text" = "LOGO";
 
 /* Class = "UILabel"; text = "DATE"; ObjectID = "E2k-El-En8"; */
 "E2k-El-En8.text" = "DATE";
+
+/* Class = "UITabBarItem"; title = "Location"; ObjectID = "Eim-9D-oIt"; */
+"Eim-9D-oIt.title" = "Location";
 
 /* Class = "UITabBarItem"; title = "Parties"; ObjectID = "JfL-lh-h4d"; */
 "JfL-lh-h4d.title" = "Parties";
@@ -44,11 +53,23 @@
 /* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "LDV-uP-KEB"; */
 "LDV-uP-KEB.normalTitle" = "REGISTER";
 
+/* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "MWD-vn-gSq"; */
+"MWD-vn-gSq.title" = "Reset";
+
+/* Class = "UIButton"; normalTitle = "SIGN OUT"; ObjectID = "POX-Md-fIg"; */
+"POX-Md-fIg.normalTitle" = "SIGN OUT";
+
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "Ptg-T6-1iS"; */
 "Ptg-T6-1iS.title" = "Settings";
 
 /* Class = "UIButton"; normalTitle = "LOCATION"; ObjectID = "QVP-fS-GsD"; */
 "QVP-fS-GsD.normalTitle" = "LOCATION";
+
+/* Class = "UILabel"; text = "Maksim"; ObjectID = "R1D-4d-Z2q"; */
+"R1D-4d-Z2q.text" = "Maksim";
+
+/* Class = "UILabel"; text = "PARTY MAKER"; ObjectID = "Rjf-KV-INm"; */
+"Rjf-KV-INm.text" = "PARTY MAKER";
 
 /* Class = "UIButton"; normalTitle = "CHOOSE DATE"; ObjectID = "RpX-WW-JR2"; */
 "RpX-WW-JR2.normalTitle" = "CHOOSE DATE";
@@ -62,8 +83,14 @@
 /* Class = "UILabel"; text = "00:30"; ObjectID = "TjF-AP-B2k"; */
 "TjF-AP-B2k.text" = "00:30";
 
+/* Class = "UILabel"; text = "Location"; ObjectID = "TjF-oy-Z6h"; */
+"TjF-oy-Z6h.text" = "Location";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "VfQ-ko-f9d"; */
 "VfQ-ko-f9d.text" = "Label";
+
+/* Class = "UILabel"; text = "Developed for \nSoftheme iOS Internship"; ObjectID = "Vzc-TC-Eye"; */
+"Vzc-TC-Eye.text" = "Developed for \nSoftheme iOS Internship";
 
 /* Class = "UILabel"; text = "START"; ObjectID = "ZKv-xO-UXv"; */
 "ZKv-xO-UXv.text" = "START";
@@ -113,6 +140,9 @@
 /* Class = "UILabel"; text = "LOCATION"; ObjectID = "mFI-XJ-LlD"; */
 "mFI-XJ-LlD.text" = "LOCATION";
 
+/* Class = "UILabel"; text = "Version 1.0.1"; ObjectID = "mn0-l1-HV0"; */
+"mn0-l1-HV0.text" = "Version 1.0.1";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "o9s-dR-0UK"; */
 "o9s-dR-0UK.text" = "Label";
 
@@ -130,6 +160,9 @@
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "weE-M8-cO5"; */
 "weE-M8-cO5.normalTitle" = "DELETE";
+
+/* Class = "UINavigationItem"; title = "LOCATION"; ObjectID = "xQx-tC-dVl"; */
+"xQx-tC-dVl.title" = "LOCATION";
 
 /* Class = "UITextField"; placeholder = "Login"; ObjectID = "yT2-fS-Gj2"; */
 "yT2-fS-Gj2.placeholder" = "Login";

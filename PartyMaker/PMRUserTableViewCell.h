@@ -12,7 +12,9 @@
 
 @interface PMRUserTableViewCell : UITableViewCell
 
-- (void)configureWithUserName:(NSString *)userName;
+@property (nonatomic) NSInteger userId;
+
+- (void)configureWithUser:(PMRUser *)user;
 + (NSString *)reuseIdentifier;
 
 @end

@@ -11,7 +11,7 @@
 @interface PMRApiController (PartyApi)
 
 - (void)saveOrUpdateParty:(PMRParty *)partyDictionary withCallback:(void (^) ())completion;
-- (void)deletePartyWithPartyId:(NSNumber *)partyId withCreatorId:(NSNumber *)creatorId withCallback:(void (^) ())completion;
-- (void)loadAllPartiesByUserId:(NSNumber *)userId withCallback:(void (^) (NSArray *parties))completion;
-
+- (void)deletePartyWithPartyId:(NSInteger)partyId withCreatorId:(NSInteger)creatorId withCallback:(void (^) ())completion;
+- (void)loadAllPartiesByUserId:(NSInteger)userId withCallback:(void (^) (NSArray *parties))completion;
+- (void)loadAllPartiesFromNetworkByUserId:(NSInteger)userId withCallback:(void (^) (NSArray *parties))completion;
 @end

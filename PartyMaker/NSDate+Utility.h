@@ -11,8 +11,8 @@
 @interface NSDate (Utility)
 
 - (NSString *)toStringWithDateFormat:(NSString *)dateFormat;
-- (NSNumber *)toSeconds;
-+ (NSDate *)dateFromSeconds:(NSNumber *)seconds;
-+ (NSString *)stringDateFromSeconds:(NSNumber *)seconds withDateFormat:(NSString *)dateFormat;
+- (NSInteger)toSeconds;
++ (NSDate *)dateFromSeconds:(NSInteger)seconds;
++ (NSString *)stringDateFromSeconds:(NSInteger)seconds withDateFormat:(NSString *)dateFormat;
 
 @end

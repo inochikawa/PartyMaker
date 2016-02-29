@@ -49,3 +49,6 @@
 "Developed for" = "Розроблено для";
 "Developer: Maksim Stecenko" = "Розробник: Максим Стеценко";
 "SIGN OUT" = "ВИЙТИ";
+"Required parameter(s) is absent" = "Ви нічого не ввели.";
+"Select Friend" = "Вибрати друга";
+"Reset" = "Відновити";

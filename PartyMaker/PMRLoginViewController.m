@@ -46,15 +46,23 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    NSInteger userId = [[[NSUserDefaults standardUserDefaults]
+                         stringForKey:@"userId"] integerValue];
+    
+    if (userId) {
+        [PMRApiController apiController].user.userId = userId;
+        [self performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
+    }
 }
 
 #pragma mark - IBActions
 
-- (IBAction)onSignInButtonTouchUpInside:(id)sender {
+- (IBAction)onSignInButtonTouchUpInside:(id)sender {    
     __block __weak PMRLoginViewController *weakSelf = self;
     __block PMRUser *user = [PMRUser new];
     
@@ -80,8 +88,11 @@
             }
             else {
                 weakSelf.informationLabel.text = @"";
-                user.userId = @([response[@"response"][@"id"] integerValue]);
-                [weakSelf performSegueWithIdentifier:@"toTabControllerSegue" sender:self];
+                user.userId = [response[@"response"][@"id"] integerValue];
+                
+                [self writeUserIdToUserDefaults:user.userId];
+                
+                [weakSelf performSegueWithIdentifier:@"toTabControllerSegue" sender:weakSelf];
                 NSLog(@"[User sign in] --- %@", response);
             }
         }];
@@ -127,6 +138,12 @@
     self.passwordTextField.delegate = self;
     self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:passwordPlaceholder
                                                                                 attributes:@{NSForegroundColorAttributeName: color}];
+}
+
+- (void)writeUserIdToUserDefaults:(NSInteger)userId {
+    NSString *userIdStringValue = [NSString stringWithFormat:@"%ld", (long)userId];
+    [[NSUserDefaults standardUserDefaults] setObject:userIdStringValue forKey:@"userId"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

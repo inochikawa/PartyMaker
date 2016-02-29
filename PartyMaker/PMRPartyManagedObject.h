@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class PMRParty;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PMRPartyManagedObject : NSManagedObject
 
-+ (instancetype)fetchFromContext:(NSManagedObjectContext *)context withPartyId:(NSNumber *)partyId;
++ (instancetype)fetchFromContext:(NSManagedObjectContext *)context withPartyId:(NSInteger)partyId;
+- (instancetype)produceUsingParty:(PMRParty *)party;
 
 @end
 

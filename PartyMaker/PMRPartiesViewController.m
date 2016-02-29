@@ -69,8 +69,6 @@
             });
         }];
     });
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -105,9 +103,9 @@
     }
 }
 
-- (PMRParty *)partyDictionaryById:(NSNumber *)partyId {
+- (PMRParty *)partyDictionaryById:(NSInteger)partyId {
     for (PMRParty *party in self.parties) {
-        if ([party.eventId integerValue] == [partyId integerValue]) {
+        if (party.eventId == partyId) {
             return party;
         }
     }

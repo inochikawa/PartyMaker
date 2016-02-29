@@ -28,7 +28,7 @@
     self.user = user;
     [self.networkSDK loginWithUserName:user.name withPassword:user.password callback:^(NSDictionary *response, NSError *error) {
         if (!error) {
-            self.user.userId = @([response[@"response"][@"id"] integerValue]);
+            self.user.userId = [response[@"response"][@"id"] integerValue];
         }
         else {
             NSLog(@"%s --- [Error] - %@, user info - %@", __PRETTY_FUNCTION__, error, error.userInfo);

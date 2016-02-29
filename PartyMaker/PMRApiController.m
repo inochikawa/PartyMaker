@@ -8,7 +8,9 @@
 
 #import "PMRApiController.h"
 #import "PMRCoreData.h"
+#import "PMRCoreDataStack.h"
 #import "PMRNetworkSDK.h"
+#import "PMRUser.h"
 
 @interface PMRApiController()
 @end
@@ -32,8 +34,10 @@
 #pragma mark - Configure API controller
 
 - (void)configureApiController {
+    self.user = [PMRUser new];
     self.coreData = [PMRCoreData new];
     self.networkSDK = [PMRNetworkSDK new];
+    self.coreData.coreDataStack = [PMRCoreDataStack new];
 }
 
 - (void)pmr_performCompletionBlock:(void (^) ())block {

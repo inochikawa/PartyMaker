@@ -22,18 +22,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventStartTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventEndTimeLabel;
-
-@property (weak, nonatomic) IBOutlet UIButton *locationButton;
-
-
-@property (weak, nonatomic) IBOutlet UIView *imageHolderView;
-@property (weak, nonatomic) IBOutlet UIButton *editButton;
-@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
-
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIButton *locationButton;
+
+@property (weak, nonatomic) IBOutlet UIView *imageHolderView;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 
 @end
 
@@ -50,7 +49,18 @@
                                         [UIColor colorWithRed:29/255. green:31/255. blue:36/255. alpha:1], NSForegroundColorAttributeName, [UIFont fontWithName:@"MyriadPro-Regular" size:16], NSFontAttributeName,nil] forState:UIControlStateNormal];
     
     self.navigationItem.backBarButtonItem = backButton;
-
+    
+    if (self.needHideButtons) {
+        self.locationButton.hidden = YES;
+        self.editButton.hidden = YES;
+        self.deleteButton.hidden = YES;
+        self.mainScrollView.scrollEnabled = NO;
+    }
+    else {
+        [self.locationButton setTitle:NSLocalizedStringFromTable(@"LOCATION", @"Language", nil) forState:UIControlStateNormal];
+        [self.editButton setTitle:NSLocalizedStringFromTable(@"EDIT", @"Language", nil) forState:UIControlStateNormal];
+        [self.deleteButton setTitle:NSLocalizedStringFromTable(@"DELETE", @"Language", nil) forState:UIControlStateNormal];
+    }
     
     self.imageHolderView.layer.borderColor = [UIColor colorWithRed:31/255. green:34/255. blue:39/255. alpha:1].CGColor;
     self.imageHolderView.layer.borderWidth = 3.0f;
@@ -60,10 +70,6 @@
     self.dateLabel.text = NSLocalizedStringFromTable(@"DATE", @"Language", nil);
     self.startLabel.text = NSLocalizedStringFromTable(@"START", @"Language", nil);
     self.endLabel.text = NSLocalizedStringFromTable(@"END", @"Language", nil);
-    
-    [self.locationButton setTitle:NSLocalizedStringFromTable(@"LOCATION", @"Language", nil) forState:UIControlStateNormal];
-    [self.editButton setTitle:NSLocalizedStringFromTable(@"EDIT", @"Language", nil) forState:UIControlStateNormal];
-    [self.deleteButton setTitle:NSLocalizedStringFromTable(@"DELETE", @"Language", nil) forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -106,7 +112,7 @@
 #pragma mark - Helpers
 
 - (void)configurePartyInfoView {
-    NSString *imageName = [NSString stringWithFormat:@"PartyLogo_Small_%d", [self.party.imageIndex intValue]];
+    NSString *imageName = [NSString stringWithFormat:@"PartyLogo_Small_%d", self.party.imageIndex];
     self.logoImageView.image = [UIImage imageNamed:imageName];
     self.eventNameLabel.text = self.party.eventName;
     self.eventDescriptionLabel.text = [self roundQuatesText:self.party.eventDescription];

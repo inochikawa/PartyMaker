@@ -12,7 +12,7 @@
 
 @interface PMRPartyTableViewCell : UITableViewCell
 
-@property (nonatomic) NSNumber *partyId;
+@property (nonatomic) NSInteger partyId;
 
 - (void)configureWithParty:(PMRParty *)partyDictionary;
 + (NSString *)reuseIdentifier;

@@ -8,18 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+@class PMRPartyManagedObject;
+
 @interface PMRParty : NSObject
 
-@property (nullable, nonatomic, retain) NSNumber *creatorId;
-@property (nullable, nonatomic, retain) NSNumber *endTime;
+@property (nonatomic) int64_t creatorId;
+@property (nonatomic) int64_t endTime;
 @property (nullable, nonatomic, retain) NSString *eventDescription;
-@property (nullable, nonatomic, retain) NSNumber *eventId;
+@property (nonatomic) int64_t eventId;
 @property (nullable, nonatomic, retain) NSString *eventName;
-@property (nullable, nonatomic, retain) NSNumber *imageIndex;
-@property (nullable, nonatomic, retain) NSNumber *isPartyChanged;
-@property (nullable, nonatomic, retain) NSNumber *isPartyDeleted;
+@property (nonatomic) int16_t imageIndex;
+@property (nonatomic) BOOL isPartyChanged;
+@property (nonatomic) BOOL isPartyDeleted;
 @property (nullable, nonatomic, retain) NSString *latitude;
 @property (nullable, nonatomic, retain) NSString *longitude;
-@property (nullable, nonatomic, retain) NSNumber *startTime;
+@property (nonatomic) int64_t startTime;
+
+- (nullable instancetype)initUsingPartyObject:(PMRPartyManagedObject * _Nullable)partyObject;
 
 @end

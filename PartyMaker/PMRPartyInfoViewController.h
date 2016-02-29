@@ -13,5 +13,6 @@
 @interface PMRPartyInfoViewController : UIViewController
 
 @property (nonatomic, weak) PMRParty *party;
+@property (nonatomic) BOOL needHideButtons;
 
 @end

@@ -127,15 +127,15 @@
     NSDate *endDate = [self selectedDateWithTime:@"00:30"];
     
     self.party = [PMRParty new];
-    self.party.eventId = @0;
-    self.party.creatorId = @0;
+    self.party.eventId = 0;
+    self.party.creatorId = 0;
     self.party.latitude = @"";
     self.party.longitude = @"";
     self.party.eventName = @"";
     self.party.eventDescription = @"";
     self.party.startTime = [startDate toSeconds];
     self.party.endTime = [endDate toSeconds];
-    self.party.imageIndex = @0;
+    self.party.imageIndex = 0;
     self.party.latitude = @"";
     self.party.longitude = @"";
 
@@ -389,7 +389,7 @@
     [self moveBallToElement:scrollView];
     NSInteger currentPage = scrollView.contentOffset.x / self.imageScrollView.frame.size.width;
     [self.imagePageControl setCurrentPage:currentPage];
-    self.party.imageIndex = @(currentPage);
+    self.party.imageIndex = currentPage;
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
@@ -448,7 +448,7 @@
     self.party.eventDescription = self.descriptionTextView.text;
     self.party.startTime = [startDate toSeconds];
     self.party.endTime = [endDate toSeconds];
-    self.party.imageIndex = @(self.imagePageControl.currentPage);
+    self.party.imageIndex = self.imagePageControl.currentPage;
     
     __block __weak PMRAddEventViewController *weakSelf = self;
     
@@ -532,10 +532,10 @@
 - (void)establishPartyInformation {
     NSString *startTime = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"HH:mm"];
     NSString *endTime = [NSDate stringDateFromSeconds:self.party.endTime withDateFormat:@"HH:mm"];
+    NSString *date = [NSDate stringDateFromSeconds:self.party.startTime withDateFormat:@"dd MMM yyyy"];
     
     self.eventNameTextField.text = self.party.eventName;
     self.descriptionTextView.text = self.party.eventDescription;
-    [self.chooseDateButton setTitle:NSLocalizedStringFromTable(@"CHOOSE DATE", @"Language", nil) forState:UIControlStateNormal];
     self.startTimeLabel.text = startTime;
     self.endTimeLabel.text = endTime;
     self.datePickerControl.date = [NSDate dateFromSeconds:self.party.startTime];
@@ -543,12 +543,18 @@
     self.endTimeSlider.value = [self minutesFromTime:endTime];
     if (![self.party.latitude isEqualToString:@""]) {
         [self.locationButton setTitle:self.party.latitude forState:UIControlStateNormal];
-    }    
+    }
     
-    self.imagePageControl.currentPage = [self.party.imageIndex integerValue];
+    // if start time and end time are equals, it's mean start and endt times aren't seted to party.
+    // Becouse the difference between the start time and the end time must be at least 30 minutes
+    if (self.party.startTime == self.party.endTime) {
+        [self.chooseDateButton setTitle:date forState:UIControlStateNormal];
+    }
+    
+    self.imagePageControl.currentPage = self.party.imageIndex;
     
     CGRect scrollViewFrame = [self estimatedImageScrollViewFrame];
-    CGPoint contentOffset = CGPointMake([self.party.imageIndex integerValue] * scrollViewFrame.size.width, 0);
+    CGPoint contentOffset = CGPointMake(self.party.imageIndex * scrollViewFrame.size.width, 0);
     [self.imageScrollView setContentOffset:contentOffset animated:YES];
 }
 

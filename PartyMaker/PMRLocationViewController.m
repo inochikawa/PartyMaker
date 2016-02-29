@@ -59,7 +59,7 @@
     if (!self.locationManager)
         self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    self.locationManager.distanceFilter = 10; // meters
+    self.locationManager.distanceFilter = 10;
     [self.locationManager requestAlwaysAuthorization];
 }
 
@@ -118,7 +118,7 @@
             [rightButton addTarget:self action:@selector(onDoneButtonTouch) forControlEvents:UIControlEventTouchUpInside];
             annotationView.rightCalloutAccessoryView = rightButton;
             
-            UIImage *partyImage = [UIImage imageNamed:[NSString stringWithFormat:@"PartyLogo_Small_%d", [self.party.imageIndex intValue]]];
+            UIImage *partyImage = [UIImage imageNamed:[NSString stringWithFormat:@"PartyLogo_Small_%d", self.party.imageIndex]];
             UIImageView *myCustomImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
             myCustomImage.image = partyImage;
             myCustomImage.contentMode = UIViewContentModeScaleAspectFit;

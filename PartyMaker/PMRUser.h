@@ -11,7 +11,7 @@
 @interface PMRUser : NSObject
 
 @property (nullable, nonatomic) NSString *name;
-@property (nullable, nonatomic) NSNumber *userId;
+@property (nonatomic) NSInteger userId;
 @property (nullable, nonatomic) NSString *password;
 @property (nullable, nonatomic) NSString *email;
 

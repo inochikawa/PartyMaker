@@ -7,8 +7,10 @@
 //
 
 #import "PMRAppDelegate.h"
-#import "PMRParty.h"
+#import "PMRTabViewController.h"
+#import "PMRLoginViewController.h"
 #import "PMRApiController.h"
+#import "PMRUser.h"
 
 @interface PMRAppDelegate ()
 
@@ -30,7 +32,6 @@
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"MyriadPro-Regular" size:12.0f],
                                                         NSForegroundColorAttributeName : [UIColor colorWithRed:35/255. green:37/255. blue:43/255. alpha:1]
                                                         } forState:UIControlStateNormal];
-
     return YES;
 }
 

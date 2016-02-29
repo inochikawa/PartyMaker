@@ -80,7 +80,7 @@
                 }
                 else {
                     weakSelf.informationLabel.text = @"";
-                    user.userId = @([response[@"response"][@"id"] integerValue]);
+                    user.userId = [response[@"response"][@"id"] integerValue];
                     
                     [weakSelf dismissViewControllerAnimated:YES completion:nil];
                     

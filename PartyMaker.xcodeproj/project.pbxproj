@@ -52,6 +52,8 @@
 		83B851B31C80AC84000B4F17 /* PMRShowPartiesLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B851B21C80AC84000B4F17 /* PMRShowPartiesLocationViewController.m */; };
 		83B851B61C80B180000B4F17 /* PMRApiController+UserApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B851B51C80B180000B4F17 /* PMRApiController+UserApi.m */; };
 		83B851B91C80B61A000B4F17 /* PMRApiController+PartyApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B851B81C80B61A000B4F17 /* PMRApiController+PartyApi.m */; };
+		83B851BC1C833D68000B4F17 /* PMRCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B851BB1C833D68000B4F17 /* PMRCoreDataStack.m */; };
+		83B851C51C8357CC000B4F17 /* PMRTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B851C41C8357CC000B4F17 /* PMRTabViewController.m */; };
 		83E217CA1C6220E000C8BF08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217C91C6220E000C8BF08 /* main.m */; };
 		83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E217CC1C6220E000C8BF08 /* PMRAppDelegate.m */; };
 		83E217D51C6220E000C8BF08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E217D41C6220E000C8BF08 /* Assets.xcassets */; };
@@ -96,8 +98,6 @@
 		8344C8861C7B438300528CC4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8344C8871C7B438300528CC4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8344C8891C7B43D000528CC4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		8344C8B41C7C79CF00528CC4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		8344C8B51C7C79D700528CC4 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		8344C8B61C7CD2B700528CC4 /* PMRLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRLocationViewController.h; sourceTree = "<group>"; };
 		8344C8B71C7CD2B700528CC4 /* PMRLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRLocationViewController.m; sourceTree = "<group>"; };
 		8344C8B91C7CD31600528CC4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -121,6 +121,12 @@
 		83B851B51C80B180000B4F17 /* PMRApiController+UserApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PMRApiController+UserApi.m"; sourceTree = "<group>"; };
 		83B851B71C80B61A000B4F17 /* PMRApiController+PartyApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PMRApiController+PartyApi.h"; sourceTree = "<group>"; };
 		83B851B81C80B61A000B4F17 /* PMRApiController+PartyApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PMRApiController+PartyApi.m"; sourceTree = "<group>"; };
+		83B851BA1C833D68000B4F17 /* PMRCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRCoreDataStack.h; sourceTree = "<group>"; };
+		83B851BB1C833D68000B4F17 /* PMRCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRCoreDataStack.m; sourceTree = "<group>"; };
+		83B851C31C8357CC000B4F17 /* PMRTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMRTabViewController.h; sourceTree = "<group>"; };
+		83B851C41C8357CC000B4F17 /* PMRTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMRTabViewController.m; sourceTree = "<group>"; };
+		83B851C91C845F8F000B4F17 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		83B851CB1C845F91000B4F17 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		83E217C51C6220E000C8BF08 /* PartyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PartyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E217C91C6220E000C8BF08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E217CB1C6220E000C8BF08 /* PMRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PMRAppDelegate.h; sourceTree = "<group>"; };
@@ -214,6 +220,8 @@
 				839C7A401C7DD4B200F33909 /* PMRSettingsViewController.m */,
 				83B851B11C80AC84000B4F17 /* PMRShowPartiesLocationViewController.h */,
 				83B851B21C80AC84000B4F17 /* PMRShowPartiesLocationViewController.m */,
+				83B851C31C8357CC000B4F17 /* PMRTabViewController.h */,
+				83B851C41C8357CC000B4F17 /* PMRTabViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -253,6 +261,8 @@
 				8344C8011C74870000528CC4 /* PMRDataModel.xcdatamodeld */,
 				83F7E9D01C6A6FD000243A5F /* PMRCoreData.h */,
 				83F7E9D11C6A6FD000243A5F /* PMRCoreData.m */,
+				83B851BA1C833D68000B4F17 /* PMRCoreDataStack.h */,
+				83B851BB1C833D68000B4F17 /* PMRCoreDataStack.m */,
 				8344C8641C76131A00528CC4 /* CoreDataModel */,
 			);
 			name = CoreData;
@@ -527,10 +537,12 @@
 				83B851B61C80B180000B4F17 /* PMRApiController+UserApi.m in Sources */,
 				83F7E9D21C6A6FD000243A5F /* PMRCoreData.m in Sources */,
 				839C7A411C7DD4B200F33909 /* PMRSettingsViewController.m in Sources */,
+				83B851BC1C833D68000B4F17 /* PMRCoreDataStack.m in Sources */,
 				839C7A331C7D19D900F33909 /* PMRParty.m in Sources */,
 				8344C87C1C7A64CD00528CC4 /* PMRPartyMakerNotification.m in Sources */,
 				839C7A301C7D19C200F33909 /* PMRPartyManagedObject.m in Sources */,
 				8344C8791C78F81300528CC4 /* PMRRegisterViewController.m in Sources */,
+				83B851C51C8357CC000B4F17 /* PMRTabViewController.m in Sources */,
 				83B851B01C80A679000B4F17 /* PMRUserTableViewCell.m in Sources */,
 				83B851B31C80AC84000B4F17 /* PMRShowPartiesLocationViewController.m in Sources */,
 				83E217CD1C6220E000C8BF08 /* PMRAppDelegate.m in Sources */,
@@ -561,8 +573,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				8344C7F51C72138600528CC4 /* Base */,
-				8344C8B41C7C79CF00528CC4 /* en */,
-				8344C8B51C7C79D700528CC4 /* uk */,
+				83B851C91C845F8F000B4F17 /* en */,
+				83B851CB1C845F91000B4F17 /* uk */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

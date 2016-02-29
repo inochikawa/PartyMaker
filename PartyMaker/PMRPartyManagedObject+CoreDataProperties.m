@@ -2,7 +2,7 @@
 //  PMRPartyManagedObject+CoreDataProperties.m
 //  PartyMaker
 //
-//  Created by 2 on 2/24/16.
+//  Created by 2 on 2/28/16.
 //  Copyright © 2016 Maksim Stecenko. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

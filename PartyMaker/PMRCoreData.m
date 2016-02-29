@@ -8,102 +8,24 @@
 
 #import "PMRCoreData.h"
 #import "PMRParty.h"
+#import "PMRCoreDataStack.h"
 #import "PMRPartyManagedObject.h"
 
 @interface PMRCoreData()
-
-@property (nonatomic) NSManagedObjectContext *mainThreadContext;
-@property (nonatomic) NSManagedObjectContext *backgroundThreadContext;
-@property (nonatomic) NSManagedObjectModel *coreDataManagedObjectModel;
-@property (nonatomic) NSPersistentStoreCoordinator *coreDataPersistentStoreCoordinator;
 
 @end
 
 @implementation PMRCoreData
 
-#pragma mark - Core Data stack
-
-- (NSManagedObjectContext *)mainManagedObjectContext {
-    if (self.mainThreadContext) {
-        return self.mainThreadContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator) {
-        self.mainThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [self.mainThreadContext setPersistentStoreCoordinator:coordinator];
-        
-    }
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applyMainContextChanges:)
-                                                 name:NSManagedObjectContextDidSaveNotification
-                                               object:self.mainThreadContext];
-    
-    return self.mainThreadContext;
-}
-
-- (NSManagedObjectContext *)backgroundManagedObjectContext {
-    if (self.backgroundThreadContext) {
-        return self.backgroundThreadContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator) {
-        self.backgroundThreadContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        [self.backgroundThreadContext setPersistentStoreCoordinator:coordinator];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applyBackgroundContextChanges:)
-                                                     name:NSManagedObjectContextDidSaveNotification
-                                                   object:self.backgroundThreadContext];
-    }
-    return self.backgroundThreadContext;
-}
-
-- (NSManagedObjectModel *)managedObjectModel {
-    if (self.coreDataManagedObjectModel != nil) {
-        return self.coreDataManagedObjectModel;
-    }
-    
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"PMRDataModel" withExtension:@"momd"];
-    self.coreDataManagedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return self.coreDataManagedObjectModel;
-}
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    if (self.coreDataPersistentStoreCoordinator != nil) {
-        return self.coreDataPersistentStoreCoordinator;
-    }
-    
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PMRDataModel.sqlite"];
-    NSLog(@"%@", storeURL);
-    NSError *error = nil;
-    self.coreDataPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![self.coreDataPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        NSLog(@"Unresolved error -  [Error] - %@, [User info] - %@", error, [error userInfo]);
-        abort();
-    }
-    
-    return self.coreDataPersistentStoreCoordinator;
-}
-
-#pragma mark - Application's Documents directory
-
-- (NSURL *)applicationDocumentsDirectory
-{
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
 #pragma mark - Party core data implementation
 
-- (NSArray *)loadAllPartiesByUserId:(NSNumber *)userId {    
-    NSManagedObjectContext *context = [self mainManagedObjectContext];
+- (NSArray *)loadAllPartiesByUserId:(NSInteger)userId {
+    NSManagedObjectContext *context = [self.coreDataStack mainManagedObjectContext];
     
     NSFetchRequest *fetch = [NSFetchRequest new];
     fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
-    fetch.predicate = [NSPredicate predicateWithFormat:@"creatorId == %@", userId];
-    [fetch setReturnsObjectsAsFaults:NO];
+    fetch.predicate = [NSPredicate predicateWithFormat:@"creatorId == %@", @(userId)];
+    fetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:YES]];
     
     NSError *error = nil;
     NSArray *fetchedObjects = [context executeFetchRequest:fetch error:&error];
@@ -114,17 +36,16 @@
     NSMutableArray *parties = [NSMutableArray new];
     
     for (PMRPartyManagedObject *partyObject in fetchedObjects) {
-        PMRParty *party = [PMRParty new];
-        [self produceParty:party usingPartyObject:partyObject];
+        PMRParty *party = [[PMRParty alloc] initUsingPartyObject:partyObject];
         [parties addObject:party];
     }
     
     return parties;
 }
 
-- (void)deleteParty:(NSNumber *)partyId withCallback:(void (^)(NSError *completionError))completion{
+- (void)deleteParty:(NSInteger)partyId withCallback:(void (^)(NSError *completionError))completion{
     __block __weak PMRCoreData *weakSelf = self;
-    NSManagedObjectContext *context = [self backgroundManagedObjectContext];
+    NSManagedObjectContext *context = [self.coreDataStack backgroundManagedObjectContext];
     [context performBlock:^{
         PMRPartyManagedObject *partyObject = [PMRPartyManagedObject fetchFromContext:context withPartyId:partyId];
         
@@ -140,9 +61,9 @@
     }];
 }
 
-- (void)deleteAllUserPartiesByUserId:(NSNumber *)userId withCallback:(void (^)(NSError *completionError))completion {
+- (void)deleteAllUserPartiesByUserId:(NSInteger)userId withCallback:(void (^)(NSError *completionError))completion {
     __weak PMRCoreData *weakSelf = self;
-    NSManagedObjectContext *context = [self backgroundManagedObjectContext];
+    NSManagedObjectContext *context = [self.coreDataStack backgroundManagedObjectContext];
     [context performBlock:^{
         NSFetchRequest *fetch = [NSFetchRequest new];
         fetch.entity = [NSEntityDescription entityForName:@"Party" inManagedObjectContext:context];
@@ -175,7 +96,7 @@
         partyObject = [NSEntityDescription insertNewObjectForEntityForName:@"Party" inManagedObjectContext:context];
     }
     
-    [self producePartyObject:partyObject usingParty:party];
+    partyObject = [partyObject produceUsingParty:party];
     
     NSError *error = nil;
     if (![context save:&error]) {
@@ -187,7 +108,7 @@
 
 - (void)saveOrUpdatePartiesFromArrayOfParties:(NSArray *)parties withCallback:(void (^)(NSError *completionError))completion {
     __block __weak PMRCoreData *weakSelf = self;
-    NSManagedObjectContext *context = [self backgroundManagedObjectContext];
+    NSManagedObjectContext *context = [self.coreDataStack backgroundManagedObjectContext];
     [context performBlock:^{
         for (PMRParty *party in parties) {
             [weakSelf saveOrUpdateParty:party inContext:context];
@@ -196,38 +117,8 @@
     }];
 }
 
-#pragma mark - Notification changes
-
-- (void)applyBackgroundContextChanges:(NSNotification *)notification {
-    @synchronized (self) {
-        [[self mainManagedObjectContext] performBlock:^{
-            [[self mainManagedObjectContext] mergeChangesFromContextDidSaveNotification:notification];
-        }];
-    }
-}
-
-- (void)applyMainContextChanges:(NSNotification *)notification {
-    @synchronized (self) {
-        [[self backgroundManagedObjectContext] performBlock:^{
-            [[self backgroundManagedObjectContext] mergeChangesFromContextDidSaveNotification:notification];
-        }];
-    }
-}
-
-#pragma mark - Perform completion block
-
-- (void)pmr_performCompletionBlock:(void (^) (NSError *completionError))block withError:(NSError *)error{
-    if (block) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            block(error);
-        });
-    }
-}
-
-#pragma mark - Helpers
-
-- (void)markPartyAsDeletedByPartyId:(NSNumber *)partyId {
-    NSManagedObjectContext *context = [self backgroundManagedObjectContext];
+- (void)markPartyAsDeletedByPartyId:(NSInteger)partyId {
+    NSManagedObjectContext *context = [self.coreDataStack backgroundManagedObjectContext];
     
     [context performBlock:^{
         PMRPartyManagedObject *partyObject = [PMRPartyManagedObject fetchFromContext:context withPartyId:partyId];
@@ -240,32 +131,18 @@
     }];
 }
 
-- (void)producePartyObject:(PMRPartyManagedObject *)partyObject usingParty:(PMRParty *)party {
-    partyObject.eventId = party.eventId;
-    partyObject.eventName = party.eventName;
-    partyObject.eventDescription = party.eventDescription;
-    partyObject.imageIndex = party.imageIndex;
-    partyObject.startTime = party.startTime;
-    partyObject.endTime = party.endTime;
-    partyObject.creatorId = party.creatorId;
-    partyObject.isPartyChanged = party.isPartyChanged;
-    partyObject.isPartyDeleted = party.isPartyDeleted;
-    partyObject.latitude = party.latitude;
-    partyObject.longitude = party.longitude;
+#pragma mark - Perform completion block
+
+- (void)pmr_performCompletionBlock:(void (^) (NSError *completionError))block withError:(NSError *)error{
+    if (block) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            block(error);
+        });
+    }
 }
 
-- (void)produceParty:(PMRParty *)party usingPartyObject:(PMRPartyManagedObject *)partyObject {
-    party.eventId = partyObject.eventId;
-    party.eventName = partyObject.eventName;
-    party.eventDescription = partyObject.eventDescription;
-    party.imageIndex = partyObject.imageIndex;
-    party.startTime = partyObject.startTime;
-    party.endTime = partyObject.endTime;
-    party.creatorId = partyObject.creatorId;
-    party.isPartyChanged = partyObject.isPartyChanged;
-    party.isPartyDeleted = partyObject.isPartyDeleted;
-    party.latitude = partyObject.latitude;
-    party.longitude = partyObject.longitude;
-}
+#pragma mark - User core data implementation.
+
+
 
 @end

@@ -8,7 +8,9 @@
 
 #import "PMRNetworkSDK.h"
 #import "PMRParty.h"
+#import "PMRUser.h"
 #import "NSDate+Utility.h"
+#import "Reachability.h"
 
 static NSString *APIURLLink;
 
@@ -79,18 +81,18 @@ static NSString *APIURLLink;
     __weak __block PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (block) {
-            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:@([(NSHTTPURLResponse *)response statusCode])];
+            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:[(NSHTTPURLResponse *)response statusCode]];
             [weakSelf pmr_performCompletionBlock:block responce:responseDictionary error:error];
         }
     }] resume];
 }
 
-- (void) loadAllPartiesByUserId:(NSNumber *)userId callback:(void (^) (NSArray *parties, NSError *error))block {
-    NSURLRequest *request = [self requestWithHTTPMethod:@"GET" withMetodAPI:@"party" withHeaderDictionary:nil withParametersDictionary:@{@"creator_id":userId}];
+- (void) loadAllPartiesByUserId:(NSInteger)userId callback:(void (^) (NSArray *parties, NSError *error))block {
+    NSURLRequest *request = [self requestWithHTTPMethod:@"GET" withMetodAPI:@"party" withHeaderDictionary:nil withParametersDictionary:@{@"creator_id":@(userId)}];
     __weak __block PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (block) {
-            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:@([(NSHTTPURLResponse *)response statusCode])];
+            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:[(NSHTTPURLResponse *)response statusCode]];
             
             NSMutableArray *parties = [NSMutableArray new];
             NSMutableArray *arrayOfDictionaries = [NSMutableArray new];
@@ -101,15 +103,15 @@ static NSString *APIURLLink;
             
             for (NSDictionary *dictionary in arrayOfDictionaries) {
                 PMRParty *party = [PMRParty new];
-                party.eventId = @([dictionary[@"id"] integerValue]);
+                party.eventId = [dictionary[@"id"] integerValue];
                 party.eventName = dictionary[@"name"];
                 party.eventDescription = dictionary[@"comment"];
-                party.startTime = @([dictionary[@"start_time"] integerValue]);
-                party.endTime = @([dictionary[@"end_time"] integerValue]);
-                party.imageIndex = @([dictionary[@"logo_id"] integerValue]);
+                party.startTime = [dictionary[@"start_time"] integerValue];
+                party.endTime = [dictionary[@"end_time"] integerValue];
+                party.imageIndex = [dictionary[@"logo_id"] integerValue];
                 party.latitude = dictionary[@"latitude"];
                 party.longitude = dictionary[@"longitude"];
-                party.creatorId = @([dictionary[@"creator_id"] integerValue]);
+                party.creatorId = [dictionary[@"creator_id"] integerValue];
                 
                 [parties addObject:party];
             }
@@ -123,12 +125,12 @@ static NSString *APIURLLink;
     }] resume];
 }
 
-- (void) deletePartyWithPartyId:(NSNumber *)partyId withCreatorId:(NSNumber *)creatorId callback:(void (^) (NSDictionary *response, NSError *error))block {
-    NSURLRequest *request = [self requestWithHTTPMethod:@"GET" withMetodAPI:@"deleteParty" withHeaderDictionary:nil withParametersDictionary:@{@"party_id":partyId, @"creator_id":creatorId}];
+- (void) deletePartyWithPartyId:(NSInteger)partyId withCreatorId:(NSInteger)creatorId callback:(void (^) (NSDictionary *response, NSError *error))block {
+    NSURLRequest *request = [self requestWithHTTPMethod:@"GET" withMetodAPI:@"deleteParty" withHeaderDictionary:nil withParametersDictionary:@{@"party_id":@(partyId), @"creator_id":@(creatorId)}];
     __weak __block PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (block) {
-            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:@([(NSHTTPURLResponse *)response statusCode])];
+            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:[(NSHTTPURLResponse *)response statusCode]];
             [weakSelf pmr_performCompletionBlock:block responce:responseDictionary error:error];
         }
     }] resume];
@@ -139,12 +141,17 @@ static NSString *APIURLLink;
     __weak __block PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (block) {
-            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:@([(NSHTTPURLResponse *)response statusCode])];
+            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:[(NSHTTPURLResponse *)response statusCode]];
             
             NSMutableArray *users = [NSMutableArray new];
             
-            for (NSDictionary *userDictionary in responseDictionary[@"response"]) {
-                [users addObject:userDictionary[@"name"]];
+            if (![responseDictionary[@"response"] isEqual:[NSNull null]]) {
+                for (NSDictionary *userDictionary in responseDictionary[@"response"]) {
+                    PMRUser *user = [PMRUser new];
+                    user.name = userDictionary[@"name"];
+                    user.userId = [userDictionary[@"id"] integerValue];
+                    [users addObject:user];
+                }
             }
             
             if (block) {
@@ -164,44 +171,53 @@ static NSString *APIURLLink;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         if (block) {
-            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:@([(NSHTTPURLResponse *)response statusCode])];
+            NSDictionary *responseDictionary = [weakSelf serialize:data statusCode:[(NSHTTPURLResponse *)response statusCode]];
             [weakSelf pmr_performCompletionBlock:block responce:responseDictionary error:error];
         }
     }] resume];
 }
 
-- (void)addPaty:(PMRParty *)party callback:(void (^) (NSNumber *partyId, NSError *error))block {
+- (void)addPaty:(PMRParty *)party callback:(void (^) (NSInteger partyId, NSError *error))block {
     NSURLRequest *request = [self requestWithHTTPMethod:@"POST"
                                            withMetodAPI:@"addParty"
-                                   withHeaderDictionary:@{@"party_id":party.eventId,
+                                   withHeaderDictionary:@{@"party_id":@(party.eventId),
                                                           @"name":party.eventName,
-                                                          @"start_time":party.startTime,
-                                                          @"end_time":party.endTime,
-                                                          @"logo_id":party.imageIndex,
+                                                          @"start_time":@(party.startTime),
+                                                          @"end_time":@(party.endTime),
+                                                          @"logo_id":@(party.imageIndex),
                                                           @"comment":party.eventDescription,
-                                                          @"creator_id":party.creatorId,
+                                                          @"creator_id":@(party.creatorId),
                                                           @"latitude":party.latitude,
                                                           @"longitude":party.longitude }
                                withParametersDictionary:nil];
-    NSNumber *partyCreatorId = party.creatorId;
+    NSInteger partyCreatorId = party.creatorId;
     __block __weak PMRNetworkSDK *weakSelf = self;
     [[self.defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (block) {
-            [weakSelf partyIdByUserId:partyCreatorId withCallback:^(NSNumber *partyId) {
+            if (party.eventId) {
                 if (block) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        block(partyId, error);
+                        block(party.eventId, error);
                     });
                 }
-            }];
+            }
+            else {
+                [weakSelf partyIdByUserId:partyCreatorId withCallback:^(NSInteger partyId) {
+                    if (block) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            block(partyId, error);
+                        });
+                    }
+                }];
+            }
         }
     }] resume];
 }
 
-- (NSDictionary *) serialize:(NSData *) data statusCode:(NSNumber *) statusCode {
+- (NSDictionary *) serialize:(NSData *) data statusCode:(NSInteger) statusCode {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    if (statusCode && [statusCode intValue] != 0)
-        [dict setValue:statusCode forKey:@"statusCode"];
+    if (statusCode && statusCode != 0)
+        [dict setValue:@(statusCode) forKey:@"statusCode"];
     else
         [dict setValue:@505 forKey:@"statusCode"];
     id jsonArray;
@@ -221,20 +237,20 @@ static NSString *APIURLLink;
     }
 }
 
-- (void)partyIdByUserId:(NSNumber *)userId withCallback:(void (^) (NSNumber *partyId))callback{
+- (void)partyIdByUserId:(NSInteger)userId withCallback:(void (^) (NSInteger partyId))callback{
     [self loadAllPartiesByUserId:userId callback:^(NSArray *parties, NSError *error) {
         if (!error) {
             NSInteger neededId = 0;
             
             for (PMRParty *party in parties) {
-                if ([party.eventId integerValue] > neededId) {
-                    neededId = [party.eventId integerValue];
+                if (party.eventId > neededId) {
+                    neededId = party.eventId;
                 }
             }
             
             if (callback) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    callback(@(neededId));
+                    callback(neededId);
                 });
             }
         }

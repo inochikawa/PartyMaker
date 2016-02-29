@@ -40,7 +40,9 @@
 }
 
 - (IBAction)onSignOutButtonTouchUpInside:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"userId"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -12,7 +12,6 @@
 @interface PMRUserTableViewCell()
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *userEmailLabel;
 
 @end
 
@@ -31,11 +30,11 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.userNameLabel.text = nil;
-    self.userEmailLabel.text = nil;
 }
 
-- (void)configureWithUserName:(NSString *)userName {
-    self.userNameLabel.text = userName;
+- (void)configureWithUser:(PMRUser *)user {
+    self.userNameLabel.text = user.name;
+    self.userId = user.userId;
 }
 
 + (NSString *)reuseIdentifier {

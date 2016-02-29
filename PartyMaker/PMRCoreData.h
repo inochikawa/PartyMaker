@@ -9,23 +9,21 @@
 #import <Foundation/Foundation.h>
 
 @class NSManagedObjectContext;
-@class NSManagedObjectModel;
-@class NSPersistentStoreCoordinator;
 @class NSError;
 @class PMRParty;
 @class PMRUser;
+@class PMRCoreDataStack;
 
 @interface PMRCoreData : NSObject
 
-- (nullable NSManagedObjectContext *)mainManagedObjectContext;
-- (nullable NSManagedObjectContext *)backgroundManagedObjectContext;
+@property (nonatomic) PMRCoreDataStack * _Nullable coreDataStack;
 
-- (nullable NSArray *)loadAllPartiesByUserId:(nonnull NSNumber *)userId;
+- (nullable NSArray *)loadAllPartiesByUserId:(NSInteger)userId;
 - (void)saveOrUpdatePartiesFromArrayOfParties:(nonnull NSArray *)parties withCallback:(void (^ _Nullable)(NSError *_Nullable completionError))completion;
 - (void)saveOrUpdateParty:(nonnull PMRParty *)party inContext:(nonnull NSManagedObjectContext *)context;
-- (void)deleteParty:(nonnull NSNumber *)eventID withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
-- (void)deleteAllUserPartiesByUserId:(nonnull NSNumber *)userId withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
+- (void)deleteParty:(NSInteger)eventID withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
+- (void)deleteAllUserPartiesByUserId:(NSInteger)userId withCallback:(void (^ _Nullable)(NSError * _Nullable completionError))completion;
 
-- (void)markPartyAsDeletedByPartyId:(nonnull NSNumber *)partyId;
+- (void)markPartyAsDeletedByPartyId:(NSInteger)partyId;
 
 @end

@@ -18,16 +18,16 @@
     return [dateFormatter stringFromDate:self];
 }
 
-- (NSNumber *)toSeconds {
-    return @([self timeIntervalSince1970]);
+- (NSInteger)toSeconds {
+    return [self timeIntervalSince1970];
 }
 
-+ (NSDate *)dateFromSeconds:(NSNumber *)seconds {
-    return [NSDate dateWithTimeIntervalSince1970:[seconds integerValue]];
++ (NSDate *)dateFromSeconds:(NSInteger)seconds {
+    return [NSDate dateWithTimeIntervalSince1970:seconds];
 }
 
-+ (NSString *)stringDateFromSeconds:(NSNumber *)seconds withDateFormat:(NSString *)dateFormat{
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[seconds integerValue]];
++ (NSString *)stringDateFromSeconds:(NSInteger)seconds withDateFormat:(NSString *)dateFormat{
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:seconds];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:dateFormat];
