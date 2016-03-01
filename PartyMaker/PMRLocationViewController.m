@@ -41,11 +41,6 @@
         [self configurePartyAnnotationWithCoordinate:partyCoordinate];
         [self configureMapViewWithCoordinate:partyCoordinate];
     }
-    else {
-        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(self.locationManager.location.coordinate.latitude,
-                                                                       self.locationManager.location.coordinate.longitude);
-        [self configureMapViewWithCoordinate:coordinate];
-    }
 }
 
 #pragma mark - Configure methods
@@ -89,6 +84,13 @@
 }
 
 #pragma mark - Map view delegates methods
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    if (![self isValidLocationString:self.party.longitude]) {
+        CLLocationCoordinate2D userCoordinate = self.locationManager.location.coordinate;
+        [self configureMapViewWithCoordinate:userCoordinate];
+    }
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]])
