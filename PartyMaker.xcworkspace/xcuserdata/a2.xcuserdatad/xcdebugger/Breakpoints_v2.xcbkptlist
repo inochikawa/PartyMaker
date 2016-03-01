@@ -537,11 +537,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRAddEventViewController.m"
-            timestampString = "478479408.891371"
+            timestampString = "478515915.021061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "579"
-            endingLineNumber = "579"
+            startingLineNumber = "575"
+            endingLineNumber = "575"
             landmarkName = "-locationWithLatitude:withLongitude:withAddress:"
             landmarkType = "5">
          </BreakpointContent>
@@ -601,11 +601,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRAddEventViewController.m"
-            timestampString = "478479408.891371"
+            timestampString = "478515915.021061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -617,11 +617,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRAddEventViewController.m"
-            timestampString = "478479408.891371"
+            timestampString = "478515915.021061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "568"
-            endingLineNumber = "568"
+            startingLineNumber = "564"
+            endingLineNumber = "564"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1464,11 +1464,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRAddEventViewController.m"
-            timestampString = "478479408.891371"
+            timestampString = "478515915.021061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "534"
-            endingLineNumber = "534"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
             landmarkName = "-establishPartyInformation"
             landmarkType = "5">
          </BreakpointContent>

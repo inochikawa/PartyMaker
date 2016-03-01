@@ -456,21 +456,17 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedStringFromTable(@"Loading...", @"Language", nil);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    [[PMRApiController apiController] saveOrUpdateParty:self.party withCallback:^{
+        if ([weakSelf.navigationController isViewLoaded]) {
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        }
+        else {
+            NSLog(@"Error - navigation controller is not loaded");
+        }
         
-        [[PMRApiController apiController] saveOrUpdateParty:self.party withCallback:^{
-            if ([weakSelf.navigationController isViewLoaded]) {
-                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-            }
-            else {
-                NSLog(@"Error - navigation controller is not loaded");
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [hud hide:YES];
-            });
-        }];
-    });
+        [hud hide:YES];
+        
+    }];
 }
 
 - (NSDate *)selectedDateWithTime:(NSString *)time {
