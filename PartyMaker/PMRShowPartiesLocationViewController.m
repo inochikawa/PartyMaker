@@ -114,7 +114,7 @@
             annotationView.canShowCallout = YES;
             annotationView.draggable = NO;
             
-            UIImage *rightButtonImage = [UIImage imageNamed:@"done"];
+            UIImage *rightButtonImage = [UIImage imageNamed:@"info"];
             
             UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
             [rightButton setImage:rightButtonImage forState:UIControlStateNormal];
