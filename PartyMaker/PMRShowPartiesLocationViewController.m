@@ -234,7 +234,16 @@
             }
         }
         
-        [self.mapView showAnnotations:annotations animated:YES];
+        if (annotations.count == 0) {
+            CLLocationCoordinate2D userCoordinate = self.locationManager.location.coordinate;
+            MKCoordinateRegion userRegion;
+            userRegion.center = userCoordinate;
+            userRegion.span = MKCoordinateSpanMake(0.0075, 0.0075);
+            [self.mapView setRegion:userRegion animated:YES];
+        }
+        else {
+            [self.mapView showAnnotations:annotations animated:YES];
+        }
     }];
 }
 

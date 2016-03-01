@@ -1305,11 +1305,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PartyMaker/PMRShowPartiesLocationViewController.m"
-            timestampString = "478451760.399432"
+            timestampString = "478483992.82595"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "-showAllPartyAnnotationsOnMapByUserId:"
             landmarkType = "5">
          </BreakpointContent>
